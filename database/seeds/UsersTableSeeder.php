@@ -2,6 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
@@ -18,5 +19,13 @@ class UsersTableSeeder extends Seeder
             'name' => 'admin',
             'password' => Hash::make('admin'),
         ]);
+
+        factory(User::class)->create([
+            'email' => 'user@gmail.com',
+            'name' => 'user',
+            'password' => Hash::make('user'),
+        ]);
+
+        Artisan::call('passport:install');
     }
 }

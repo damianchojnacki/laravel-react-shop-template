@@ -34,6 +34,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" render={(props) => <Home {...props} loaded={this.state.loaded} />} />
                         <Route path="/login" render={(props) => <Login {...props} loaded={this.state.loaded} />} />
+                        <Route path="/logout" render={(props) => <Login {...props} loaded={this.state.loaded} />} />
                     </Switch>
                 </div>
             </Router>

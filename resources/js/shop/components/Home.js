@@ -5,6 +5,10 @@ import Menu from './Menu';
 class Home extends React.Component{
     constructor(props) {
         super(props);
+
+        this.state = {
+            logged: !!localStorage.getItem('access_token'),
+        }
     }
 
     render(){
@@ -13,7 +17,7 @@ class Home extends React.Component{
                 <Helmet>
                     <title>Shop | Homepage</title>
                 </Helmet>
-                <Menu />
+                <Menu logged={this.state.logged}/>
                 <main className="main">
                     Homepage content
                 </main>

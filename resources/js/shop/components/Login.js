@@ -26,6 +26,7 @@ class Login extends React.Component {
                 message: '',
             },
             redirectToAdmin: false,
+            logged: props.logged,
         };
     }
 
@@ -66,7 +67,11 @@ class Login extends React.Component {
                         axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
 
                         getUser().then(res => {
-                            res.data.name === 'admin' && this.setState({redirectToAdmin: true})
+                            res.data.name === 'admin' && this.setState({redirectToAdmin: true});
+                            this.setState({
+                                errors: {},
+                                logged: true,
+                            });
                         });
                     })
                     .catch(error => {
@@ -80,32 +85,36 @@ class Login extends React.Component {
 
     render() {
         return this.state.redirectToAdmin ?
-            window.location.assign(`${window.location.origin.toString()}/admin`):
-            (
-            <div className="content">
-                <Helmet>
-                    <title>Shop | Login</title>
-                </Helmet>
-                <Menu/>
-                <Form method="POST" onSubmit={this.handleSubmit}>
-                    {this.state.errors.data
-                    && (
-                        <Alert theme="danger">
-                            {this.state.errors.data}
-                        </Alert>
-                    )}
-                    <FormGroup>
-                        <label htmlFor="#email">Email</label>
-                        <FormInput invalid={!!this.state.errors.data} type="email" id="#email" name="email" onChange={this.handleChange} disabled={this.loading}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <label htmlFor="#password">Password</label>
-                        <FormInput invalid={!!this.state.errors.data} type="password" id="#password" name="password" onChange={this.handleChange} disabled={this.loading}/>
-                    </FormGroup>
-                    <Button>Log in</Button>
-                </Form>
-            </div>
-        )
+            window.location.assign(`${window.location.origin.toString()}/admin`)
+            :
+            this.state.logged || !!localStorage.getItem('access_token')?
+                <Redirect to="/"/>
+                :
+                (
+                    <div className="content">
+                        <Helmet>
+                            <title>Shop | Login</title>
+                        </Helmet>
+                        <Menu/>
+                        <Form method="POST" onSubmit={this.handleSubmit}>
+                            {this.state.errors.data
+                            && (
+                                <Alert theme="danger">
+                                    {this.state.errors.data}
+                                </Alert>
+                            )}
+                            <FormGroup>
+                                <label htmlFor="#email">Email</label>
+                                <FormInput invalid={!!this.state.errors.data} type="email" id="#email" name="email" onChange={this.handleChange} disabled={this.loading}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <label htmlFor="#password">Password</label>
+                                <FormInput invalid={!!this.state.errors.data} type="password" id="#password" name="password" onChange={this.handleChange} disabled={this.loading}/>
+                            </FormGroup>
+                            <Button>Log in</Button>
+                        </Form>
+                    </div>
+                )
     }
 }
 
