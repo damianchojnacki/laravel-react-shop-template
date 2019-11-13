@@ -4,8 +4,7 @@ import {Helmet} from 'react-helmet';
 import Menu from './Menu';
 import {Form, FormInput, FormGroup, Button, Alert} from "shards-react";
 import ReeValidate from 'ree-validate';
-import {getUser, login} from '../utils/api';
-import axios from 'axios';
+import {getUser, login, isAuthenticated} from '../utils/auth';
 
 class Login extends React.Component {
     constructor(props) {
@@ -63,9 +62,6 @@ class Login extends React.Component {
 
                 success && login(credentials)
                     .then(res => {
-                        localStorage.setItem('access_token', res.data.token);
-                        axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-
                         getUser().then(res => {
                             res.data.name === 'admin' && this.setState({redirectToAdmin: true});
                             this.setState({
@@ -87,7 +83,8 @@ class Login extends React.Component {
         return this.state.redirectToAdmin ?
             window.location.assign(`${window.location.origin.toString()}/admin`)
             :
-            this.state.logged || !!localStorage.getItem('access_token')?
+            this.state.logged || isAuthenticated()
+                ?
                 <Redirect to="/"/>
                 :
                 (

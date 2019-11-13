@@ -1,5 +1,6 @@
 import React from "react";
-import { Nav, NavItem, NavLink } from "shards-react";
+import { Nav, NavItem } from "shards-react";
+import {logout, isAuthenticated} from "../utils/auth";
 import {Link} from 'react-router-dom';
 
 class Menu extends React.Component{
@@ -14,7 +15,7 @@ class Menu extends React.Component{
     handleLogout = (e) => {
         e.preventDefault();
 
-        localStorage.removeItem('access_token');
+        logout();
         this.setState({logged: false});
     };
 
@@ -30,13 +31,13 @@ class Menu extends React.Component{
                 <NavItem>
                     <Link className="nav-link" to="/">Contact</Link>
                 </NavItem>
-                {!this.state.logged ?
+                {isAuthenticated() ?
                     <NavItem>
-                        <Link className="nav-link" to="/login">Login</Link>
+                        <Link className="nav-link" to="#" onClick={this.handleLogout}>Logout</Link>
                     </NavItem>
                     :
                     <NavItem>
-                        <Link className="nav-link" to="#" onClick={this.handleLogout}>Logout</Link>
+                        <Link className="nav-link" to="/login">Login</Link>
                     </NavItem>
                 }
             </Nav>

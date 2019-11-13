@@ -25,8 +25,17 @@ import AdminLayout from "./layouts/Admin/Admin.jsx";
 import "./assets/css/black-dashboard-react.css";
 import "./assets/demo/demo.css";
 import "./assets/css/nucleo-icons.css";
+import {isAuthenticated} from "./utils/auth";
+import axios from "axios";
 
 const hist = createBrowserHistory();
+
+require('../bootstrap');
+
+isAuthenticated() ?
+axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('access_token')}`
+:
+window.location.assign(window.location.origin.toString());
 
 ReactDOM.render(
   <Router history={hist}>

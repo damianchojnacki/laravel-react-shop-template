@@ -49,13 +49,17 @@ import {
   chartExample3,
   chartExample4
 } from "../variables/charts.jsx";
+import Api from "../utils/api/Api";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bigChartData: "data1"
+      bigChartData: "data1",
+      api: false,
     };
+
+    console.log(this.state.api);
   }
   setBgChartData = name => {
     this.setState({
