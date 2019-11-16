@@ -11,6 +11,5 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/shop/app.js', 'public/js/shop')
-    .react('resources/js/admin/app.js', 'public/js/admin');
+mix.react('resources/js/app.js', 'public/js');
 

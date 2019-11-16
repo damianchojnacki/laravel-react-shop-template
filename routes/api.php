@@ -20,5 +20,5 @@ Route::post('register', 'AuthController@register')->name('auth.register');
 // private routes
 Route::middleware('auth:api')->group(function () {
     Route::get('user', 'AuthController@getUser')->name('auth.user');
-    Route::get('logout', 'AuthController@logout')->name('auth.logout');
+    Route::post('logout', 'AuthController@logout')->name('auth.logout');
 });

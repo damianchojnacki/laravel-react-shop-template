@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller {
 
     public function getUser (Request $request) {
-        $response = $request->user();
+        $response = new UserResource($request->user());
 
         return response($response, 200);
     }
