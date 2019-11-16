@@ -1,6 +1,6 @@
 # Shop template created with Laravel & React
 
-<p align="center">
+<p style="display: flex">
     <img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400">
     <img src="https://cdn.worldvectorlogo.com/logos/react.svg" width="100"> 
 </p>
