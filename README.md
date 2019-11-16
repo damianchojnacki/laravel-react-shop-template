@@ -1,13 +1,15 @@
 # Shop template created with Laravel & React
 
 <p align="center">
-    <img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" height="100">
-    <img src="https://cdn.worldvectorlogo.com/logos/react.svg" height="100"> 
+    <img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" height="200">
+    <img src="https://cdn.worldvectorlogo.com/logos/react.svg" height="200"> 
 </p>
 
 ---
 Master branch is working application ready for deployment on:
-![Heroku](https://cdn-images-1.medium.com/max/1600/1*fIjRtO5P8zc3pjs0E5hYkw.png)
+<p align="center">
+    <img src="https://cdn-images-1.medium.com/max/1600/1*fIjRtO5P8zc3pjs0E5hYkw.png" height="200">
+</p>
 ---
 
 ### 
