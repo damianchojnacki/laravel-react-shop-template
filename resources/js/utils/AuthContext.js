@@ -3,7 +3,7 @@ import * as React from "react";
 const AuthContext = React.createContext();
 
 const initialState = {
-    authenticated: false,
+    authenticated: !!localStorage.getItem('access_token'),
     user: null,
 };
 

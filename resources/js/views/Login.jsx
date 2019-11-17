@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import Menu from '../components/Menu';
@@ -10,7 +10,6 @@ import {AuthContext} from "../utils/AuthContext";
 export default function Login(){
 
     const { state, dispatch } = React.useContext(AuthContext);
-
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -62,7 +61,7 @@ export default function Login(){
         :
         state.authenticated
             ?
-            <Redirect to="/home"/>
+            <Redirect to="/"/>
             :
             (
                 <div className="content">
@@ -71,7 +70,7 @@ export default function Login(){
                     </Helmet>
                     <Menu/>
                     <Form method="POST" onSubmit={handleSubmit}>
-                        {errors.length
+                        {errors.data
                         && (
                             <Alert theme="danger">
                                 {errors.data}
@@ -79,11 +78,11 @@ export default function Login(){
                         )}
                         <FormGroup>
                             <label htmlFor="#email">Email</label>
-                            <FormInput invalid={!!errors.data} type="email" id="#email" name="email" onChange={handleChange} disabled={loading}/>
+                            <FormInput invalid={!!errors.data} type="email" id="#email" name="email" onChange={handleChange} disabled={loading} required/>
                         </FormGroup>
                         <FormGroup>
                             <label htmlFor="#password">Password</label>
-                            <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={handleChange} disabled={loading}/>
+                            <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={handleChange} disabled={loading} required/>
                         </FormGroup>
                         <Button>Log in</Button>
                     </Form>

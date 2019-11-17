@@ -42,7 +42,8 @@
         "react-router-dom": "^5.1.2",
         "reactstrap": "^8.1.1",
         "ree-validate": "^3.0.2",
-        "shards-react": "^1.0.3"
+        "shards-react": "^1.0.3",
+        "shards-ui": "^3.0.0"
     },
     "babel": {
         "presets": [

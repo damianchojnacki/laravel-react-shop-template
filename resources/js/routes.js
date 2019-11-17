@@ -23,12 +23,19 @@ import Typography from "./views/Typography";
 import UserProfile from "./views/UserProfile";
 import Home from "./views/Home";
 import Login from "./views/Login";
+import Products from "./views/Products";
 
 var routes = [
   {
-    path: "/home",
+    path: "/",
     name: "Home",
     component: Home,
+    layout: "/shop"
+  },
+  {
+    path: "/products",
+    name: "Products",
+    component: Products,
     layout: "/shop"
   },
   {
