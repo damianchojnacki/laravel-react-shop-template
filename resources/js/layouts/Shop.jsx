@@ -3,8 +3,6 @@ import {Route, Switch} from "react-router-dom";
 
 import routes from "../routes.js";
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import "shards-ui/dist/css/shards.min.css"
 import Api from "../utils/Api";
 import {AuthContext} from "../utils/AuthContext";
 

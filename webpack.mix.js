@@ -11,5 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js');
+mix.react('resources/js/app.js', 'public/js')
+    .copy('resources/css/black-admin.css', 'public/css')
+    .copy('resources/css/shards.css', 'public/css');
 

@@ -13,6 +13,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/admin/{path?}', 'app');
+Route::view('/admin/{path?}', 'admin');
 Route::view('/{path?}', 'app');
 

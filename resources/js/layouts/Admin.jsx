@@ -26,7 +26,6 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "../routes.js";
 
-import "../assets/css/black-dashboard-react.css";
 import "../assets/demo/demo.css";
 import "../assets/css/nucleo-icons.css";
 import PerfectScrollbar from "perfect-scrollbar";
@@ -39,18 +38,22 @@ function Admin(props) {
     const [backgroundColor, setBackgroundColor] = useState("blue");
     const [sidebarOpened, setSidebarOpened] =  useState(document.documentElement.className.indexOf("nav-open") !== -1);
     const [redirectBack, setRedirectBack] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        state.authenticated &&
+        state.authenticated ?
             Api.getUser()
                 .then(res => {
                     dispatch({type: "login", payload: res.data});
                 })
-                .catch(dispatch({type: "logout"}));
+                .catch(dispatch({type: "logout"}))
+                .finally(() => {setLoading(false)})
+            :
+            setLoading(false);
     }, []);
 
     useEffect(() => {
-        !state.authenticated || (state.user && state.user.name !== 'admin') && setRedirectBack(true);
+        (!loading && (!state.authenticated || state.user.name !== 'admin')) && setRedirectBack(true);
 
         let tables = document.querySelectorAll(".table-responsive");
         for (let i = 0; i < tables.length; i++) new PerfectScrollbar(tables[i]);

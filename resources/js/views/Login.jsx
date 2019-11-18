@@ -7,9 +7,9 @@ import ReeValidate from 'ree-validate';
 import Api from '../utils/Api';
 import {AuthContext} from "../utils/AuthContext";
 
-export default function Login(){
+export default function Login() {
 
-    const { state, dispatch } = React.useContext(AuthContext);
+    const {state, dispatch} = React.useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -42,17 +42,17 @@ export default function Login(){
 
                 success && Api.login(credentials)
                     .then(res => {
-                        Api.getUser().then( res => {
-                            res.data.name === 'admin' && setRedirectToAdmin(true);
-                            dispatch({ type: "login", payload: res.data });
+                        Api.getUser().then(res => {
+                            dispatch({type: "login", payload: res.data});
                             setErrors({});
                             setLoading(false);
+                            res.data.name === 'admin' && setRedirectToAdmin(true); //TODO correct redirect
                         });
                     })
                     .catch(error => {
                         setErrors(error.response);
                         setLoading(false);
-                    })
+                    });
             });
     };
 

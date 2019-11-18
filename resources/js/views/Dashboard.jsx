@@ -58,7 +58,6 @@ class Dashboard extends React.Component {
       api: false,
     };
 
-    console.log(this.state.api);
   }
   setBgChartData = name => {
     this.setState({

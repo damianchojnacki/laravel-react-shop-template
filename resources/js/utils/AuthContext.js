@@ -4,7 +4,7 @@ const AuthContext = React.createContext();
 
 const initialState = {
     authenticated: !!localStorage.getItem('access_token'),
-    user: null,
+    user: {},
 };
 
 const reducer = (state, action) => {
