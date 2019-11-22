@@ -14,7 +14,6 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
-    const [redirectToAdmin, setRedirectToAdmin] = useState(false);
 
     const validator = new ReeValidate({
         email: 'required|email',
@@ -46,7 +45,6 @@ export default function Login() {
                             dispatch({type: "login", payload: res.data});
                             setErrors({});
                             setLoading(false);
-                            res.data.name === 'admin' && setRedirectToAdmin(true); //TODO correct redirect
                         });
                     })
                     .catch(error => {
@@ -56,10 +54,7 @@ export default function Login() {
             });
     };
 
-    return redirectToAdmin ?
-        <Redirect to="/admin"/>
-        :
-        state.authenticated
+    return state.authenticated
             ?
             <Redirect to="/"/>
             :

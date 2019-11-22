@@ -6,6 +6,9 @@ import routes from "../routes.js";
 import Api from "../utils/Api";
 import {AuthContext} from "../utils/AuthContext";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../assets/css/shards.css";
+
 function Shop() {
     const {state, dispatch} = React.useContext(AuthContext);
 

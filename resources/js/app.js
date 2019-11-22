@@ -33,8 +33,8 @@ ReactDOM.render(
     <Router history={hist}>
         <Switch>
             <AuthContextProvider>
-                <Route path="/admin" render={props => <AdminLayout {...props} />}/>
                 <Route path="/" render={(props) => <ShopLayout {...props} />}/>
+                <Route path="/admin" render={props => <AdminLayout {...props} />}/>
             </AuthContextProvider>
         </Switch>
     </Router>,

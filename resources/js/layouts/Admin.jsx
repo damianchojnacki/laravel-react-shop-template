@@ -26,6 +26,7 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "../routes.js";
 
+import "../assets/scss/black-dashboard-react.scss";
 import "../assets/demo/demo.css";
 import "../assets/css/nucleo-icons.css";
 import PerfectScrollbar from "perfect-scrollbar";
@@ -100,7 +101,7 @@ function Admin(props) {
     return redirectBack ? <Redirect to="/"/>  :
         (
             <>
-                <div className="wrapper">
+                <div className="wrapper black-dashboard">
                     <Sidebar
                         {...props}
                         routes={routes}
