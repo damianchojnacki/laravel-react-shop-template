@@ -23,10 +23,12 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'AuthController@logout')->name('auth.logout');
 });
 
-Route::middleware(['auth:api', 'admin'])->group(function () {
-    Route::get('products', 'ProductController@index')->name('admin.products');
-    Route::get('products/{id}', 'ProductController@show')->name('admin.products.show');
-    Route::post('products', 'ProductController@store')->name('admin.products.store');
-    Route::put('products', 'ProductController@edit')->name('admin.products.edit');
-    Route::delete('products', 'ProductController@delete')->name('admin.products.delete');
+Route::group([
+    'name' => 'products',
+], function () {
+    Route::get('products', 'ProductController@index')->name('products');
+    Route::get('products/{id}', 'ProductController@show')->name('products.show');
+    Route::post('products', 'ProductController@store')->name('products.store');
+    Route::put('products', 'ProductController@edit')->name('products.edit');
+    Route::delete('products', 'ProductController@delete')->name('products.delete');
 });
