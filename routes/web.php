@@ -13,6 +13,5 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/admin/{path?}', 'app');
-Route::view('/{path?}', 'app');
+Route::view('/{path?}', 'app')->where('path', '.*');
 

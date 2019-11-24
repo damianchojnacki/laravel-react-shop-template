@@ -18,7 +18,7 @@ window.axios.interceptors.response.use(
     response => response,
     (error) => {
         if (error.response.status === 401) localStorage.removeItem('access_token');
-        console.warn("Error - " + error.response.data);
+        console.warn("Error - " + error.response.data.message);
         return Promise.reject(error);
     },
 );

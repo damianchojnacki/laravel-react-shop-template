@@ -7,7 +7,7 @@ import Api from "../utils/Api";
 import {AuthContext} from "../utils/AuthContext";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "../assets/css/shards.css";
+import "shards-ui/dist/css/shards.min.css";
 
 function Shop() {
     const {state, dispatch} = React.useContext(AuthContext);

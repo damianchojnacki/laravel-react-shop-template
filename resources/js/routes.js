@@ -15,15 +15,17 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Dashboard from "./views/Dashboard";
-import Icons from "./views/Icons";
-import Notifications from "./views/Notifications";
-import TableList from "./views/TableList";
-import Typography from "./views/Typography";
-import UserProfile from "./views/UserProfile";
-import Home from "./views/Home";
-import Login from "./views/Login";
-import Products from "./views/Products";
+import Dashboard from "./views/admin/Dashboard";
+import Icons from "./views/admin/Icons";
+import Notifications from "./views/admin/Notifications";
+import TableList from "./views/admin/TableList";
+import Typography from "./views/admin/Typography";
+import UserProfile from "./views/admin/UserProfile";
+import Home from "./views/shop/Home";
+import Login from "./views/shop/Login";
+import ShopProducts from "./views/shop/Products";
+import AdminProducts from "./views/admin/Products";
+
 
 var routes = [
   {
@@ -35,7 +37,7 @@ var routes = [
   {
     path: "/products",
     name: "Products",
-    component: Products,
+    component: ShopProducts,
     layout: "/shop"
   },
   {
@@ -49,6 +51,13 @@ var routes = [
     name: "Dashboard",
     icon: "tim-icons icon-chart-pie-36",
     component: Dashboard,
+    layout: "/admin"
+  },
+  {
+    path: "/products",
+    name: "Products",
+    icon: "tim-icons icon-basket-simple",
+    component: AdminProducts,
     layout: "/admin"
   },
   {

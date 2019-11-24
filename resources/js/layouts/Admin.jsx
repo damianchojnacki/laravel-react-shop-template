@@ -27,7 +27,6 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin.jsx";
 import routes from "../routes.js";
 
 import "../assets/scss/black-dashboard-react.scss";
-import "../assets/demo/demo.css";
 import "../assets/css/nucleo-icons.css";
 import PerfectScrollbar from "perfect-scrollbar";
 import Api from "../utils/Api";
@@ -100,7 +99,7 @@ function Admin(props) {
 
     return redirectBack ? <Redirect to="/"/>  :
         (
-            <>
+            <div className="black-dashboard">
                 <div className="wrapper black-dashboard">
                     <Sidebar
                         {...props}
@@ -132,7 +131,7 @@ function Admin(props) {
                     bgColor={backgroundColor}
                     handleBgClick={handleBgClick}
                 />
-            </>
+            </div>
         );
 }
 
