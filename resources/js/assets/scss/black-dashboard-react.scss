@@ -87,10 +87,6 @@
 @import "black-dashboard-react/custom/vendor/plugin-perfect-scrollbar.scss";
 @import "black-dashboard-react/custom/vendor/plugin-react-notification-alert.scss";
 
-// light mode
-
-@import "black-dashboard-react/custom/white-content.scss";
-
 // Cards
 
 @import 'black-dashboard-react/custom/card';
@@ -99,4 +95,12 @@
 @import "black-dashboard-react/custom/cards/card-user";
 @import "black-dashboard-react/custom/cards/card-task";
 @import "black-dashboard-react/custom/cards/card-plain";
+
+// Overwrites
+
+@import "black-dashboard-react/overwrites";
 }
+
+// light mode
+
+@import "black-dashboard-react/custom/white-content.scss";

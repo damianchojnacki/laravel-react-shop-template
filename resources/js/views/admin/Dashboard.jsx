@@ -50,21 +50,30 @@ import {
   chartExample4
 } from "../../variables/charts.jsx";
 import {Helmet} from "react-helmet";
+import ChartService from "../../utils/ChartService";
+import {separateHundreds} from "../../utils/helpers";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bigChartData: "data1",
+      bigChartData: null,
       api: false,
     };
-
   }
-  setBgChartData = name => {
-    this.setState({
-      bigChartData: name
-    });
+
+  componentDidMount() {
+    this.setBigChartData('products');
+  }
+
+  setBigChartData = (name, color) => {
+    ChartService.get(name).then(res => {
+      this.setState({
+        bigChartData: ChartService.generate(res.data, color),
+      });
+    })
   };
+
   render() {
     return (
       <>
@@ -78,8 +87,8 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <Row>
                     <Col className="text-left" sm="6">
-                      <h5 className="card-category">Total Shipments</h5>
-                      <CardTitle tag="h2">Performance</CardTitle>
+                      <h5 className="card-category">{this.state.bigChartData ? this.state.bigChartData.title : null}</h5>
+                      <CardTitle tag="h2">{this.state.bigChartData ? `Total - ${separateHundreds(this.state.bigChartData.total)}` : null}</CardTitle>
                     </Col>
                     <Col sm="6">
                       <ButtonGroup
@@ -88,13 +97,11 @@ class Dashboard extends React.Component {
                       >
                         <Button
                           tag="label"
-                          className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data1"
-                          })}
                           color="info"
                           id="0"
                           size="sm"
-                          onClick={() => this.setBgChartData("data1")}
+                          className="btn-simple"
+                          onClick={() => this.setBigChartData("products")}
                         >
                           <input
                             defaultChecked
@@ -103,7 +110,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Accounts
+                            Purchases
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-single-02" />
@@ -114,10 +121,8 @@ class Dashboard extends React.Component {
                           id="1"
                           size="sm"
                           tag="label"
-                          className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data2"
-                          })}
-                          onClick={() => this.setBgChartData("data2")}
+                          className="btn-simple"
+                          onClick={() => this.setBigChartData("views", '#ffee00')}
                         >
                           <input
                             className="d-none"
@@ -125,32 +130,10 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Purchases
+                            Views
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-gift-2" />
-                          </span>
-                        </Button>
-                        <Button
-                          color="info"
-                          id="2"
-                          size="sm"
-                          tag="label"
-                          className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data3"
-                          })}
-                          onClick={() => this.setBgChartData("data3")}
-                        >
-                          <input
-                            className="d-none"
-                            name="options"
-                            type="radio"
-                          />
-                          <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Sessions
-                          </span>
-                          <span className="d-block d-sm-none">
-                            <i className="tim-icons icon-tap-02" />
                           </span>
                         </Button>
                       </ButtonGroup>
@@ -159,10 +142,12 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Line
-                      data={chartExample1[this.state.bigChartData]}
-                      options={chartExample1.options}
-                    />
+                    {this.state.bigChartData &&
+                      <Line
+                          data={this.state.bigChartData.data}
+                          options={this.state.bigChartData.options}
+                      />
+                    }
                   </div>
                 </CardBody>
               </Card>

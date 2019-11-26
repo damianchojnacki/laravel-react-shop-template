@@ -1,5 +1,3 @@
-import Api from "./utils/Api";
-
 window._ = require('lodash');
 
 /**

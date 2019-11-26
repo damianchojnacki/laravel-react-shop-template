@@ -3,7 +3,7 @@ import {Route, Switch} from "react-router-dom";
 
 import routes from "../routes.js";
 
-import Api from "../utils/Api";
+import AuthService from "../utils/AuthService";
 import {AuthContext} from "../utils/AuthContext";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,7 +14,7 @@ function Shop() {
 
     useEffect(() => {
         state.authenticated &&
-            Api.getUser()
+            AuthService.getUser()
                 .then(res => {
                     dispatch({type: "login", payload: res.data});
                 })

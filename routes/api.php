@@ -13,14 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// public routes
-Route::post('login', 'AuthController@login')->name('auth.login');
-Route::post('register', 'AuthController@register')->name('auth.register');
 
-// private routes
-Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'AuthController@getUser')->name('auth.user');
-    Route::post('logout', 'AuthController@logout')->name('auth.logout');
+Route::group([
+    'name' => 'auth',
+], function () {
+    // public routes
+    Route::post('login', 'AuthController@login')->name('auth.login');
+    Route::post('register', 'AuthController@register')->name('auth.register');
+
+    // private routes
+    Route::middleware('auth:api')->group(function () {
+        Route::get('user', 'AuthController@getUser')->name('auth.user');
+        Route::post('logout', 'AuthController@logout')->name('auth.logout');
+    });
 });
 
 Route::group([
@@ -31,4 +36,13 @@ Route::group([
     Route::post('products', 'ProductController@store')->name('products.store');
     Route::put('products', 'ProductController@edit')->name('products.edit');
     Route::delete('products', 'ProductController@delete')->name('products.delete');
+});
+
+Route::group([
+    'name' => 'charts',
+    'middleware' => ['auth:api', 'admin']
+], function () {
+    Route::get('charts/products', 'ChartController@products')->name('chart.products');
+    Route::get('charts/views', 'ChartController@views')->name('chart.views');
+    Route::get('charts/views-unique', 'ChartController@viewsUnique')->name('chart.views-unique');
 });

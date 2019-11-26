@@ -29,20 +29,21 @@ import routes from "../routes.js";
 import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";
 import PerfectScrollbar from "perfect-scrollbar";
-import Api from "../utils/Api";
+import AuthService from "../utils/AuthService";
 import {AuthContext} from "../utils/AuthContext";
 
 function Admin(props) {
 
     const { state, dispatch } = React.useContext(AuthContext);
-    const [backgroundColor, setBackgroundColor] = useState("blue");
+    const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('background'));
+    const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode'));
     const [sidebarOpened, setSidebarOpened] =  useState(document.documentElement.className.indexOf("nav-open") !== -1);
     const [redirectBack, setRedirectBack] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         state.authenticated ?
-            Api.getUser()
+            AuthService.getUser()
                 .then(res => {
                     dispatch({type: "login", payload: res.data});
                 })
@@ -50,6 +51,8 @@ function Admin(props) {
                 .finally(() => {setLoading(false)})
             :
             setLoading(false);
+
+        darkMode === 'light' ?  document.body.classList.add("white-content") : document.body.classList.remove("white-content");
     }, []);
 
     useEffect(() => {
@@ -65,7 +68,15 @@ function Admin(props) {
     };
 
     const handleBgClick = color => {
+        localStorage.setItem('background', color);
         setBackgroundColor(color);
+    };
+
+    const handleDarkModeClick = color => {
+        localStorage.setItem('darkMode', color);
+        setDarkMode(color);
+
+        color === 'light' ?  document.body.classList.add("white-content") : document.body.classList.remove("white-content");
     };
 
     const getRoutes = routes => {
@@ -130,6 +141,7 @@ function Admin(props) {
                 <FixedPlugin
                     bgColor={backgroundColor}
                     handleBgClick={handleBgClick}
+                    handleDarkModeClick={handleDarkModeClick}
                 />
             </div>
         );

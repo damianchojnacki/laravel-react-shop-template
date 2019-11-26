@@ -37,7 +37,7 @@ import {
     Modal
 } from "reactstrap";
 import {AuthContext} from "../../utils/AuthContext";
-import Api from "../../utils/Api";
+import AuthService from "../../utils/AuthService";
 
 function AdminNavbar(props) {
     const { state, dispatch } = React.useContext(AuthContext);
@@ -54,7 +54,7 @@ function AdminNavbar(props) {
     const handleLogout = (e) => {
         e.preventDefault();
 
-        Api.logout();
+        AuthService.logout();
         dispatch({ type: "logout" });
     };
 

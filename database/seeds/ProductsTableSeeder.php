@@ -1,8 +1,9 @@
 <?php
 
+use App\Image;
 use App\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use JD\Cloudder\Facades\Cloudder;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -13,6 +14,12 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Product::class, 20)->create();
+        //config('app.env') !== 'testing' && Cloudder::deleteResourcesByPrefix('products');
+
+        factory(Product::class, 100)->create()->each(function($post) {
+            //$image = new Image();
+            //$image->url= Product::imageUpload('https://lorempixel.com/640/640');
+            //$post->image()->save($image);
+        });
     }
 }

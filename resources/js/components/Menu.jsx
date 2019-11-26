@@ -1,6 +1,6 @@
 import React from "react";
 import { Nav, NavItem } from "shards-react";
-import Api from "../utils/Api";
+import AuthService from "../utils/AuthService";
 import {Link, NavLink} from 'react-router-dom';
 import routes from "../routes";
 import {AuthContext} from "../utils/AuthContext";
@@ -11,7 +11,7 @@ function Menu(){
     const handleLogout = (e) => {
         e.preventDefault();
 
-        Api.logout();
+        AuthService.logout();
         dispatch({ type: "logout" });
     };
 

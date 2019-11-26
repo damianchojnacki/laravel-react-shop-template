@@ -30,6 +30,7 @@
         border-radius: 0.1875rem;
         padding: 0 10px;
         background: linear-gradient($black, $black-states);
+      display: none;
     }
 
     .dropdown .dropdown-menu .tim-icons{
@@ -313,7 +314,7 @@
              -o-transform: translateY(-13%);
              -ms-transform: translateY(-13%);
              transform: translateY(-13%);
-
+              display:block;
              transform-origin: 0 0;
         }
     }

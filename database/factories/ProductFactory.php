@@ -20,5 +20,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'size' => rand(11, 17),
         'ram' => $faker->randomElement($rams),
         'price' => $faker->randomFloat('2', 300, 1200),
+        'created_at' => $faker->dateTimeBetween('-1 year', 'now')
     ];
 });

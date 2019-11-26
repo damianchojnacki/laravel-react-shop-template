@@ -17,9 +17,6 @@
 */
 import React, { Component } from "react";
 
-// reactstrap components
-import { Button } from "reactstrap";
-
 class FixedPlugin extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +24,7 @@ class FixedPlugin extends Component {
       classes: "dropdown show-dropdown"
     };
   }
+
   handleClick = () => {
     if (this.state.classes === "dropdown show-dropdown") {
       this.setState({ classes: "dropdown show-dropdown show" });
@@ -34,16 +32,7 @@ class FixedPlugin extends Component {
       this.setState({ classes: "dropdown show-dropdown" });
     }
   };
-  activateMode = mode => {
-    switch (mode) {
-      case "light":
-        document.body.classList.add("white-content");
-        break;
-      default:
-        document.body.classList.remove("white-content");
-        break;
-    }
-  };
+
   render() {
     return (
       <div className="fixed-plugin">
@@ -94,11 +83,11 @@ class FixedPlugin extends Component {
               <span className="color-label">LIGHT MODE</span>{" "}
               <span
                 className="badge light-badge mr-2"
-                onClick={() => this.activateMode("light")}
+                onClick={() => this.props.handleDarkModeClick("light")}
               />{" "}
               <span
                 className="badge dark-badge ml-2"
-                onClick={() => this.activateMode("dark")}
+                onClick={() => this.props.handleDarkModeClick("dark")}
               />{" "}
               <span className="color-label">DARK MODE</span>{" "}
             </li>

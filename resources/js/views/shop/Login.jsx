@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import Menu from '../../components/Menu';
 import {Form, FormInput, FormGroup, Button, Alert} from "shards-react";
 import ReeValidate from 'ree-validate';
-import Api from '../../utils/Api';
+import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
 
 export default function Login() {
@@ -39,9 +39,9 @@ export default function Login() {
             .then((success) => {
                 setLoading(true);
 
-                success && Api.login(credentials)
+                success && AuthService.login(credentials)
                     .then(res => {
-                        Api.getUser().then(res => {
+                        AuthService.getUser().then(res => {
                             dispatch({type: "login", payload: res.data});
                             setErrors({});
                             setLoading(false);
