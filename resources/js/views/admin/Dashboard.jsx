@@ -136,6 +136,26 @@ class Dashboard extends React.Component {
                             <i className="tim-icons icon-gift-2" />
                           </span>
                         </Button>
+                        <Button
+                            color="info"
+                            id="1"
+                            size="sm"
+                            tag="label"
+                            className="btn-simple"
+                            onClick={() => this.setBigChartData("views-unique", '#00ddcc')}
+                        >
+                          <input
+                              className="d-none"
+                              name="options"
+                              type="radio"
+                          />
+                          <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                            Unique views
+                          </span>
+                          <span className="d-block d-sm-none">
+                            <i className="tim-icons icon-gift-2" />
+                          </span>
+                        </Button>
                       </ButtonGroup>
                     </Col>
                   </Row>

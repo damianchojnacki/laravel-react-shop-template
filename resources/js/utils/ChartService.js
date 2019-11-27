@@ -59,13 +59,14 @@ export default class ChartService{
                             barPercentage: 1.6,
                             gridLines: {
                                 drawBorder: false,
+                                color: "rgba(0,0,0,0.0)",
                                 zeroLineColor: "transparent"
                             },
                             ticks: {
                                 padding: 20,
                                 fontColor: "#9a9a9a",
                                 min: 0
-                            }
+                            },
                         }
                     ],
                     xAxes: [
