@@ -19,7 +19,7 @@ import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
+import { Line, Bar, Pie } from "react-chartjs-2";
 
 // reactstrap components
 import {
@@ -58,20 +58,36 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       bigChartData: null,
+      smallChartsData: [],
     };
   }
 
   componentDidMount() {
     this.setBigChartData('orders');
+
+    this.setSmallChartData(0, 'views');
+    this.setSmallChartData(1, 'views-unique');
   }
 
-  setBigChartData = (name, color) => {
-    ChartService.get(name).then(chart => {
-      this.setState({
-        bigChartData: ChartService.generate(chart, color),
-      });
-    })
-  };
+  async setBigChartData(name, color) {
+    const chart = await ChartService.get(name);
+
+    this.setState({
+      bigChartData: ChartService.generate(chart, color, 'big'),
+    });
+  }
+
+  async setSmallChartData(index, name, color) {
+    const chart = await ChartService.get(name);
+
+    const smallChartsData = this.state.smallChartsData;
+
+    smallChartsData[index] = ChartService.generate(chart, color, 'small');
+
+    this.setState({
+      smallChartsData: smallChartsData,
+    });
+  }
 
   render() {
     return (
@@ -91,7 +107,7 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col sm="6">
                       <ButtonGroup
-                        className="btn-group-toggle float-right"
+                        className="btn-group-toggle float-md-right"
                         data-toggle="buttons"
                       >
                         <Button
@@ -112,7 +128,7 @@ class Dashboard extends React.Component {
                             Orders
                           </span>
                           <span className="d-block d-sm-none">
-                            <i className="tim-icons icon-single-02" />
+                            <i className="tim-icons icon-delivery-fast" />
                           </span>
                         </Button>
                         <Button
@@ -132,7 +148,7 @@ class Dashboard extends React.Component {
                             Views
                           </span>
                           <span className="d-block d-sm-none">
-                            <i className="tim-icons icon-gift-2" />
+                            <i className="tim-icons icon-tap-02" />
                           </span>
                         </Button>
                         <Button
@@ -152,7 +168,7 @@ class Dashboard extends React.Component {
                             Unique views
                           </span>
                           <span className="d-block d-sm-none">
-                            <i className="tim-icons icon-gift-2" />
+                            <i className="tim-icons icon-tap-02" />
                           </span>
                         </Button>
                       </ButtonGroup>
@@ -173,58 +189,38 @@ class Dashboard extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col lg="4">
+            <Col lg="6">
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Total Shipments</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-bell-55 text-info" />{" "}
-                    763,215
-                  </CardTitle>
+                  <h5 className="card-category">{this.state.smallChartsData[0] ? this.state.smallChartsData[0].title : null}</h5>
+                  <CardTitle tag="h2">{this.state.smallChartsData[0] ? `Total - ${separateHundreds(this.state.smallChartsData[0].total)}` : null}</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Line
-                      data={chartExample2.data}
-                      options={chartExample2.options}
-                    />
+                    {this.state.smallChartsData[0] &&
+                      <Pie
+                          data={this.state.smallChartsData[0].data}
+                          options={this.state.smallChartsData[0].options}
+                      />
+                    }
                   </div>
                 </CardBody>
               </Card>
             </Col>
-            <Col lg="4">
+            <Col lg="6">
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Daily Sales</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-delivery-fast text-primary" />{" "}
-                    3,500€
-                  </CardTitle>
+                  <h5 className="card-category">{this.state.smallChartsData[1] ? this.state.smallChartsData[1].title : null}</h5>
+                  <CardTitle tag="h2">{this.state.smallChartsData[1] ? `Total - ${separateHundreds(this.state.smallChartsData[1].total)}` : null}</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
+                    {this.state.smallChartsData[1] &&
                     <Bar
-                      data={chartExample3.data}
-                      options={chartExample3.options}
+                        data={this.state.smallChartsData[1].data}
+                        options={this.state.smallChartsData[1].options}
                     />
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col lg="4">
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">Completed Tasks</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-send text-success" /> 12,100K
-                  </CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-                    <Line
-                      data={chartExample4.data}
-                      options={chartExample4.options}
-                    />
+                    }
                   </div>
                 </CardBody>
               </Card>
