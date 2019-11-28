@@ -12,7 +12,7 @@ class Order extends Model
     protected $guarded = ['uuid'];
 
     public function status(){
-        return $this->hasOne(Status::class);
+        return $this->belongsTo(Status::class);
     }
 
     public function products(){

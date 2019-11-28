@@ -16,9 +16,7 @@
 
 */
 import React from "react";
-// nodejs library that concatenates classes
-import classNames from "classnames";
-// react plugin used to create charts
+
 import { Line, Bar, Pie } from "react-chartjs-2";
 
 // reactstrap components
@@ -42,13 +40,6 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 
-// core components
-import {
-  chartExample1,
-  chartExample2,
-  chartExample3,
-  chartExample4
-} from "../../variables/charts.jsx";
 import {Helmet} from "react-helmet";
 import ChartService from "../../utils/ChartService";
 import {separateHundreds} from "../../utils/helpers";
@@ -65,24 +56,24 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.setBigChartData('orders');
 
-    this.setSmallChartData(0, 'views');
-    this.setSmallChartData(1, 'views-unique');
+    this.setSmallChartData(0, 'orders/statuses', '#ffff00', 'pie');
+    this.setSmallChartData(1, 'views-unique', '#ffff00', 'bar');
   }
 
   async setBigChartData(name, color) {
     const chart = await ChartService.get(name);
 
     this.setState({
-      bigChartData: ChartService.generate(chart, color, 'big'),
+      bigChartData: ChartService.generate(chart, color, 'line'),
     });
   }
 
-  async setSmallChartData(index, name, color) {
+  async setSmallChartData(index, name, color, type) {
     const chart = await ChartService.get(name);
 
     const smallChartsData = this.state.smallChartsData;
 
-    smallChartsData[index] = ChartService.generate(chart, color, 'small');
+    smallChartsData[index] = ChartService.generate(chart, color, type);
 
     this.setState({
       smallChartsData: smallChartsData,

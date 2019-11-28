@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class LaravelChart {
 
@@ -48,7 +47,7 @@ class LaravelChart {
                 ->get()
                 ->groupBy(function ($entry) {
                     if ($this->options['report_type'] == 'group_by_string') {
-                        return $entry->{$this->options['group_by_field']};
+                        return $entry->{$this->options['group_by_field']}->{$this->options['field_name']};
                     }
                     else if ($entry->{$this->options['group_by_field']} instanceof \Carbon\Carbon) {
                         return $entry->{$this->options['group_by_field']}

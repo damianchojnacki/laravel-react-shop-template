@@ -7,9 +7,9 @@ export default class ChartService{
         return chart.data;
     }
 
-    static generate(data, color = 'rgb(29,140,248)', size = 'big'){
+    static generate(data, color = 'rgb(29,140,248)', type = 'line'){
         const options = {
-            big: {
+            line: {
                 maintainAspectRatio: false,
                 legend: {
                     display: false
@@ -58,7 +58,7 @@ export default class ChartService{
                 }
             },
 
-            small: {
+            bar: {
                 maintainAspectRatio: false,
                 legend: {
                     display: false
@@ -104,6 +104,21 @@ export default class ChartService{
                         }
                     ]
                 }
+            },
+
+            pie: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "#f5f5f5",
+                    titleFontColor: "#333",
+                    bodyFontColor: "#666",
+                    bodySpacing: 4,
+                    xPadding: 12,
+                    mode: "nearest",
+                    intersect: 0,
+                    position: "nearest"
+                },
+                responsive: true,
             }
         };
 
@@ -112,11 +127,22 @@ export default class ChartService{
             title: data.title,
             data: canvas => {
                 let ctx = canvas.getContext("2d");
-
                 let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
                 gradientStroke.addColorStop(1, addAlpha(color, '0.1'));
                 gradientStroke.addColorStop(0.2, "transparent");
+
+                if(type === 'pie') {
+                    gradientStroke = [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#CCFF56',
+                        '#00FFCC',
+                        '#FF00CC',
+                    ];
+
+                    color = 'transparent';
+                }
 
                 return {
                     labels: data.labels,
@@ -138,7 +164,7 @@ export default class ChartService{
                     ]
                 };
             },
-            options: options[size],
+            options: options[type],
         };
     }
 }

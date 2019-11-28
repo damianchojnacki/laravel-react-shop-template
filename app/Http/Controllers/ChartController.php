@@ -21,6 +21,19 @@ class ChartController extends Controller
         return response($chart->getDivided(), 200);
     }
 
+    public function ordersStatuses()
+    {
+        $chart = new LaravelChart([
+            'title' => 'Orders statuses (by month)',
+            'report_type' => 'group_by_string',
+            'model' => 'App\Order',
+            'group_by_field' => 'status',
+            'field_name' => 'name',
+        ]);
+
+        return response($chart->getDivided(), 200);
+    }
+
     public function views()
     {
         $chart = new LaravelChart([
