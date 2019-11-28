@@ -6,12 +6,12 @@ use App\LaravelChart;
 
 class ChartController extends Controller
 {
-    public function products()
+    public function orders()
     {
         $chart = new LaravelChart([
-            'title' => 'Products (by month)',
+            'title' => 'Orders (by month)',
             'report_type' => 'group_by_date',
-            'model' => 'App\Product',
+            'model' => 'App\Order',
             'group_by_field' => 'created_at',
             'group_by_period' => 'month',
             'filter_field' => 'created_at',

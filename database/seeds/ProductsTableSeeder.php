@@ -14,12 +14,16 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        //config('app.env') !== 'testing' && Cloudder::deleteResourcesByPrefix('products');
+        $products = factory(Product::class, 20)->create();
 
-        factory(Product::class, 100)->create()->each(function($post) {
-            //$image = new Image();
-            //$image->url= Product::imageUpload('https://lorempixel.com/640/640');
-            //$post->image()->save($image);
-        });
+        if(in_array(config('app.env'), ['dev', 'prod'])){
+            Cloudder::deleteResourcesByPrefix('products');
+
+            $products->each(function($post) {
+                $image = new Image();
+                $image->url= Product::imageUpload('https://lorempixel.com/640/640');
+                $post->image()->save($image);
+            });
+        }
     }
 }

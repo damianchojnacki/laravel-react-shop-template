@@ -42,7 +42,7 @@ Route::group([
     'name' => 'charts',
     'middleware' => ['auth:api', 'admin']
 ], function () {
-    Route::get('charts/products', 'ChartController@products')->name('chart.products');
+    Route::get('charts/orders', 'ChartController@orders')->name('chart.orders');
     Route::get('charts/views', 'ChartController@views')->name('chart.views');
     Route::get('charts/views-unique', 'ChartController@viewsUnique')->name('chart.views-unique');
 });

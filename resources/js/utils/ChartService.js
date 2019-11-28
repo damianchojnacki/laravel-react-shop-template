@@ -2,7 +2,9 @@ import addAlpha from "./helpers";
 
 export default class ChartService{
     static async get(name){
-        return window.axios.get(`/api/charts/${name}`);
+        const chart = await window.axios.get(`/api/charts/${name}`);
+
+        return chart.data;
     }
 
     static generate(data, color = 'rgb(29,140,248)'){

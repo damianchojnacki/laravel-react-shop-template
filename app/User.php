@@ -41,4 +41,8 @@ class User extends Authenticatable
     public function isAdmin(){
         return $this->name == 'admin';
     }
+
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
 }

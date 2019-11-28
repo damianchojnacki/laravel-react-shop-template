@@ -15,4 +15,8 @@ class Product extends Model
 
         return $id;
     }
+
+    public function order(){
+        return $this->belongsToMany(Order::class, 'order_product');
+    }
 }

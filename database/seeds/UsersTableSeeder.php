@@ -26,6 +26,8 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('user'),
         ]);
 
+        factory(User::class, 10)->create();
+
         Artisan::call('passport:install');
     }
 }

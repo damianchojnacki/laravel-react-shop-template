@@ -58,18 +58,17 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       bigChartData: null,
-      api: false,
     };
   }
 
   componentDidMount() {
-    this.setBigChartData('products');
+    this.setBigChartData('orders');
   }
 
   setBigChartData = (name, color) => {
-    ChartService.get(name).then(res => {
+    ChartService.get(name).then(chart => {
       this.setState({
-        bigChartData: ChartService.generate(res.data, color),
+        bigChartData: ChartService.generate(chart, color),
       });
     })
   };
@@ -101,7 +100,7 @@ class Dashboard extends React.Component {
                           id="0"
                           size="sm"
                           className="btn-simple"
-                          onClick={() => this.setBigChartData("products")}
+                          onClick={() => this.setBigChartData("orders")}
                         >
                           <input
                             defaultChecked
@@ -110,7 +109,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Purchases
+                            Orders
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-single-02" />
