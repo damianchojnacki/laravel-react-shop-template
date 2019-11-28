@@ -43,7 +43,8 @@ Route::group([
     //'middleware' => ['auth:api', 'admin']
 ], function () {
     Route::get('charts/orders', 'ChartController@orders')->name('chart.orders');
-    Route::get('charts/orders/statuses', 'ChartController@ordersStatuses')->name('chart.orders.statuses');
+    Route::get('charts/orders/countries', 'ChartController@ordersCountries')->name('chart.orders.countries');
+    Route::get('charts/orders/values', 'ChartController@ordersValues')->name('chart.orders.values');
     Route::get('charts/views', 'ChartController@views')->name('chart.views');
     Route::get('charts/views-unique', 'ChartController@viewsUnique')->name('chart.views-unique');
 });

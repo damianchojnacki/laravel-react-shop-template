@@ -56,8 +56,8 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.setBigChartData('orders');
 
-    this.setSmallChartData(0, 'orders/statuses', '#ffff00', 'pie');
-    this.setSmallChartData(1, 'views-unique', '#ffff00', 'bar');
+    this.setSmallChartData(0, 'orders/countries', '#ffffff', 'pie');
+    this.setSmallChartData(1, 'orders/values', '#fd5d93', 'bar');
   }
 
   async setBigChartData(name, color) {
@@ -94,7 +94,7 @@ class Dashboard extends React.Component {
                   <Row>
                     <Col className="text-left" sm="6">
                       <h5 className="card-category">{this.state.bigChartData ? this.state.bigChartData.title : null}</h5>
-                      <CardTitle tag="h2">{this.state.bigChartData ? `Total - ${separateHundreds(this.state.bigChartData.total)}` : null}</CardTitle>
+                      <CardTitle tag="h2">{this.state.bigChartData ? separateHundreds(this.state.bigChartData.total) : null}</CardTitle>
                     </Col>
                     <Col sm="6">
                       <ButtonGroup
@@ -184,7 +184,10 @@ class Dashboard extends React.Component {
               <Card className="card-chart">
                 <CardHeader>
                   <h5 className="card-category">{this.state.smallChartsData[0] ? this.state.smallChartsData[0].title : null}</h5>
-                  <CardTitle tag="h2">{this.state.smallChartsData[0] ? `Total - ${separateHundreds(this.state.smallChartsData[0].total)}` : null}</CardTitle>
+                  <CardTitle tag="h2">
+                      <i className="tim-icons icon-map-big text-info" />{" "}
+                      {this.state.smallChartsData[0] ? separateHundreds(this.state.smallChartsData[0].total) : null}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
@@ -202,7 +205,10 @@ class Dashboard extends React.Component {
               <Card className="card-chart">
                 <CardHeader>
                   <h5 className="card-category">{this.state.smallChartsData[1] ? this.state.smallChartsData[1].title : null}</h5>
-                  <CardTitle tag="h2">{this.state.smallChartsData[1] ? `Total - ${separateHundreds(this.state.smallChartsData[1].total)}` : null}</CardTitle>
+                  <CardTitle tag="h2">
+                      <i className="tim-icons icon-money-coins text-danger" />{" "}
+                      {this.state.smallChartsData[1] ? `${separateHundreds(this.state.smallChartsData[1].total)} $` : null}
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">

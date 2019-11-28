@@ -71,7 +71,7 @@ export default class ChartService{
                     xPadding: 12,
                     mode: "nearest",
                     intersect: 0,
-                    position: "nearest"
+                    position: "nearest",
                 },
                 responsive: true,
                 scales: {
@@ -86,7 +86,10 @@ export default class ChartService{
                                 suggestedMin: 60,
                                 suggestedMax: 120,
                                 padding: 20,
-                                fontColor: "#9e9e9e"
+                                fontColor: "#9e9e9e",
+                                callback: function(value) {
+                                    return data.sign ? value + ' ' + data.sign : value;
+                                }
                             }
                         }
                     ],
@@ -99,7 +102,7 @@ export default class ChartService{
                             },
                             ticks: {
                                 padding: 20,
-                                fontColor: "#9e9e9e"
+                                fontColor: "#9e9e9e",
                             }
                         }
                     ]
@@ -128,19 +131,11 @@ export default class ChartService{
             data: canvas => {
                 let ctx = canvas.getContext("2d");
                 let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-                gradientStroke.addColorStop(1, addAlpha(color, '0.1'));
+                gradientStroke.addColorStop(1, addAlpha(color, '0.2'));
                 gradientStroke.addColorStop(0.2, "transparent");
 
                 if(type === 'pie') {
-                    gradientStroke = [
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FFCE56',
-                        '#CCFF56',
-                        '#00FFCC',
-                        '#FF00CC',
-                    ];
-
+                    gradientStroke = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D', '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC', '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399', '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933', '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
                     color = 'transparent';
                 }
 

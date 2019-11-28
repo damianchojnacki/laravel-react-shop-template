@@ -9,6 +9,6 @@ class Status extends Model
     public $timestamps = false;
 
     public function order(){
-        return $this->belongsTo(Product::class);
+        return $this->hasOne(Product::class);
     }
 }

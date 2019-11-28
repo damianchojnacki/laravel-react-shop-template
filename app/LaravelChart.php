@@ -47,11 +47,20 @@ class LaravelChart {
                 ->get()
                 ->groupBy(function ($entry) {
                     if ($this->options['report_type'] == 'group_by_string') {
-                        return $entry->{$this->options['group_by_field']}->{$this->options['field_name']};
+                        return $entry->{$this->options['group_by_field']};
                     }
                     else if ($entry->{$this->options['group_by_field']} instanceof \Carbon\Carbon) {
                         return $entry->{$this->options['group_by_field']}
                             ->format(self::GROUP_PERIODS[$this->options['group_by_period']]);
+                    } else if($this->options['report_type'] == 'group_by_relation'){
+                        if(isset($this->options['relation_field2']))
+                            $return = $entry->{$this->options['group_by_field']}->{$this->options['relation_field']}->{$this->options['relation_field2']};
+                        else if(isset($this->options['relation_field']))
+                            $return = $entry->{$this->options['group_by_field']}->{$this->options['relation_field']};
+                        else
+                            $return = $entry->{$this->options['group_by_field']};
+
+                        return $return;
                     } else {
                         return \Carbon\Carbon::createFromFormat($this->options['group_by_field_format'] ?? 'Y-m-d H:i:s',
                             $entry->{$this->options['group_by_field']})
@@ -67,20 +76,23 @@ class LaravelChart {
     }
 
     public function getTotal(){
-        return array_sum($this->data->toArray());
+        return round(array_sum($this->data->toArray()));
     }
 
     public function getDivided(){
+        !isset($this->options['sign']) && $this->options['sign'] = null;
+
         $data = [
             'total' => $this->getTotal(),
             'title' => $this->options['title'],
             'labels' => [],
             'values' => [],
+            'sign' => $this->options['sign'],
         ];
 
         foreach($this->data as $key => $value){
             $data['labels'][] = $key;
-            $data['values'][] = $value;
+            $data['values'][] = round($value);
         }
 
         return $data;
@@ -90,9 +102,11 @@ class LaravelChart {
     {
         $rules = [
             'title' => 'required',
-            'report_type' => 'required|in:group_by_date,group_by_string',
+            'report_type' => 'required|in:group_by_date,group_by_string,group_by_relation',
             'model' => 'required|bail',
             'group_by_field' => 'required|bail',
+            'relation_field' => 'bail',
+            'relation_field2' => 'bail',
             'group_by_period' => 'in:day,week,month,year|bail',
             'aggregate_function' => 'in:count,sum,avg|bail',
             'filter_days' => 'integer',
