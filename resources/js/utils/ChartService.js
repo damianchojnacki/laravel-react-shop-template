@@ -7,7 +7,7 @@ export default class ChartService{
         return chart.data;
     }
 
-    static generate(data, color = 'rgb(29,140,248)', type = 'line'){
+    static generate(data, color = '#1D8CF8', type = 'line'){
         const options = {
             line: {
                 maintainAspectRatio: false,
@@ -128,6 +128,7 @@ export default class ChartService{
         return {
             total: data.total,
             title: data.title,
+            sign: data.sign ? data.sign : '',
             data: canvas => {
                 let ctx = canvas.getContext("2d");
                 let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);

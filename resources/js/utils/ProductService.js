@@ -5,8 +5,10 @@ export default class ProductService{
         return response.data;
     }
 
-    static get(id) {
-        return window.axios.get(`/api/products/${id}`);
+    static async get(id) {
+        const response = await window.axios.get(`/api/products/${id}`);
+
+        return response.data;
     }
 }
 

@@ -18,7 +18,7 @@ export default function Products(props){
         <tr key={product.id}>
             <td>{ index + 1 }</td>
             <td>{ product.name }</td>
-            <td>{ product.type.name }</td>
+            <td>{ product.type.name_display }</td>
             <td className="text-center">{ product.price } USD</td>
             <td className="text-right"><a className="btn btn-primary" href={`/admin/products/${product.id}`}>Details</a></td>
         </tr>

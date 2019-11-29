@@ -9,7 +9,7 @@ class ChartController extends Controller
     public function orders()
     {
         $chart = new LaravelChart([
-            'title' => 'Total orders',
+            'title' => 'Orders (one year)',
             'report_type' => 'group_by_date',
             'model' => 'App\Order',
             'group_by_field' => 'created_at',
@@ -55,7 +55,7 @@ class ChartController extends Controller
     public function views()
     {
         $chart = new LaravelChart([
-            'title' => 'Total views',
+            'title' => 'Views (one year)',
             'report_type' => 'group_by_date',
             'model' => 'App\Views',
             'group_by_field' => 'created_at',
@@ -72,7 +72,7 @@ class ChartController extends Controller
     public function viewsUnique()
     {
         $chart = new LaravelChart([
-            'title' => 'Total unique views',
+            'title' => 'Unique views (one year)',
             'report_type' => 'group_by_date',
             'model' => 'App\Views',
             'group_by_field' => 'created_at',

@@ -23,7 +23,7 @@ class ProductController extends Controller
 
         $products = Product::with(['image', 'type'])->get();
 
-        (!$request->user() || $request->user()->name != 'admin') && $products = ProductResource::collection($products);
+        (!$request->user() || !$request->user()->isAdmin()) && $products = ProductResource::collection($products);
 
         return response($products, 200);
     }
@@ -45,9 +45,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        Auth::shouldUse('api');
+
+        $product = Product::with(['image', 'type'])->find($id);
+
+        (!$request->user() || !$request->user()->isAdmin()) && $product = new ProductResource($product);
+
+        return response($product, 200);
     }
 
     /**

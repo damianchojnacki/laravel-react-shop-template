@@ -116,7 +116,7 @@ class ProductsTableSeeder extends Seeder
 
         Product::all()->each(function($product) use($faker) {
             $image = new Image();
-            $image->url = 'images/products/' . $product->id . '.png';
+            $image->url = '/images/products/' . $product->id . '.png';
             $product->image()->save($image);
 
             $product->created_at = $faker->dateTimeBetween('-1 year', 'now');
