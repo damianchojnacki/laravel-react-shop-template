@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-
+import {Link} from "react-router-dom";
 import {Line, Bar, Pie} from "react-chartjs-2";
 
 // reactstrap components
@@ -85,7 +85,7 @@ class Dashboard extends React.Component {
                 <td>{order.created_at}</td>
                 <td>{order.user.email}</td>
                 <td className="text-center">{order.value} USD</td>
-                <td className="text-right"><a className="btn btn-primary" href={`/admin/orders/${order.id}`}>Details</a>
+                <td className="text-right"><Link className="btn btn-primary" to={`/admin/orders/${order.id}`}>Details</Link>
                 </td>
             </tr>
         );

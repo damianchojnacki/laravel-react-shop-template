@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import ProductService from "../../utils/ProductService";
 
@@ -20,7 +21,7 @@ export default function Products(props){
             <td>{ product.name }</td>
             <td>{ product.type.name_display }</td>
             <td className="text-center">{ product.price } USD</td>
-            <td className="text-right"><a className="btn btn-primary" href={`/admin/products/${product.id}`}>Details</a></td>
+            <td className="text-right"><Link className="btn btn-primary" to={`/admin/products/${product.id}`}>Details</Link></td>
         </tr>
     );
 
