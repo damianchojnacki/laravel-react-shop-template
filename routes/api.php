@@ -39,8 +39,16 @@ Route::group([
 });
 
 Route::group([
+    'name' => 'orders',
+    //'middleware' => ['auth:api', 'admin'],
+], function () {
+    Route::get('orders', 'OrderController@index')->name('orders');
+    Route::get('orders/recent', 'OrderController@recent')->name('orders.recent');
+});
+
+Route::group([
     'name' => 'charts',
-    //'middleware' => ['auth:api', 'admin']
+    //'middleware' => ['auth:api', 'admin'],
 ], function () {
     Route::get('charts/orders', 'ChartController@orders')->name('chart.orders');
     Route::get('charts/orders/countries', 'ChartController@ordersCountries')->name('chart.orders.countries');

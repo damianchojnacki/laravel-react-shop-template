@@ -9,10 +9,11 @@ class Order extends Model
 {
     use UsesUuid;
 
-    protected $guarded = ['uuid'];
+    protected $guarded = ['id', 'value'];
+    protected $appends = ['value'];
 
     public function status(){
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(OrderStatus::class);
     }
 
     public function products(){

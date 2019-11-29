@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         Auth::shouldUse('api');
 
-        $products = Product::all();
+        $products = Product::with(['image', 'type'])->get();
 
         (!$request->user() || $request->user()->name != 'admin') && $products = ProductResource::collection($products);
 

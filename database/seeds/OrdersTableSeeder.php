@@ -14,10 +14,10 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Order::class, 50)->create()->each(function ($order) {
-            $products = Product::all()->random(rand(1, 10));
+        $products = $products = Product::all();
 
-            foreach($products as $product){
+        factory(Order::class, 50)->create()->each(function ($order) use($products) {
+            foreach($products->random(rand(1, 5)) as $product){
                 $order->products()->attach($product, ['quantity' => rand(1, 3)]);
             }
         });

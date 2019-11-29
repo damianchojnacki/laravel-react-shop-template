@@ -38,7 +38,7 @@ class ChartController extends Controller
     public function ordersValues()
     {
         $chart = new LaravelChart([
-            'title' => 'Total value of orders',
+            'title' => 'Total value of orders (one year)',
             'report_type' => 'group_by_date',
             'model' => 'App\Order',
             'group_by_field' => 'created_at',

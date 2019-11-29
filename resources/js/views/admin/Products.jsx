@@ -8,17 +8,17 @@ export default function Products(props){
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        ProductService.all().then(response => {
-            setProducts(response.data);
+        ProductService.all().then(products => {
+            setProducts(products);
             setLoading(false);
         });
     }, []);
 
     const productsTable = products.map((product, index) =>
         <tr key={product.id}>
-            <td>{ index }</td>
+            <td>{ index + 1 }</td>
             <td>{ product.name }</td>
-            <td>{ product.title }</td>
+            <td>{ product.type.name }</td>
             <td className="text-center">{ product.price } USD</td>
             <td className="text-right"><a className="btn btn-primary" href={`/admin/products/${product.id}`}>Details</a></td>
         </tr>

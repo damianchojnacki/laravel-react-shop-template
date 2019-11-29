@@ -13,9 +13,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CountriesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        config('app.env') !== 'prod' && $this->call(ProductsTableSeeder::class);
+        $this->call(ProductTypesTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
         config('app.env') !== 'prod' && $this->call(ViewsTableSeeder::class);
-        config('app.env') !== 'prod' && $this->call(StatusesTableSeeder::class);
+        config('app.env') !== 'prod' && $this->call(OrderStatusesTableSeeder::class);
         config('app.env') !== 'prod' && $this->call(OrdersTableSeeder::class);
     }
 }
