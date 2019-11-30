@@ -85,7 +85,7 @@ class Dashboard extends React.Component {
                 <td>{order.created_at}</td>
                 <td>{order.user.email}</td>
                 <td className="text-center">{order.value} USD</td>
-                <td className="text-right"><Link className="btn btn-primary" to={`/admin/orders/${order.id}`}>Details</Link>
+                <td className="text-right"><Link className={`btn btn-${this.props.bgColor}`} to={`/admin/orders/${order.id}`}>Details</Link>
                 </td>
             </tr>
         );

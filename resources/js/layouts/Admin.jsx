@@ -85,7 +85,7 @@ function Admin(props) {
                 return (
                     <Route
                         exact path={prop.layout + prop.path}
-                        component={prop.component}
+                        render={(props) => <prop.component {...props} bgColor={backgroundColor} />}
                         key={key}
                     />
                 );
@@ -119,8 +119,7 @@ function Admin(props) {
                         toggleSidebar={toggleSidebar}
                     />
                     <div
-                        className="main-panel"
-                        data={backgroundColor}
+                        className={`main-panel ${backgroundColor}`}
                     >
                         <AdminNavbar
                             {...props}

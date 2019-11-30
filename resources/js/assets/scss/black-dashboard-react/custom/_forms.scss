@@ -21,6 +21,18 @@
         border-left: none;
         background-color: $transparent-bg;
     }
+
+    &.primary:focus{
+      border-color: $primary !important;
+    }
+
+    &.success:focus{
+      border-color: $success !important;
+    }
+
+    &.info:focus{
+      border-color: $info !important;
+    }
   }
 
   .has-success &,

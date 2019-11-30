@@ -58,7 +58,7 @@ class Sidebar extends React.Component {
     const { bgColor, routes, rtlActive } = this.props;
 
     return (
-      <div className="sidebar" data={bgColor}>
+      <div className={`sidebar ${bgColor}`}>
         <div className="sidebar-wrapper" ref="sidebar">
           <Nav>
             {routes.map((prop, key) => {
@@ -101,7 +101,7 @@ Sidebar.propTypes = {
   // if true, then instead of the routes[i].name, routes[i].rtlName will be rendered
   // insde the links of this component
   rtlActive: PropTypes.bool,
-  bgColor: PropTypes.oneOf(["primary", "blue", "green"]),
+  bgColor: PropTypes.oneOf(["primary", "success", "info"]),
   routes: PropTypes.arrayOf(PropTypes.object),
   logo: PropTypes.shape({
     // innerLink is for links that will direct the user within the app

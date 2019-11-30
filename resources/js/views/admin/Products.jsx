@@ -21,7 +21,7 @@ export default function Products(props){
             <td>{ product.name }</td>
             <td>{ product.type.name_display }</td>
             <td className="text-center">{ product.price } USD</td>
-            <td className="text-right"><Link className="btn btn-primary" to={`/admin/products/${product.id}`}>Details</Link></td>
+            <td className="text-right"><Link className={`btn btn-${props.bgColor}`} to={`/admin/products/${product.id}`}>Details</Link></td>
         </tr>
     );
 

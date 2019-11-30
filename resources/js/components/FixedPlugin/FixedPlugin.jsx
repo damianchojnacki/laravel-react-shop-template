@@ -63,7 +63,7 @@ class FixedPlugin extends Component {
                   }
                   data-color="blue"
                   onClick={() => {
-                    this.props.handleBgClick("blue");
+                    this.props.handleBgClick("info");
                   }}
                 />{" "}
                 <span
@@ -74,7 +74,7 @@ class FixedPlugin extends Component {
                   }
                   data-color="green"
                   onClick={() => {
-                    this.props.handleBgClick("green");
+                    this.props.handleBgClick("success");
                   }}
                 />{" "}
               </div>

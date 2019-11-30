@@ -38,6 +38,7 @@ import {
 } from "reactstrap";
 import {AuthContext} from "../../utils/AuthContext";
 import AuthService from "../../utils/AuthService";
+import Icons from "../../views/admin/Icons";
 
 function AdminNavbar(props) {
     const { state, dispatch } = React.useContext(AuthContext);
@@ -66,7 +67,7 @@ function AdminNavbar(props) {
     // this function opens and closes the collapse on small devices
     const toggleCollapse = () => {
         collapseOpen ? setColor("navbar-transparent") : setColor("bg-white");
-        
+
         setCollapseOpen(!collapseOpen);
     };
 
@@ -178,7 +179,7 @@ function AdminNavbar(props) {
                                     onClick={e => e.preventDefault()}
                                 >
                                     <div className="photo">
-                                        <img alt="..." src={require("../../assets/img/anime3.png")}/>
+                                        <i className="tim-icons icon-single-02"></i>
                                     </div>
                                     <b className="caret d-none d-lg-block d-xl-block"/>
                                     <p className="d-lg-none">Log out</p>

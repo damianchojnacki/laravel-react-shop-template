@@ -342,10 +342,11 @@
     }
   }
 
-  &[data="blue"]{
+  &.info{
     @include linear-gradient($info-states, $info);
   }
-  &[data="green"]{
+
+  &.success{
     @include linear-gradient($success-states, $success);
   }
 
@@ -446,15 +447,15 @@
 
   @include transitions (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
-  &[data="blue"]{
+  &.info{
     border-top: 2px solid $info;
   }
 
-  &[data="green"]{
+  &.success{
     border-top: 2px solid $success;
   }
 
-  &[data="primary"]{
+  &.primary{
     border-top: 2px solid $primary;
   }
 

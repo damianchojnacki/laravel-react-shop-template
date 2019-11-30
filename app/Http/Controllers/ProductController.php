@@ -6,10 +6,18 @@ use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        Auth::shouldUse('api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +27,6 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        Auth::shouldUse('api');
-
         $products = Product::with(['image', 'type'])->get();
 
         (!$request->user() || !$request->user()->isAdmin()) && $products = ProductResource::collection($products);
@@ -47,8 +53,6 @@ class ProductController extends Controller
      */
     public function show($id, Request $request)
     {
-        Auth::shouldUse('api');
-
         $product = Product::with(['image', 'type'])->find($id);
 
         (!$request->user() || !$request->user()->isAdmin()) && $product = new ProductResource($product);
@@ -62,9 +66,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $product = $request->validate([
+            'id' => 'integer',
+            'name' => 'required|string|max:64',
+            'price' => 'required|numeric|min:1',
+        ]);
+
+        $product = Product::find($request->input('id'));
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->save();
+
+        return response('Product has been updated', 200);
     }
 
     /**
