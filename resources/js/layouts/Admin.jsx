@@ -18,6 +18,8 @@
 import React, {useState, useEffect} from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
 
+import Notifications from 'react-notify-toast';
+
 // core components
 import AdminNavbar from "../components/Navbars/AdminNavbar.jsx";
 import Footer from "../components/Footer/Footer.jsx";
@@ -111,6 +113,7 @@ function Admin(props) {
     return redirectBack ? <Redirect to="/"/>  :
         (
             <div className="black-dashboard">
+                <Notifications/>
                 <div className="wrapper black-dashboard">
                     <Sidebar
                         {...props}

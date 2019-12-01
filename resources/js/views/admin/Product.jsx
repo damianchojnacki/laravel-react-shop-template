@@ -12,14 +12,13 @@ import {
     Row,
     Col
 } from "reactstrap";
-import AuthService from "../../utils/AuthService";
+import Notifications, {notify} from 'react-notify-toast';
 import ProductService from "../../utils/ProductService";
 
 function Product(props) {
     const [product, setProduct] = useState({});
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
-
 
     useEffect(() => {
         async function get() {
@@ -41,9 +40,13 @@ function Product(props) {
             price: price,
         };
 
-        ProductService.edit(data).then(res => {
-            console.log(res.data);
-        });
+        ProductService.edit(data)
+            .then(res => {
+                notify.show(res.data, 'success');
+            })
+            .catch(error => {
+                notify.show(error.response.data.message, 'error');
+            });
     };
 
     return (

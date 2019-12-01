@@ -1,7 +1,7 @@
 .navbar {
   padding: 10px 30px 10px 15px;
   width: 100%;
-  z-index: 1050;
+  z-index: 10;
   background: $navbar-color;
 
   .photo {
@@ -31,7 +31,7 @@
 
   &.navbar-absolute{
     position: absolute;
-    z-index: 1050;
+    z-index: 10;
   }
 
 

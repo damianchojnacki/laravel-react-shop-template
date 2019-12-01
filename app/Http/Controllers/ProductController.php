@@ -68,7 +68,7 @@ class ProductController extends Controller
      */
     public function edit(Request $request)
     {
-        $product = $request->validate([
+        $request->validate([
             'id' => 'integer',
             'name' => 'required|string|max:64',
             'price' => 'required|numeric|min:1',

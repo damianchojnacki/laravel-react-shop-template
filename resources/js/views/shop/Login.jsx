@@ -3,7 +3,6 @@ import {Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import Menu from '../../components/Menu';
 import {Form, FormInput, FormGroup, Button, Alert} from "shards-react";
-import ReeValidate from 'ree-validate';
 import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
 
