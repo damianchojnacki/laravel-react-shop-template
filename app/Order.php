@@ -28,5 +28,4 @@ class Order extends Model
     {
         return $this->products()->sum('price');
     }
-
 }

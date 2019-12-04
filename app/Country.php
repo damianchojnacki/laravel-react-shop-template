@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
+    public $timestamps = false;
+
     protected static function boot() {
         parent::boot();
 

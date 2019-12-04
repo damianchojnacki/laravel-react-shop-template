@@ -11,8 +11,12 @@ export default class ProductService{
         return response.data;
     }
 
-    static edit(product){
-        return window.axios.put(`/api/products`, product);
+    static edit(data){
+        return window.axios.put(`/api/products`, data);
+    }
+
+    static delete(id){
+        return window.axios.delete(`/api/products/${id}`);
     }
 }
 

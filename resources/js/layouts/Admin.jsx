@@ -49,8 +49,12 @@ function Admin(props) {
                 .then(res => {
                     dispatch({type: "login", payload: res.data});
                 })
-                .catch(dispatch({type: "logout"}))
-                .finally(() => {setLoading(false)})
+                .catch(() => {
+                    dispatch({type: "logout"});
+                })
+                .finally(() => {
+                    setLoading(false);
+                })
             :
             setLoading(false);
 

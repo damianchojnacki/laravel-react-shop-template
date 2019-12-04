@@ -35,20 +35,21 @@ Route::group([
     Route::get('products/{id}', 'ProductController@show')->name('products.show');
     Route::post('products', 'ProductController@store')->name('products.store');
     Route::put('products', 'ProductController@edit')->name('products.edit');
-    Route::delete('products', 'ProductController@delete')->name('products.delete');
+    Route::delete('products/{id}', 'ProductController@delete')->name('products.delete');
 });
 
 Route::group([
     'name' => 'orders',
-    //'middleware' => ['auth:api', 'admin'],
 ], function () {
     Route::get('orders', 'OrderController@index')->name('orders');
     Route::get('orders/recent', 'OrderController@recent')->name('orders.recent');
+    Route::get('orders/statuses', 'OrderController@statuses')->name('orders.statuses');
+    Route::get('orders/{id}', 'OrderController@show')->name('orders.show');
 });
 
 Route::group([
     'name' => 'charts',
-    //'middleware' => ['auth:api', 'admin'],
+    'middleware' => ['auth:api', 'admin'],
 ], function () {
     Route::get('charts/orders', 'ChartController@orders')->name('chart.orders');
     Route::get('charts/orders/countries', 'ChartController@ordersCountries')->name('chart.orders.countries');
@@ -56,3 +57,4 @@ Route::group([
     Route::get('charts/views', 'ChartController@views')->name('chart.views');
     Route::get('charts/views-unique', 'ChartController@viewsUnique')->name('chart.views-unique');
 });
+

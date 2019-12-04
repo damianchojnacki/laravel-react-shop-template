@@ -26,6 +26,7 @@ import Login from "./views/shop/Login";
 import ShopProducts from "./views/shop/Products";
 import AdminProducts from "./views/admin/Products";
 import Product from "./views/admin/Product";
+import Order from "./views/admin/Order";
 
 
 var routes = [
@@ -69,7 +70,7 @@ var routes = [
     },
     {
         path: `/orders/:id`,
-        component: Icons,
+        component: Order,
         layout: "/admin",
         hidden: true
     },

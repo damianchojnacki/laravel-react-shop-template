@@ -5,6 +5,7 @@ import Menu from '../../components/Menu';
 import {Form, FormInput, FormGroup, Button, Alert} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
+import ReeValidate from "ree-validate";
 
 export default function Login() {
 
@@ -41,13 +42,14 @@ export default function Login() {
                 success && AuthService.login(credentials)
                     .then(res => {
                         AuthService.getUser().then(res => {
-                            dispatch({type: "login", payload: res.data});
                             setErrors({});
-                            setLoading(false);
+                            dispatch({type: "login", payload: res.data});
                         });
                     })
                     .catch(error => {
                         setErrors(error.response);
+                    })
+                    .finally(() => {
                         setLoading(false);
                     });
             });

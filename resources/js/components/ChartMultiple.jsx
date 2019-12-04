@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import {Button, ButtonGroup, Card, CardBody, CardHeader, CardTitle, Col, Row} from "reactstrap";
 import {separateHundreds} from "../utils/helpers";
 import ChartService from "../utils/ChartService";
-import {Line} from "react-chartjs-2";
 
 function ChartMultiple(props){
     const [chart, setChart] = useState(null);
@@ -14,6 +13,7 @@ function ChartMultiple(props){
 
             setChart(ChartService.generate(chart, props.color, props.type));
         }
+
         gen();
     }, []);
 

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Redirect} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -19,6 +20,7 @@ function Product(props) {
     const [product, setProduct] = useState({});
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
+    const [redirect, setRedirect] = useState();
 
     useEffect(() => {
         async function get() {
@@ -49,8 +51,20 @@ function Product(props) {
             });
     };
 
+    const handleDelete = () => {
+        ProductService.delete(product.id)
+            .then(res => {
+                notify.show(res.data, 'success');
+                setRedirect(<Redirect to="/admin/products"/>)
+            })
+            .catch(error => {
+                notify.show(error.response.data.message, 'error');
+            });
+    };
+
     return (
         <div className="content">
+            {redirect}
             <Row>
                 <Col md="8">
                     <Form onSubmit={handleSubmit}>
@@ -97,6 +111,9 @@ function Product(props) {
                                 <Button className="btn-fill" color={props.bgColor} type="submit">
                                     Save
                                 </Button>
+                                <Button className="btn-fill" color="danger" type="button" onClick={handleDelete}>
+                                    Delete
+                                </Button>
                             </CardFooter>
                         </Card>
                     </Form>
@@ -106,8 +123,7 @@ function Product(props) {
                 </Col>
             </Row>
         </div>
-    )
-        ;
+    );
 }
 
 export default Product;

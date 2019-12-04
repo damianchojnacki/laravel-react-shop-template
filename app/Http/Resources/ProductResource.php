@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class ProductResource extends JsonResource
 {
@@ -14,11 +15,14 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'name' => $this->name,
-            'price' => $this->price,
-            'type' => $this->type->name,
-            'image' => $this->image->url,
-        ];
+        if(Auth::check() ?? Auth::user()->isAdmin())
+            return parent::toArray($request);
+        else
+            return [
+                'name' => $this->name,
+                'price' => $this->price,
+                'type' => new ProductTypeResource($this->whenLoaded('type')),
+                'image' => $this->whenLoaded('image'),
+            ];
     }
 }

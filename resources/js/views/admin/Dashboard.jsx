@@ -68,12 +68,12 @@ class Dashboard extends React.Component {
         ];
     }
 
-    componentDidMount() {
-        OrderService.recent().then(orders => {
-            this.setState({
-                orders: orders,
-                loading: false,
-            });
+    async componentDidMount() {
+        const orders = await OrderService.recent();
+
+        this.setState({
+            orders: orders,
+            loading: false,
         });
     }
 
