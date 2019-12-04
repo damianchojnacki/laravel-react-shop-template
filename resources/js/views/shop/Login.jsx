@@ -5,7 +5,7 @@ import Menu from '../../components/Menu';
 import {Form, FormInput, FormGroup, Button, Alert} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
-import ReeValidate from "ree-validate";
+import isEmail from 'validator/lib/isEmail';
 
 export default function Login() {
 
@@ -14,11 +14,6 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
-
-    const validator = new ReeValidate({
-        email: 'required|email',
-        password: 'required',
-    });
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -35,24 +30,23 @@ export default function Login() {
             password,
         };
 
-        validator.validateAll(credentials)
-            .then((success) => {
-                setLoading(true);
+        if(isEmail(email) && password){
+            setLoading(true);
 
-                success && AuthService.login(credentials)
-                    .then(res => {
-                        AuthService.getUser().then(res => {
-                            setErrors({});
-                            dispatch({type: "login", payload: res.data});
-                        });
-                    })
-                    .catch(error => {
-                        setErrors(error.response);
-                    })
-                    .finally(() => {
-                        setLoading(false);
+            AuthService.login(credentials)
+                .then(() => {
+                    AuthService.getUser().then(res => {
+                        setErrors({});
+                        dispatch({type: "login", payload: res.data});
                     });
-            });
+                })
+                .catch(error => {
+                    setErrors(error.response);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
     };
 
     return state.authenticated

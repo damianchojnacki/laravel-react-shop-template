@@ -124,13 +124,13 @@ function Order(props) {
                                     <Col md="12">
                                         <label>Status</label>
                                         <Input
-                                            defaultValue={order.status && order.status.id}
                                             type="select"
+                                            value={order.status && order.status.id}
                                             onChange={e => setValue(e.target.value)}
                                             className={props.bgColor}
                                         >
                                             {statuses && statuses.map((status) => {
-                                                return <option value={status.id}>{status.name}</option>
+                                                return <option key={status.id} value={status.id}>{status.name}</option>
                                             })}
                                         </Input>
                                     </Col>
