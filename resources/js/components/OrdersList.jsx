@@ -1,32 +1,36 @@
 import React from "react";
-import {Card, CardBody, CardHeader, CardTitle, CardFooter, ListGroup, ListGroupItem} from "reactstrap";
+import {Table} from "reactstrap";
 import {Link} from "react-router-dom";
 
 function OrdersList(props){
     return (
-        <table className="table">
+        <Table responsive>
             <thead className="text-primary">
             <tr>
-                <th>#</th>
-                <th>Purchase date</th>
-                <th>Customer email</th>
-                <th className="text-center">Value</th>
+                {props.fields.index && <th>#</th>}
+                {props.fields.id && <th>ID</th>}
+                {props.fields.date && <th>Purchase date</th>}
+                {props.fields.email && <th>Customer email</th>}
+                {props.fields.value && <th className="text-center">Value</th>}
+                {props.fields.status && <th>Order status</th>}
                 <th></th>
             </tr>
             </thead>
             <tbody>
                 {props.orders ? props.orders.map((order, index) =>
                     <tr key={order.id}>
-                        <td>{index + 1}</td>
-                        <td>{order.created_at}</td>
-                        <td>{order.user.email}</td>
-                        <td className="text-center">{order.value} USD</td>
+                        {props.fields.index && <td>{index + 1}</td>}
+                        {props.fields.id && <td>{order.id}</td>}
+                        {props.fields.date && <td>{order.created_at}</td>}
+                        {props.fields.email && <td>{order.user.email}</td>}
+                        {props.fields.value && <td className="text-center">{order.value} USD</td>}
+                        {props.fields.status && <td>{order.status.name}</td>}
                         <td className="text-right"><Link className={`btn btn-${props.bgColor}`} to={`/admin/orders/${order.id}`}>Details</Link>
                         </td>
                     </tr>
                 ) : null}
             </tbody>
-        </table>
+        </Table>
     );
 }
 

@@ -15,7 +15,7 @@ class OrderController extends Controller
     }
 
     public function index($page){
-        $orders = Order::with(['products', 'user.country'])->skip(($page - 1) * 10)->take(10)->get();
+        $orders = Order::with(['products', 'user.country', 'status'])->skip(($page - 1) * 10)->take(10)->get();
 
         return response(OrderResource::collection($orders), 200);
     }
