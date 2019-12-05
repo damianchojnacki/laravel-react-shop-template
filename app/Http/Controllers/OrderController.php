@@ -14,8 +14,8 @@ class OrderController extends Controller
         Auth::shouldUse('api');
     }
 
-    public function index(){
-        $orders = Order::with(['products', 'user.country'])->get();
+    public function index($page){
+        $orders = Order::with(['products', 'user.country'])->skip(($page - 1) * 10)->take(10)->get();
 
         return response(OrderResource::collection($orders), 200);
     }
@@ -23,7 +23,7 @@ class OrderController extends Controller
     public function recent(){
         $orders = Order::with('user.country')->whereHas('status', function($status){
             $status->where('name', 'preparing');
-        })->orderBy('created_at', 'DESC')->get()->take(10);
+        })->orderBy('created_at', 'DESC')->take(10)->get();
 
         return response(OrderResource::collection($orders), 200);
     }

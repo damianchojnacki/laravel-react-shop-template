@@ -37,6 +37,7 @@ import {separateHundreds} from "../../utils/helpers";
 import OrderService from "../../utils/OrderService";
 import Chart from "../../components/Chart";
 import ChartMultiple from "../../components/ChartMultiple";
+import OrdersList from "../../components/OrdersList";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -78,18 +79,6 @@ class Dashboard extends React.Component {
     }
 
     render() {
-
-        const ordersTable = this.state.orders.map((order, index) =>
-            <tr key={order.id}>
-                <td>{index + 1}</td>
-                <td>{order.created_at}</td>
-                <td>{order.user.email}</td>
-                <td className="text-center">{order.value} USD</td>
-                <td className="text-right"><Link className={`btn btn-${this.props.bgColor}`} to={`/admin/orders/${order.id}`}>Details</Link>
-                </td>
-            </tr>
-        );
-
         return (
             <>
                 <Helmet>
@@ -108,11 +97,11 @@ class Dashboard extends React.Component {
                     <Row>
                         <Col lg="6">
                             <Chart
-                                type="pie"
-                                chart={Pie}
+                                type="bar"
+                                chart={Bar}
                                 api="orders/countries"
-                                icon="tim-icons icon-map-big text-info"
-                                color="#000000"
+                                icon="tim-icons icon-map-big text-warning"
+                                color="#ff8d72"
                             />
                         </Col>
                         <Col lg="6">
@@ -134,20 +123,7 @@ class Dashboard extends React.Component {
                                 </div>
                                 <div className="card-body">
                                     <div className="table-responsive ps">
-                                        <table className="table">
-                                            <thead className="text-primary">
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Purchase date</th>
-                                                <th>Customer email</th>
-                                                <th className="text-center">Value</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {!this.state.loading ? ordersTable : null}
-                                            </tbody>
-                                        </table>
+                                        <OrdersList orders={this.state.orders} bgColor={this.props.bgColor}/>
                                     </div>
                                 </div>
                             </div>

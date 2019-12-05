@@ -16,7 +16,7 @@ class OrdersTableSeeder extends Seeder
     {
         $products = $products = Product::all();
 
-        factory(Order::class, 50)->create()->each(function ($order) use($products) {
+        factory(Order::class, 1000)->create()->each(function ($order) use($products) {
             foreach($products->random(rand(1, 5)) as $product){
                 $order->products()->attach($product, ['quantity' => rand(1, 3)]);
             }

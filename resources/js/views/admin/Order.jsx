@@ -16,10 +16,12 @@ import {
 import Notifications, {notify} from 'react-notify-toast';
 import ProductService from "../../utils/ProductService";
 import OrderService from "../../utils/OrderService";
+import ProductsList from "../../components/ProductsList";
 
 function Order(props) {
     const [order, setOrder] = useState({});
     const [value, setValue] = useState(0);
+    const [status, setStatus] = useState();
     const [statuses, setStatuses] = useState([]);
     const [redirect, setRedirect] = useState();
 
@@ -27,12 +29,17 @@ function Order(props) {
         const order = await OrderService.get(props.match.params.id);
         setOrder(order);
         setValue(order.price);
+        setStatus(order.status.id)
     };
 
     const getOrdersStatuses = async () => {
         const statuses = await window.axios.get('/api/orders/statuses');
 
-        setStatuses(statuses.data);
+        const options =  statuses.data.map((status) => {
+            return <option key={status.id} value={status.id}>{status.name}</option>
+        });
+
+        setStatuses(options);
     };
 
     useEffect(() => {
@@ -72,7 +79,7 @@ function Order(props) {
         <div className="content">
             {redirect}
             <Row>
-                <Col md="6">
+                <Col md="8">
                     <Form onSubmit={handleSubmit}>
                         <Card>
                             <CardHeader>
@@ -125,13 +132,11 @@ function Order(props) {
                                         <label>Status</label>
                                         <Input
                                             type="select"
-                                            value={order.status && order.status.id}
-                                            onChange={e => setValue(e.target.value)}
+                                            value={status}
+                                            onChange={e => setStatus(e.target.value)}
                                             className={props.bgColor}
                                         >
-                                            {statuses && statuses.map((status) => {
-                                                return <option key={status.id} value={status.id}>{status.name}</option>
-                                            })}
+                                            {statuses}
                                         </Input>
                                     </Col>
                                 </Row>
@@ -147,7 +152,9 @@ function Order(props) {
                         </Card>
                     </Form>
                 </Col>
-                <Col md="6">
+                <Col md="4">
+                    <h2>Products:</h2>
+                    <ProductsList products={order.products} bgColor={props.bgColor}/>
                 </Col>
             </Row>
         </div>

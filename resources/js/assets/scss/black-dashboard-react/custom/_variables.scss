@@ -776,8 +776,8 @@ $alert-color-level: 0 !default;
 
 // List group
 
-$list-group-bg:                     $white !default;
-$list-group-border-color:           $border-color !default; //rgba($black, .125);
+$list-group-bg:                     $transparent-bg !default;
+$list-group-border-color:           $opacity-1 !default; //rgba($black, .125);
 $list-group-border-width:           $border-width !default;
 $list-group-border-radius:          $border-radius !default;
 
@@ -837,12 +837,9 @@ $popover-arrow-outer-color:         transparent !default;
 
 // Breadcrumbs
 
-$breadcrumb-bg:                     $black-states !default;
+$breadcrumb-bg:                     $transparent-bg !default;
 $breadcrumb-divider-color:          $white !default;
 $breadcrumb-active-color:           $white !default;
-
-
-
 
 // Badges
 

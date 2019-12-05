@@ -41,7 +41,7 @@ Route::group([
 Route::group([
     'name' => 'orders',
 ], function () {
-    Route::get('orders', 'OrderController@index')->name('orders');
+    Route::get('orders/page/{page}', 'OrderController@index')->name('orders');
     Route::get('orders/recent', 'OrderController@recent')->name('orders.recent');
     Route::get('orders/statuses', 'OrderController@statuses')->name('orders.statuses');
     Route::get('orders/{id}', 'OrderController@show')->name('orders.show');

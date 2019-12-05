@@ -1,5 +1,4 @@
 .white-content{
-
   background: $light-bg;
 
   .navbar.navbar-transparent .navbar-brand{
@@ -296,4 +295,14 @@
 
      }
    }
+
+    .breadcrumb-item.active{
+        color: $dark;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before{
+        color: $dark;
+    }
 }
+
+

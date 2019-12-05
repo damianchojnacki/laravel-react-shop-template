@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\UsesUuid;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -11,6 +12,16 @@ class Order extends Model
 
     protected $guarded = ['id', 'value'];
     protected $appends = ['value'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Order by created_at DESC
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'DESC');
+        });
+    }
 
     public function status(){
         return $this->belongsTo(OrderStatus::class);
@@ -26,6 +37,13 @@ class Order extends Model
 
     public function getValueAttribute()
     {
-        return $this->products()->sum('price');
+        $products = $this->products()->select('price')->get();
+
+        $value = 0;
+
+        foreach($products as $product)
+            $value += $product->price * $product->pivot->quantity;
+
+        return $value;
     }
 }

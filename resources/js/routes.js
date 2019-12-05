@@ -27,7 +27,7 @@ import ShopProducts from "./views/shop/Products";
 import AdminProducts from "./views/admin/Products";
 import Product from "./views/admin/Product";
 import Order from "./views/admin/Order";
-
+import Orders from "./views/admin/Orders";
 
 var routes = [
     {
@@ -58,7 +58,7 @@ var routes = [
     {
         path: "/products",
         name: "Products",
-        icon: "tim-icons icon-basket-simple",
+        icon: "tim-icons icon-laptop",
         component: AdminProducts,
         layout: "/admin",
     },
@@ -67,6 +67,13 @@ var routes = [
         component: Product,
         layout: "/admin",
         hidden: true
+    },
+    {
+        path: "/orders",
+        name: "Orders",
+        icon: "tim-icons icon-basket-simple",
+        component: Orders,
+        layout: "/admin",
     },
     {
         path: `/orders/:id`,
