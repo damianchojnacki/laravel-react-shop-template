@@ -44,7 +44,9 @@ Route::group([
     Route::get('orders/page/{page}', 'OrderController@index')->name('orders');
     Route::get('orders/recent', 'OrderController@recent')->name('orders.recent');
     Route::get('orders/statuses', 'OrderController@statuses')->name('orders.statuses');
+    Route::get('orders/search/{id}', 'OrderController@search')->name('orders.search');
     Route::get('orders/{id}', 'OrderController@show')->name('orders.show');
+    Route::delete('orders/{id}', 'OrderController@delete')->name('orders.delete');
 });
 
 Route::group([

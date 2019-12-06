@@ -17,6 +17,12 @@ export default class OrderService{
         return response.data;
     }
 
+    static async search(id) {
+        const response = await window.axios.get(`/api/orders/search/${id}`);
+
+        return response.data;
+    }
+
     static edit(data){
         return window.axios.put(`/api/orders`, data);
     }

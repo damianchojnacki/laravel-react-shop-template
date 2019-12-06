@@ -33,6 +33,7 @@ function ChartMultiple(props){
             size="sm"
             className="btn-simple"
             onClick={() => changeData(button.url, button.color, index)}
+            active={current === index}
         >
             <input
                 defaultChecked
@@ -71,7 +72,7 @@ function ChartMultiple(props){
                 </Row>
             </CardHeader>
             <CardBody>
-                <div className="chart-area">
+                <div className="chart-area" style={props.height && {height: props.height}}>
                     {chart &&
                     <props.chart
                         data={chart.data}

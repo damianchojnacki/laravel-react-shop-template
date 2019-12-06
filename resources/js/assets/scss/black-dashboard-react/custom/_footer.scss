@@ -1,5 +1,5 @@
 .footer{
-    padding: 24px 0 24px 250px;
+    padding: 0 0 24px 250px;
 
     [class*="container-"] {
       padding: 0;
@@ -71,7 +71,9 @@
 
 @media screen and (max-width: 768px){
   .footer {
-    nav {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      nav {
       display: block;
       margin-bottom: 5px;
       float: none;

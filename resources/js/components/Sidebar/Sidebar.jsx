@@ -55,7 +55,7 @@ class Sidebar extends React.Component {
     document.documentElement.classList.remove("nav-open");
   };
   render() {
-    const { bgColor, routes, rtlActive } = this.props;
+    const { bgColor, routes } = this.props;
 
     return (
       <div className={`sidebar ${bgColor}`}>
@@ -79,7 +79,7 @@ class Sidebar extends React.Component {
                     onClick={this.props.toggleSidebar}
                   >
                     <i className={prop.icon} />
-                    <p>{rtlActive ? prop.rtlName : prop.name}</p>
+                    <p>{prop.name}</p>
                   </NavLink>
                 </li>
               );
@@ -92,7 +92,6 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.defaultProps = {
-  rtlActive: false,
   bgColor: "primary",
   routes: [{}]
 };
@@ -100,7 +99,6 @@ Sidebar.defaultProps = {
 Sidebar.propTypes = {
   // if true, then instead of the routes[i].name, routes[i].rtlName will be rendered
   // insde the links of this component
-  rtlActive: PropTypes.bool,
   bgColor: PropTypes.oneOf(["primary", "success", "info"]),
   routes: PropTypes.arrayOf(PropTypes.object),
   logo: PropTypes.shape({

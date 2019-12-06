@@ -15,7 +15,7 @@ class OrderController extends Controller
     }
 
     public function index($page){
-        $orders = Order::with(['products', 'user.country', 'status'])->skip(($page - 1) * 10)->take(10)->get();
+        $orders = Order::with(['user.country', 'status'])->skip(($page - 1) * 10)->take(10)->get();
 
         return response(OrderResource::collection($orders), 200);
     }
@@ -39,5 +39,19 @@ class OrderController extends Controller
         $order = Order::with(['products.image', 'status', 'user.country'])->findOrFail($id);
 
         return response(new OrderResource($order), 200);
+    }
+
+    public function search($id)
+    {
+        $order = Order::with(['status', 'user.country'])->where('id', 'like', "%$id%")->take(100)->get();
+
+        return response(OrderResource::collection($order), 200);
+    }
+
+    public function delete($id)
+    {
+        Order::findOrFail($id)->delete();
+
+        return response('Order has been deleted', 200);
     }
 }

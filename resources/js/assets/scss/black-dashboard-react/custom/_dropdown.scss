@@ -334,6 +334,10 @@
 }
 
 @media screen and (max-width: 991px){
+    .navbar-toggler{
+        background: transparent !important;
+    }
+
   .dropdown-toggle:after{
     display: inline-block;
     width: 0;

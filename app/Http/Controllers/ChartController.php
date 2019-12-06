@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\LaravelChart;
+use Carbon\Carbon;
 
 class ChartController extends Controller
 {
@@ -15,7 +16,7 @@ class ChartController extends Controller
             'group_by_field' => 'created_at',
             'group_by_period' => 'month',
             'filter_field' => 'created_at',
-            'filter_days' => 365,
+            'filter_days' => Carbon::now()->daysInYear,
         ]);
 
         return response($chart->getDivided(), 200);

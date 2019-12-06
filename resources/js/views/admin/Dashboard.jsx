@@ -91,6 +91,7 @@ class Dashboard extends React.Component {
                                 type="line"
                                 chart={Line}
                                 api={this.chartMultiple}
+                                height={480}
                             />
                         </Col>
                     </Row>
@@ -128,11 +129,9 @@ class Dashboard extends React.Component {
                                             bgColor={this.props.bgColor}
                                             fields={{
                                                 id: true,
-                                                index: false,
                                                 date: true,
                                                 email: true,
                                                 value: true,
-                                                status: false,
                                             }}
                                         />
                                     </div>

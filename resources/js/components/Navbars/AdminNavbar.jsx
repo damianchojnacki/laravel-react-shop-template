@@ -99,7 +99,7 @@ function AdminNavbar(props) {
                                 <span className="navbar-toggler-bar bar3"/>
                             </button>
                         </div>
-                        <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
+                        <NavbarBrand href="#" onClick={e => e.preventDefault()}>
                             {props.brandText}
                         </NavbarBrand>
                     </div>
@@ -181,7 +181,6 @@ function AdminNavbar(props) {
                                     <div className="photo">
                                         <i className="tim-icons icon-single-02"></i>
                                     </div>
-                                    <b className="caret d-none d-lg-block d-xl-block"/>
                                     <p className="d-lg-none">Log out</p>
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-navbar" right tag="ul">
