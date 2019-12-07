@@ -29,6 +29,15 @@ Route::group([
 });
 
 Route::group([
+    'name' => 'users',
+], function () {
+    Route::get('users/page/{page}', 'UserController@index')->name('users');
+    Route::get('users/search/{id}', 'UserController@search')->name('users.search');
+    Route::get('users/{id}', 'UserController@show')->name('users.show');
+    Route::delete('users/{id}', 'UserController@delete')->name('users.delete');
+});
+
+Route::group([
     'name' => 'products',
 ], function () {
     Route::get('products', 'ProductController@index')->name('products');

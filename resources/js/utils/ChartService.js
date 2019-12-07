@@ -131,9 +131,9 @@ export default class ChartService {
             sign: data.sign ? data.sign : '',
             data: canvas => {
                 let ctx = canvas.getContext("2d");
-                let gradientStroke = ctx.createLinearGradient(0, canvas.height, 0, canvas.height / 3);
+                let gradientStroke = ctx.createLinearGradient(0, canvas.height / 1.25, 0, 0);
                 gradientStroke.addColorStop(1, addAlpha(color, 0.2));
-                gradientStroke.addColorStop(0, "transparent");
+                gradientStroke.addColorStop(0.2, "transparent");
 
                 if (type === 'pie') {
                     gradientStroke = colors;
