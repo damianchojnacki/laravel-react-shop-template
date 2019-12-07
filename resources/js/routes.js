@@ -24,10 +24,9 @@ import UserProfile from "./views/admin/UserProfile";
 import Home from "./views/shop/Home";
 import Login from "./views/shop/Login";
 import ShopProducts from "./views/shop/Products";
-import AdminProducts from "./views/admin/Products";
 import Product from "./views/admin/Product";
 import Order from "./views/admin/Order";
-import Orders from "./views/admin/Orders";
+import Resource from "./views/admin/Resource";
 
 var routes = [
     {
@@ -59,7 +58,7 @@ var routes = [
         path: "/products",
         name: "Products",
         icon: "tim-icons icon-laptop",
-        component: AdminProducts,
+        component: Resource,
         layout: "/admin",
     },
     {
@@ -72,7 +71,7 @@ var routes = [
         path: "/orders",
         name: "Orders",
         icon: "tim-icons icon-basket-simple",
-        component: Orders,
+        component: Resource,
         layout: "/admin",
     },
     {
@@ -80,6 +79,13 @@ var routes = [
         component: Order,
         layout: "/admin",
         hidden: true
+    },
+    {
+        path: "/users",
+        name: "Users",
+        icon: "tim-icons icon-single-02",
+        component: Resource,
+        layout: "/admin",
     },
     {
         path: "/icons",

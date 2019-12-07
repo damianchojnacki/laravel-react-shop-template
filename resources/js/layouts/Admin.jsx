@@ -93,7 +93,7 @@ function Admin(props) {
                 return (
                     <Route
                         exact path={prop.layout + prop.path}
-                        render={(props) => <prop.component {...props} bgColor={backgroundColor} />}
+                        render={(props) => <prop.component {...props} name={prop.name} bgColor={backgroundColor} />}
                         key={key}
                     />
                 );

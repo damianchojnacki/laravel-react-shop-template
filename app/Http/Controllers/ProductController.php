@@ -15,9 +15,8 @@ class ProductController extends Controller
         Auth::shouldUse('api');
     }
 
-    public function index()
-    {
-        $products = Product::with(['image', 'type'])->get();
+    public function index($page){
+        $products = Product::with('type')->skip(($page - 1) * 10)->take(10)->get();
 
         return response(ProductResource::collection($products), 200);
     }
@@ -33,6 +32,13 @@ class ProductController extends Controller
 
         return response(new ProductResource($product), 200);
 
+    }
+
+    public function search($name)
+    {
+        $product = Product::with('type')->where('name', 'like', "%$name%")->take(100)->get();
+
+        return response(ProductResource::collection($product), 200);
     }
 
     public function edit(Request $request)

@@ -1,12 +1,18 @@
 export default class ProductService{
-    static async all() {
-        const response = await window.axios.get('/api/products');
+    static async all(page) {
+        const response = await window.axios.get(`/api/products/page/${page}`);
 
         return response.data;
     }
 
     static async get(id) {
         const response = await window.axios.get(`/api/products/${id}`);
+
+        return response.data;
+    }
+
+    static async search(name) {
+        const response = await window.axios.get(`/api/products/search/${name}`);
 
         return response.data;
     }

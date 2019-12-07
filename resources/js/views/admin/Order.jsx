@@ -16,7 +16,7 @@ import {
 import Notifications, {notify} from 'react-notify-toast';
 import ProductService from "../../utils/ProductService";
 import OrderService from "../../utils/OrderService";
-import ProductsList from "../../components/ProductsList";
+import ProductsListComplex from "../../components/ProductsListComplex";
 
 function Order(props) {
     const [order, setOrder] = useState({});
@@ -154,7 +154,7 @@ function Order(props) {
                 </Col>
                 <Col md="4">
                     <h2>Products:</h2>
-                    <ProductsList products={order.products} bgColor={props.bgColor}/>
+                    <ProductsListComplex products={order.products} bgColor={props.bgColor}/>
                 </Col>
             </Row>
         </div>

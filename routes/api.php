@@ -40,7 +40,8 @@ Route::group([
 Route::group([
     'name' => 'products',
 ], function () {
-    Route::get('products', 'ProductController@index')->name('products');
+    Route::get('products/page/{page}', 'ProductController@index')->name('products');
+    Route::get('products/search/{id}', 'ProductController@search')->name('products.search');
     Route::get('products/{id}', 'ProductController@show')->name('products.show');
     Route::post('products', 'ProductController@store')->name('products.store');
     Route::put('products', 'ProductController@edit')->name('products.edit');

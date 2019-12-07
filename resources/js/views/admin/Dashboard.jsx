@@ -125,7 +125,7 @@ class Dashboard extends React.Component {
                                 <div className="card-body">
                                     <div className="table-responsive ps">
                                         <OrdersList
-                                            orders={this.state.orders}
+                                            data={this.state.orders}
                                             bgColor={this.props.bgColor}
                                             fields={{
                                                 id: true,
