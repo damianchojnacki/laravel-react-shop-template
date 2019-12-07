@@ -131,7 +131,7 @@ export default class ChartService {
             sign: data.sign ? data.sign : '',
             data: canvas => {
                 let ctx = canvas.getContext("2d");
-                let gradientStroke = ctx.createLinearGradient(0, (screen.height / 3) - 100, 0, 0);
+                let gradientStroke = ctx.createLinearGradient(0, ctx.canvas.height / 4, 0, 0);
                 gradientStroke.addColorStop(1, addAlpha(color, 0.2));
                 gradientStroke.addColorStop(0.2, "transparent");
 
