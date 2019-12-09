@@ -91,7 +91,6 @@ class Dashboard extends React.Component {
                                 type="line"
                                 chart={Line}
                                 api={this.chartMultiple}
-                                height={480}
                             />
                         </Col>
                     </Row>
@@ -101,7 +100,7 @@ class Dashboard extends React.Component {
                                 type="bar"
                                 chart={Bar}
                                 api="orders/countries"
-                                icon="tim-icons icon-map-big text-warning"
+                                icon="tim-icons icon-world text-warning"
                                 color="#ff8d72"
                             />
                         </Col>

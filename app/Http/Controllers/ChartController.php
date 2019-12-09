@@ -25,7 +25,7 @@ class ChartController extends Controller
     public function ordersCountries()
     {
         $chart = new LaravelChart([
-            'title' => 'Orders by country',
+            'title' => 'Total orders by country',
             'report_type' => 'group_by_relation',
             'model' => 'App\Order',
             'group_by_field' => 'user',

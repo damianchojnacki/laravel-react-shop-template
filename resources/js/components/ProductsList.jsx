@@ -17,7 +17,7 @@ function ProductsList(props){
             </tr>
             </thead>
             <tbody>
-                {props.data ? props.data.map((product, index) =>
+                {(props.data && props.data.length > 0) ? props.data.map((product, index) =>
                     <tr key={product.id}>
                         {props.fields.index && <td>{index + 1}</td>}
                         {props.fields.id && <td>{product.id}</td>}

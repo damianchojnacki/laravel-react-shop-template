@@ -7,6 +7,12 @@ export default class ChartService {
         return chart.data;
     }
 
+    static async dynamic(name) {
+        const chart = await window.axios.get(`/api/charts/orders`);
+
+        return chart.data;
+    }
+
     static generate(data, color = '#1D8CF8', type = 'line') {
         const options = {
             line: {
@@ -131,9 +137,11 @@ export default class ChartService {
             sign: data.sign ? data.sign : '',
             data: canvas => {
                 let ctx = canvas.getContext("2d");
-                let gradientStroke = ctx.createLinearGradient(0, ctx.canvas.height / 4, 0, 0);
+                let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
                 gradientStroke.addColorStop(1, addAlpha(color, 0.2));
-                gradientStroke.addColorStop(0.2, "transparent");
+                gradientStroke.addColorStop(0.4, addAlpha(color, 0.0));
+                gradientStroke.addColorStop(0, addAlpha(color, 0)); //blue colors
 
                 if (type === 'pie') {
                     gradientStroke = colors;

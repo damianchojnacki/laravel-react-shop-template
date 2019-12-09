@@ -22,6 +22,7 @@ class UserResource extends JsonResource
                 'name' => $this->name,
                 'email' => $this->email,
                 'country' => $this->whenLoaded('country'),
+                'orders' => OrderResource::collection($this->whenLoaded('orders')),
             ];
     }
 }

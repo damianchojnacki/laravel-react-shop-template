@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('orders.status')->findOrFail($id);
 
         return response(new UserResource($user), 200);
     }

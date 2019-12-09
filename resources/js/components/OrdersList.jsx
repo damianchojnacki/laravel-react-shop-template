@@ -17,7 +17,7 @@ function OrdersList(props){
             </tr>
             </thead>
             <tbody>
-                {props.data ? props.data.map((order, index) =>
+                {(props.data && props.data.length > 0) ? props.data.map((order, index) =>
                     <tr key={order.id}>
                         {props.fields.index && <td>{index + 1}</td>}
                         {props.fields.id && <td>{order.id}</td>}

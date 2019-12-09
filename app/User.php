@@ -42,8 +42,8 @@ class User extends Authenticatable
         return $this->name == 'admin';
     }
 
-    public function order(){
-        return $this->hasOne(Order::class);
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
 
     public function country(){

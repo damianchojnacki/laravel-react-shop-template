@@ -1,0 +1,147 @@
+import React, {useEffect, useState} from "react";
+import {Redirect} from "react-router-dom";
+
+// reactstrap components
+import {
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    Form,
+    Input,
+    Row,
+    Col
+} from "reactstrap";
+import Notifications, {notify} from 'react-notify-toast';
+import ProductService from "../../utils/ProductService";
+import OrderService from "../../utils/OrderService";
+import ProductsListComplex from "../../components/ProductsListComplex";
+import ChartService from "../../utils/ChartService";
+import ChartDynamic from "../../components/ChartDynamic";
+
+function Analytics(props) {
+    const [data, setData] = useState(null);
+    const [range, setRange] = useState(null);
+    const [group, setGroup] = useState(null);
+    const [resource, setResource] = useState(null);
+
+    const getThemeColor = theme => {
+        const style = getComputedStyle(document.body);
+        let color;
+
+        theme === 'green' ? color = style.getPropertyValue('--success') :
+        theme === 'green' ? color = style.getPropertyValue('--info') :
+        color = style.getPropertyValue('--primary');
+
+        return color;
+    };
+
+    useEffect(() => {
+        async function gen(){
+            const chart = await ChartService.dynamic(resource, group, range);
+
+            setData(ChartService.generate(chart, getThemeColor(props.bgColor), 'line'));
+        }
+
+        gen();
+    }, [range, group, resource]);
+
+    return (
+        <div className="content">
+            <Row>
+                <Col>
+                    {data &&
+                    <ChartDynamic data={data}/>
+                    }
+                </Col>
+            </Row>
+            <Row>
+                <Col md="4">
+                    <Card>
+                        <CardHeader>
+                            <h2 className="card-title text-center">Resource</h2>
+                        </CardHeader>
+                        <CardBody>
+                            <Button color="secondary" onClick={() => setResource('orders')} block disabled={resource === 'orders'}>
+                                <i className="tim-icons icon-cart"></i>
+                                <p>Orders made</p>
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setResource('orders/value')} block disabled={resource === 'orders/value'}>
+                                <i className="tim-icons icon-money-coins"></i>
+                                <p>Value of orders</p>
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setResource('products')} block disabled={resource === 'products'}>
+                                <i className="tim-icons icon-laptop"></i>
+                                <p>Ordered products</p>
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setResource('users')} block disabled={resource === 'users'}>
+                                <i className="tim-icons icon-single-02"></i>
+                                <p>New users</p>
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setResource('views')} block disabled={resource === 'views'}>
+                                <i className="tim-icons icon-tap-02"></i>
+                                <p>Views</p>
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setResource('views-unique')} block disabled={resource === 'views-unique'}>
+                                <i className="tim-icons icon-tap-02"></i>
+                                <p>Unique views</p>
+                            </Button>
+                        </CardBody>
+                    </Card>
+                </Col>
+                <Col md="4">
+                    <Card>
+                        <CardHeader>
+                            <h2 className="card-title text-center">Range</h2>
+                        </CardHeader>
+                        <CardBody>
+                            <Button color="secondary" onClick={() => setRange('day')} block disabled={range === 'day'}>
+                                Day
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setRange('week')} block disabled={range === 'week'}>
+                                Week
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setRange('month')} block disabled={range === 'month'}>
+                                Month
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setRange('year')} block disabled={range === 'year'}>
+                                Year
+                            </Button>
+                        </CardBody>
+                    </Card>
+                </Col>
+                <Col md="4">
+                    <Card>
+                        <CardHeader>
+                            <h2 className="card-title text-center">Group by</h2>
+                        </CardHeader>
+                        <CardBody>
+                            <Button color="secondary" onClick={() => setGroup('day')} block disabled={group === 'day'}>
+                                Day
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setGroup('week')} block disabled={group === 'week'}>
+                                Week
+                            </Button>
+
+                            <Button color="secondary" onClick={() => setGroup('month')} block disabled={group === 'month'}>
+                                Month
+                            </Button>
+                        </CardBody>
+                    </Card>
+                </Col>
+            </Row>
+        </div>
+    );
+}
+
+export default Analytics;

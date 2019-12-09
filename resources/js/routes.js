@@ -27,6 +27,8 @@ import ShopProducts from "./views/shop/Products";
 import Product from "./views/admin/Product";
 import Order from "./views/admin/Order";
 import Resource from "./views/admin/Resource";
+import User from "./views/admin/User";
+import Analytics from "./views/admin/Analytics";
 
 var routes = [
     {
@@ -86,6 +88,19 @@ var routes = [
         icon: "tim-icons icon-single-02",
         component: Resource,
         layout: "/admin",
+    },
+    {
+        path: `/users/:id`,
+        component: User,
+        layout: "/admin",
+        hidden: true
+    },
+    {
+        path: "/analytics",
+        name: "Analytics",
+        icon: "tim-icons icon-chart-bar-32",
+        component: Analytics,
+        layout: "/admin"
     },
     {
         path: "/icons",
