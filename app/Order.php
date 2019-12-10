@@ -31,6 +31,17 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity');
     }
 
+    public function getProductsCountAttribute(){
+        $products = $this->products()->get();
+
+        $count = 0;
+
+        foreach($products as $product)
+            $count += $product->pivot->quantity;
+
+        return $count;
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }

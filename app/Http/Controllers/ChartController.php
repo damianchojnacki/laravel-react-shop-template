@@ -22,8 +22,10 @@ class ChartController extends Controller
         ];
 
         if($aggregateField = ChartHelper::getAggregateField($resource)){
+            $aggregateField == 'products' ? $aggregate = 'count' : $aggregate = 'sum';
+
             $options['aggregate_field'] = $aggregateField;
-            $options['aggregate_function'] = 'sum';
+            $options['aggregate_function'] = $aggregate;
         }
 
         $chart = new LaravelChart($options);

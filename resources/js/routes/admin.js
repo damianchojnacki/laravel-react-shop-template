@@ -16,7 +16,6 @@
 
 */
 import Dashboard from "../views/admin/Dashboard";
-import Icons from "../views/admin/Icons";
 import Product from "../views/admin/Product";
 import Order from "../views/admin/Order";
 import Resource from "../views/admin/Resource";
@@ -75,13 +74,6 @@ export default [
         name: "Analytics",
         icon: "tim-icons icon-chart-bar-32",
         component: Analytics,
-        layout: "/admin"
-    },
-    {
-        path: "/icons",
-        name: "Icons",
-        icon: "tim-icons icon-atom",
-        component: Icons,
         layout: "/admin"
     },
 ];

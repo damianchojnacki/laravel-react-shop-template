@@ -71,7 +71,7 @@ function Analytics(props) {
                                 <p>Value of orders</p>
                             </Button>
 
-                            <Button color="secondary" onClick={() => setResource('products')} block disabled={resource === 'products'}>
+                            <Button color="secondary" onClick={() => setResource('orders-productsCount')} block disabled={resource === 'orders-products'}>
                                 <i className="tim-icons icon-laptop"></i>
                                 <p>Ordered products</p>
                             </Button>

@@ -38,7 +38,6 @@ import {
 } from "reactstrap";
 import {AuthContext} from "../../utils/AuthContext";
 import AuthService from "../../utils/AuthService";
-import Icons from "../../views/admin/Icons";
 
 function AdminNavbar(props) {
     const { state, dispatch } = React.useContext(AuthContext);
