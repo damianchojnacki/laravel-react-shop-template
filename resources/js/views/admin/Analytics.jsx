@@ -44,16 +44,14 @@ function Analytics(props) {
             setData(ChartService.generate(chart, getThemeColor(props.bgColor), 'line'));
         }
 
-        gen();
+        (range && group && resource) && gen();
     }, [range, group, resource]);
 
     return (
         <div className="content">
             <Row>
                 <Col>
-                    {data &&
-                    <ChartDynamic data={data}/>
-                    }
+                    {data && <ChartDynamic data={data}/>}
                 </Col>
             </Row>
             <Row>
@@ -68,7 +66,7 @@ function Analytics(props) {
                                 <p>Orders made</p>
                             </Button>
 
-                            <Button color="secondary" onClick={() => setResource('orders/value')} block disabled={resource === 'orders/value'}>
+                            <Button color="secondary" onClick={() => setResource('orders-value')} block disabled={resource === 'orders-value'}>
                                 <i className="tim-icons icon-money-coins"></i>
                                 <p>Value of orders</p>
                             </Button>
@@ -83,12 +81,12 @@ function Analytics(props) {
                                 <p>New users</p>
                             </Button>
 
-                            <Button color="secondary" onClick={() => setResource('views')} block disabled={resource === 'views'}>
+                            <Button color="secondary" onClick={() => setResource('views-views')} block disabled={resource === 'views-views'}>
                                 <i className="tim-icons icon-tap-02"></i>
                                 <p>Views</p>
                             </Button>
 
-                            <Button color="secondary" onClick={() => setResource('views-unique')} block disabled={resource === 'views-unique'}>
+                            <Button color="secondary" onClick={() => setResource('views-views_unique')} block disabled={resource === 'views-views_unique'}>
                                 <i className="tim-icons icon-tap-02"></i>
                                 <p>Unique views</p>
                             </Button>
@@ -101,10 +99,6 @@ function Analytics(props) {
                             <h2 className="card-title text-center">Range</h2>
                         </CardHeader>
                         <CardBody>
-                            <Button color="secondary" onClick={() => setRange('day')} block disabled={range === 'day'}>
-                                Day
-                            </Button>
-
                             <Button color="secondary" onClick={() => setRange('week')} block disabled={range === 'week'}>
                                 Week
                             </Button>

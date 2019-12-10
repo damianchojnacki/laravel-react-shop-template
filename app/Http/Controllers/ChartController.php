@@ -2,11 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ChartHelper;
 use App\LaravelChart;
 use Carbon\Carbon;
 
 class ChartController extends Controller
 {
+    public function dynamic($resource, $group, $range)
+    {
+
+        $options = [
+            'title' => ChartHelper::getName($resource) . " (one $range)",
+            'report_type' => 'group_by_date',
+            'model' => ChartHelper::getModel($resource),
+            'group_by_field' => 'created_at',
+            'group_by_period' => $group,
+            'filter_field' => 'created_at',
+            'filter_period' => $range,
+        ];
+
+        if($aggregateField = ChartHelper::getAggregateField($resource)){
+            $options['aggregate_field'] = $aggregateField;
+            $options['aggregate_function'] = 'sum';
+        }
+
+        $chart = new LaravelChart($options);
+
+        return response($chart->getDivided(), 200);
+    }
+
     public function orders()
     {
         $chart = new LaravelChart([

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class LaravelChart {
@@ -34,9 +35,9 @@ class LaravelChart {
                             now()->subDays($this->options['filter_days'])->format('Y-m-d'));
                     } else if (isset($this->options['filter_period'])) {
                         switch ($this->options['filter_period']) {
-                            case 'week': $start = date('Y-m-d', strtotime('last Monday')); break;
-                            case 'month': $start = date('Y-m') . '-01'; break;
-                            case 'year': $start = date('Y') . '-01-01'; break;
+                            case 'week': $start = Carbon::now()->subWeek(); break;
+                            case 'month': $start = Carbon::now()->subMonth(); break;
+                            case 'year': $start = Carbon::now()->subYear(); break;
                         }
                         if (isset($start)) {
                             return $query->where($this->options['filter_field'], '>=', $start);

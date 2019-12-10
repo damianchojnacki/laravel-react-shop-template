@@ -33,10 +33,12 @@ ReactDOM.render(
     <Router history={hist}>
         <Switch>
             <AuthContextProvider>
-                <Route path="/" render={(props) => <ShopLayout {...props} />}/>
                 <Route path="/admin" render={props => <AdminLayout {...props} />}/>
+                <Route path="/" render={(props) => <ShopLayout {...props} />}/>
             </AuthContextProvider>
         </Switch>
     </Router>,
     document.getElementById("root")
 );
+
+//TODO render only one main view

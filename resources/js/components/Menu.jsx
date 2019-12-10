@@ -2,10 +2,9 @@ import React from "react";
 import { Nav, NavItem } from "shards-react";
 import AuthService from "../utils/AuthService";
 import {Link, NavLink} from 'react-router-dom';
-import routes from "../routes";
 import {AuthContext} from "../utils/AuthContext";
 
-function Menu(){
+function Menu(props){
     const { state, dispatch } = React.useContext(AuthContext);
 
     const handleLogout = (e) => {
@@ -16,15 +15,14 @@ function Menu(){
     };
 
     return (
-        <Nav style={{paddingTop: 20+'px', paddingBottom: 20+'px'}}>
-            {routes.map((prop, key) => {
+        <Nav style={{paddingTop: '20px', paddingBottom: '20px'}}>
+            {props.routes && props.routes.map((prop, key) => {
                 if (prop.name === "Login" && state.authenticated) return null;
-                return prop.layout === '/shop' &&
-                    (
-                        <NavItem key={key}>
-                            <NavLink className="nav-link" to={prop.path}>{prop.name}</NavLink>
-                        </NavItem>
-                    );
+                return (
+                    <NavItem key={key}>
+                        <NavLink className="nav-link" to={prop.path}>{prop.name}</NavLink>
+                    </NavItem>
+                );
             })}
             {state.authenticated &&
                 <NavItem>

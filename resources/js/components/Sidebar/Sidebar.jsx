@@ -63,7 +63,7 @@ class Sidebar extends React.Component {
           <Nav>
             {routes.map((prop, key) => {
               if (prop.redirect) return null;
-              return (prop.layout === '/admin' && !prop.hidden) &&
+              return !prop.hidden &&
               (
                 <li
                   className={

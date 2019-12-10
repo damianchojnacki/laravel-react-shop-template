@@ -26,7 +26,7 @@ import Footer from "../components/Footer/Footer.jsx";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import FixedPlugin from "../components/FixedPlugin/FixedPlugin.jsx";
 
-import routes from "../routes.js";
+import routes from "../routes/admin.js";
 
 import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";
@@ -89,17 +89,14 @@ function Admin(props) {
 
     const getRoutes = routes => {
         return routes.map((prop, key) => {
-            if (prop.layout === "/admin") {
-                return (
-                    <Route
-                        exact path={prop.layout + prop.path}
-                        render={(props) => <prop.component {...props} name={prop.name} bgColor={backgroundColor} />}
-                        key={key}
-                    />
-                );
-            } else {
-                return null;
-            }
+            return (
+                <Route
+                    exact
+                    path={prop.layout + prop.path}
+                    render={(props) => <prop.component {...props} name={prop.name} bgColor={backgroundColor} />}
+                    key={key}
+                />
+            );
         });
     };
 

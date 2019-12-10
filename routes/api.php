@@ -63,6 +63,7 @@ Route::group([
     'name' => 'charts',
     'middleware' => ['auth:api', 'admin'],
 ], function () {
+    Route::get('charts/dynamic/{resource}/{group}/{range}', 'ChartController@dynamic')->name('chart.dynamic');
     Route::get('charts/orders', 'ChartController@orders')->name('chart.orders');
     Route::get('charts/orders/countries', 'ChartController@ordersCountries')->name('chart.orders.countries');
     Route::get('charts/orders/values', 'ChartController@ordersValues')->name('chart.orders.values');

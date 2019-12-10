@@ -58,7 +58,6 @@ export default function Login() {
                     <Helmet>
                         <title>Shop | Login</title>
                     </Helmet>
-                    <Menu/>
                     <Form method="POST" onSubmit={handleSubmit}>
                         {errors.data
                         && (

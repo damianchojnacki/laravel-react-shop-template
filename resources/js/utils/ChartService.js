@@ -7,8 +7,8 @@ export default class ChartService {
         return chart.data;
     }
 
-    static async dynamic(name) {
-        const chart = await window.axios.get(`/api/charts/orders`);
+    static async dynamic(resource, group, range) {
+        const chart = await window.axios.get(`/api/charts/dynamic/${resource}/${group}/${range}`);
 
         return chart.data;
     }

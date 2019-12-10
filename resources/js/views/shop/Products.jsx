@@ -7,11 +7,9 @@ export default function Products(props){
             <Helmet>
                 <title>Shop | Admin - Products</title>
             </Helmet>
-            <div className="content">
-                <main className="main">
-                    Products content
-                </main>
-            </div>
+            <main className="main">
+                Products content
+            </main>
         </>
     )
 }
