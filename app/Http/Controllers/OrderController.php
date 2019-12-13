@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\OrderResource;
 use App\Order;
 use App\OrderStatus;
+use App\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -53,5 +55,25 @@ class OrderController extends Controller
         Order::findOrFail($id)->delete();
 
         return response('Order has been deleted', 200);
+    }
+
+    public function edit(Request $request)
+    {
+        $request->validate([
+            'id' => 'uuid',
+            'status' => 'required|min:1|max:4',
+            'products' => 'required|array'
+        ]);
+
+        $order = Order::findOrFail($request->input('id'));
+        $order->status->save(OrderStatus::find($request->input('status')));
+
+        foreach($request->input('products') as $product){
+            $order->products()->attach(Product::find($product['id']), ['quantity' => $product['pivot']['quantity']]);
+        }
+
+        $order->save();
+
+        return response('Order has been updated', 200);
     }
 }

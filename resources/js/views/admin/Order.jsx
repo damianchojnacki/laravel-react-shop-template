@@ -13,23 +13,23 @@ import {
     Row,
     Col
 } from "reactstrap";
-import Notifications, {notify} from 'react-notify-toast';
-import ProductService from "../../utils/ProductService";
+import {notify} from 'react-notify-toast';
 import OrderService from "../../utils/OrderService";
 import ProductsListComplex from "../../components/ProductsListComplex";
 
 function Order(props) {
     const [order, setOrder] = useState({});
-    const [value, setValue] = useState(0);
+    const [products, setProducts] = useState([]);
     const [status, setStatus] = useState();
     const [statuses, setStatuses] = useState([]);
     const [redirect, setRedirect] = useState();
 
     const getOrders = async () => {
         const order = await OrderService.get(props.match.params.id);
+
+        setProducts(order.products);
+        setStatus(order.status.id);
         setOrder(order);
-        setValue(order.price);
-        setStatus(order.status.id)
     };
 
     const getOrdersStatuses = async () => {
@@ -52,7 +52,8 @@ function Order(props) {
 
         const data = {
             id: order.id,
-            value: value,
+            status: status,
+            products: products,
         };
 
         OrderService.edit(data)
@@ -122,8 +123,7 @@ function Order(props) {
                                         <Input
                                             defaultValue={order.value}
                                             type="number"
-                                            onChange={e => setValue(e.target.value)}
-                                            className={props.bgColor}
+                                            disabled
                                         />
                                     </Col>
                                 </Row>
@@ -154,7 +154,7 @@ function Order(props) {
                 </Col>
                 <Col md="4">
                     <h2>Products:</h2>
-                    <ProductsListComplex products={order.products} bgColor={props.bgColor}/>
+                    <ProductsListComplex products={products} bgColor={props.bgColor}/>
                 </Col>
             </Row>
         </div>
