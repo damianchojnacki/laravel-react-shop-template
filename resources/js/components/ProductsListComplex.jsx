@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 function ProductsListComplex(props){
     return (
-        (props.data && props.data.length > 0) ? props.products.map(product => {
+        (props.data && props.data.length > 0) ? props.data.map(product => {
             return (
                 <Card key={product.id}>
                     <CardHeader>

@@ -66,7 +66,7 @@ class OrderController extends Controller
         ]);
 
         $order = Order::findOrFail($request->input('id'));
-        $order->status->save(OrderStatus::find($request->input('status')));
+        $order->status()->associate(OrderStatus::findOrFail($request->input('status')));
 
         foreach($request->input('products') as $product){
             $order->products()->attach(Product::find($product['id']), ['quantity' => $product['pivot']['quantity']]);

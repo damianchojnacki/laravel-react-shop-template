@@ -34,6 +34,7 @@ Route::group([
     Route::get('users/page/{page}', 'UserController@index')->name('users');
     Route::get('users/search/{id}', 'UserController@search')->name('users.search');
     Route::get('users/{id}', 'UserController@show')->name('users.show');
+    Route::put('users', 'UserController@edit')->name('users.edit');
     Route::delete('users/{id}', 'UserController@delete')->name('users.delete');
 });
 
@@ -70,5 +71,11 @@ Route::group([
     Route::get('charts/orders/values', 'ChartController@ordersValues')->name('chart.orders.values');
     Route::get('charts/views', 'ChartController@views')->name('chart.views');
     Route::get('charts/views-unique', 'ChartController@viewsUnique')->name('chart.views-unique');
+});
+
+Route::group([
+    'name' => 'countries',
+], function () {
+    Route::get('countries', 'CountryController@index')->name('countries');
 });
 

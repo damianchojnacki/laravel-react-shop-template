@@ -21,17 +21,28 @@ function User(props) {
     const [user, setUser] = useState({});
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [country, setCountry] = useState('');
+    const [countries, setCountries] = useState([]);
     const [redirect, setRedirect] = useState();
 
     useEffect(() => {
-        async function get() {
+        (async function() {
             const user = await UserService.get(props.match.params.id);
             setUser(user);
             setName(user.name);
             setEmail(user.email);
-        }
+            setCountry(user.country.id);
+        })();
 
-        get();
+        (async function() {
+            const countries = await window.axios.get('/api/countries');
+
+            const options =  countries.data.map((country) => {
+                return <option key={country.id} value={country.id}>{country.name}</option>
+            });
+
+            setCountries(options);
+        })();
     }, []);
 
     const handleSubmit = (e) => {
@@ -41,6 +52,7 @@ function User(props) {
             id: user.id,
             name: name,
             email: email,
+            country: country,
         };
 
         UserService.edit(data)
@@ -105,6 +117,19 @@ function User(props) {
                                             onChange={e => setEmail(e.target.value)}
                                             className={props.bgColor}
                                         />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md="12">
+                                        <label>Country</label>
+                                        <Input
+                                            type="select"
+                                            value={country}
+                                            onChange={e => setCountry(e.target.value)}
+                                            className={props.bgColor}
+                                        >
+                                            {countries}
+                                        </Input>
                                     </Col>
                                 </Row>
                             </CardBody>
