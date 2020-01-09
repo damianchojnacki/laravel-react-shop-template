@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
@@ -54,7 +55,7 @@ class AuthController extends Controller {
     public function handleProviderCallback($social){
         $user = Socialite::with($social)->stateless()->user();
 
-        return redirect()->to('/')->withCookies([Cookie::make('access_token', $user->token, 60)]);
+        return redirect()->to('/')->withCookies([Cookie::make('access_token', $user->token, 60, '/', config('app.url'), true, false)]);
     }
 
     public function register(Request $request) {
