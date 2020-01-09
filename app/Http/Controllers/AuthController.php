@@ -6,6 +6,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -53,7 +54,7 @@ class AuthController extends Controller {
     public function handleProviderCallback($social){
         $user = Socialite::with($social)->stateless()->user();
 
-        return redirect()->to('/')->withCookies(['access_token' => $user->token]);
+        return redirect()->to('/')->withCookies([Cookie::make('access_token', $user->token, 60)]);
     }
 
     public function register(Request $request) {
