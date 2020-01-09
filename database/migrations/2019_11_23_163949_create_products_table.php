@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->tinyInteger('type_id');
             $table->foreign('type_id')->references('id')->on('product_types');
-            $table->decimal('price', 4, 2);
+            $table->integer('price');
             $table->timestamps();
         });
     }
