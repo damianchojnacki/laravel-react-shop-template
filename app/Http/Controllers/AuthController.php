@@ -55,7 +55,7 @@ class AuthController extends Controller {
     public function handleProviderCallback($social){
         $user = Socialite::with($social)->stateless()->user();
 
-        return redirect()->to('/')->withCookies([Cookie::make('access_token', $user->token, 60, '/', config('app.url'), true, false)]);
+        return redirect()->to('/')->withCookies([Cookie::make('access_token', $user->token, 60, '/', null, true, false)]);
     }
 
     public function register(Request $request) {
