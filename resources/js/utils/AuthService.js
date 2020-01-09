@@ -1,8 +1,10 @@
+import cookie from 'react-cookies';
+
 class AuthService{
     static login(credentials) {
         return window.axios.post('/api/login', credentials)
             .then(res => {
-                localStorage.setItem('access_token', res.data.token);
+                cookie.save('access_token', res.data.token, {maxAge: 3600});
                 window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
             });
     }
@@ -14,7 +16,7 @@ class AuthService{
     static logout() {
         const response = window.axios.post('/api/logout');
 
-        localStorage.removeItem('access_token');
+        cookie.remove('access_token');
 
         return response;
     }

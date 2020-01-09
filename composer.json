@@ -13,6 +13,7 @@
         "jrm2k6/cloudder": "^0.6.0",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.0",
+        "laravel/socialite": "^4.3",
         "laravel/tinker": "^1.0",
         "mbezhanov/faker-provider-collection": "^1.2"
     },

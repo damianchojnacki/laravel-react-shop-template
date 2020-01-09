@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
-import Menu from '../../components/Menu';
 import {Form, FormInput, FormGroup, Button, Alert} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
 import isEmail from 'validator/lib/isEmail';
+import GoogleButton from 'react-google-button';
 
 export default function Login() {
 
@@ -58,6 +58,9 @@ export default function Login() {
                     <Helmet>
                         <title>Shop | Login</title>
                     </Helmet>
+                    <div className="mb-3">
+                        <a href="./redirect/google"><GoogleButton /></a>
+                    </div>
                     <Form method="POST" onSubmit={handleSubmit}>
                         {errors.data
                         && (

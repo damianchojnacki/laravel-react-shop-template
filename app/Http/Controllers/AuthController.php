@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class AuthController extends Controller {
 
@@ -35,6 +39,23 @@ class AuthController extends Controller {
         }
 
         return response($response, $status);
+    }
+
+    public function socialLogin($social){
+        if ($social == "facebook" || $social == "google")
+            return Socialite::with($social)
+                ->stateless()
+                ->redirect();
+        else
+            return Socialite::with($social)->redirect();
+    }
+
+    public function handleProviderCallback($social){
+        $user = Socialite::with($social)->stateless()->user();
+
+        $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+
+        return redirect()->to('/')->withCookies(['access_token' => $token]);
     }
 
     public function register(Request $request) {

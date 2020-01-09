@@ -1,9 +1,10 @@
 import * as React from "react";
+import cookie from 'react-cookies';
 
 const AuthContext = React.createContext();
 
 const initialState = {
-    authenticated: !!localStorage.getItem('access_token'),
+    authenticated: !!cookie.load('access_token'),
     user: {},
 };
 

@@ -8,7 +8,7 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "server": "php artisan serve",
+        "server": "php artisan serve --port=80",
         "start": "concurrently --kill-others \"yarn run server\" \"yarn run watch\""
     },
     "devDependencies": {
@@ -40,7 +40,9 @@
         "prop-types": "^15.7.2",
         "react": "^16.2.0",
         "react-chartjs-2": "^2.8.0",
+        "react-cookies": "^0.1.1",
         "react-dom": "^16.2.0",
+        "react-google-button": "^0.7.0",
         "react-helmet": "^5.2.1",
         "react-notification-alert": "^0.0.12",
         "react-notify-toast": "^0.5.1",
