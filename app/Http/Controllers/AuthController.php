@@ -53,9 +53,7 @@ class AuthController extends Controller {
     public function handleProviderCallback($social){
         $user = Socialite::with($social)->stateless()->user();
 
-        $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-
-        return redirect()->to('/')->withCookies(['access_token' => $token]);
+        return redirect()->to('/')->withCookies(['access_token' => $user->token]);
     }
 
     public function register(Request $request) {
