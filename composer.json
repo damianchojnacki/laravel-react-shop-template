@@ -52,12 +52,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "@php artisan optimize",
-            "echo \"$OAUTH_PUBLIC_KEY\" > storage/oauth-public.key",
-            "echo \"$OAUTH_PRIVATE_KEY\" > storage/oauth-private.key"
-        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
