@@ -28,7 +28,7 @@ class LaravelChart {
         $this->validateOptions($this->options);
 
         try {
-            return $this->options['model']::orderBy($this->options['group_by_field'])
+            $query = $this->options['model']::orderBy($this->options['group_by_field'])
                 ->when(isset($this->options['filter_field']), function($query) {
                     if (isset($this->options['filter_days'])) {
                         return $query->where($this->options['filter_field'], '>=',
@@ -44,9 +44,15 @@ class LaravelChart {
                         }
                     }
                 })
-                ->whereNotNull($this->options['group_by_field'])
-                ->whereHas($this->options['relation_field'])
-                ->get()
+                ->whereNotNull($this->options['group_by_field']);
+
+            if($this->options['group_by_field'] != 'created_at'){
+                $query->whereHas($this->options['group_by_field'], function($query){
+                    if(isset($this->options['relation_field'])) $query->has($this->options['relation_field']);
+                });
+            }
+
+            return $query->get()
                 ->groupBy(function ($entry) {
                     if ($this->options['report_type'] == 'group_by_string') {
                         return $entry->{$this->options['group_by_field']};
@@ -72,6 +78,7 @@ class LaravelChart {
                 ->map(function ($entries) {
                     return $entries->{$this->options['aggregate_function'] ?? 'count'}($this->options['aggregate_field'] ?? '');
                 });
+
         } catch (\Error $ex) {
             throw new \Exception('Laravel Charts error: ' . $ex->getMessage());
         }
