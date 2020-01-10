@@ -55,8 +55,8 @@ class AuthController extends Controller {
     public function handleProviderCallback($social){
         $userSocial = Socialite::with($social)->stateless()->user();
 
-        $token = $userSocial->token;
         $user = User::firstOrNew(['email' => $userSocial->getEmail()]);
+
         if (!$user->id) {
             $user->fill([
                 "name" => $userSocial->getName(),
@@ -65,7 +65,8 @@ class AuthController extends Controller {
             // Save user social
             $user->save();
         }
-        $access_token = $user->createToken($token)->accessToken;
+
+        $access_token = $user->createToken('Laravel Password Grant Client')->accessToken;
 
         return redirect()->to('/')->withCookies([Cookie::make('access_token', $access_token, 60, '/', null, true, false)]);
     }
