@@ -53,9 +53,21 @@ class AuthController extends Controller {
     }
 
     public function handleProviderCallback($social){
-        $user = Socialite::with($social)->stateless()->user();
+        $userSocial = Socialite::with($social)->stateless()->user();
 
-        return redirect()->to('/')->withCookies([Cookie::make('access_token', $user->token, 60, '/', null, true, false)]);
+        $token = $userSocial->token;
+        $user = User::firstOrNew(['email' => $userSocial->getEmail()]);
+        if (!$user->id) {
+            $user->fill([
+                "name" => $userSocial->getName(),
+                "password"=>Hash::make(Str::random()),
+            ]);
+            // Save user social
+            $user->save();
+        }
+        $access_token = $user->createToken($token)->accessToken;
+
+        return redirect()->to('/')->withCookies([Cookie::make('access_token', $access_token, 60, '/', null, true, false)]);
     }
 
     public function register(Request $request) {
