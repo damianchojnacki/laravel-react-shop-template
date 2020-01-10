@@ -67,7 +67,7 @@ class AuthController extends Controller {
             $user->save();
         }
 
-        $access_token = $user->createToken()->accessToken;
+        $access_token = $user->createToken($token)->accessToken;
 
         return redirect()->to('/')->withCookies([Cookie::make('access_token', $access_token, 60, '/', null, false, false)]);
     }
