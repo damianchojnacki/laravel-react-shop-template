@@ -18,6 +18,7 @@ function Menu(props){
         <Nav style={{paddingTop: '20px', paddingBottom: '20px'}}>
             {props.routes && props.routes.map((prop, key) => {
                 if (prop.name === "Login" && state.authenticated) return null;
+                if (prop.name === "Register" && state.authenticated) return null;
                 return (
                     <NavItem key={key}>
                         <NavLink className="nav-link" to={prop.path}>{prop.name}</NavLink>

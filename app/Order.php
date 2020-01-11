@@ -55,6 +55,6 @@ class Order extends Model
         foreach($products as $product)
             $value += $product->price * $product->pivot->quantity;
 
-        return $value;
+        return number_format($value, 2, '.', '');
     }
 }

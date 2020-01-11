@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {Redirect, Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
-import {Form, FormInput, FormGroup, Button, Alert} from "shards-react";
+import {Form, FormInput, FormGroup, Button, Alert, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
 import isEmail from 'validator/lib/isEmail';
 import GoogleButton from 'react-google-button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 export default function Login() {
 
@@ -70,13 +72,30 @@ export default function Login() {
                         )}
                         <FormGroup>
                             <label htmlFor="#email">Email</label>
-                            <FormInput invalid={!!errors.data} type="email" id="#email" name="email" onChange={handleChange} disabled={loading} required/>
+                            <InputGroup seamless>
+                                <InputGroupAddon type="prepend">
+                                    <InputGroupText>
+                                        <FontAwesomeIcon icon={faEnvelope} />
+                                    </InputGroupText>
+                                </InputGroupAddon>
+                                <FormInput invalid={!!errors.data} type="email" id="#email" name="email" onChange={handleChange} disabled={loading} required/>
+                            </InputGroup>
                         </FormGroup>
                         <FormGroup>
                             <label htmlFor="#password">Password</label>
-                            <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={handleChange} disabled={loading} required/>
+                            <InputGroup seamless>
+                                <InputGroupAddon type="prepend">
+                                    <InputGroupText>
+                                        <FontAwesomeIcon icon={faLock} />
+                                    </InputGroupText>
+                                </InputGroupAddon>
+                                <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={handleChange} disabled={loading} required/>
+                            </InputGroup>
                         </FormGroup>
                         <Button>Log in</Button>
+                        <p className="mt-3">
+                            <Link to="./register">Don't have an account? You can create one there.</Link>
+                        </p>
                     </Form>
                 </div>
             )

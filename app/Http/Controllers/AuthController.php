@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
@@ -77,6 +78,7 @@ class AuthController extends Controller {
         $validator = Validator::make($request->all(), [
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'country' => 'required|numeric|in:'.Country::all()->pluck('id')->toArray(),
         ]);
 
         if ($validator->fails()) {
