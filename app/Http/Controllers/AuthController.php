@@ -78,16 +78,19 @@ class AuthController extends Controller {
         $validator = Validator::make($request->all(), [
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'country' => 'required|numeric|in:'.Country::all()->pluck('id')->toArray(),
+            'country' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
             return response(['errors' => $validator->errors()->all()], 422);
         }
 
-        $request['password'] = Hash::make($request['password']);
-        $request['name'] = uniqid();
-        $user = User::create($request->toArray());
+        $user = new User();
+        $user->email = $request['email'];
+        $user->name = $request['name'];
+        $user->password = Hash::make($request['password']);
+        $user->country()->associate(Country::find($request['country']));
+        $user->saveOrFail();
 
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
         $response = ['token' => $token];

@@ -9,6 +9,16 @@ class AuthService{
             });
     }
 
+    static register(credentials) {
+        credentials.password_confirmation = credentials.passwordConfirmation;
+
+        return window.axios.post('/api/register', credentials)
+            .then(res => {
+                cookie.save('access_token', res.data.token, {maxAge: 3600});
+                window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
+            });
+    }
+
     static getUser() {
         return window.axios.get('/api/user');
     }
