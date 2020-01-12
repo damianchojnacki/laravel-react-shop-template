@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import {notify} from 'react-notify-toast';
 import OrderService from "../../utils/OrderService";
-import ProductsListComplex from "../../components/ProductsListComplex";
+import ProductsListComplex from "../../components/admin/ProductsListComplex";
 
 function Order(props) {
     const [order, setOrder] = useState({});

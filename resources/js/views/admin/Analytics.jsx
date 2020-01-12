@@ -15,9 +15,9 @@ import {
 import Notifications, {notify} from 'react-notify-toast';
 import ProductService from "../../utils/ProductService";
 import OrderService from "../../utils/OrderService";
-import ProductsListComplex from "../../components/ProductsListComplex";
+import ProductsListComplex from "../../components/admin/ProductsListComplex";
 import ChartService from "../../utils/ChartService";
-import ChartDynamic from "../../components/ChartDynamic";
+import ChartDynamic from "../../components/admin/ChartDynamic";
 import {Helmet} from "react-helmet";
 
 function Analytics(props) {

@@ -91,7 +91,6 @@ export default function Register() {
         position: "absolute",
         top: 50 + "%",
         left: 50 + "%",
-        width: 50 + "%",
         transform: "translate(-50%, -50%)",
     };
 
@@ -243,14 +242,16 @@ export default function Register() {
     ];
 
     const formClasses = classNames({
-        animated: true,
-        fadeOut: hide,
-        fadeIn: !hide,
+        "animated": true,
+        "fadeOut": hide,
+        "fadeIn": !hide,
+        "col-12": true,
+        "col-lg-6": true
     });
 
     return state.authenticated
         ?
-        <Redirect to="/"/>
+        <Redirect to="/register/success"/>
         :
         (
             <div className="content">

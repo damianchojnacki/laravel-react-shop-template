@@ -8,9 +8,9 @@ import {AuthContext} from "../utils/AuthContext";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "shards-ui/dist/css/shards.min.css";
-import Menu from "../components/Menu";
+import Menu from "../components/shop/Menu";
 
-function Shop() {
+function Shop(props) {
     const {state, dispatch} = React.useContext(AuthContext);
 
     useEffect(() => {
@@ -27,8 +27,9 @@ function Shop() {
             return (
                 <Route
                     exact
+                    {...props}
                     path={prop.path}
-                    component={prop.component}
+                    render={(props) => <prop.component {...props} />}
                     key={key}
                 />
             );
@@ -37,7 +38,7 @@ function Shop() {
 
     return (
         <div className="container">
-            <Menu routes={routes}/>
+            <Menu {...props} routes={routes}/>
             <Switch>
                 {getRoutes(routes)}
             </Switch>

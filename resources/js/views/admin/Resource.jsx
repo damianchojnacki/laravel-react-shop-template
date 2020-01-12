@@ -12,13 +12,12 @@ import {
     Input,
 } from 'reactstrap';
 
-import OrdersList from "../../components/OrdersList";
+import OrdersList from "../../components/admin/OrdersList";
 import OrderService from "../../utils/OrderService";
 import UserService from "../../utils/UserService";
 import ProductService from "../../utils/ProductService";
-import UsersList from "../../components/UsersList";
-import Order from "./Order";
-import ProductsList from "../../components/ProductsList";
+import UsersList from "../../components/admin/UsersList";
+import ProductsList from "../../components/admin/ProductsList";
 
 window['OrderService'] = OrderService;
 window['UserService'] = UserService;

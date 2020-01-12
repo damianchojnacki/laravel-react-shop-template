@@ -35,9 +35,9 @@ import {Helmet} from "react-helmet";
 import ChartService from "../../utils/ChartService";
 import {separateHundreds} from "../../utils/helpers";
 import OrderService from "../../utils/OrderService";
-import Chart from "../../components/Chart";
-import ChartMultiple from "../../components/ChartMultiple";
-import OrdersList from "../../components/OrdersList";
+import Chart from "../../components/admin/Chart";
+import ChartMultiple from "../../components/admin/ChartMultiple";
+import OrdersList from "../../components/admin/OrdersList";
 
 class Dashboard extends React.Component {
     constructor(props) {

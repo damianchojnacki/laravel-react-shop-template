@@ -1,6 +1,6 @@
 import Home from "../views/shop/Home";
 import Login from "../views/shop/Login";
-import ShopProducts from "../views/shop/Products";
+import Products from "../views/shop/Products";
 import Register from "../views/shop/Register";
 
 export default [
@@ -13,8 +13,14 @@ export default [
     {
         path: "/products",
         name: "Products",
-        component: ShopProducts,
+        component: Products,
         layout: "/shop"
+    },
+    {
+        path: "/products/:category",
+        component: Products,
+        layout: "/shop",
+        hidden: true,
     },
     {
         path: "/login",
@@ -27,5 +33,11 @@ export default [
         name: "Register",
         component: Register,
         layout: "/shop"
+    },
+    {
+        path: "/register/:result",
+        component: Home,
+        layout: "/shop",
+        hidden: true
     },
 ];

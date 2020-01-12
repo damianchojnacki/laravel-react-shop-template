@@ -39,7 +39,7 @@ class User extends Authenticatable
     ];
 
     public function isAdmin(){
-        return $this->name == 'admin';
+        return $this->name == 'admin' && $this->is_admin == 1;
     }
 
     public function orders(){

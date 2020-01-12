@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->smallInteger('country_id')->nullable()->default(null);
+            $table->boolean('is_admin')->default(0);
             $table->foreign('country_id')->references('id')->on('countries');
             $table->rememberToken();
             $table->timestamps();

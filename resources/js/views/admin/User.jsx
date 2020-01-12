@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 import {notify} from 'react-notify-toast';
 import UserService from "../../utils/UserService";
-import OrdersList from "../../components/OrdersList";
+import OrdersList from "../../components/admin/OrdersList";
 
 function User(props) {
     const [user, setUser] = useState({});

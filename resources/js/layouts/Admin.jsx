@@ -21,10 +21,10 @@ import {Route, Switch, Redirect} from "react-router-dom";
 import Notifications from 'react-notify-toast';
 
 // core components
-import AdminNavbar from "../components/Navbars/AdminNavbar.jsx";
-import Footer from "../components/Footer/Footer.jsx";
-import Sidebar from "../components/Sidebar/Sidebar.jsx";
-import FixedPlugin from "../components/FixedPlugin/FixedPlugin.jsx";
+import AdminNavbar from "../components/admin/Navbars/AdminNavbar.jsx";
+import Footer from "../components/admin/Footer/Footer.jsx";
+import Sidebar from "../components/admin/Sidebar/Sidebar.jsx";
+import FixedPlugin from "../components/admin/FixedPlugin/FixedPlugin.jsx";
 
 import routes from "../routes/admin.js";
 
