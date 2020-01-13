@@ -9,6 +9,7 @@ import {AuthContext} from "../utils/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "shards-ui/dist/css/shards.min.css";
 import Menu from "../components/shop/Menu";
+import Footer from "../components/shop/Footer";
 
 function Shop(props) {
     const {state, dispatch} = React.useContext(AuthContext);
@@ -37,11 +38,14 @@ function Shop(props) {
     };
 
     return (
-        <div className="container">
+        <div className="p-0 container d-flex flex-column" style={{minHeight: "100vh"}}>
             <Menu {...props} routes={routes}/>
-            <Switch>
-                {getRoutes(routes)}
-            </Switch>
+            <div style={{flexGrow: 1}}>
+                <Switch>
+                    {getRoutes(routes)}
+                </Switch>
+            </div>
+            <Footer/>
         </div>
     );
 }

@@ -57,14 +57,13 @@ export default function Products(props){
             <Helmet>
                 <title>Shop | Admin - Products</title>
             </Helmet>
-            <main className="main">
+            <main className="main my-2">
                 <ProductsNav category={category} search={value => setSearchField(value)}/>
 
-                <div className="col-md-12 p-0 mt-4 d-flex flex-wrap">
+                <div className="col-md-12 p-0 mt-4 d-flex flex-wrap justify-content-between">
                     <ProductsListComplex data={products} width="25"/>
 
-
-                    <Button className="btn-block" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
+                    <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
                 </div>
             </main>
         </>

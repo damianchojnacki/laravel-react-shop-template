@@ -246,7 +246,8 @@ export default function Register() {
         "fadeOut": hide,
         "fadeIn": !hide,
         "col-12": true,
-        "col-lg-6": true
+        "col-lg-6": true,
+        "p-4": true,
     });
 
     return state.authenticated
@@ -254,7 +255,7 @@ export default function Register() {
         <Redirect to="/register/success"/>
         :
         (
-            <div className="content">
+            <div className="container">
                 <Helmet>
                     <title>Shop | Register</title>
                 </Helmet>

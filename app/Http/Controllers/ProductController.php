@@ -16,13 +16,13 @@ class ProductController extends Controller
     }
 
     public function index($page, $category = null){
-        $category ?
+        if($category)
+            $products = Product::whereHas('type', function($q) use($category){
+                $q->where('name', $category);
+            })->with(['type', 'image'])->skip(($page - 1) * 12)->take(12)->get();
 
-        $products = Product::whereHas('type', function($q) use($category){
-            $q->where('name', $category);
-        })->with(['type', 'image'])->skip(($page - 1) * 10)->take(10)->get() :
-
-        $products = Product::with(['type', 'image'])->skip(($page - 1) * 10)->take(10)->get();
+        else
+            $products = Product::with(['type', 'image'])->skip(($page - 1) * 12)->take(12)->get();
 
         return response(ProductResource::collection($products), 200);
     }
@@ -40,9 +40,15 @@ class ProductController extends Controller
 
     }
 
-    public function search($name)
+    public function search($name, $category = null)
     {
-        $product = Product::with('type')->where('name', 'like', "%$name%")->take(100)->get();
+        if($category)
+            $product = Product::whereHas('type', function($q) use($category){
+                $q->where('name', $category);
+            })->with(['type', 'image'])->where('name', 'like', "%$name%")->take(100)->get();
+
+        else
+            $product = Product::with('type')->where('name', 'like', "%$name%")->take(100)->get();
 
         return response(ProductResource::collection($product), 200);
     }

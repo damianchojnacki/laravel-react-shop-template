@@ -17,7 +17,9 @@ function Menu(props) {
 
     return (
         <Navbar type="dark" theme="primary" expand="md" className="mb-4">
-            <NavbarBrand href="#">Shop Template</NavbarBrand>
+            <Link to="/">
+                <NavbarBrand tag="div">Shop Template</NavbarBrand>
+            </Link>
             <NavbarToggler onClick={() => setNavbarOpened(!navbarOpened)} />
 
             <Collapse open={navbarOpened} navbar>

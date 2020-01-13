@@ -56,7 +56,7 @@ export default function Login() {
             <Redirect to="/"/>
             :
             (
-                <div className="content">
+                <div className="container">
                     <Helmet>
                         <title>Shop | Login</title>
                     </Helmet>
