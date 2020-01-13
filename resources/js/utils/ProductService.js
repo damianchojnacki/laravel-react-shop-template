@@ -1,6 +1,8 @@
 export default class ProductService{
-    static async all(page) {
-        const response = await window.axios.get(`/api/products/page/${page}`);
+    static async all(page, category = null) {
+        const query = category ? `/api/products/page/${page}/${category}` : `/api/products/page/${page}`;
+
+        const response = await window.axios.get(query);
 
         return response.data;
     }
@@ -11,8 +13,10 @@ export default class ProductService{
         return response.data;
     }
 
-    static async search(name) {
-        const response = await window.axios.get(`/api/products/search/${name}`);
+    static async search(name, category = null) {
+        const query = category ? `/api/products/search/${name}/${category}` : `/api/products/search/${name}`;
+
+        const response = await window.axios.get(query);
 
         return response.data;
     }

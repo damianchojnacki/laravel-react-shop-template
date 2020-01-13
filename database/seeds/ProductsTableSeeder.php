@@ -16,8 +16,8 @@ class ProductsTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $processor = ProductType::where('name', 'processor')->first()->id;
-        $graphic = ProductType::where('name', 'graphic')->first()->id;
+        $processor = ProductType::where('name', 'cpu')->first()->id;
+        $graphic = ProductType::where('name', 'gpu')->first()->id;
         $hdd = ProductType::where('name', 'hdd')->first()->id;
         $ssd = ProductType::where('name', 'ssd')->first()->id;
 

@@ -14,11 +14,11 @@ class ProductTypesTableSeeder extends Seeder
     {
         DB::table('product_types')->insert([
             [
-                'name' => 'processor',
+                'name' => 'cpu',
                 'name_display' => 'Processors',
             ],
             [
-                'name' => 'graphic',
+                'name' => 'gpu',
                 'name_display' => 'Graphic cards',
             ],
             [

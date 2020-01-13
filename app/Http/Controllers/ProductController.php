@@ -15,8 +15,14 @@ class ProductController extends Controller
         Auth::shouldUse('api');
     }
 
-    public function index($page){
-        $products = Product::with('type')->skip(($page - 1) * 10)->take(10)->get();
+    public function index($page, $category = null){
+        $category ?
+
+        $products = Product::whereHas('type', function($q) use($category){
+            $q->where('name', $category);
+        })->with(['type', 'image'])->skip(($page - 1) * 10)->take(10)->get() :
+
+        $products = Product::with(['type', 'image'])->skip(($page - 1) * 10)->take(10)->get();
 
         return response(ProductResource::collection($products), 200);
     }

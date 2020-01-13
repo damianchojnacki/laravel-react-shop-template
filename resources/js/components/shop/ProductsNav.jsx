@@ -5,8 +5,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductsNav(props){
-    const [search, setSearch] = useState('');
-
     const names = {
         cpu: {
             full: "Processors",
@@ -32,12 +30,10 @@ export default function ProductsNav(props){
 
     const pages = ["cpu", "gpu", "hdd", "ssd"];
 
-    const category = props.match.params.category;
-
     const navList = pages.map(page =>
         <NavItem key={page}>
-            <NavLink tag="span" active={category === page}>
-                <Link to={`/products/${page}`} className={category === page ? "text-light" : null}>
+            <NavLink tag="span" active={props.category === page}>
+                <Link to={`/products/${page}`} className={props.category === page ? "text-light" : null}>
                     {displayName(names[page])}
                 </Link>
             </NavLink>
@@ -48,8 +44,8 @@ export default function ProductsNav(props){
         <>
             <Nav pills>
                 <NavItem>
-                    <NavLink tag="span" active={!category}>
-                        <Link to="/products" className={!category ? "text-light" : null}>
+                    <NavLink tag="span" active={!props.category}>
+                        <Link to="/products" className={!props.category ? "text-light" : null}>
                             Our recommendation
                         </Link>
                     </NavLink>
@@ -62,7 +58,7 @@ export default function ProductsNav(props){
                                 <FontAwesomeIcon icon={faSearch} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <FormInput type="text" onChange={(e) => setSearch(e.target.value)} placeholder="Search product" required/>
+                        <FormInput type="text" onChange={(e) => props.search(e.target.value)} placeholder="Search product" required/>
                     </InputGroup>
                 </NavItem>
             </Nav>
