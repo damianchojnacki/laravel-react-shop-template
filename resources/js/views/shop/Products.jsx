@@ -4,12 +4,8 @@ import ProductsNav from '../../components/shop/ProductsNav';
 import {Button} from "shards-react";
 import ProductsListComplex from "../../components/shop/ProductsListComplex";
 import classnames from 'classnames';
-import {CartContext} from "../../utils/CartContext";
-import {notify} from "react-notify-toast";
 
 export default function Products(props){
-    const {state, dispatch} = React.useContext(CartContext);
-
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
     const [searchField, setSearchField] = useState(null);
@@ -64,18 +60,6 @@ export default function Products(props){
         "justify-content-between": products.length % 4 === 0,
     });
 
-    const addToCart = product => {
-        dispatch({type: "add", payload: product.id});
-
-        notify.show(`${product.name} has been added to cart.`, 'success', 1500);
-    };
-
-    const removeFromCart = product => {
-        dispatch({type: "remove", payload: product.id});
-
-        notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
-    };
-
     return (
         <>
             <Helmet>
@@ -85,7 +69,7 @@ export default function Products(props){
                 <ProductsNav category={category} search={value => setSearchField(value)}/>
 
                 <div className={productsFlexClasses}>
-                    <ProductsListComplex {...props} data={products} width="25" addToCart={addToCart} removeFromCart={removeFromCart}/>
+                    <ProductsListComplex {...props} data={products} width="25"/>
 
                     <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
                 </div>
