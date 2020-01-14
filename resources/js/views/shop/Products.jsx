@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import { Helmet } from 'react-helmet';
 import ProductsNav from '../../components/shop/ProductsNav';
-import {Button, Card, CardBody, CardFooter, CardHeader} from "shards-react";
-import ProductsList from "../../components/admin/ProductsList";
-import ProductsListComplex from "../../components/admin/ProductsListComplex";
-import {Col} from "reactstrap";
+import {Button} from "shards-react";
+import ProductsListComplex from "../../components/shop/ProductsListComplex";
+import classnames from 'classnames';
+import {CartContext} from "../../utils/CartContext";
+import {notify} from "react-notify-toast";
 
 export default function Products(props){
+    const {state, dispatch} = React.useContext(CartContext);
+
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
     const [searchField, setSearchField] = useState(null);
@@ -52,6 +55,27 @@ export default function Products(props){
             setPage(page + 1);
     };
 
+    const productsFlexClasses = classnames({
+        "col-md-12": true,
+        "p-0": true,
+        "mt-4": true,
+        "d-flex": true,
+        "flex-wrap": true,
+        "justify-content-between": products.length % 4 === 0,
+    });
+
+    const addToCart = product => {
+        dispatch({type: "add", payload: product.id});
+
+        notify.show(`${product.name} has been added to cart.`, 'success', 1500);
+    };
+
+    const removeFromCart = product => {
+        dispatch({type: "remove", payload: product.id});
+
+        notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
+    };
+
     return (
         <>
             <Helmet>
@@ -60,8 +84,8 @@ export default function Products(props){
             <main className="main my-2">
                 <ProductsNav category={category} search={value => setSearchField(value)}/>
 
-                <div className="col-md-12 p-0 mt-4 d-flex flex-wrap justify-content-between">
-                    <ProductsListComplex data={products} width="25"/>
+                <div className={productsFlexClasses}>
+                    <ProductsListComplex {...props} data={products} width="25" addToCart={addToCart} removeFromCart={removeFromCart}/>
 
                     <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
                 </div>

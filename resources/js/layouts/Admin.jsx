@@ -31,7 +31,6 @@ import routes from "../routes/admin.js";
 import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";
 
-//import "../assets/black-dashboard.min";
 import PerfectScrollbar from "perfect-scrollbar";
 import AuthService from "../utils/AuthService";
 import {AuthContext} from "../utils/AuthContext";

@@ -154,7 +154,7 @@ function Order(props) {
                 </Col>
                 <Col md="4">
                     <h2>Products:</h2>
-                    <ProductsListComplex data={products} bgColor={props.bgColor}/>
+                    <ProductsListComplex {...props} data={products} bgColor={props.bgColor}/>
                 </Col>
             </Row>
         </div>
