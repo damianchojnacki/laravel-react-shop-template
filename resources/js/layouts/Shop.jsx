@@ -13,6 +13,7 @@ import "shards-ui/dist/css/shards.min.css";
 import Menu from "../components/shop/Menu";
 import Footer from "../components/shop/Footer";
 import {CartContextProvider} from "../utils/CartContext";
+import Cart from "../components/shop/Cart";
 
 function Shop(props) {
     const {state, dispatch} = React.useContext(AuthContext);
@@ -44,8 +45,9 @@ function Shop(props) {
         <CartContextProvider>
             <Notifications/>
             <div className="p-0 container d-flex flex-column" style={{minHeight: "100vh"}}>
+                <Cart/>
                 <Menu {...props} routes={routes}/>
-                <div style={{flexGrow: 1}}>
+                <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
                     <Switch>
                         {getRoutes(routes)}
                     </Switch>

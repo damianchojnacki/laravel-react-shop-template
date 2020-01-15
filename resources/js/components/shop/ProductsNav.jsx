@@ -3,6 +3,7 @@ import {FormInput, InputGroup, InputGroupAddon, InputGroupText, Nav, NavItem, Na
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {isMobile} from "../../utils/helpers";
 
 export default function ProductsNav(props){
     const names = {
@@ -25,7 +26,7 @@ export default function ProductsNav(props){
     };
 
     const displayName = (name) => {
-        return window.innerWidth <= 760 ? name.short : name.full;
+        return isMobile() ? name.short : name.full;
     };
 
     const pages = ["cpu", "gpu", "hdd", "ssd"];
@@ -42,16 +43,16 @@ export default function ProductsNav(props){
 
     return (
         <>
-            <Nav pills>
+            <Nav className="px-2" pills>
                 <NavItem>
                     <NavLink tag="span" active={!props.category}>
                         <Link to="/products" className={!props.category ? "text-light" : null}>
-                            Our recommendation
+                            All
                         </Link>
                     </NavLink>
                 </NavItem>
                 {navList}
-                <NavItem className="ml-auto">
+                <NavItem className={isMobile() ? "w-100 my-4 ml-auto" : "ml-auto"} >
                     <InputGroup seamless>
                         <InputGroupAddon type="prepend">
                             <InputGroupText>

@@ -48,7 +48,7 @@ class ProductController extends Controller
             })->with(['type', 'image'])->where('name', 'like', "%$name%")->take(100)->get();
 
         else
-            $product = Product::with('type')->where('name', 'like', "%$name%")->take(100)->get();
+            $product = Product::with(['type', 'image'])->where('name', 'like', "%$name%")->take(100)->get();
 
         return response(ProductResource::collection($product), 200);
     }
@@ -74,5 +74,23 @@ class ProductController extends Controller
         Product::findOrFail($id)->delete();
 
         return response('Product has been deleted', 200);
+    }
+
+    public function cart($cart){
+        $cart = json_decode($cart);
+
+        $quantity = [];
+
+        foreach($cart as $id){
+            isset($quantity[$id]) ? $quantity[$id]++ : $quantity[$id] = 1;
+        }
+
+        $products = Product::whereIn('id', $cart)->with(['type', 'image'])->get()->map(function($product) use ($quantity){
+            $product->quantity = $quantity[$product->id];
+
+            return $product;
+        });
+
+        return response(ProductResource::collection($products), 200);
     }
 }

@@ -87,13 +87,6 @@ export default function Register() {
         } else nextStep();
     };
 
-    const formStyles = {
-        position: "absolute",
-        top: 50 + "%",
-        left: 50 + "%",
-        transform: "translate(-50%, -50%)",
-    };
-
     const validateStep = () => {
         switch (step) {
             case 1:
@@ -245,9 +238,6 @@ export default function Register() {
         "animated": true,
         "fadeOut": hide,
         "fadeIn": !hide,
-        "col-12": true,
-        "col-lg-6": true,
-        "p-4": true,
     });
 
     return state.authenticated
@@ -255,13 +245,15 @@ export default function Register() {
         <Redirect to="/register/success"/>
         :
         (
-            <div className="container">
+            <>
                 <Helmet>
                     <title>Shop | Register</title>
                 </Helmet>
-                <Form method="POST" onSubmit={handleSubmit} className={formClasses} style={formStyles}>
-                    {displayStep()}
-                </Form>
-            </div>
+                <div className="container col-lg-9 col-12">
+                    <Form method="POST" onSubmit={handleSubmit} className={formClasses}>
+                        {displayStep()}
+                    </Form>
+                </div>
+            </>
         )
 }

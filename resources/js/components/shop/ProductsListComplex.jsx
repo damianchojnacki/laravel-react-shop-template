@@ -2,6 +2,7 @@ import React from "react";
 import {Card, CardBody, CardHeader, CardTitle, CardFooter, Button} from "shards-react";
 import {notify} from "react-notify-toast";
 import {CartContext} from "../../utils/CartContext";
+import {isDesktop, isMobile} from "../../utils/helpers";
 
 function ProductsListComplex(props){
     const {state, dispatch} = React.useContext(CartContext);
@@ -21,7 +22,7 @@ function ProductsListComplex(props){
     return (
         (props.data && props.data.length > 0) ? props.data.map(product => {
             return (
-                <Card key={product.id} style={{width: window.innerWidth < 1200 ? window.innerWidth < 760 ? "100%" : "30%" : "23%"}} className="m-2">
+                <Card key={product.id} style={{width: !isDesktop() ? isMobile() ? "100%" : "30%" : "23%"}} className="m-2">
                     <CardHeader className="h-75">
                         <CardTitle tag="h5">{product.name}</CardTitle>
                         {product.image && <img className="rounded mx-auto mw-100 d-block" style={{maxHeight: '200px'}} src={product.image.url} alt={product.name}/>}

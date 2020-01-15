@@ -65,7 +65,7 @@ export default function Products(props){
             <Helmet>
                 <title>Shop | Admin - Products</title>
             </Helmet>
-            <main className="main my-2">
+            <main className="main my-2 d-flex flex-column flex-grow-1 w-100">
                 <ProductsNav category={category} search={value => setSearchField(value)}/>
 
                 <div className={productsFlexClasses}>

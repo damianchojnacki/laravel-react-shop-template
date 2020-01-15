@@ -56,47 +56,49 @@ export default function Login() {
             <Redirect to="/"/>
             :
             (
-                <div className="container">
+                <>
                     <Helmet>
                         <title>Shop | Login</title>
                     </Helmet>
-                    <div className="mb-3">
-                        <a href="./redirect/google"><GoogleButton /></a>
+                    <div className="container col-lg-6 col-12">
+                        <div className="mb-3">
+                            <a href="./redirect/google" className="d-inline-block"><GoogleButton /></a>
+                        </div>
+                        <Form method="POST" onSubmit={handleSubmit}>
+                            {errors.data
+                            && (
+                                <Alert theme="danger">
+                                    {errors.data}
+                                </Alert>
+                            )}
+                            <FormGroup>
+                                <label htmlFor="#email">Email</label>
+                                <InputGroup seamless>
+                                    <InputGroupAddon type="prepend">
+                                        <InputGroupText>
+                                            <FontAwesomeIcon icon={faEnvelope} />
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <FormInput invalid={!!errors.data} type="email" id="#email" name="email" onChange={handleChange} disabled={loading} required/>
+                                </InputGroup>
+                            </FormGroup>
+                            <FormGroup>
+                                <label htmlFor="#password">Password</label>
+                                <InputGroup seamless>
+                                    <InputGroupAddon type="prepend">
+                                        <InputGroupText>
+                                            <FontAwesomeIcon icon={faLock} />
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={handleChange} disabled={loading} required/>
+                                </InputGroup>
+                            </FormGroup>
+                            <Button>Log in</Button>
+                            <p className="mt-3">
+                                <Link to="./register">Don't have an account? You can create one there.</Link>
+                            </p>
+                        </Form>
                     </div>
-                    <Form method="POST" onSubmit={handleSubmit}>
-                        {errors.data
-                        && (
-                            <Alert theme="danger">
-                                {errors.data}
-                            </Alert>
-                        )}
-                        <FormGroup>
-                            <label htmlFor="#email">Email</label>
-                            <InputGroup seamless>
-                                <InputGroupAddon type="prepend">
-                                    <InputGroupText>
-                                        <FontAwesomeIcon icon={faEnvelope} />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <FormInput invalid={!!errors.data} type="email" id="#email" name="email" onChange={handleChange} disabled={loading} required/>
-                            </InputGroup>
-                        </FormGroup>
-                        <FormGroup>
-                            <label htmlFor="#password">Password</label>
-                            <InputGroup seamless>
-                                <InputGroupAddon type="prepend">
-                                    <InputGroupText>
-                                        <FontAwesomeIcon icon={faLock} />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                                <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={handleChange} disabled={loading} required/>
-                            </InputGroup>
-                        </FormGroup>
-                        <Button>Log in</Button>
-                        <p className="mt-3">
-                            <Link to="./register">Don't have an account? You can create one there.</Link>
-                        </p>
-                    </Form>
-                </div>
+                </>
             )
 }

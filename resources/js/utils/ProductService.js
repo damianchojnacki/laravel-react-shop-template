@@ -28,5 +28,13 @@ export default class ProductService{
     static delete(id){
         return window.axios.delete(`/api/products/${id}`);
     }
+
+    static async cart(cart) {
+        const param = JSON.stringify(cart);
+
+        const response = await window.axios.get(`/api/products/cart/${param}`);
+
+        return response.data;
+    }
 }
 

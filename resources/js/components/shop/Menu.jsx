@@ -41,9 +41,6 @@ function Menu(props) {
                         </NavItem>
                     }
                 </Nav>
-                <div className="ml-auto">
-                    <Cart/>
-                </div>
             </Collapse>
         </Navbar>
     );

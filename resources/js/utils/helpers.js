@@ -46,3 +46,11 @@ export function checkFullName(name){
     return (name && name.split(" ")[1] && name.split(" ")[0][0] === name.split(" ")[0][0].toUpperCase() && name.split(" ")[1][0] === name.split(" ")[1][0].toUpperCase());
 }
 
+export function isMobile(){
+    return window.innerWidth <= 760;
+}
+
+export function isDesktop(){
+    return window.innerWidth > 1200;
+}
+
