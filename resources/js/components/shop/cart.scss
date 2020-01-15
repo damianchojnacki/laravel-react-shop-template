@@ -25,6 +25,12 @@
         padding: 1rem 0 0 2rem;
     }
 
+    &__products{
+        @media (max-width: "760px") {
+            max-width: 300px;
+        }
+    }
+
     &__field {
         padding: 0 .5rem;
 
@@ -55,6 +61,8 @@
     }
 
     .list-group-item{
+        overflow: auto;
+
         @media (max-width: "1200px") {
             padding-left: .5rem;
             padding-right: .5rem;

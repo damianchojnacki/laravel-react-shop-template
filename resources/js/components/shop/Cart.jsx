@@ -45,7 +45,7 @@ function Cart(props) {
         <DropdownMenu right className={products.length ? null: "cart__empty"}>
             <h4 className="cart__header">Shopping cart</h4>
             {products.length ?
-                <DropdownItem tag="span">
+                <DropdownItem tag="span" className="cart__products">
                     <ListGroup>
                         {products.map(product =>
                             <ListGroupItem key={product.id}>
