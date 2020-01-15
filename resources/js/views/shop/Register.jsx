@@ -166,7 +166,7 @@ export default function Register() {
         <>
             <h1>Select safe password and retype:</h1>
             <Row className="my-4">
-                <div className="col-6">
+                <div className="col-lg-6 col-12 my-2">
                     <InputGroup seamless>
                         <InputGroupAddon type="prepend">
                             <InputGroupText>
@@ -176,7 +176,7 @@ export default function Register() {
                         <FormInput size="lg" invalid={!!password && !validateStep()} type="password" onChange={(e) => {setPassword(e.target.value)}} value={password} style={{paddingLeft: 50+"px"}} required/>
                     </InputGroup>
                 </div>
-                <div className="col-6">
+                <div className="col-lg-6 col-12 my-2">
                     <InputGroup seamless>
                         <InputGroupAddon type="prepend">
                             <InputGroupText>
