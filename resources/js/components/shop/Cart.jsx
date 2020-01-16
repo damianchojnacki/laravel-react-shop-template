@@ -33,9 +33,17 @@ function Cart(props) {
         notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
     };
 
-    const sum = products.length > 1 && products.reduce((previousValue, currentValue) => {
-        return +previousValue.price * +previousValue.quantity + +currentValue.price * +currentValue.quantity;
-    });
+    const getSumOfProducts = () => {
+        if(products.length) {
+            let sum = 0;
+
+            products.map(product => {
+                sum += product.price * product.quantity;
+            });
+
+            return sum.toFixed(2);
+        }
+    };
 
     return (
         <Dropdown dropup open={opened} className="cart" toggle={() => false}>
@@ -50,14 +58,14 @@ function Cart(props) {
                         {products.map(product =>
                             <ListGroupItem key={product.id}>
                                 <span className="cart__field">{product.name}</span>
-                                <span className="cart__field">{product.price} USD</span>
+                                <span className="cart__field">{product.price.toFixed(2)} $</span>
                                 <span className="cart__field">{product.quantity}</span>
                                 <span className="cart__field">
                                     <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(product)}>Remove</Button>
                                 </span>
                             </ListGroupItem>
                         )}
-                        <ListGroupItem className="text-right"><span className="cart__sum">Sum: {sum ? sum : products[0].price * products[0].quantity} USD</span></ListGroupItem>
+                        <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts()} $</span></ListGroupItem>
                     </ListGroup>
                 </DropdownItem>
                     :

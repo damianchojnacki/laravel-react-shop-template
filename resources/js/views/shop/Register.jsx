@@ -136,7 +136,7 @@ export default function Register() {
             {errors &&
                 errors.map((e, index) => <Alert theme="danger" key={index}>{e}</Alert>)
             }
-            <Button block onClick={nextStep} size="lg">Let's go!</Button>
+            <Button block onClick={nextStep} size="lg">Start</Button>
         </>,
         <>
             <h1>Please enter your e-mail below:</h1>
@@ -161,7 +161,7 @@ export default function Register() {
                 <FormInput size="lg" invalid={!!name && !validateStep()} type="text" onChange={(e) => {setName(e.target.value)}} value={name} style={{paddingLeft: 50+"px"}} required/>
             </InputGroup>
             <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={nextStep} className="float-right">Next</Button>
+            <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
         </>,
         <>
             <h1>Select safe password and retype:</h1>
@@ -188,7 +188,7 @@ export default function Register() {
                 </div>
             </Row>
             <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={nextStep} className="float-right">Next</Button>
+            <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
         </>,
         <>
             <h1>Where are you from?</h1>
