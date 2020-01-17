@@ -15,13 +15,13 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, {Suspense, lazy} from "react";
 import ReactDOM from "react-dom";
 import {createBrowserHistory} from "history";
-import {Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-import ShopLayout from './layouts/Shop';
-import AdminLayout from "./layouts/Admin";
+const ShopLayout = lazy(() => import('./layouts/Shop'));
+const AdminLayout = lazy(() => import("./layouts/Admin"));
 
 import {AuthContextProvider} from './utils/AuthContext';
 
@@ -29,14 +29,19 @@ const hist = createBrowserHistory();
 
 require('./bootstrap');
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Loading from "./components/Loading";
+
 ReactDOM.render(
     <Router history={hist}>
-        <Switch>
+        <Suspense fallback={<Loading/>}>
             <AuthContextProvider>
-                <Route path="/admin" render={props => <AdminLayout {...props} />}/>
-                <Route path="/" render={(props) => <ShopLayout {...props} />}/>
+                <Switch>
+                    <Route path="/admin" render={props => <AdminLayout {...props} />}/>
+                    <Route path="/" render={(props) => <ShopLayout {...props} />}/>
+                </Switch>
             </AuthContextProvider>
-        </Switch>
+        </Suspense>
     </Router>,
     document.getElementById("root")
 );

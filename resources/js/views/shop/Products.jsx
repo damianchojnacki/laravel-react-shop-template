@@ -4,6 +4,7 @@ import ProductsNav from '../../components/shop/ProductsNav';
 import {Button} from "shards-react";
 import ProductsListComplex from "../../components/shop/ProductsListComplex";
 import classnames from 'classnames';
+import ProductService from "../../utils/ProductService";
 
 export default function Products(props){
     const [products, setProducts] = useState([]);

@@ -28,7 +28,6 @@
 @import "black-dashboard-react/bootstrap/mixins";
 
  // Bootstrap components
-.black-dashboard{
 @import "black-dashboard-react/bootstrap/root";
 @import "black-dashboard-react/bootstrap/reboot";
 @import "black-dashboard-react/bootstrap/type";
@@ -96,7 +95,6 @@
 // Overwrites
 
 @import "black-dashboard-react/overwrites";
-}
 
 @import "black-dashboard-react/custom/dropdown.scss";
 @import "black-dashboard-react/custom/sidebar-and-main-panel.scss";

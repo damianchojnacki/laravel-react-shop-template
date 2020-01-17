@@ -4,7 +4,7 @@ import {Helmet} from 'react-helmet';
 import {Form, FormInput, FormGroup, Button, Alert, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
-import isEmail from 'validator/lib/isEmail';
+import {isEmail} from '../../utils/helpers';
 import GoogleButton from 'react-google-button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';

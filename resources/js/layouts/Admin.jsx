@@ -114,7 +114,7 @@ function Admin(props) {
 
     return redirectBack ? <Redirect to="/"/>  :
         (
-            <div className="black-dashboard">
+            <>
                 <Notifications/>
                 <div className="wrapper black-dashboard">
                     <Sidebar
@@ -147,7 +147,7 @@ function Admin(props) {
                     handleBgClick={handleBgClick}
                     handleDarkModeClick={handleDarkModeClick}
                 />
-            </div>
+            </>
         );
 }
 

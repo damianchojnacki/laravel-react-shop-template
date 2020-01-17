@@ -9,7 +9,8 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "server": "php artisan serve --port=80",
-        "start": "concurrently --kill-others \"yarn run server\" \"yarn run watch\""
+        "start": "concurrently --kill-others \"yarn run server\" \"yarn run watch\"",
+        "analyze": "source-map-explorer public/js/*"
     },
     "devDependencies": {
         "@babel/core": "7.0.0",
@@ -41,7 +42,6 @@
         "flag-icon-css": "^3.4.5",
         "history": "^4.10.1",
         "jquery": ">=3.4.0",
-        "lodash": "^4.17.13",
         "perfect-scrollbar": "^1.4.0",
         "popper.js": "1.14.7",
         "prop-types": "^15.7.2",
@@ -56,9 +56,7 @@
         "react-router-dom": "^5.1.2",
         "react-select": "^3.0.8",
         "reactstrap": "^8.1.1",
-        "shards-react": "^1.0.3",
-        "shards-ui": "^3.0.0",
-        "validator": "^12.1.0"
+        "shards-react": "^1.0.3"
     },
     "babel": {
         "presets": [

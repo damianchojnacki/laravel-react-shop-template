@@ -38,7 +38,7 @@ function Cart(props) {
             let sum = 0;
 
             products.map(product => {
-                sum += product.price * product.quantity;
+                sum += parseFloat(product.price) * product.quantity;
             });
 
             return sum.toFixed(2);
@@ -58,7 +58,7 @@ function Cart(props) {
                         {products.map(product =>
                             <ListGroupItem key={product.id}>
                                 <span className="cart__field">{product.name}</span>
-                                <span className="cart__field">{product.price.toFixed(2)} $</span>
+                                <span className="cart__field">{parseFloat(product.price).toFixed(2)} $</span>
                                 <span className="cart__field">{product.quantity}</span>
                                 <span className="cart__field">
                                     <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(product)}>Remove</Button>

@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
-import {Form, FormInput, FormGroup, Button, Alert, InputGroupAddon, InputGroupText, InputGroup, Row, FormCheckbox} from "shards-react";
+import {Form, FormInput, Button, Alert, InputGroupAddon, InputGroupText, InputGroup, Row, FormCheckbox} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
-import GoogleButton from 'react-google-button';
 import classNames from 'classnames';
 import 'animate.css';
 import 'flag-icon-css/css/flag-icon.min.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faLock, faUnlockAlt, faUser, faUsers} from "@fortawesome/free-solid-svg-icons";
-import {isIn, isEmail, equals} from "validator";
-import {checkFullName} from "../../utils/helpers";
+import {faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
+import {checkFullName, isEmail, equals} from "../../utils/helpers";
 import Select from 'react-select';
-import {faFileAlt, faFileImage, faFileVideo} from "@fortawesome/free-regular-svg-icons";
 
 export default function Register() {
 

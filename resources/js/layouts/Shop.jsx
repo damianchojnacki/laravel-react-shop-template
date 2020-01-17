@@ -8,7 +8,6 @@ import {AuthContext} from "../utils/AuthContext";
 
 import Notifications from 'react-notify-toast';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import "shards-ui/dist/css/shards.min.css";
 import Menu from "../components/shop/Menu";
 import Footer from "../components/shop/Footer";
