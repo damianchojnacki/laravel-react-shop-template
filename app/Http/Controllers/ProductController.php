@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Discount;
+use App\Http\Resources\DiscountResource;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,14 +18,22 @@ class ProductController extends Controller
         Auth::shouldUse('api');
     }
 
-    public function index($page, $category = null){
-        if($category)
-            $products = Product::whereHas('type', function($q) use($category){
+    public function index($page, $category = null)
+    {
+        if ($category)
+            $products = Product::whereHas('type', function ($q) use ($category) {
                 $q->where('name', $category);
             })->with(['type', 'image'])->skip(($page - 1) * 12)->take(12)->get();
 
         else
             $products = Product::with(['type', 'image'])->skip(($page - 1) * 12)->take(12)->get();
+
+        return response(ProductResource::collection($products), 200);
+    }
+
+    public function all()
+    {
+        $products = Product::all();
 
         return response(ProductResource::collection($products), 200);
     }
@@ -40,10 +51,31 @@ class ProductController extends Controller
 
     }
 
+    public function discounts()
+    {
+        $discounts = Discount::with('product')->get();
+
+        return response(DiscountResource::collection($discounts), 200);
+    }
+
+    public function withoutDiscount()
+    {
+        $products = Product::whereDoesntHave('discount')->get();
+
+        return response(ProductResource::collection($products), 200);
+    }
+
+    public function discountDelete($id)
+    {
+        Discount::findOrFail($id)->delete();
+
+        return response('Discount has been deleted', 200);
+    }
+
     public function search($name, $category = null)
     {
-        if($category)
-            $product = Product::whereHas('type', function($q) use($category){
+        if ($category)
+            $product = Product::whereHas('type', function ($q) use ($category) {
                 $q->where('name', $category);
             })->with(['type', 'image'])->where('name', 'like', "%$name%")->take(100)->get();
 
@@ -76,21 +108,39 @@ class ProductController extends Controller
         return response('Product has been deleted', 200);
     }
 
-    public function cart($cart){
+    public function cart($cart)
+    {
         $cart = json_decode($cart);
 
         $quantity = [];
 
-        foreach($cart as $id){
+        foreach ($cart as $id) {
             isset($quantity[$id]) ? $quantity[$id]++ : $quantity[$id] = 1;
         }
 
-        $products = Product::whereIn('id', $cart)->with(['type', 'image'])->get()->map(function($product) use ($quantity){
+        $products = Product::whereIn('id', $cart)->with(['type', 'image'])->get()->map(function ($product) use ($quantity) {
             $product->quantity = $quantity[$product->id];
 
             return $product;
         });
 
         return response(ProductResource::collection($products), 200);
+    }
+
+    public function discountAdd(Request $request)
+    {
+
+        $request->validate([
+            'product_id' => 'required|integer',
+            'percent_off' => 'required|integer|min:1|max:99',
+            'ends' => 'required|date',
+        ]);
+
+        $discount = new Discount;
+        $discount->percent_off = $request->input('percent_off');
+        $discount->ends = Carbon::createFromDate($request->input('ends'));
+        Product::findOrFail($request->input('product_id'))->discount()->save($discount);
+
+        return response('Discount has been applied', 200);
     }
 }

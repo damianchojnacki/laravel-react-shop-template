@@ -6,21 +6,41 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public function image() {
+    protected $appends = ['final_price'];
+
+    public function image()
+    {
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public static function imageUpload($image){
+    public static function imageUpload($image)
+    {
         $id = Image::imageUpload($image, 'posts');
 
         return $id;
     }
 
-    public function order(){
+    public function order()
+    {
         return $this->belongsToMany(Order::class, 'order_product');
     }
 
-    public function type(){
+    public function type()
+    {
         return $this->belongsTo(ProductType::class);
+    }
+
+    public function discount()
+    {
+        return $this->hasOne(Discount::class);
+    }
+
+    public function getFinalPrice(){
+        return $this->discount ? round($this->price - $this->price * ($this->discount->percent_off / 100), 2) : null;
+    }
+
+    public function getFinalPriceAttribute()
+    {
+        return $this->getFinalPrice();
     }
 }

@@ -13,4 +13,3 @@ const mix = require('laravel-mix');
 
 mix.react('resources/js/app.js', 'public/js')
     .copy('resources/images', 'public/images', false);
-

@@ -1,6 +1,6 @@
 export default class ProductService{
-    static async all(page, category = null) {
-        const query = category ? `/api/products/page/${page}/${category}` : `/api/products/page/${page}`;
+    static async all(page = null, category = null) {
+        const query = page ? category ? `/api/products/page/${page}/${category}` : `/api/products/page/${page}` : `/api/products/all`;
 
         const response = await window.axios.get(query);
 
@@ -36,5 +36,24 @@ export default class ProductService{
 
         return response.data;
     }
+
+    static discounts = {
+        all: async () => {
+            const response = await window.axios.get('/api/products/discounts');
+
+            return response.data;
+        },
+        without: async () => {
+            const response = await window.axios.get('/api/products/discounts/without');
+
+            return response.data;
+        },
+        delete: async id => {
+            return window.axios.delete(`/api/products/discounts/${id}`);
+        },
+        add: async data => {
+            return window.axios.post(`/api/products/discounts`, data);
+        }
+    };
 }
 

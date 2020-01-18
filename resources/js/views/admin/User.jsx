@@ -105,6 +105,7 @@ function User(props) {
                                             type="text"
                                             onChange={e => setName(e.target.value)}
                                             className={props.bgColor}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -116,6 +117,7 @@ function User(props) {
                                             type="email"
                                             onChange={e => setEmail(e.target.value)}
                                             className={props.bgColor}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -127,6 +129,7 @@ function User(props) {
                                             value={country}
                                             onChange={e => setCountry(e.target.value)}
                                             className={props.bgColor}
+                                            required
                                         >
                                             {countries}
                                         </Input>

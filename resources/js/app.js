@@ -18,7 +18,7 @@
 import React, {Suspense, lazy} from "react";
 import ReactDOM from "react-dom";
 import {createBrowserHistory} from "history";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 
 const ShopLayout = lazy(() => import('./layouts/Shop'));
 const AdminLayout = lazy(() => import("./layouts/Admin"));

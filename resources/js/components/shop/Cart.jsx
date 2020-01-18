@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import {
     Dropdown,
     DropdownToggle,
@@ -53,21 +54,28 @@ function Cart(props) {
         <DropdownMenu right className={products.length ? null: "cart__empty"}>
             <h4 className="cart__header">Shopping cart</h4>
             {products.length ?
-                <DropdownItem tag="span" className="cart__products">
-                    <ListGroup>
-                        {products.map(product =>
-                            <ListGroupItem key={product.id}>
-                                <span className="cart__field">{product.name}</span>
-                                <span className="cart__field">{parseFloat(product.price).toFixed(2)} $</span>
-                                <span className="cart__field">{product.quantity}</span>
-                                <span className="cart__field">
-                                    <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(product)}>Remove</Button>
-                                </span>
-                            </ListGroupItem>
-                        )}
-                        <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts()} $</span></ListGroupItem>
-                    </ListGroup>
-                </DropdownItem>
+                <>
+                    <DropdownItem tag="span" className="cart__products">
+                        <ListGroup>
+                            {products.map(product =>
+                                <ListGroupItem key={product.id}>
+                                    <span className="cart__field">{product.name}</span>
+                                    <span className="cart__field">{parseFloat(product.price).toFixed(2)} $</span>
+                                    <span className="cart__field">{product.quantity}</span>
+                                    <span className="cart__field">
+                                        <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(product)}>Remove</Button>
+                                    </span>
+                                </ListGroupItem>
+                            )}
+                            <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts()} $</span></ListGroupItem>
+                        </ListGroup>
+                    </DropdownItem>
+                    <DropdownItem tag="span">
+                        <Link>
+                            <Button block>Checkout</Button>
+                        </Link>
+                    </DropdownItem>
+                </>
                     :
                 <DropdownItem tag="span">Your shopping cart is empty.</DropdownItem>
             }

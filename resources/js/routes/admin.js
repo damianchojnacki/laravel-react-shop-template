@@ -21,6 +21,8 @@ import Order from "../views/admin/Order";
 import Resource from "../views/admin/Resource";
 import User from "../views/admin/User";
 import Analytics from "../views/admin/Analytics";
+import Discounts from "../views/admin/Discounts";
+import DiscountsNew from "../views/admin/DiscountsNew";
 
 export default [
     {
@@ -75,5 +77,18 @@ export default [
         icon: "tim-icons icon-chart-bar-32",
         component: Analytics,
         layout: "/admin"
+    },
+    {
+        path: "/discounts",
+        name: "Discounts",
+        icon: "tim-icons icon-money-coins",
+        component: Discounts,
+        layout: "/admin"
+    },
+    {
+        path: "/discounts/new",
+        component: DiscountsNew,
+        layout: "/admin",
+        hidden: true
     },
 ];

@@ -1,6 +1,7 @@
 import React from "react";
 import {Table} from "reactstrap";
 import {Link} from "react-router-dom";
+import Button from "reactstrap/es/Button";
 
 function ProductsList(props){
     return (
@@ -18,15 +19,21 @@ function ProductsList(props){
             </thead>
             <tbody>
                 {(props.data && props.data.length > 0) ? props.data.map((product, index) =>
-                    <tr key={product.id}>
+                    <tr key={product.id} className={props.product === product.id ? "table-warning" : null}>
                         {props.fields.index && <td>{index + 1}</td>}
                         {props.fields.id && <td>{product.id}</td>}
                         {props.fields.name && <td>{product.name}</td>}
                         {props.fields.type && <td>{product.type.name_display}</td>}
                         {props.fields.price && <td className="text-center">{product.price} USD</td>}
                         {props.fields.date && <td>{product.created_at}</td>}
-                        <td className="text-right"><Link className={`btn btn-${props.bgColor}`} to={`/admin/products/${product.id}`}>Details</Link>
-                        </td>
+                        {props.discount ?
+                            <td className="text-right">
+                                <Link className={`btn btn-${props.bgColor}`} to={`/admin/products/${product.id}`}>Details</Link>
+                            </td> :
+                            <td className="text-right">
+                                <Button color="success" onClick={() => props.add(product)}>Select</Button>
+                            </td>
+                        }
                     </tr>
                 ) : null}
             </tbody>

@@ -135,6 +135,7 @@ function Order(props) {
                                             value={status}
                                             onChange={e => setStatus(e.target.value)}
                                             className={props.bgColor}
+                                            required
                                         >
                                             {statuses}
                                         </Input>

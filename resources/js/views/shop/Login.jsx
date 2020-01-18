@@ -93,7 +93,7 @@ export default function Login() {
                                     <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={handleChange} disabled={loading} required/>
                                 </InputGroup>
                             </FormGroup>
-                            <Button>Log in</Button>
+                            <Button block>Log in</Button>
                             <p className="mt-3">
                                 <Link to="./register">Don't have an account? You can create one there.</Link>
                             </p>

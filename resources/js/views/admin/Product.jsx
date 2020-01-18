@@ -33,7 +33,7 @@ function Product(props) {
         get();
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
 
         const data = {
@@ -92,6 +92,7 @@ function Product(props) {
                                             type="text"
                                             onChange={e => setName(e.target.value)}
                                             className={props.bgColor}
+                                            required
                                         />
                                     </Col>
                                 </Row>
@@ -103,6 +104,7 @@ function Product(props) {
                                             type="number"
                                             onChange={e => setPrice(e.target.value)}
                                             className={props.bgColor}
+                                            required
                                         />
                                     </Col>
                                 </Row>

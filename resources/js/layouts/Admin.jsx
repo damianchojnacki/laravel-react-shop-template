@@ -112,7 +112,7 @@ function Admin(props) {
         return "Brand";
     };
 
-    return redirectBack ? <Redirect to="/"/>  :
+    return redirectBack ? window.location = '/'  :
         (
             <>
                 <Notifications/>
