@@ -43,8 +43,12 @@ class LaravelChart {
                             return $query->where($this->options['filter_field'], '>=', $start);
                         }
                     }
-                })
-                ->whereNotNull($this->options['group_by_field']);
+                });
+
+            if($this->options['report_type'] == "group_by_relation")
+                $query->whereHas($this->options['group_by_field']);
+            else
+                $query->whereNotNull($this->options['group_by_field']);
 
             if($this->options['group_by_field'] != 'created_at'){
                 $query->whereHas($this->options['group_by_field'], function($query){
