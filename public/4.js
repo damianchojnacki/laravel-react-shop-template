@@ -3428,7 +3428,7 @@ function Product(props) {
       display: "flex"
     }
   }, product.image && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-    src: product.image.url,
+    src: product.image.src,
     alt: product.name
   }))));
 }
@@ -3496,7 +3496,7 @@ function ProductNew(props) {
     var data = {
       name: name,
       price: price,
-      img: image.url
+      img: image.id
     };
     _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].add(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show("".concat(name, " has been added."), 'success');
@@ -3510,6 +3510,7 @@ function ProductNew(props) {
 
   var uploadImage = function uploadImage(image) {
     _utils_ImageService__WEBPACK_IMPORTED_MODULE_5__["default"].upload(image).then(function (res) {
+      setImage(res.data.src);
       react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show("Image has been uploaded.", 'success');
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show(error.response.data.message, 'error');
@@ -3542,15 +3543,6 @@ function ProductNew(props) {
     },
     className: props.bgColor,
     required: true
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
-    md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
-    type: "number",
-    onChange: function onChange(e) {
-      return setPrice(e.target.value);
-    },
-    className: props.bgColor,
-    required: true
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     className: "btn-fill",
     color: "success",
@@ -3561,8 +3553,8 @@ function ProductNew(props) {
     style: {
       display: "flex"
     }
-  }, image.url ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: image.url,
+  }, image.src ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: image.src,
     alt: name
   }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
     type: "file",

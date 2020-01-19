@@ -21,6 +21,10 @@ export default class ProductService{
         return response.data;
     }
 
+    static add(data){
+        return window.axios.post(`/api/products`, data);
+    }
+
     static edit(data){
         return window.axios.put(`/api/products`, data);
     }

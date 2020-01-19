@@ -15,6 +15,9 @@ class ImageController extends Controller
         $publicId = Image::imageUpload($request->file('img'), 'products');
         $url = Image::getImageSrc($publicId);
 
-        return response($url, 200);
+        return response([
+            'src' => $url,
+            'id' => $publicId,
+        ], 200);
     }
 }

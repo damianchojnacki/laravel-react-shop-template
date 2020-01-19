@@ -121,7 +121,7 @@ function Product(props) {
                     </Form>
                 </Col>
                 <Col md="4" className="justify-content-center align-items-center" style={{display: "flex"}}>
-                    {product.image && <img src={product.image.url} alt={product.name}/>}
+                    {product.image && <img src={product.image.src} alt={product.name}/>}
                 </Col>
             </Row>
         </div>

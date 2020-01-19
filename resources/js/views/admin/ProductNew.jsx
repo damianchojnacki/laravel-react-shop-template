@@ -29,7 +29,7 @@ function ProductNew(props) {
         const data = {
             name: name,
             price: price,
-            img: image.url,
+            img: image.id,
         };
 
         ProductService.add(data)
@@ -45,6 +45,7 @@ function ProductNew(props) {
     const uploadImage = image => {
         ImageService.upload(image)
             .then(res => {
+                setImage(res.data.src);
                 notify.show(`Image has been uploaded.`, 'success');
             })
             .catch(error => {
@@ -85,17 +86,6 @@ function ProductNew(props) {
                                         />
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col md="12">
-                                        <label>Image</label>
-                                        <Input
-                                            type="number"
-                                            onChange={e => setPrice(e.target.value)}
-                                            className={props.bgColor}
-                                            required
-                                        />
-                                    </Col>
-                                </Row>
                             </CardBody>
                             <CardFooter>
                                 <Button className="btn-fill" color="success" type="submit">
@@ -106,8 +96,8 @@ function ProductNew(props) {
                     </Form>
                 </Col>
                 <Col md="4" className="justify-content-center align-items-center" style={{display: "flex"}}>
-                    {image.url ?
-                        <img src={image.url} alt={name}/> :
+                    {image.src ?
+                        <img src={image.src} alt={name}/> :
                         <Input type="file" onChange={e => uploadImage(e.target.files[0])}/>
                     }
                 </Col>

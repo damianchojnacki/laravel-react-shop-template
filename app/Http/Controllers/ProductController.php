@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Discount;
 use App\Http\Resources\ProductResource;
+use App\Image;
 use App\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -44,7 +45,19 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:64',
+            'price' => 'required|numeric|min:1',
+            'img' => 'required|string'
+        ]);
+
+        $product = Product::createOrFail($request->toArray());
+
+        $image = new Image();
+        $image->url= $request->input('img');
+        $product->image()->save($image);
+
+        return response('Product has been created', 200);
     }
 
     public function show($id)

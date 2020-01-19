@@ -176,6 +176,11 @@ function () {
       });
     }
   }, {
+    key: "add",
+    value: function add(data) {
+      return window.axios.post("/api/products", data);
+    }
+  }, {
     key: "edit",
     value: function edit(data) {
       return window.axios.put("/api/products", data);

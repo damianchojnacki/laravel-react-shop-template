@@ -8,6 +8,7 @@ use Cloudder;
 class Image extends Model
 {
     protected $hidden = ['id', 'imageable_id', 'imageable_type','created_at', 'updated_at'];
+    protected $appends = ['src'];
 
     /**
      * Get the owning imageable model.
@@ -30,6 +31,10 @@ class Image extends Model
             $id = null;
 
         return $id;
+    }
+
+    public function getSrcAttribute(){
+        return self::getImageSrc($this->url);
     }
 
     public function imageDelete(){
