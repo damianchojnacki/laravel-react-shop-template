@@ -28,7 +28,12 @@ class LaravelChart {
         $this->validateOptions($this->options);
 
         try {
-            $query = $this->options['model']::orderBy($this->options['group_by_field'])
+            if($this->options['report_type'] == "group_by_relation")
+                $order_by = "created_at";
+            else
+                $order_by = $this->options['group_by_field'];
+
+            $query = $this->options['model']::orderBy($order_by)
                 ->when(isset($this->options['filter_field']), function($query) {
                     if (isset($this->options['filter_days'])) {
                         return $query->where($this->options['filter_field'], '>=',
