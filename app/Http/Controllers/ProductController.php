@@ -51,7 +51,7 @@ class ProductController extends Controller
             'img' => 'required|string'
         ]);
 
-        $product = Product::createOrFail($request->toArray());
+        $product = Product::create($request->toArray());
 
         $image = new Image();
         $image->url= $request->input('img');
