@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use JD\Cloudder\Facades\Cloudder;
+use Cloudder;
 
 class Image extends Model
 {

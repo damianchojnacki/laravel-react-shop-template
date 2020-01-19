@@ -6,9 +6,6 @@ import {
     CardBody,
     CardFooter,
     Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
     Input,
 } from 'reactstrap';
 
@@ -18,6 +15,7 @@ import UserService from "../../utils/UserService";
 import ProductService from "../../utils/ProductService";
 import UsersList from "../../components/admin/UsersList";
 import ProductsList from "../../components/admin/ProductsList";
+import {Link} from "react-router-dom";
 
 window['OrderService'] = OrderService;
 window['UserService'] = UserService;
@@ -29,14 +27,11 @@ function Resource(props){
     const [searchField, setSearchField] = useState(null);
     const [searchFieldBy, setSearchFieldBy] = useState('');
     const [service, setService] = useState(null);
-    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         initialLoad();
         service && getResource();
     }, [page, searchField, service]);
-
-    const toggle = () => setModal(!modal);
 
     const getResource = async () => {
         if(searchField && searchField !== ""){
@@ -93,21 +88,20 @@ function Resource(props){
                 <title>Shop | Admin - {props.name}</title>
             </Helmet>
             <main className="content">
-                <Modal isOpen={modal} toggle={toggle}>
-                    <ModalHeader toggle={toggle}>
-                        Search by {searchFieldBy}
-                    </ModalHeader>
-                    <ModalBody>
-                        <Input type="text" onChange={(e) => {setSearchField(e.target.value)}} defaultValue=""/>
-                    </ModalBody>
-                </Modal>
                 <div className="col-md-12">
                     <Card className="card-plain">
-                        <CardHeader tag="h2">
-                            All {props.name}
-                            <Button color="success" onClick={toggle} className="float-right">
-                                Search by {searchFieldBy}
-                            </Button>
+                        <CardHeader className="row justify-content-between align-items-center">
+                            <h2 className="col-md-3 col-12 m-0">
+                                All {props.name}
+                            </h2>
+                            <div className="col-md-3 col-12 my-md-0 my-4">
+                                <Input type="text" className={props.bgColor} onChange={(e) => {setSearchField(e.target.value)}} placeholder={`Search by ${searchFieldBy}`}/>
+                            </div>
+                            <Link to={`/admin/${props.name.toLowerCase()}/new`} className="col-md-3 col-12">
+                                <Button color="success" className="px-3" block>
+                                    New {props.name.slice(0, -1)}
+                                </Button>
+                            </Link>
                         </CardHeader>
                         <CardBody>
                             {props.name === "Orders" &&

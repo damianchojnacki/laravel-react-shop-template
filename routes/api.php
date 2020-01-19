@@ -84,3 +84,8 @@ Route::group([
     Route::get('countries', 'CountryController@index')->name('countries');
 });
 
+Route::group([
+    'name' => 'images',
+], function () {
+    Route::post('images', 'ImageController@store')->name('images.store');
+});

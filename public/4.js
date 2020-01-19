@@ -1780,6 +1780,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_admin_Analytics__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../views/admin/Analytics */ "./resources/js/views/admin/Analytics.jsx");
 /* harmony import */ var _views_admin_Discounts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../views/admin/Discounts */ "./resources/js/views/admin/Discounts.jsx");
 /* harmony import */ var _views_admin_DiscountsNew__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../views/admin/DiscountsNew */ "./resources/js/views/admin/DiscountsNew.jsx");
+/* harmony import */ var _views_admin_ProductNew__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../views/admin/ProductNew */ "./resources/js/views/admin/ProductNew.jsx");
 /*!
 
 =========================================================
@@ -1805,6 +1806,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ([{
   path: "/dashboard",
   name: "Dashboard",
@@ -1817,6 +1819,11 @@ __webpack_require__.r(__webpack_exports__);
   icon: "tim-icons icon-laptop",
   component: _views_admin_Resource__WEBPACK_IMPORTED_MODULE_3__["default"],
   layout: "/admin"
+}, {
+  path: "/products/new",
+  component: _views_admin_ProductNew__WEBPACK_IMPORTED_MODULE_8__["default"],
+  layout: "/admin",
+  hidden: true
 }, {
   path: "/products/:id",
   component: _views_admin_Product__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -2090,6 +2097,49 @@ function () {
   }]);
 
   return ChartService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/utils/ImageService.js":
+/*!********************************************!*\
+  !*** ./resources/js/utils/ImageService.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ImageService; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ImageService =
+/*#__PURE__*/
+function () {
+  function ImageService() {
+    _classCallCheck(this, ImageService);
+  }
+
+  _createClass(ImageService, null, [{
+    key: "upload",
+    value: function upload(data) {
+      var formData = new FormData();
+      formData.append('img', data);
+      return window.axios.post("/api/images", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+    }
+  }]);
+
+  return ImageService;
 }();
 
 
@@ -2837,12 +2887,16 @@ function Discounts(props) {
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Card"], {
     className: "card-plain"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CardHeader"], {
-    tag: "h2"
-  }, "All discounts", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/admin/discounts/new"
+    className: "row justify-content-between"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    className: "col-md-3 col-12"
+  }, "All discounts"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/admin/discounts/new",
+    className: "col-md-3 col-12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], {
     color: props.bgColor,
-    className: "float-right"
+    className: "px-3",
+    block: true
   }, "New discount"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_DiscountsList__WEBPACK_IMPORTED_MODULE_7__["default"], {
     data: discounts,
     bgColor: props.bgColor,
@@ -3383,6 +3437,145 @@ function Product(props) {
 
 /***/ }),
 
+/***/ "./resources/js/views/admin/ProductNew.jsx":
+/*!*************************************************!*\
+  !*** ./resources/js/views/admin/ProductNew.jsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
+/* harmony import */ var _utils_ImageService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ImageService */ "./resources/js/utils/ImageService.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+ // reactstrap components
+
+
+
+
+
+
+function ProductNew(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      name = _useState2[0],
+      setName = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      price = _useState4[0],
+      setPrice = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+      _useState6 = _slicedToArray(_useState5, 2),
+      image = _useState6[0],
+      setImage = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState8 = _slicedToArray(_useState7, 2),
+      redirect = _useState8[0],
+      setRedirect = _useState8[1];
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    var data = {
+      name: name,
+      price: price,
+      img: image.url
+    };
+    _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].add(data).then(function (res) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show("".concat(name, " has been added."), 'success');
+      setRedirect(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+        to: "/admin/products/".concat(res.data.id)
+      }));
+    })["catch"](function (error) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show(error.response.data.message, 'error');
+    });
+  };
+
+  var uploadImage = function uploadImage(image) {
+    _utils_ImageService__WEBPACK_IMPORTED_MODULE_5__["default"].upload(image).then(function (res) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show("Image has been uploaded.", 'success');
+    })["catch"](function (error) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show(error.response.data.message, 'error');
+    });
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "content"
+  }, redirect, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    md: "8"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+    onSubmit: handleSubmit
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "card-title"
+  }, "New product")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    md: "12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    type: "text",
+    onChange: function onChange(e) {
+      return setName(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    md: "12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    type: "number",
+    onChange: function onChange(e) {
+      return setPrice(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    md: "12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    type: "number",
+    onChange: function onChange(e) {
+      return setPrice(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    className: "btn-fill",
+    color: "success",
+    type: "submit"
+  }, "Add"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+    md: "4",
+    className: "justify-content-center align-items-center",
+    style: {
+      display: "flex"
+    }
+  }, image.url ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: image.url,
+    alt: name
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+    type: "file",
+    onChange: function onChange(e) {
+      return uploadImage(e.target.files[0]);
+    }
+  }))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (ProductNew);
+
+/***/ }),
+
 /***/ "./resources/js/views/admin/Resource.jsx":
 /*!***********************************************!*\
   !*** ./resources/js/views/admin/Resource.jsx ***!
@@ -3405,6 +3598,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
 /* harmony import */ var _components_admin_UsersList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/admin/UsersList */ "./resources/js/components/admin/UsersList.jsx");
 /* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -3414,6 +3608,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -3454,19 +3649,10 @@ function Resource(props) {
       service = _useState10[0],
       setService = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      modal = _useState12[0],
-      setModal = _useState12[1];
-
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     initialLoad();
     service && getResource();
   }, [page, searchField, service]);
-
-  var toggle = function toggle() {
-    return setModal(!modal);
-  };
 
   var getResource = function getResource() {
     var found, newData;
@@ -3551,28 +3737,31 @@ function Resource(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Admin - ", props.name)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", {
     className: "content"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"], {
-    isOpen: modal,
-    toggle: toggle
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalHeader"], {
-    toggle: toggle
-  }, "Search by ", searchFieldBy), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["ModalBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    type: "text",
-    onChange: function onChange(e) {
-      setSearchField(e.target.value);
-    },
-    defaultValue: ""
-  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], {
     className: "card-plain"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], {
-    tag: "h2"
-  }, "All ", props.name, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "row justify-content-between align-items-center"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    className: "col-md-3 col-12 m-0"
+  }, "All ", props.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-3 col-12 my-md-0 my-4"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+    type: "text",
+    className: props.bgColor,
+    onChange: function onChange(e) {
+      setSearchField(e.target.value);
+    },
+    placeholder: "Search by ".concat(searchFieldBy)
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__["Link"], {
+    to: "/admin/".concat(props.name.toLowerCase(), "/new"),
+    className: "col-md-3 col-12"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     color: "success",
-    onClick: toggle,
-    className: "float-right"
-  }, "Search by ", searchFieldBy)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, props.name === "Orders" && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: "px-3",
+    block: true
+  }, "New ", props.name.slice(0, -1)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, props.name === "Orders" && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_4__["default"], {
     data: data,
     bgColor: props.bgColor,
     fields: {

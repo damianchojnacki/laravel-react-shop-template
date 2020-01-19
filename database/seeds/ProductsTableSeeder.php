@@ -114,9 +114,11 @@ class ProductsTableSeeder extends Seeder
             ],
         ]);
 
+        config('app.env') !== 'testing' &&  Cloudder::deleteResourcesByPrefix('products');
+
         Product::all()->each(function($product) use($faker) {
             $image = new Image();
-            $image->url = '/images/products/' . $product->id . '.png';
+            $image->url = Product::imageUpload('/images/products/' . $product->id . '.png');
             $product->image()->save($image);
 
             $product->created_at = $faker->dateTimeBetween('-1 year', 'now');

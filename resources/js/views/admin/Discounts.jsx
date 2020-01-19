@@ -44,10 +44,12 @@ function Discounts(props){
             <main className="content">
                 <div className="col-md-12">
                     <Card className="card-plain">
-                        <CardHeader tag="h2">
-                            All discounts
-                            <Link to="/admin/discounts/new">
-                                <Button color={props.bgColor} className="float-right">
+                        <CardHeader className="row justify-content-between">
+                            <h2 className="col-md-3 col-12">
+                                All discounts
+                            </h2>
+                            <Link to="/admin/discounts/new" className="col-md-3 col-12">
+                                <Button color={props.bgColor} className="px-3" block>
                                     New discount
                                 </Button>
                             </Link>

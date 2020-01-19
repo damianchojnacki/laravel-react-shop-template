@@ -16,7 +16,7 @@ class Product extends Model
 
     public static function imageUpload($image)
     {
-        $id = Image::imageUpload($image, 'posts');
+        $id = Image::imageUpload($image, 'products');
 
         return $id;
     }
