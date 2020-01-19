@@ -31,7 +31,7 @@ function Cart(props) {
     const removeFromCart = product => {
         dispatch({type: "remove", payload: product.id});
 
-        notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
+        notify.show(`${product.name} has been removed from cart.`, 'success', 1500);
     };
 
     const getSumOfProducts = () => {

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Discount;
-use App\Http\Resources\DiscountResource;
 use App\Http\Resources\ProductResource;
 use App\Product;
 use Carbon\Carbon;
@@ -13,20 +12,25 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
 
+    private $like = "like";
+
     public function __construct()
     {
         Auth::shouldUse('api');
+
+        $this->like = config('database.default') == "pgsql" ? "ilike" : "like";
     }
 
-    public function index($page, $category = null)
+    public function index($page = null, $category = null)
     {
-        if ($category)
+        if ($category && $page)
             $products = Product::whereHas('type', function ($q) use ($category) {
                 $q->where('name', $category);
-            })->with(['type', 'image'])->skip(($page - 1) * 12)->take(12)->get();
-
+            })->skip(($page - 1) * 12)->take(12)->get();
+        else if($page)
+            $products = Product::skip(($page - 1) * 12)->take(12)->get();
         else
-            $products = Product::with(['type', 'image'])->skip(($page - 1) * 12)->take(12)->get();
+            $products = Product::all();
 
         return response(ProductResource::collection($products), 200);
     }
@@ -51,20 +55,6 @@ class ProductController extends Controller
 
     }
 
-    public function discounts()
-    {
-        $discounts = Discount::with('product')->get();
-
-        return response(DiscountResource::collection($discounts), 200);
-    }
-
-    public function withoutDiscount()
-    {
-        $products = Product::whereDoesntHave('discount')->get();
-
-        return response(ProductResource::collection($products), 200);
-    }
-
     public function discountDelete($id)
     {
         Discount::findOrFail($id)->delete();
@@ -77,10 +67,10 @@ class ProductController extends Controller
         if ($category)
             $product = Product::whereHas('type', function ($q) use ($category) {
                 $q->where('name', $category);
-            })->with(['type', 'image'])->where('name', 'like', "%$name%")->take(100)->get();
+            })->with(['type', 'image'])->where('name', $this->like, "%$name%")->take(100)->get();
 
         else
-            $product = Product::with(['type', 'image'])->where('name', 'like', "%$name%")->take(100)->get();
+            $product = Product::with(['type', 'image'])->where('name', $this->like, "%$name%")->take(100)->get();
 
         return response(ProductResource::collection($product), 200);
     }

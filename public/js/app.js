@@ -33430,7 +33430,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39225,10 +39225,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ShopLayout = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./layouts/Shop */ "./resources/js/layouts/Shop.jsx"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./layouts/Shop */ "./resources/js/layouts/Shop.jsx"));
 });
 var AdminLayout = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./layouts/Admin */ "./resources/js/layouts/Admin.jsx"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./layouts/Admin */ "./resources/js/layouts/Admin.jsx"));
 });
 
 var hist = Object(history__WEBPACK_IMPORTED_MODULE_2__["createBrowserHistory"])();

@@ -41,13 +41,12 @@ Route::group([
 Route::group([
     'name' => 'products',
 ], function () {
-    Route::get('products/page/{page}/{category?}', 'ProductController@index')->name('products');
-    Route::get('products/all', 'ProductController@all')->name('products.all');
+    Route::get('products/all/{page?}/{category?}', 'ProductController@index')->name('products');
     Route::get('products/search/{id}/{category?}', 'ProductController@search')->name('products.search');
     Route::get('products/discounts', 'ProductController@discounts')->name('products.discounts');
     Route::get('products/discounts/without', 'ProductController@withoutDiscount')->name('products.discounts.without');
-    Route::get('products/{id}', 'ProductController@show')->name('products.show');
     Route::get('products/cart/{cart}', 'ProductController@cart')->name('products.cart');
+    Route::get('products/{id}', 'ProductController@show')->name('products.show');
     Route::post('products', 'ProductController@store')->name('products.store');
     Route::put('products', 'ProductController@edit')->name('products.edit');
     Route::delete('products/{id}', 'ProductController@delete')->name('products.delete');

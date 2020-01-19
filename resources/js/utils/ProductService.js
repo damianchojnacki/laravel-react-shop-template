@@ -1,6 +1,6 @@
 export default class ProductService{
     static async all(page = null, category = null) {
-        const query = page ? category ? `/api/products/page/${page}/${category}` : `/api/products/page/${page}` : `/api/products/all`;
+        const query = page ? category ? `/api/products/all/${page}/${category}` : `/api/products/all/${page}` : `/api/products`;
 
         const response = await window.axios.get(query);
 
