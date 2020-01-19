@@ -45,7 +45,7 @@ function ProductNew(props) {
     const uploadImage = image => {
         ImageService.upload(image)
             .then(res => {
-                setImage(res.data.src);
+                setImage(res.data);
                 notify.show(`Image has been uploaded.`, 'success');
             })
             .catch(error => {

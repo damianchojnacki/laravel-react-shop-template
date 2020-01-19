@@ -3510,7 +3510,7 @@ function ProductNew(props) {
 
   var uploadImage = function uploadImage(image) {
     _utils_ImageService__WEBPACK_IMPORTED_MODULE_5__["default"].upload(image).then(function (res) {
-      setImage(res.data.src);
+      setImage(res.data);
       react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show("Image has been uploaded.", 'success');
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show(error.response.data.message, 'error');

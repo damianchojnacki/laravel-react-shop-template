@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
-class ProductResource extends JsonResource
+class ImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,12 +19,7 @@ class ProductResource extends JsonResource
             return parent::toArray($request);
         else
             return [
-                'id' => $this->id,
-                'name' => $this->name,
-                'price' => $this->price,
-                'type' => new ProductTypeResource($this->whenLoaded('type')),
-                'image' => new ImageResource($this->whenLoaded('image')),
-                'quantity' => $this->when($this->quantity, $this->quantity),
+                'src' => $this->src,
             ];
     }
 }

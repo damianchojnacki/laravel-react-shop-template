@@ -362,7 +362,7 @@ function ProductsListComplex(props) {
       style: {
         maxHeight: '200px'
       },
-      src: product.image.url,
+      src: product.image.src,
       alt: product.name
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "font-weight-bold"

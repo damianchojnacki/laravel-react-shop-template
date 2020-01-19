@@ -25,7 +25,7 @@ function ProductsListComplex(props){
                 <Card key={product.id} style={{width: !isDesktop() ? isMobile() ? "100%" : "30%" : "23%"}} className="m-2">
                     <CardHeader className="h-75">
                         <CardTitle tag="h5">{product.name}</CardTitle>
-                        {product.image && <img className="rounded mx-auto mw-100 d-block" style={{maxHeight: '200px'}} src={product.image.url} alt={product.name}/>}
+                        {product.image && <img className="rounded mx-auto mw-100 d-block" style={{maxHeight: '200px'}} src={product.image.src} alt={product.name}/>}
                     </CardHeader>
                     <CardBody>
                         <p>
