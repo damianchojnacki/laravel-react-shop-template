@@ -51,11 +51,15 @@ class ProductController extends Controller
             'img' => 'required|string'
         ]);
 
-        $product = Product::create($request->toArray());
+        $product = new Product;
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
 
         $image = new Image();
         $image->url= $request->input('img');
+
         $product->image()->save($image);
+        $product->save();
 
         return response('Product has been created', 200);
     }
