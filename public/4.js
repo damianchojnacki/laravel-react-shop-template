@@ -722,15 +722,15 @@ function DiscountsList(props) {
     responsive: true
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
     className: "text-primary"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "#"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Product"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Percent off"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Product price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Final price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ends"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Added at"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.data && props.data.length > 0 ? props.data.map(function (discount, index) {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "#"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Product"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Percent off"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Product price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Final price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ends"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Added at"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.data && props.data.length > 0 ? props.data.map(function (product, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-      key: discount.id
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, discount.product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, discount.percent_off, " %"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, discount.product.price, " USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, discount.product.final_price, " USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, discount.ends), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, discount.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      key: product.discount.id
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.percent_off, " %"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.price, " USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.final_price, " USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.ends), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-right"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       className: "btn btn-danger",
       onClick: function onClick() {
-        return props.deleteDiscount(discount);
+        return props.deleteDiscount(product.discount);
       }
     }, "Delete")));
   }) : null));
@@ -1295,19 +1295,19 @@ function ProductsList(props) {
       className: props.product === product.id ? "table-warning" : null
     }, props.fields.index && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), props.fields.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.id), props.fields.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), props.fields.type && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.type.name_display), props.fields.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
-    }, product.price, " USD"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.created_at), props.discount ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-      className: "text-right"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      className: "btn btn-".concat(props.bgColor),
-      to: "/admin/products/".concat(product.id)
-    }, "Details")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    }, product.price, " USD"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.created_at), props.add ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-right"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       color: "success",
       onClick: function onClick() {
         return props.add(product);
       }
-    }, "Select")));
+    }, "Select")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-right"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      className: "btn btn-".concat(props.bgColor),
+      to: "/admin/products/".concat(product.id)
+    }, "Details")));
   }) : null));
 }
 
@@ -2917,29 +2917,29 @@ function DiscountsNew(props) {
       setEnds = _useState8[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    function get() {
-      var products;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function get$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.without());
-
-            case 2:
-              products = _context.sent;
-              setProducts(products);
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      });
-    }
-
-    get();
+    getProducts();
   }, []);
+
+  var getProducts = function getProducts() {
+    var products;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getProducts$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.without());
+
+          case 2:
+            products = _context.sent;
+            setProducts(products);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    });
+  };
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
@@ -2950,6 +2950,7 @@ function DiscountsNew(props) {
     };
     _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.add(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_6__["notify"].show(res.data, 'success');
+      getProducts();
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_6__["notify"].show(error.response.data.message, 'error');
     });

@@ -111,7 +111,7 @@ function () {
             case 0:
               page = _args.length > 0 && _args[0] !== undefined ? _args[0] : null;
               category = _args.length > 1 && _args[1] !== undefined ? _args[1] : null;
-              query = page ? category ? "/api/products/all/".concat(page, "/").concat(category) : "/api/products/all/".concat(page) : "/api/products";
+              query = page ? category ? "/api/products/all/".concat(page, "/").concat(category) : "/api/products/all/".concat(page) : "/api/products/all";
               _context.next = 5;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get(query));
 
@@ -215,17 +215,19 @@ function () {
 
 _defineProperty(ProductService, "discounts", {
   all: function all() {
-    var response;
+    var products;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function all$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
             _context5.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/products/discounts'));
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(ProductService.all());
 
           case 2:
-            response = _context5.sent;
-            return _context5.abrupt("return", response.data);
+            products = _context5.sent;
+            return _context5.abrupt("return", products.filter(function (product) {
+              return product.discount;
+            }));
 
           case 4:
           case "end":
@@ -235,17 +237,19 @@ _defineProperty(ProductService, "discounts", {
     });
   },
   without: function without() {
-    var response;
+    var products;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function without$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
             _context6.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/products/discounts/without'));
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(ProductService.all());
 
           case 2:
-            response = _context6.sent;
-            return _context6.abrupt("return", response.data);
+            products = _context6.sent;
+            return _context6.abrupt("return", products.filter(function (product) {
+              return !product.discount;
+            }));
 
           case 4:
           case "end":

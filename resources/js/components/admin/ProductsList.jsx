@@ -26,12 +26,12 @@ function ProductsList(props){
                         {props.fields.type && <td>{product.type.name_display}</td>}
                         {props.fields.price && <td className="text-center">{product.price} USD</td>}
                         {props.fields.date && <td>{product.created_at}</td>}
-                        {props.discount ?
-                            <td className="text-right">
-                                <Link className={`btn btn-${props.bgColor}`} to={`/admin/products/${product.id}`}>Details</Link>
-                            </td> :
+                        {props.add ?
                             <td className="text-right">
                                 <Button color="success" onClick={() => props.add(product)}>Select</Button>
+                            </td> :
+                            <td className="text-right">
+                                <Link className={`btn btn-${props.bgColor}`} to={`/admin/products/${product.id}`}>Details</Link>
                             </td>
                         }
                     </tr>

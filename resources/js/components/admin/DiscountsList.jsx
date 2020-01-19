@@ -19,16 +19,17 @@ function DiscountsList(props){
             </tr>
             </thead>
             <tbody>
-                {(props.data && props.data.length > 0) ? props.data.map((discount, index) =>
-                    <tr key={discount.id}>
+                {(props.data && props.data.length > 0) ? props.data.map((product, index) =>
+                    <tr key={product.discount.id}>
                         <td>{index + 1}</td>
-                        <td>{discount.product.name}</td>
-                        <td>{discount.percent_off} %</td>
-                        <td>{discount.product.price} USD</td>
-                        <td>{discount.product.final_price} USD</td>
-                        <td>{discount.ends}</td>
-                        <td>{discount.created_at}</td>
-                        <td className="text-right"><Button className="btn btn-danger" onClick={() => props.deleteDiscount(discount)}>Delete</Button>
+                        <td>{product.name}</td>
+                        <td>{product.discount.percent_off} %</td>
+                        <td>{product.price} USD</td>
+                        <td>{product.final_price} USD</td>
+                        <td>{product.discount.ends}</td>
+                        <td>{product.discount.created_at}</td>
+                        <td className="text-right">
+                            <Button className="btn btn-danger" onClick={() => props.deleteDiscount(product.discount)}>Delete</Button>
                         </td>
                     </tr>
                 ) : null}

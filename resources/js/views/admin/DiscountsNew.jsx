@@ -19,14 +19,15 @@ function DiscountsNew(props){
     const [ends, setEnds] = useState('');
 
     useEffect(() => {
-        async function get() {
-            const products = await ProductService.discounts.without();
+        getProducts();
 
-            setProducts(products);
-        }
-
-        get();
     }, []);
+
+    const getProducts = async () => {
+        const products = await ProductService.discounts.without();
+
+        setProducts(products);
+    };
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -40,6 +41,8 @@ function DiscountsNew(props){
         ProductService.discounts.add(data)
             .then(res => {
                 notify.show(res.data, 'success');
+
+                getProducts();
             })
             .catch(error => {
                 notify.show(error.response.data.message, 'error');
