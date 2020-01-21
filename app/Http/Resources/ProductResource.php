@@ -24,6 +24,8 @@ class ProductResource extends JsonResource
                 'price' => $this->price,
                 'type' => new ProductTypeResource($this->whenLoaded('type')),
                 'image' => new ImageResource($this->whenLoaded('image')),
+                'discount' => new DiscountResource($this->whenLoaded('discount')),
+                'final_price' => $this->final_price,
                 'quantity' => $this->when($this->quantity, $this->quantity),
             ];
     }

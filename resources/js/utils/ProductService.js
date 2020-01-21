@@ -1,3 +1,5 @@
+import DiscountService from './DiscountService';
+
 export default class ProductService{
     static async all(page = null, category = null) {
         const query = page ? category ? `/api/products/all/${page}/${category}` : `/api/products/all/${page}` : `/api/products/all`;
@@ -9,6 +11,12 @@ export default class ProductService{
 
     static async get(id) {
         const response = await window.axios.get(`/api/products/${id}`);
+
+        return response.data;
+    }
+
+    static async discounted() {
+        const response = await window.axios.get(`/api/products/discounted`);
 
         return response.data;
     }
@@ -41,27 +49,6 @@ export default class ProductService{
         return response.data;
     }
 
-    static discounts = {
-        all: async () => {
-            const products = await this.all();
-
-            return products.filter(product => {
-                return product.discount;
-            });
-        },
-        without: async () => {
-            const products = await this.all();
-
-            return products.filter(product => {
-                return !product.discount;
-            });
-        },
-        delete: async id => {
-            return window.axios.delete(`/api/products/discounts/${id}`);
-        },
-        add: async data => {
-            return window.axios.post(`/api/products/discounts`, data);
-        }
-    };
+    static discounts = new DiscountService;
 }
 

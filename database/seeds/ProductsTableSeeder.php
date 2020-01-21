@@ -1,6 +1,8 @@
 <?php
 
+use App\Discount;
 use App\Image;
+use App\Jobs\UploadImage;
 use App\Product;
 use App\ProductType;
 use Illuminate\Database\Seeder;
@@ -114,12 +116,14 @@ class ProductsTableSeeder extends Seeder
             ],
         ]);
 
+        Product::all()->random(5)->each(function($product){
+            $product->discount()->save(factory(Discount::class)->make());
+        });
+
         config('app.env') !== 'testing' &&  Cloudder::deleteResourcesByPrefix('products');
 
         Product::all()->each(function($product) use($faker) {
-            $image = new Image();
-            $image->url = Product::imageUpload('./public/images/products/' . $product->id . '.png');
-            $product->image()->save($image);
+            UploadImage::dispatch($product);
 
             $product->created_at = $faker->dateTimeBetween('-1 year', 'now');
             $product->updated_at = $product->created_at;

@@ -1,6 +1,6 @@
 export default class OrderService{
     static async all(page) {
-        const response = await window.axios.get(`/api/orders/page/${page}`);
+        const response = await window.axios.get(`/api/orders/all/${page}`);
 
         return response.data;
     }

@@ -6,7 +6,6 @@ use App\Discount;
 use App\Http\Resources\ProductResource;
 use App\Image;
 use App\Product;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,13 +35,6 @@ class ProductController extends Controller
         return response(ProductResource::collection($products), 200);
     }
 
-    public function all()
-    {
-        $products = Product::all();
-
-        return response(ProductResource::collection($products), 200);
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -66,17 +58,10 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with(['image', 'type'])->findOrFail($id);
+        $product = Product::findOrFail($id);
 
         return response(new ProductResource($product), 200);
 
-    }
-
-    public function discountDelete($id)
-    {
-        Discount::findOrFail($id)->delete();
-
-        return response('Discount has been deleted', 200);
     }
 
     public function search($name, $category = null)
@@ -87,7 +72,7 @@ class ProductController extends Controller
             })->with(['type', 'image'])->where('name', $this->like, "%$name%")->take(100)->get();
 
         else
-            $product = Product::with(['type', 'image'])->where('name', $this->like, "%$name%")->take(100)->get();
+            $product = Product::where('name', $this->like, "%$name%")->take(100)->get();
 
         return response(ProductResource::collection($product), 200);
     }
@@ -125,7 +110,7 @@ class ProductController extends Controller
             isset($quantity[$id]) ? $quantity[$id]++ : $quantity[$id] = 1;
         }
 
-        $products = Product::whereIn('id', $cart)->with(['type', 'image'])->get()->map(function ($product) use ($quantity) {
+        $products = Product::whereIn('id', $cart)->get()->map(function ($product) use ($quantity) {
             $product->quantity = $quantity[$product->id];
 
             return $product;
@@ -134,20 +119,10 @@ class ProductController extends Controller
         return response(ProductResource::collection($products), 200);
     }
 
-    public function discountAdd(Request $request)
+    public function discounted()
     {
+        $productsWithDiscount = Product::has('discount')->get();
 
-        $request->validate([
-            'product_id' => 'required|integer',
-            'percent_off' => 'required|integer|min:1|max:99',
-            'ends' => 'required|date',
-        ]);
-
-        $discount = new Discount;
-        $discount->percent_off = $request->input('percent_off');
-        $discount->ends = Carbon::createFromDate($request->input('ends'));
-        Product::findOrFail($request->input('product_id'))->discount()->save($discount);
-
-        return response('Discount has been applied', 200);
+        return response(ProductResource::collection($productsWithDiscount), 200);
     }
 }

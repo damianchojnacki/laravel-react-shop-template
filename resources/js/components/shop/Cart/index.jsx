@@ -6,15 +6,16 @@ import {
     DropdownMenu,
     DropdownItem, InputGroupText
 } from "shards-react";
-import {CartContext} from "../../utils/CartContext";
-import "./cart.scss";
+import {CartContext} from "../../../utils/CartContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
-import ProductService from "../../utils/ProductService";
+import ProductService from "../../../utils/ProductService";
 import {ListGroup, ListGroupItem, Button} from "shards-react";
 import {notify} from "react-notify-toast";
 
-function Cart(props) {
+import "./style.scss";
+
+function Index(props) {
     const {state, dispatch} = React.useContext(CartContext);
     const [opened, setOpened] = useState(false);
     const [products, setProducts] = useState([]);
@@ -84,4 +85,4 @@ function Cart(props) {
     );
 }
 
-export default Cart;
+export default Index;

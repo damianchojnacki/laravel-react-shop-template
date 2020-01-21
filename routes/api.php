@@ -30,62 +30,85 @@ Route::group([
 
 Route::group([
     'name' => 'users',
+    'middleware' => ['auth:api', 'admin'],
 ], function () {
-    Route::get('users/page/{page}', 'UserController@index')->name('users');
-    Route::get('users/search/{id}', 'UserController@search')->name('users.search');
-    Route::get('users/{id}', 'UserController@show')->name('users.show');
-    Route::put('users', 'UserController@edit')->name('users.edit');
-    Route::delete('users/{id}', 'UserController@delete')->name('users.delete');
+    Route::get('users/page/{page}', 'UserController@index');
+    Route::get('users/search/{id}', 'UserController@search');
+    Route::get('users/{id}', 'UserController@show');
+    Route::put('users', 'UserController@edit');
+    Route::delete('users/{id}', 'UserController@delete');
 });
 
 Route::group([
     'name' => 'products',
 ], function () {
-    Route::get('products/all/{page?}/{category?}', 'ProductController@index')->name('products');
-    Route::get('products/search/{id}/{category?}', 'ProductController@search')->name('products.search');
-    Route::get('products/discounts', 'ProductController@discounts')->name('products.discounts');
-    Route::get('products/discounts/without', 'ProductController@withoutDiscount')->name('products.discounts.without');
-    Route::get('products/cart/{cart}', 'ProductController@cart')->name('products.cart');
-    Route::get('products/{id}', 'ProductController@show')->name('products.show');
-    Route::post('products', 'ProductController@store')->name('products.store');
-    Route::put('products', 'ProductController@edit')->name('products.edit');
-    Route::delete('products/{id}', 'ProductController@delete')->name('products.delete');
-    Route::post('products/discounts', 'ProductController@discountAdd')->name('products.discounts.add');
-    Route::delete('products/discounts/{id}', 'ProductController@discountDelete')->name('products.discounts.delete');
+    Route::get('products/all/{page?}/{category?}', 'ProductController@index');
+    Route::get('products/search/{id}/{category?}', 'ProductController@search');
+    Route::get('products/cart/{cart}', 'ProductController@cart');
+    Route::get('products/discounted', 'ProductController@discounted');
+    Route::get('products/{id}', 'ProductController@show');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::post('products', 'ProductController@store');
+        Route::put('products', 'ProductController@edit');
+        Route::delete('products/{id}', 'ProductController@delete');
+    });
+});
+
+Route::group([
+    'name' => 'product-types',
+], function () {
+    Route::get('product-types', 'ProductTypeController@index');
+});
+
+
+Route::group([
+    'name' => 'product-discounts',
+], function () {
+    Route::post('product-discounts', 'DiscountController@create');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::delete('product-discounts/{id}', 'DiscountController@discountDelete');
+    });
 });
 
 Route::group([
     'name' => 'orders',
+    'middleware' => 'auth:api',
 ], function () {
-    Route::get('orders/page/{page}', 'OrderController@index')->name('orders');
-    Route::get('orders/recent', 'OrderController@recent')->name('orders.recent');
-    Route::get('orders/statuses', 'OrderController@statuses')->name('orders.statuses');
-    Route::get('orders/search/{id}', 'OrderController@search')->name('orders.search');
-    Route::put('orders', 'OrderController@edit')->name('orders.edit');
-    Route::get('orders/{id}', 'OrderController@show')->name('orders.show');
-    Route::delete('orders/{id}', 'OrderController@delete')->name('orders.delete');
+    Route::get('orders/{id}', 'OrderController@show');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('orders/all/{page}', 'OrderController@index');
+        Route::get('orders/recent', 'OrderController@recent');
+        Route::get('orders/statuses', 'OrderController@statuses');
+        Route::get('orders/search/{id}', 'OrderController@search');
+        Route::put('orders', 'OrderController@edit');
+        Route::delete('orders/{id}', 'OrderController@delete');
+    });
 });
 
 Route::group([
     'name' => 'charts',
     'middleware' => ['auth:api', 'admin'],
 ], function () {
-    Route::get('charts/dynamic/{resource}/{group}/{range}', 'ChartController@dynamic')->name('chart.dynamic');
-    Route::get('charts/orders', 'ChartController@orders')->name('chart.orders');
-    Route::get('charts/orders/countries', 'ChartController@ordersCountries')->name('chart.orders.countries');
-    Route::get('charts/orders/values', 'ChartController@ordersValues')->name('chart.orders.values');
-    Route::get('charts/views', 'ChartController@views')->name('chart.views');
-    Route::get('charts/views-unique', 'ChartController@viewsUnique')->name('chart.views-unique');
+    Route::get('charts/dynamic/{resource}/{group}/{range}', 'ChartController@dynamic');
+    Route::get('charts/orders', 'ChartController@orders');
+    Route::get('charts/orders/countries', 'ChartController@ordersCountries');
+    Route::get('charts/orders/values', 'ChartController@ordersValues');
+    Route::get('charts/views', 'ChartController@views');
+    Route::get('charts/views-unique', 'ChartController@viewsUnique');
 });
 
 Route::group([
     'name' => 'countries',
 ], function () {
-    Route::get('countries', 'CountryController@index')->name('countries');
+    Route::get('countries', 'CountryController@index');
 });
 
 Route::group([
     'name' => 'images',
+    'middleware' => ['auth:api', 'admin'],
 ], function () {
-    Route::post('images', 'ImageController@store')->name('images.store');
+    Route::post('images', 'ImageController@store');
 });

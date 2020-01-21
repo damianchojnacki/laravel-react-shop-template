@@ -1317,7 +1317,7 @@ function ProductsList(props) {
 
 /***/ "./resources/js/components/admin/ProductsListComplex.jsx":
 /*!***************************************************************!*\
-  !*** ./resources/js/components/admin/ProductsListComplex.jsx ***!
+  !*** ./resources/js/components/admin/index.jsx ***!
   \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2182,7 +2182,7 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/orders/page/".concat(page)));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/orders/all/".concat(page)));
 
             case 2:
               response = _context.sent;

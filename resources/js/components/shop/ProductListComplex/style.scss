@@ -1,0 +1,17 @@
+@media screen and (min-width: 1200px) {
+    .product{
+        width: 23%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .product{
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .product{
+        width: 100%;
+    }
+}

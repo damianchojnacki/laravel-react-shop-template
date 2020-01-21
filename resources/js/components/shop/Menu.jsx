@@ -3,7 +3,6 @@ import {Nav, NavItem, Navbar, NavbarToggler, NavbarBrand, Collapse} from "shards
 import AuthService from "../../utils/AuthService";
 import {Link, NavLink} from 'react-router-dom';
 import {AuthContext} from "../../utils/AuthContext";
-import Cart from "./Cart";
 
 function Menu(props) {
     const {state, dispatch} = React.useContext(AuthContext);

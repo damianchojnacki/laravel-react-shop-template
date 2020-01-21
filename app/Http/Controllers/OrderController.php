@@ -40,6 +40,9 @@ class OrderController extends Controller
     {
         $order = Order::with(['products.image', 'status', 'user.country'])->findOrFail($id);
 
+        if(!Auth::user()->isAdmin() || Auth::user()->id != $order->user->id)
+            return response("You are not authorized to see this order.", 401);
+
         return response(new OrderResource($order), 200);
     }
 

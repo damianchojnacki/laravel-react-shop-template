@@ -68,6 +68,125 @@ function () {
 
 /***/ }),
 
+/***/ "./resources/js/utils/DiscountService.js":
+/*!***********************************************!*\
+  !*** ./resources/js/utils/DiscountService.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiscountService; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ProductService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductService */ "./resources/js/utils/ProductService.js");
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var DiscountService =
+/*#__PURE__*/
+function () {
+  function DiscountService() {
+    _classCallCheck(this, DiscountService);
+  }
+
+  _createClass(DiscountService, [{
+    key: "all",
+    value: function all() {
+      var products;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function all$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_ProductService__WEBPACK_IMPORTED_MODULE_1__["default"].all());
+
+            case 2:
+              products = _context.sent;
+              return _context.abrupt("return", products.filter(function (product) {
+                return product.discount;
+              }));
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "without",
+    value: function without() {
+      var products;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function without$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_ProductService__WEBPACK_IMPORTED_MODULE_1__["default"].all());
+
+            case 2:
+              products = _context2.sent;
+              return _context2.abrupt("return", products.filter(function (product) {
+                return !product.discount;
+              }));
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "delete",
+    value: function _delete(id) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _delete$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", window.axios["delete"]("/api/discounts/".concat(id)));
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "add",
+    value: function add(data) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function add$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              return _context4.abrupt("return", window.axios.post("/api/discounts", data));
+
+            case 1:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      });
+    }
+  }]);
+
+  return DiscountService;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/js/utils/ProductService.js":
 /*!**********************************************!*\
   !*** ./resources/js/utils/ProductService.js ***!
@@ -80,6 +199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ProductService; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _DiscountService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DiscountService */ "./resources/js/utils/DiscountService.js");
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -89,6 +209,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 var ProductService =
 /*#__PURE__*/
@@ -149,28 +271,50 @@ function () {
       });
     }
   }, {
+    key: "discounted",
+    value: function discounted() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function discounted$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/products/discounted"));
+
+            case 2:
+              response = _context3.sent;
+              return _context3.abrupt("return", response.data);
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    }
+  }, {
     key: "search",
     value: function search(name) {
       var category,
           query,
           response,
-          _args3 = arguments;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function search$(_context3) {
+          _args4 = arguments;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function search$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              category = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : null;
+              category = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : null;
               query = category ? "/api/products/search/".concat(name, "/").concat(category) : "/api/products/search/".concat(name);
-              _context3.next = 4;
+              _context4.next = 4;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get(query));
 
             case 4:
-              response = _context3.sent;
-              return _context3.abrupt("return", response.data);
+              response = _context4.sent;
+              return _context4.abrupt("return", response.data);
 
             case 6:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
       });
@@ -194,21 +338,21 @@ function () {
     key: "cart",
     value: function cart(_cart) {
       var param, response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function cart$(_context4) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function cart$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
               param = JSON.stringify(_cart);
-              _context4.next = 3;
+              _context5.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/products/cart/".concat(param)));
 
             case 3:
-              response = _context4.sent;
-              return _context4.abrupt("return", response.data);
+              response = _context5.sent;
+              return _context5.abrupt("return", response.data);
 
             case 5:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
       });
@@ -218,80 +362,7 @@ function () {
   return ProductService;
 }();
 
-_defineProperty(ProductService, "discounts", {
-  all: function all() {
-    var products;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function all$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            _context5.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(ProductService.all());
-
-          case 2:
-            products = _context5.sent;
-            return _context5.abrupt("return", products.filter(function (product) {
-              return product.discount;
-            }));
-
-          case 4:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    });
-  },
-  without: function without() {
-    var products;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function without$(_context6) {
-      while (1) {
-        switch (_context6.prev = _context6.next) {
-          case 0:
-            _context6.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(ProductService.all());
-
-          case 2:
-            products = _context6.sent;
-            return _context6.abrupt("return", products.filter(function (product) {
-              return !product.discount;
-            }));
-
-          case 4:
-          case "end":
-            return _context6.stop();
-        }
-      }
-    });
-  },
-  "delete": function _delete(id) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _delete$(_context7) {
-      while (1) {
-        switch (_context7.prev = _context7.next) {
-          case 0:
-            return _context7.abrupt("return", window.axios["delete"]("/api/products/discounts/".concat(id)));
-
-          case 1:
-          case "end":
-            return _context7.stop();
-        }
-      }
-    });
-  },
-  add: function add(data) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function add$(_context8) {
-      while (1) {
-        switch (_context8.prev = _context8.next) {
-          case 0:
-            return _context8.abrupt("return", window.axios.post("/api/products/discounts", data));
-
-          case 1:
-          case "end":
-            return _context8.stop();
-        }
-      }
-    });
-  }
-});
+_defineProperty(ProductService, "discounts", new _DiscountService__WEBPACK_IMPORTED_MODULE_1__["default"]());
 
 
 

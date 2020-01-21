@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Helmet } from 'react-helmet';
 import ProductsNav from '../../components/shop/ProductsNav';
 import {Button} from "shards-react";
-import ProductsListComplex from "../../components/shop/ProductsListComplex";
+import ProductsListComplex from "../../components/shop/ProductListComplex";
 import classnames from 'classnames';
 import ProductService from "../../utils/ProductService";
 
@@ -70,7 +70,7 @@ export default function Products(props){
                 <ProductsNav category={category} search={value => setSearchField(value)}/>
 
                 <div className={productsFlexClasses}>
-                    <ProductsListComplex {...props} data={products} width="25"/>
+                    <ProductsListComplex {...props} data={products}/>
 
                     <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
                 </div>
