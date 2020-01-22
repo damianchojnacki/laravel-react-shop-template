@@ -1,41 +1,36 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FormInput, InputGroup, InputGroupAddon, InputGroupText, Nav, NavItem, NavLink} from "shards-react";
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
-import {isMobile} from "../../utils/helpers";
+import {isMobile, newArray} from "../../../utils/helpers";
+import ProductService from "../../../utils/ProductService";
+import "./style.scss";
 
 export default function ProductsNav(props){
-    const names = {
-        cpu: {
-            full: "Processors",
-            short: "CPU",
-        },
-        gpu: {
-            full: "Graphic cards",
-            short: "GPU",
-        },
-        hdd: {
-            full: "Hard disks",
-            short: "HDD",
-        },
-        ssd: {
-            full: "SSD's",
-            short: "SSD's",
-        },
-    };
 
-    const displayName = (name) => {
-        return isMobile() ? name.short : name.full;
-    };
+    const [productTypes, setProductTypes] = useState(props.productTypes);
 
-    const pages = ["cpu", "gpu", "hdd", "ssd"];
+    useEffect(() => {
+        (async () => {
+            const productTypes = await ProductService.types();
 
-    const navList = pages.map(page =>
-        <NavItem key={page}>
-            <NavLink tag="span" active={props.category === page}>
-                <Link to={`/products/${page}`} className={props.category === page ? "text-light" : null}>
-                    {displayName(names[page])}
+            setProductTypes(productTypes);
+        })();
+    }, []);
+
+    const navList = productTypes.length && productTypes.map(page =>
+        <NavItem key={page.id}>
+            <NavLink tag="span" active={props.category === page.name}>
+                <Link
+                    to={`/products/${page.name}`}
+                    className={props.category === page.name ? "text-light" : null}
+                >
+                    <span
+                        className="products-nav__dynamic"
+                        data-shortname={page.short}
+                        data-longname={page.long}
+                    ></span>
                 </Link>
             </NavLink>
         </NavItem>
@@ -51,7 +46,9 @@ export default function ProductsNav(props){
                         </Link>
                     </NavLink>
                 </NavItem>
+
                 {navList}
+
                 <NavItem className={isMobile() ? "w-100 my-4 ml-auto" : "ml-auto"} >
                     <InputGroup seamless>
                         <InputGroupAddon type="prepend">
@@ -66,3 +63,11 @@ export default function ProductsNav(props){
         </>
     )
 }
+
+ProductsNav.defaultProps = {
+    productTypes: newArray(4, {
+        name: '',
+        short: '',
+        long: '',
+    })
+};

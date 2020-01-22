@@ -30,7 +30,7 @@ function Menu(props) {
                         if (prop.hidden) return null;
                         return (
                             <NavItem key={key}>
-                                <NavLink className="nav-link" to={prop.path}>{prop.name}</NavLink>
+                                <NavLink className="nav-link" to={prop.link ?? prop.path}>{prop.name}</NavLink>
                             </NavItem>
                         );
                     })}

@@ -11,16 +11,11 @@ export default [
         layout: "/shop"
     },
     {
-        path: "/products",
+        path: "/products/:category?",
+        link: "/products",
         name: "Products",
         component: Products,
-        layout: "/shop"
-    },
-    {
-        path: "/products/:category",
-        component: Products,
         layout: "/shop",
-        hidden: true,
     },
     {
         path: "/login",

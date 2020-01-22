@@ -16,7 +16,8 @@ class CreateProductTypesTable extends Migration
         Schema::create('product_types', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('name', 32);
-            $table->string('name_display', 32);
+            $table->string('long', 32);
+            $table->string('short', 8);
         });
     }
 

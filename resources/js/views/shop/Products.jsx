@@ -5,6 +5,7 @@ import {Button} from "shards-react";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
 import classnames from 'classnames';
 import ProductService from "../../utils/ProductService";
+import {newArray} from "../../utils/helpers";
 
 export default function Products(props){
     const [products, setProducts] = useState([]);
@@ -70,7 +71,7 @@ export default function Products(props){
                 <ProductsNav category={category} search={value => setSearchField(value)}/>
 
                 <div className={productsFlexClasses}>
-                    <ProductsListComplex {...props} data={products}/>
+                    <ProductsListComplex {...props} data={products.length ? products : props.products}/>
 
                     <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
                 </div>
@@ -78,3 +79,10 @@ export default function Products(props){
         </>
     )
 }
+
+Products.defaultProps = {
+    products: newArray(12, {
+        name: '',
+        price: '',
+    })
+};

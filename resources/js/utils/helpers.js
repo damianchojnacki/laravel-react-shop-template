@@ -63,3 +63,13 @@ export function isEmail(email){
 export function equals(one, two){
     return one === two;
 }
+
+export function newArray(arrayLength, parameters){
+    return new Array(arrayLength).fill().map((e,i) => {
+            return {
+                id: i,
+                ...parameters
+            }
+        }
+    )
+}

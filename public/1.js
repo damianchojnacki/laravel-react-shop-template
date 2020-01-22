@@ -271,21 +271,26 @@ function () {
       });
     }
   }, {
-    key: "discounted",
-    value: function discounted() {
-      var response;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function discounted$(_context3) {
+    key: "search",
+    value: function search(name) {
+      var category,
+          query,
+          response,
+          _args3 = arguments;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function search$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/products/discounted"));
+              category = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : null;
+              query = category ? "/api/products/search/".concat(name, "/").concat(category) : "/api/products/search/".concat(name);
+              _context3.next = 4;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get(query));
 
-            case 2:
+            case 4:
               response = _context3.sent;
               return _context3.abrupt("return", response.data);
 
-            case 4:
+            case 6:
             case "end":
               return _context3.stop();
           }
@@ -293,26 +298,21 @@ function () {
       });
     }
   }, {
-    key: "search",
-    value: function search(name) {
-      var category,
-          query,
-          response,
-          _args4 = arguments;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function search$(_context4) {
+    key: "types",
+    value: function types() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function types$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              category = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : null;
-              query = category ? "/api/products/search/".concat(name, "/").concat(category) : "/api/products/search/".concat(name);
-              _context4.next = 4;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get(query));
+              _context4.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/product-types"));
 
-            case 4:
+            case 2:
               response = _context4.sent;
               return _context4.abrupt("return", response.data);
 
-            case 6:
+            case 4:
             case "end":
               return _context4.stop();
           }
@@ -372,7 +372,7 @@ _defineProperty(ProductService, "discounts", new _DiscountService__WEBPACK_IMPOR
 /*!***************************************!*\
   !*** ./resources/js/utils/helpers.js ***!
   \***************************************/
-/*! exports provided: default, separateHundreds, getRandomColor, colors, checkFullName, isMobile, isDesktop, isEmail, equals */
+/*! exports provided: default, separateHundreds, getRandomColor, colors, checkFullName, isMobile, isDesktop, isEmail, equals, newArray */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -386,6 +386,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDesktop", function() { return isDesktop; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEmail", function() { return isEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "equals", function() { return equals; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newArray", function() { return newArray; });
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function addAlpha(color, alpha) {
   var r, g, b; // Check the format of the color, HEX or RGB?
 
@@ -435,6 +442,13 @@ function isEmail(email) {
 }
 function equals(one, two) {
   return one === two;
+}
+function newArray(arrayLength, parameters) {
+  return new Array(arrayLength).fill().map(function (e, i) {
+    return _objectSpread({
+      id: i
+    }, parameters);
+  });
 }
 
 /***/ })

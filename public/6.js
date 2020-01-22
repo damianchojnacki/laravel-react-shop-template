@@ -390,7 +390,7 @@ function ProductsListComplex(props) {
 
 /***/ "./resources/js/components/shop/ProductsNav.jsx":
 /*!******************************************************!*\
-  !*** ./resources/js/components/shop/ProductsNav.jsx ***!
+  !*** ./resources/js/components/shop/index.jsx ***!
   \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {

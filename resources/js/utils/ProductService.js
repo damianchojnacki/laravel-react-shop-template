@@ -15,16 +15,16 @@ export default class ProductService{
         return response.data;
     }
 
-    static async discounted() {
-        const response = await window.axios.get(`/api/products/discounted`);
-
-        return response.data;
-    }
-
     static async search(name, category = null) {
         const query = category ? `/api/products/search/${name}/${category}` : `/api/products/search/${name}`;
 
         const response = await window.axios.get(query);
+
+        return response.data;
+    }
+
+    static async types() {
+        const response = await window.axios.get(`/api/product-types`);
 
         return response.data;
     }

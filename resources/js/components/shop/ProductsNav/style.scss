@@ -1,0 +1,12 @@
+.products-nav{
+    &__dynamic{
+        &::before{
+            display: block;
+            content: attr(data-longname);
+
+            @media screen and (max-width: 760px) {
+                content: attr(data-shortname);
+            }
+        }
+    }
+}

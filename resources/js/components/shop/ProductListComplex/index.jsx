@@ -2,9 +2,9 @@ import React from "react";
 import {Card, CardBody, CardHeader, CardTitle, CardFooter, Button} from "shards-react";
 import {notify} from "react-notify-toast";
 import {CartContext} from "../../../utils/CartContext";
-import {isDesktop, isMobile} from "../../../utils/helpers";
-
 import './style.scss';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 
 function ProductsListComplex(props){
     const {state, dispatch} = React.useContext(CartContext);
@@ -22,28 +22,43 @@ function ProductsListComplex(props){
     };
 
     return (
-        (props.data && props.data.length > 0) ? props.data.map(product => {
+        (props.data && props.data.length) && props.data.map(product => {
             return (
-                <Card key={product.id} style={{width: props.fixed ? "auto" : null }} className="product m-2">
-                    <CardHeader className="h-75">
+                <Card key={product.id} className="product m-2">
+                    <CardHeader className="h-75 product__header">
                         <CardTitle tag="h5">{product.name}</CardTitle>
                         {product.image && <img className="rounded mx-auto mw-100 d-block" style={{maxHeight: '200px'}} src={product.image.src} alt={product.name}/>}
                     </CardHeader>
                     <CardBody>
                         <p>
-                            <span className="font-weight-bold">Price: </span>
-                            {product.price} $
+                            {product.price &&
+                                <>
+                                    <span className="font-weight-bold">Price: </span>
+                                    {product.discount ?
+                                        <>
+                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price} $</span>
+                                            <FontAwesomeIcon icon={faArrowRight} className="mx-2"/>
+                                            <span>{product.final_price} $</span>
+                                        </> :
+                                        <span>{product.price} $</span>
+                                    }
+                                </>
+                            }
                         </p>
                     </CardBody>
                     <CardFooter className="d-flex flex-wrap justify-content-between">
-                        {state.cart.includes(product.id) &&
-                            <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>Remove</Button>
+                        {product.name &&
+                            <>
+                                {state.cart.includes(product.id) &&
+                                        <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>Remove</Button>
+                                }
+                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>Add to cart</Button>
+                            </>
                         }
-                        <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>Add to cart</Button>
                     </CardFooter>
                 </Card>
             );
-        }) : null
+        })
     )
 }
 

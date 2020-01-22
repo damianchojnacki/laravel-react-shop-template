@@ -15,19 +15,23 @@ class ProductTypesTableSeeder extends Seeder
         DB::table('product_types')->insert([
             [
                 'name' => 'cpu',
-                'name_display' => 'Processors',
+                'long' => 'Processors',
+                'short' => 'CPU\'s',
             ],
             [
                 'name' => 'gpu',
-                'name_display' => 'Graphic cards',
+                'long' => 'Graphic cards',
+                'short' => 'GPU\'s',
             ],
             [
                 'name' => 'hdd',
-                'name_display' => 'Hard disks',
+                'long' => 'Hard disks',
+                'short' => 'HDD\'s',
             ],
             [
                 'name' => 'ssd',
-                'name_display' => 'SSD',
+                'long' => 'SSD\'s',
+                'short' => 'SSD\'s',
             ],
         ]);
     }

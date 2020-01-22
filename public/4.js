@@ -1317,7 +1317,7 @@ function ProductsList(props) {
 
 /***/ "./resources/js/components/admin/ProductsListComplex.jsx":
 /*!***************************************************************!*\
-  !*** ./resources/js/components/admin/index.jsx ***!
+  !*** ./resources/js/components/admin/ProductsListComplex.jsx ***!
   \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
