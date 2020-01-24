@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Discount::class, function (Faker $faker) {
     return [
-        'percent_off' => rand(1, 99),
+        'percent_off' => rand(5, 50),
         'ends' => $faker->dateTimeBetween('now', '+1 week'),
     ];
 });

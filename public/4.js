@@ -1289,13 +1289,17 @@ function ProductsList(props) {
     className: "text-primary"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, props.fields.index && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "#"), props.fields.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "ID"), props.fields.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), props.fields.type && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Type"), props.fields.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
     className: "text-center"
-  }, "Price"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Added at"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.data && props.data.length > 0 ? props.data.map(function (product, index) {
+  }, "Price"), props.fields.price_final && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+    className: "text-center"
+  }, "Final price"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Added at"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.data && props.data.length > 0 ? props.data.map(function (product, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: product.id,
       className: props.product === product.id ? "table-warning" : null
     }, props.fields.index && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), props.fields.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.id), props.fields.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), props.fields.type && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.type.name_display), props.fields.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
-    }, product.price, " USD"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.created_at), props.add ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    }, product.price, " USD"), props.fields.price_final && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-center"
+    }, product.price_final, " USD"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.created_at), props.add ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-right"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       color: "success",

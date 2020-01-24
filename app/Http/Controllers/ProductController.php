@@ -106,9 +106,8 @@ class ProductController extends Controller
 
         $quantity = [];
 
-        foreach ($cart as $id) {
+        foreach ($cart as $id)
             isset($quantity[$id]) ? $quantity[$id]++ : $quantity[$id] = 1;
-        }
 
         $products = Product::whereIn('id', $cart)->get()->map(function ($product) use ($quantity) {
             $product->quantity = $quantity[$product->id];

@@ -21,8 +21,25 @@ function ProductsListComplex(props){
         notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
     };
 
+    const sortProducts = products => {
+        return products.sort((previous, next) => {
+            if(props.sort.type === "desc"){
+                const pre = previous;
+
+                previous = next;
+                next = pre;
+            }
+
+            if(props.sort.sort === "id") return previous.id - next.id;
+            if(props.sort.sort === "name") return previous.name.localeCompare(next.name);
+            if(props.sort.sort === "price") return previous.price_final - next.price_final;
+        });
+    };
+
+    const data = (props.data && props.data.length && props.data[0].name) && props.sort ? sortProducts(props.data) : props.data;
+
     return (
-        (props.data && props.data.length) && props.data.map(product => {
+        (data && data.length) && data.map(product => {
             return (
                 <Card key={product.id} className="product m-2">
                     <CardHeader className="h-75 product__header">
@@ -38,7 +55,7 @@ function ProductsListComplex(props){
                                         <>
                                             <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price} $</span>
                                             <FontAwesomeIcon icon={faArrowRight} className="mx-2"/>
-                                            <span>{product.final_price} $</span>
+                                            <span>{product.price_final} $</span>
                                         </> :
                                         <span>{product.price} $</span>
                                     }

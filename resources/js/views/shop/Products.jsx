@@ -10,7 +10,8 @@ import {newArray} from "../../utils/helpers";
 export default function Products(props){
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
-    const [searchField, setSearchField] = useState(null);
+    const [searchField, setSearchField] = useState('');
+    const [sort, setSort] = useState({sort: "id", type: "asc"});
     const [category, setCategory] = useState(props.match.params.category);
 
     useEffect(() => {
@@ -45,8 +46,8 @@ export default function Products(props){
     };
 
     const showMoreOrReload = () => {
-        if(searchField){
-            setSearchField(null);
+        if(searchField && searchField !== ''){
+            setSearchField('');
             setProducts([]);
             setPage(1);
         } else
@@ -68,12 +69,14 @@ export default function Products(props){
                 <title>Shop | Admin - Products</title>
             </Helmet>
             <main className="main my-2 d-flex flex-column flex-grow-1 w-100">
-                <ProductsNav category={category} search={value => setSearchField(value)}/>
+                <ProductsNav category={category} searchField={searchField} search={value => setSearchField(value)} setSort={e => setSort(e)}/>
 
                 <div className={productsFlexClasses}>
-                    <ProductsListComplex {...props} data={products.length ? products : props.products}/>
+                    <ProductsListComplex {...props} data={products.length ? products : props.products} sort={sort}/>
 
-                    <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
+                    {(searchField || products.length % 12 === 0) &&
+                        <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
+                    }
                 </div>
             </main>
         </>

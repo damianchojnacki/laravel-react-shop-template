@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $appends = ['final_price'];
+    protected $appends = ['price_final'];
     protected $with = ['type', 'image', 'discount'];
 
     public function image()
@@ -37,10 +37,10 @@ class Product extends Model
     }
 
     public function getFinalPrice(){
-        return $this->discount ? round($this->price - $this->price * ($this->discount->percent_off / 100), 2) : null;
+        return $this->discount ? round($this->price - $this->price * ($this->discount->percent_off / 100), 2) : round($this->price, 2);
     }
 
-    public function getFinalPriceAttribute()
+    public function getPriceFinalAttribute()
     {
         return $this->getFinalPrice();
     }

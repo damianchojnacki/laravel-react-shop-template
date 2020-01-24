@@ -9,4 +9,24 @@
             }
         }
     }
+
+    &__sort{
+        width: 20%;
+        z-index: 2;
+
+        @media screen and (max-width: 992px) {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+
+    &__search{
+        z-index: 1;
+        margin-left: 1rem;
+
+        @media screen and (max-width: 992px) {
+            width: 100%;
+            margin: 1rem 0;
+        }
+    }
 }

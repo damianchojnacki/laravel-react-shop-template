@@ -2,11 +2,12 @@ import Home from "../views/shop/Home";
 import Login from "../views/shop/Login";
 import Products from "../views/shop/Products";
 import Register from "../views/shop/Register";
+import Checkout from "../views/shop/Checkout";
 
 export default [
     {
         path: "/",
-        name: "Home",
+        name: "Homepage",
         component: Home,
         layout: "/shop"
     },
@@ -32,6 +33,12 @@ export default [
     {
         path: "/register/:result",
         component: Home,
+        layout: "/shop",
+        hidden: true
+    },
+    {
+        path: "/checkout",
+        component: Checkout,
         layout: "/shop",
         hidden: true
     },

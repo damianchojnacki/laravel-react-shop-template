@@ -15,18 +15,17 @@ import {notify} from "react-notify-toast";
 
 import "./style.scss";
 
-function Index(props) {
+function Cart(props) {
     const {state, dispatch} = React.useContext(CartContext);
     const [opened, setOpened] = useState(false);
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        async function get() {
+        (async function () {
             const products = await ProductService.cart(state.cart);
-            setProducts(products);
-        }
 
-        get();
+            setProducts(products);
+        }());
     }, [state]);
 
     const removeFromCart = product => {
@@ -36,11 +35,11 @@ function Index(props) {
     };
 
     const getSumOfProducts = () => {
-        if(products.length) {
+        if(products && products.length) {
             let sum = 0;
 
             products.map(product => {
-                sum += parseFloat(product.price) * product.quantity;
+                sum += parseFloat(product.price_final) * product.quantity;
             });
 
             return sum.toFixed(2);
@@ -52,16 +51,16 @@ function Index(props) {
             <DropdownToggle className="cart__button" onClick={() => setOpened(!opened)}>
                 <FontAwesomeIcon size="lg" icon={faShoppingCart}/>
             </DropdownToggle>
-        <DropdownMenu right className={products.length ? null: "cart__empty"}>
+        <DropdownMenu right className={products && products.length ? null: "cart__empty"}>
             <h4 className="cart__header">Shopping cart</h4>
-            {products.length ?
+            {products && products.length ?
                 <>
                     <DropdownItem tag="span" className="cart__products">
                         <ListGroup>
                             {products.map(product =>
                                 <ListGroupItem key={product.id}>
                                     <span className="cart__field">{product.name}</span>
-                                    <span className="cart__field">{parseFloat(product.price).toFixed(2)} $</span>
+                                    <span className="cart__field">{product.price_final} $</span>
                                     <span className="cart__field">{product.quantity}</span>
                                     <span className="cart__field">
                                         <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(product)}>Remove</Button>
@@ -72,7 +71,7 @@ function Index(props) {
                         </ListGroup>
                     </DropdownItem>
                     <DropdownItem tag="span">
-                        <Link>
+                        <Link to="/checkout">
                             <Button block>Checkout</Button>
                         </Link>
                     </DropdownItem>
@@ -85,4 +84,4 @@ function Index(props) {
     );
 }
 
-export default Index;
+export default Cart;

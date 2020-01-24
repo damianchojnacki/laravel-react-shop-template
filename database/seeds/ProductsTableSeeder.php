@@ -116,10 +116,6 @@ class ProductsTableSeeder extends Seeder
             ],
         ]);
 
-        Product::all()->random(5)->each(function($product){
-            $product->discount()->save(factory(Discount::class)->make());
-        });
-
         config('app.env') !== 'testing' &&  Cloudder::deleteResourcesByPrefix('products');
 
         Product::all()->each(function($product) use($faker) {

@@ -21,11 +21,11 @@ class ProductResource extends JsonResource
             return [
                 'id' => $this->id,
                 'name' => $this->name,
-                'price' => $this->price,
+                'price' => floatval($this->price),
+                'price_final' => $this->price_final,
                 'type' => new ProductTypeResource($this->whenLoaded('type')),
                 'image' => new ImageResource($this->whenLoaded('image')),
                 'discount' => new DiscountResource($this->whenLoaded('discount')),
-                'final_price' => $this->final_price,
                 'quantity' => $this->when($this->quantity, $this->quantity),
             ];
     }

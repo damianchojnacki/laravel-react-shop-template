@@ -13,6 +13,7 @@ function ProductsList(props){
                 {props.fields.name && <th>Name</th>}
                 {props.fields.type && <th>Type</th>}
                 {props.fields.price && <th className="text-center">Price</th>}
+                {props.fields.price_final && <th className="text-center">Final price</th>}
                 {props.fields.date && <th>Added at</th>}
                 <th></th>
             </tr>
@@ -25,6 +26,7 @@ function ProductsList(props){
                         {props.fields.name && <td>{product.name}</td>}
                         {props.fields.type && <td>{product.type.name_display}</td>}
                         {props.fields.price && <td className="text-center">{product.price} USD</td>}
+                        {props.fields.price_final && <td className="text-center">{product.price_final} USD</td>}
                         {props.fields.date && <td>{product.created_at}</td>}
                         {props.add ?
                             <td className="text-right">
