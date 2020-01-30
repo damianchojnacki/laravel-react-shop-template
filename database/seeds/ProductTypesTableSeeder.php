@@ -20,7 +20,7 @@ class ProductTypesTableSeeder extends Seeder
             ],
             [
                 'name' => 'gpu',
-                'long' => 'Graphic cards',
+                'long' => 'Graphics cards',
                 'short' => 'GPU\'s',
             ],
             [

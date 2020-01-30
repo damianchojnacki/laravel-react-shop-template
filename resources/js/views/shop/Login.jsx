@@ -7,7 +7,8 @@ import {AuthContext} from "../../utils/AuthContext";
 import {isEmail} from '../../utils/helpers';
 import GoogleButton from 'react-google-button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
+import 'animate.css/animate.css';
 
 export default function Login() {
 
@@ -16,13 +17,6 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
-
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-
-        name === 'email' && setEmail(value);
-        name === 'password' && setPassword(value);
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,15 +37,15 @@ export default function Login() {
                     });
                 })
                 .catch(error => {
-                    setErrors(error.response);
+                    setTimeout(() => setErrors(error.response), 1000);
                 })
                 .finally(() => {
-                    setLoading(false);
+                    setTimeout(() => setLoading(false), 1000);
                 });
         }
     };
 
-    return state.authenticated
+    return state.authenticated && !loading
             ?
             <Redirect to="/"/>
             :
@@ -79,7 +73,7 @@ export default function Login() {
                                             <FontAwesomeIcon icon={faEnvelope} />
                                         </InputGroupText>
                                     </InputGroupAddon>
-                                    <FormInput invalid={!!errors.data} type="email" id="#email" name="email" onChange={handleChange} disabled={loading} required/>
+                                    <FormInput invalid={!!errors.data} type="email" id="#email" name="email" onChange={e => setEmail(e.target.value)} disabled={loading} required/>
                                 </InputGroup>
                             </FormGroup>
                             <FormGroup>
@@ -90,10 +84,20 @@ export default function Login() {
                                             <FontAwesomeIcon icon={faLock} />
                                         </InputGroupText>
                                     </InputGroupAddon>
-                                    <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={handleChange} disabled={loading} required/>
+                                    <FormInput invalid={!!errors.data} type="password" id="#password" name="password" onChange={e => setPassword(e.target.value)} disabled={loading} required/>
                                 </InputGroup>
                             </FormGroup>
-                            <Button block>Log in</Button>
+                            <Button block>
+                                {loading ? state.authenticated ?
+                                    <FontAwesomeIcon size="lg" icon={faCheckCircle} className="animated fadeIn"/>
+                                    :
+                                    <div className="spinner-border spinner-border-sm" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </div>
+                                    :
+                                    <span>Log in</span>
+                                }
+                            </Button>
                             <p className="mt-3">
                                 <Link to="./register">Don't have an account? You can create one there.</Link>
                             </p>

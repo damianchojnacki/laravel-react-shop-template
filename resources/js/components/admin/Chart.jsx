@@ -7,12 +7,11 @@ function Chart(props){
     const [chart, setChart] = useState(null);
 
     useEffect(() => {
-        async function gen(){
+        (async function (){
             const chart = await ChartService.get(props.api);
 
             setChart(ChartService.generate(chart, props.color, props.type));
-        }
-        gen();
+        })();
     }, []);
 
     return (

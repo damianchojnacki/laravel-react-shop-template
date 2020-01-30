@@ -467,9 +467,9 @@ function Chart(props) {
       setChart = _useState2[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    function gen() {
+    (function _callee() {
       var chart;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function gen$(_context) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
@@ -486,9 +486,7 @@ function Chart(props) {
           }
         }
       });
-    }
-
-    gen();
+    })();
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], {
     className: "card-chart"
@@ -3450,14 +3448,27 @@ function Product(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
-/* harmony import */ var _utils_ImageService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ImageService */ "./resources/js/utils/ImageService.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
+/* harmony import */ var _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/ImageService */ "./resources/js/utils/ImageService.js");
+/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
+/* harmony import */ var reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reactstrap/es/FormGroup */ "./node_modules/reactstrap/es/FormGroup.js");
+/* harmony import */ var reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! reactstrap/es/Label */ "./node_modules/reactstrap/es/Label.js");
+/* harmony import */ var reactstrap_es_CustomInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! reactstrap/es/CustomInput */ "./node_modules/reactstrap/es/CustomInput.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faImage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons/faImage */ "./node_modules/@fortawesome/free-solid-svg-icons/faImage.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faImage__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons_faImage__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons/faCloudUploadAlt */ "./node_modules/@fortawesome/free-solid-svg-icons/faCloudUploadAlt.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_13__);
+
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -3474,98 +3485,167 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
+
+
+
+
 function ProductNew(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
       name = _useState2[0],
       setName = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
       _useState4 = _slicedToArray(_useState3, 2),
       price = _useState4[0],
       setPrice = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
       _useState6 = _slicedToArray(_useState5, 2),
       image = _useState6[0],
       setImage = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      redirect = _useState8[0],
-      setRedirect = _useState8[1];
+      type = _useState8[0],
+      setType = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      productTypes = _useState10[0],
+      setProductTypes = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      redirect = _useState12[0],
+      setRedirect = _useState12[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    (function _callee() {
+      var types, options;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].types());
+
+            case 2:
+              types = _context.sent;
+              setType(types[0].id);
+              options = types.map(function (type) {
+                return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+                  key: type.id,
+                  value: type.id
+                }, type["long"]);
+              });
+              setProductTypes(options);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    })();
+  }, []);
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var data = {
       name: name,
       price: price,
-      img: image.id
+      img: image.id,
+      type: type
     };
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].add(data).then(function (res) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show("".concat(name, " has been added."), 'success');
-      setRedirect(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-        to: "/admin/products/".concat(res.data.id)
+    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].add(data).then(function (res) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("".concat(name, " has been added."), 'success');
+      setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+        to: "/admin/products/".concat(res.data)
       }));
     })["catch"](function (error) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show(error.response.data.message, 'error');
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
     });
   };
 
   var uploadImage = function uploadImage(image) {
-    _utils_ImageService__WEBPACK_IMPORTED_MODULE_5__["default"].upload(image).then(function (res) {
+    _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__["default"].upload(image).then(function (res) {
       setImage(res.data);
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show("Image has been uploaded.", 'success');
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("Image has been uploaded.", 'success');
     })["catch"](function (error) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_3__["notify"].show(error.response.data.message, 'error');
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
     });
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "content"
-  }, redirect, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+  }, redirect, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], {
     onSubmit: handleSubmit
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Card"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "card-title"
-  }, "New product")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+  }, "New product")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Name"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     type: "text",
     onChange: function onChange(e) {
       return setName(e.target.value);
     },
     className: props.bgColor,
     required: true
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Price"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     type: "number",
     onChange: function onChange(e) {
       return setPrice(e.target.value);
     },
     className: props.bgColor,
     required: true
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+    md: "12"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Type"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+    type: "select",
+    value: type,
+    onChange: function onChange(e) {
+      return setType(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
+  }, productTypes)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     className: "btn-fill",
     color: "success",
     type: "submit"
-  }, "Add"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
+  }, "Add"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "4",
     className: "justify-content-center align-items-center",
     style: {
       display: "flex"
     }
-  }, image.src ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  }, image.src ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: image.src,
     alt: name
-  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+  }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_8__["default"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    "for": "exampleCustomFileBrowser",
+    className: "text-center"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__["FontAwesomeIcon"], {
+    size: "6x",
+    icon: _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_13__["faCloudUploadAlt"]
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "mt-2"
+  }, "Upload product image")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     type: "file",
+    style: {
+      opacity: 0
+    },
     onChange: function onChange(e) {
       return uploadImage(e.target.files[0]);
     }
-  }))));
+  })))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (ProductNew);

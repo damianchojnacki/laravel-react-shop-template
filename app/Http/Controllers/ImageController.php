@@ -9,7 +9,7 @@ class ImageController extends Controller
 {
     public function store(Request $request){
         $request->validate([
-            'img' => 'mimes:jpeg,jpg,png,gif|required|max:2024',
+            'img' => 'required|max:3070',
         ]);
 
         $publicId = Image::imageUpload($request->file('img'), 'products');

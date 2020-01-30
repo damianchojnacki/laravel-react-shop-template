@@ -6,6 +6,7 @@ use App\Discount;
 use App\Http\Resources\ProductResource;
 use App\Image;
 use App\Product;
+use App\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,20 +41,23 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:64',
             'price' => 'required|numeric|min:1',
-            'img' => 'required|string'
+            'img' => 'required|string',
+            'type' => 'required|numeric|min:1',
         ]);
 
         $product = new Product;
         $product->name = $request->input('name');
         $product->price = $request->input('price');
 
-        $image = new Image();
-        $image->url= $request->input('img');
-
-        $product->image()->save($image);
+        $type = ProductType::find($request->input('type'));
+        $product->type()->associate($type);
         $product->save();
 
-        return response('Product has been created', 200);
+        $image = new Image();
+        $image->url= $request->input('img');
+        $product->image()->save($image);
+
+        return response($product->id, 200);
     }
 
     public function show($id)

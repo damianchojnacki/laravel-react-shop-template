@@ -76,8 +76,6 @@ Route::group([
     'name' => 'orders',
     'middleware' => 'auth:api',
 ], function () {
-    Route::get('orders/{id}', 'OrderController@show');
-
     Route::middleware('auth:api')->group(function () {
         Route::get('orders/all/{page}', 'OrderController@index');
         Route::get('orders/recent', 'OrderController@recent');
@@ -86,6 +84,8 @@ Route::group([
         Route::put('orders', 'OrderController@edit');
         Route::delete('orders/{id}', 'OrderController@delete');
     });
+
+    Route::get('orders/{id}', 'OrderController@show');
 });
 
 Route::group([
