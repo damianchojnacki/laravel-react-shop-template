@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import 'animate.css';
 import 'flag-icon-css/css/flag-icon.min.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {checkFullName, isEmail, equals} from "../../utils/helpers";
 import Select from 'react-select';
 
@@ -25,6 +25,7 @@ export default function Register() {
     const [hide, setHide] = useState(false);
     const [countries, setCountries] = useState([]);
     const [terms, setTerms] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         (async function() {
@@ -36,7 +37,7 @@ export default function Register() {
                     value: country.name,
                     label:
                         <>
-                            <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}></i>
+                            <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
                             <span className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
                         </>
                 }
@@ -70,6 +71,8 @@ export default function Register() {
         };
 
         if (validate(credentials)) {
+            setLoading(true);
+
             AuthService.register(credentials)
                 .then(() => {
                     AuthService.getUser().then(res => {
@@ -80,6 +83,9 @@ export default function Register() {
                     setErrors(error.response.data.errors);
 
                     setStep(1);
+                })
+                .finally(() => {
+                    setTimeout(() => setLoading(false), 2000);
                 });
         } else nextStep();
     };
@@ -237,7 +243,7 @@ export default function Register() {
         "fadeIn": !hide,
     });
 
-    return state.authenticated
+    return state.authenticated && !loading
         ?
         <Redirect to="/register/success"/>
         :
@@ -247,9 +253,22 @@ export default function Register() {
                     <title>Shop | Register</title>
                 </Helmet>
                 <div className="container col-lg-9 col-12">
-                    <Form method="POST" onSubmit={handleSubmit} className={formClasses}>
-                        {displayStep()}
-                    </Form>
+                    {loading ? state.authenticated ?
+                        <div className="d-flex justify-content-center">
+                            <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
+                        </div>
+                    :
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-grow" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    :
+                        <Form method="POST" onSubmit={handleSubmit} className={formClasses}>
+                            {displayStep()}
+                        </Form>
+                    }
+
                 </div>
             </>
         )

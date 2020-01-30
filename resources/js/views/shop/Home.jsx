@@ -26,7 +26,9 @@ function Home(props){
             });
 
             setSpecialOffer(productsDiscounted.pop());
-            setProductsDiscounted(productsDiscounted);
+
+            //slice can be removed but displayed products will be moved to the edges (flex)
+            setProductsDiscounted(productsDiscounted.slice(productsDiscounted.length % 4));
         })();
     }, []);
 
@@ -47,12 +49,13 @@ function Home(props){
             <Helmet>
                 <title>Shop | Homepage</title>
             </Helmet>
-            {result === "success" &&
-                <Alert theme="success">
-                    You've successfully registered and logged in. You can start shopping right now!
-                </Alert>
-            }
+
             <main className="col-md-12">
+                {result === "success" &&
+                    <Alert theme="success" className="m-2 mb-4">
+                        You've successfully registered and logged in. You can start shopping right now!
+                    </Alert>
+                }
                 <Card className="m-2">
                     <div className="row position-relative m-0">
                         <CardHeader className="h-100 col-md-3 col-12" style={{minHeight: '275px'}}>

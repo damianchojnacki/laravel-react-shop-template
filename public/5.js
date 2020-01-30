@@ -1191,8 +1191,9 @@ function Home(props) {
               productsDiscounted.sort(function (previous, next) {
                 return previous.discount.percent_off - next.discount.percent_off;
               });
-              setSpecialOffer(productsDiscounted.pop());
-              setProductsDiscounted(productsDiscounted);
+              setSpecialOffer(productsDiscounted.pop()); //slice can be removed but displayed products will be moved to the edges (flex)
+
+              setProductsDiscounted(productsDiscounted.slice(productsDiscounted.length % 4));
 
             case 6:
             case "end":
@@ -1219,11 +1220,12 @@ function Home(props) {
     react_notify_toast__WEBPACK_IMPORTED_MODULE_7__["notify"].show("".concat(product.name, " has been removed to cart."), 'success', 1500);
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Homepage")), result === "success" && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
-    theme: "success"
-  }, "You've successfully registered and logged in. You can start shopping right now!"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Homepage")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", {
     className: "col-md-12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Card"], {
+  }, result === "success" && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
+    theme: "success",
+    className: "m-2 mb-4"
+  }, "You've successfully registered and logged in. You can start shopping right now!"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Card"], {
     className: "m-2"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row position-relative m-0"
@@ -1757,6 +1759,11 @@ function Register() {
       terms = _useState20[0],
       setTerms = _useState20[1];
 
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      loading = _useState22[0],
+      setLoading = _useState22[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     (function _callee() {
       var countries, list;
@@ -1812,6 +1819,7 @@ function Register() {
     };
 
     if (validate(credentials)) {
+      setLoading(true);
       _utils_AuthService__WEBPACK_IMPORTED_MODULE_5__["default"].register(credentials).then(function () {
         _utils_AuthService__WEBPACK_IMPORTED_MODULE_5__["default"].getUser().then(function (res) {
           dispatch({
@@ -1822,6 +1830,10 @@ function Register() {
       })["catch"](function (error) {
         setErrors(error.response.data.errors);
         setStep(1);
+      })["finally"](function () {
+        setTimeout(function () {
+          return setLoading(false);
+        }, 2000);
       });
     } else nextStep();
   };
@@ -2037,11 +2049,24 @@ function Register() {
     "fadeOut": hide,
     "fadeIn": !hide
   });
-  return state.authenticated ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+  return state.authenticated && !loading ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
     to: "/register/success"
   }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_3__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Register")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "container col-lg-9 col-12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_4__["Form"], {
+  }, loading ? state.authenticated ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_10__["FontAwesomeIcon"], {
+    size: "6x",
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_11__["faCheckCircle"],
+    className: "animated bounceIn text-success"
+  })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "spinner-grow",
+    role: "status"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "sr-only"
+  }, "Loading..."))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_4__["Form"], {
     method: "POST",
     onSubmit: handleSubmit,
     className: formClasses

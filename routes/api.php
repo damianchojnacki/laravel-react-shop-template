@@ -63,12 +63,12 @@ Route::group([
 
 
 Route::group([
-    'name' => 'product-discounts',
+    'name' => 'discounts',
 ], function () {
-    Route::post('product-discounts', 'DiscountController@create');
+    Route::post('discounts', 'DiscountController@create');
 
     Route::middleware('auth:api')->group(function () {
-        Route::delete('product-discounts/{id}', 'DiscountController@discountDelete');
+        Route::delete('discounts/{id}', 'DiscountController@discountDelete');
     });
 });
 
