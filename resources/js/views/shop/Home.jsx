@@ -50,7 +50,7 @@ function Home(props){
                 <title>Shop | Homepage</title>
             </Helmet>
 
-            <main className="col-md-12">
+            <main className="d-flex flex-column">
                 {result === "success" &&
                     <Alert theme="success" className="m-2 mb-4">
                         You've successfully registered and logged in. You can start shopping right now!

@@ -1293,7 +1293,7 @@ function ProductsList(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: product.id,
       className: props.product === product.id ? "table-warning" : null
-    }, props.fields.index && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), props.fields.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.id), props.fields.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), props.fields.type && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.type.name_display), props.fields.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    }, props.fields.index && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), props.fields.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.id), props.fields.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), props.fields.type && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.type["long"]), props.fields.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, product.price, " USD"), props.fields.price_final && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
@@ -1345,7 +1345,7 @@ function ProductsListComplex(props) {
       style: {
         maxHeight: '200px'
       },
-      src: product.image.url,
+      src: product.image.src,
       alt: product.name
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ListGroup"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ListGroupItem"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "font-weight-bold"
@@ -1782,7 +1782,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_admin_Analytics__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../views/admin/Analytics */ "./resources/js/views/admin/Analytics.jsx");
 /* harmony import */ var _views_admin_Discounts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../views/admin/Discounts */ "./resources/js/views/admin/Discounts.jsx");
 /* harmony import */ var _views_admin_DiscountsNew__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../views/admin/DiscountsNew */ "./resources/js/views/admin/DiscountsNew.jsx");
-/* harmony import */ var _views_admin_ProductNew__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../views/admin/ProductNew */ "./resources/js/views/admin/ProductNew.jsx");
 /*!
 
 =========================================================
@@ -1808,7 +1807,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ([{
   path: "/dashboard",
   name: "Dashboard",
@@ -1821,11 +1819,6 @@ __webpack_require__.r(__webpack_exports__);
   icon: "tim-icons icon-laptop",
   component: _views_admin_Resource__WEBPACK_IMPORTED_MODULE_3__["default"],
   layout: "/admin"
-}, {
-  path: "/products/new",
-  component: _views_admin_ProductNew__WEBPACK_IMPORTED_MODULE_8__["default"],
-  layout: "/admin",
-  hidden: true
 }, {
   path: "/products/:id",
   component: _views_admin_Product__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -3290,6 +3283,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
+/* harmony import */ var _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/ImageService */ "./resources/js/utils/ImageService.js");
+/* harmony import */ var reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reactstrap/es/FormGroup */ "./node_modules/reactstrap/es/FormGroup.js");
+/* harmony import */ var reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reactstrap/es/Label */ "./node_modules/reactstrap/es/Label.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons/faCloudUploadAlt */ "./node_modules/@fortawesome/free-solid-svg-icons/faCloudUploadAlt.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_10__);
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -3302,6 +3301,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
  // reactstrap components
+
+
+
+
+
 
 
 
@@ -3323,47 +3327,105 @@ function Product(props) {
       price = _useState6[0],
       setPrice = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      redirect = _useState8[0],
-      setRedirect = _useState8[1];
+      type = _useState8[0],
+      setType = _useState8[1];
 
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      image = _useState10[0],
+      setImage = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      productsTypes = _useState12[0],
+      setProductsTypes = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState14 = _slicedToArray(_useState13, 2),
+      redirect = _useState14[0],
+      setRedirect = _useState14[1];
+
+  var id = props.match.params.id;
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    function get() {
-      var product;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function get$(_context) {
+    (function _callee() {
+      var types, options, _product;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].get(props.match.params.id));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].types());
 
             case 2:
-              product = _context.sent;
-              setProduct(product);
-              setName(product.name);
-              setPrice(product.price);
+              types = _context.sent;
+              options = types.map(function (type) {
+                return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+                  key: type.id,
+                  value: type.id
+                }, type["long"]);
+              });
+              setProductsTypes(options);
 
-            case 6:
+              if (!(id !== 'new')) {
+                _context.next = 16;
+                break;
+              }
+
+              _context.next = 8;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].get(props.match.params.id));
+
+            case 8:
+              _product = _context.sent;
+              setProduct(_product);
+              setName(_product.name);
+              setPrice(_product.price);
+              setType(_product.type.id);
+              setImage(_product.image);
+              _context.next = 17;
+              break;
+
+            case 16:
+              setType(types[0].id);
+
+            case 17:
             case "end":
               return _context.stop();
           }
         }
       });
-    }
-
-    get();
+    })();
   }, []);
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var data = {
-      id: product.id,
+      id: id,
       name: name,
-      price: price
+      price: price,
+      type: type,
+      img: image.id
     };
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
+    if (id === 'new') _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].add(data).then(function (res) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("".concat(name, " has been added."), 'success');
+      setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+        to: "/admin/products/".concat(res.data)
+      }));
+    })["catch"](function (error) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
+    });else _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
+    })["catch"](function (error) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
+    });
+  };
+
+  var uploadImage = function uploadImage(image) {
+    _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__["default"].upload(image).then(function (res) {
+      setImage(res.data);
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("Image has been uploaded.", 'success');
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
     });
@@ -3388,7 +3450,7 @@ function Product(props) {
     onSubmit: handleSubmit
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "card-title"
-  }, "Product")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+  }, id !== 'new' ? "Product" : "New product")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, id !== 'new' && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "ID"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     defaultValue: product.id,
@@ -3414,198 +3476,6 @@ function Product(props) {
     },
     className: props.bgColor,
     required: true
-  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    className: "btn-fill",
-    color: props.bgColor,
-    type: "submit"
-  }, "Save"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    className: "btn-fill",
-    color: "danger",
-    type: "button",
-    onClick: handleDelete
-  }, "Delete"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-    md: "4",
-    className: "justify-content-center align-items-center",
-    style: {
-      display: "flex"
-    }
-  }, product.image && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-    src: product.image.src,
-    alt: product.name
-  }))));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Product);
-
-/***/ }),
-
-/***/ "./resources/js/views/admin/ProductNew.jsx":
-/*!*************************************************!*\
-  !*** ./resources/js/views/admin/ProductNew.jsx ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
-/* harmony import */ var _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/ImageService */ "./resources/js/utils/ImageService.js");
-/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
-/* harmony import */ var reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reactstrap/es/FormGroup */ "./node_modules/reactstrap/es/FormGroup.js");
-/* harmony import */ var reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! reactstrap/es/Label */ "./node_modules/reactstrap/es/Label.js");
-/* harmony import */ var reactstrap_es_CustomInput__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! reactstrap/es/CustomInput */ "./node_modules/reactstrap/es/CustomInput.js");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons_faImage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons/faImage */ "./node_modules/@fortawesome/free-solid-svg-icons/faImage.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons_faImage__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons_faImage__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons/faCloudUploadAlt */ "./node_modules/@fortawesome/free-solid-svg-icons/faCloudUploadAlt.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_13__);
-
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
- // reactstrap components
-
-
-
-
-
-
-
-
-
-
-
-
-
-function ProductNew(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      name = _useState2[0],
-      setName = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      price = _useState4[0],
-      setPrice = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
-      _useState6 = _slicedToArray(_useState5, 2),
-      image = _useState6[0],
-      setImage = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState8 = _slicedToArray(_useState7, 2),
-      type = _useState8[0],
-      setType = _useState8[1];
-
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState10 = _slicedToArray(_useState9, 2),
-      productTypes = _useState10[0],
-      setProductTypes = _useState10[1];
-
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
-      _useState12 = _slicedToArray(_useState11, 2),
-      redirect = _useState12[0],
-      setRedirect = _useState12[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    (function _callee() {
-      var types, options;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].types());
-
-            case 2:
-              types = _context.sent;
-              setType(types[0].id);
-              options = types.map(function (type) {
-                return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-                  key: type.id,
-                  value: type.id
-                }, type["long"]);
-              });
-              setProductTypes(options);
-
-            case 6:
-            case "end":
-              return _context.stop();
-          }
-        }
-      });
-    })();
-  }, []);
-
-  var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-    var data = {
-      name: name,
-      price: price,
-      img: image.id,
-      type: type
-    };
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].add(data).then(function (res) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("".concat(name, " has been added."), 'success');
-      setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/admin/products/".concat(res.data)
-      }));
-    })["catch"](function (error) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
-    });
-  };
-
-  var uploadImage = function uploadImage(image) {
-    _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__["default"].upload(image).then(function (res) {
-      setImage(res.data);
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("Image has been uploaded.", 'success');
-    })["catch"](function (error) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
-    });
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "content"
-  }, redirect, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-    md: "8"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], {
-    onSubmit: handleSubmit
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
-    className: "card-title"
-  }, "New product")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-    md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Name"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    type: "text",
-    onChange: function onChange(e) {
-      return setName(e.target.value);
-    },
-    className: props.bgColor,
-    required: true
-  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-    md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Price"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    type: "number",
-    onChange: function onChange(e) {
-      return setPrice(e.target.value);
-    },
-    className: props.bgColor,
-    required: true
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Type"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
@@ -3616,7 +3486,16 @@ function ProductNew(props) {
     },
     className: props.bgColor,
     required: true
-  }, productTypes)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  }, productsTypes)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, id !== 'new' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "btn-fill",
+    color: props.bgColor,
+    type: "submit"
+  }, "Save"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "btn-fill",
+    color: "danger",
+    type: "button",
+    onClick: handleDelete
+  }, "Delete")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     className: "btn-fill",
     color: "success",
     type: "submit"
@@ -3629,12 +3508,12 @@ function ProductNew(props) {
   }, image.src ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: image.src,
     alt: name
-  }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_8__["default"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_8__["default"], {
     "for": "exampleCustomFileBrowser",
     className: "text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_11__["FontAwesomeIcon"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {
     size: "6x",
-    icon: _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_13__["faCloudUploadAlt"]
+    icon: _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_10__["faCloudUploadAlt"]
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
     className: "mt-2"
   }, "Upload product image")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
@@ -3648,7 +3527,7 @@ function ProductNew(props) {
   })))));
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (ProductNew);
+/* harmony default export */ __webpack_exports__["default"] = (Product);
 
 /***/ }),
 

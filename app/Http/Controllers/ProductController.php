@@ -49,7 +49,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->price = $request->input('price');
 
-        $type = ProductType::find($request->input('type'));
+        $type = ProductType::findOrFail($request->input('type'));
         $product->type()->associate($type);
         $product->save();
 
@@ -87,11 +87,16 @@ class ProductController extends Controller
             'id' => 'integer',
             'name' => 'required|string|max:64',
             'price' => 'required|numeric|min:1',
+            'type' => 'required|numeric|min:1',
         ]);
 
         $product = Product::findOrFail($request->input('id'));
         $product->name = $request->input('name');
         $product->price = $request->input('price');
+
+        $type = ProductType::findOrFail($request->input('type'));
+        $product->type()->associate($type);
+
         $product->save();
 
         return response('Product has been updated', 200);

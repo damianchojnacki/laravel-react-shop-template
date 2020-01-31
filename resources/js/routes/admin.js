@@ -23,7 +23,6 @@ import User from "../views/admin/User";
 import Analytics from "../views/admin/Analytics";
 import Discounts from "../views/admin/Discounts";
 import DiscountsNew from "../views/admin/DiscountsNew";
-import ProductNew from "../views/admin/ProductNew";
 
 export default [
     {
@@ -39,12 +38,6 @@ export default [
         icon: "tim-icons icon-laptop",
         component: Resource,
         layout: "/admin",
-    },
-    {
-        path: `/products/new`,
-        component: ProductNew,
-        layout: "/admin",
-        hidden: true
     },
     {
         path: `/products/:id`,

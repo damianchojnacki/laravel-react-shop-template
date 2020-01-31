@@ -1221,7 +1221,7 @@ function Home(props) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Homepage")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", {
-    className: "col-md-12"
+    className: "d-flex flex-column"
   }, result === "success" && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
     theme: "success",
     className: "m-2 mb-4"

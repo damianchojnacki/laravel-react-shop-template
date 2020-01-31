@@ -24,7 +24,7 @@ function ProductsList(props){
                         {props.fields.index && <td>{index + 1}</td>}
                         {props.fields.id && <td>{product.id}</td>}
                         {props.fields.name && <td>{product.name}</td>}
-                        {props.fields.type && <td>{product.type.name_display}</td>}
+                        {props.fields.type && <td>{product.type.long}</td>}
                         {props.fields.price && <td className="text-center">{product.price} USD</td>}
                         {props.fields.price_final && <td className="text-center">{product.price_final} USD</td>}
                         {props.fields.date && <td>{product.created_at}</td>}
