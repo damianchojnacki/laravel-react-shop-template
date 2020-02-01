@@ -23,6 +23,10 @@ export default class OrderService{
         return response.data;
     }
 
+    static create(data){
+        return window.axios.post(`/api/orders`, data);
+    }
+
     static edit(data){
         return window.axios.put(`/api/orders`, data);
     }

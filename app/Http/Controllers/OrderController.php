@@ -6,7 +6,9 @@ use App\Http\Resources\OrderResource;
 use App\Order;
 use App\OrderStatus;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -60,20 +62,52 @@ class OrderController extends Controller
         return response('Order has been deleted', 200);
     }
 
+    public function create(Request $request)
+    {
+        $request->validate([
+            'status' => 'required|min:1|max:4',
+            'products' => 'required|array',
+            'user' => 'required|min:1',
+            'date' => 'date',
+        ]);
+
+        $order = new Order();
+        $request->exists('date') && $order->created_at = Carbon::createFromDate($request->input('date'));
+        $order->status()->associate(OrderStatus::findOrFail($request->input('status')));
+        $order->user()->associate(User::findOrFail($request->input('user')));
+        $order->save();
+
+        foreach($request->input('products') as $product){
+            $existing = $order->products()->where('name', $product['name'])->first();
+
+            if($existing){
+                $existing->pivot->quantity++;
+                $existing->pivot->save();
+            }
+            else
+                $order->products()->attach(Product::find($product['id']), ['quantity' => 1]);
+        }
+
+        return response($order->id, 200);
+    }
+
     public function edit(Request $request)
     {
         $request->validate([
             'id' => 'uuid',
             'status' => 'required|min:1|max:4',
-            'products' => 'required|array'
+            'products' => 'required|array',
+            'user' => 'required|min:1',
         ]);
 
         $order = Order::findOrFail($request->input('id'));
         $order->status()->associate(OrderStatus::findOrFail($request->input('status')));
+        $order->user()->associate(User::findOrFail($request->input('user')));
 
-        foreach($request->input('products') as $product){
+        $order->products()->detach();
+
+        foreach($request->input('products') as $product)
             $order->products()->attach(Product::find($product['id']), ['quantity' => $product['pivot']['quantity']]);
-        }
 
         $order->save();
 

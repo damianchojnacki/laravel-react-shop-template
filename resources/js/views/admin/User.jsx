@@ -21,25 +21,27 @@ function User(props) {
     const [user, setUser] = useState({});
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [country, setCountry] = useState('');
+    const [password, setPassword] = useState('');
+    const [country, setCountry] = useState('1');
     const [countries, setCountries] = useState([]);
     const [redirect, setRedirect] = useState();
+    const id = props.match.params.id;
 
     useEffect(() => {
         (async function() {
-            const user = await UserService.get(props.match.params.id);
-            setUser(user);
-            setName(user.name);
-            setEmail(user.email);
-            setCountry(user.country.id);
-        })();
+            const countriesData = await window.axios.get('/api/countries');
 
-        (async function() {
-            const countries = await window.axios.get('/api/countries');
-
-            const options =  countries.data.map((country) => {
+            const options =  countriesData.data.map((country) => {
                 return <option key={country.id} value={country.id}>{country.name}</option>
             });
+
+            if(id !== 'new'){
+                const user = await UserService.get(id);
+                setUser(user);
+                setName(user.name);
+                setEmail(user.email);
+                setCountry(user.country.id);
+            }
 
             setCountries(options);
         })();
@@ -49,19 +51,30 @@ function User(props) {
         e.preventDefault();
 
         const data = {
-            id: user.id,
+            id: id,
             name: name,
             email: email,
             country: country,
+            password: password,
         };
 
-        UserService.edit(data)
-            .then(res => {
-                notify.show(res.data, 'success');
-            })
-            .catch(error => {
-                notify.show(error.response.data.message, 'error');
-            });
+        if(id !== 'new')
+            UserService.edit(data)
+                .then(res => {
+                    notify.show(res.data, 'success');
+                })
+                .catch(error => {
+                    notify.show(error.response.data.message, 'error');
+                });
+        else
+            UserService.create(data)
+                .then(res => {
+                    notify.show(`${name} has been added.`, 'success');
+                    setRedirect(<Redirect to={`/admin/users/${res.data}`}/>)
+                })
+                .catch(error => {
+                    notify.show(error.response.data.message, 'error');
+                });
     };
 
     const handleDelete = () => {
@@ -79,7 +92,7 @@ function User(props) {
         <div className="content">
             {redirect}
             <Row>
-                <Col md="6">
+                <Col md={id !== 'new' ? 6 : 12}>
                     <Form onSubmit={handleSubmit}>
                         <Card>
                             <CardHeader>
@@ -87,16 +100,18 @@ function User(props) {
                                 {/*<h5 className="card-category">ID: {user.id}</h5>*/}
                             </CardHeader>
                             <CardBody>
-                                <Row>
-                                    <Col md="12">
-                                        <label>ID</label>
-                                        <Input
-                                            defaultValue={user.id}
-                                            type="text"
-                                            disabled
-                                        />
-                                    </Col>
-                                </Row>
+                                {id !== 'new' &&
+                                    <Row>
+                                        <Col md="12">
+                                            <label>ID</label>
+                                            <Input
+                                                value={id}
+                                                type="text"
+                                                disabled
+                                            />
+                                        </Col>
+                                    </Row>
+                                }
                                 <Row>
                                     <Col md="12">
                                         <label>Name</label>
@@ -121,6 +136,19 @@ function User(props) {
                                         />
                                     </Col>
                                 </Row>
+                                {id === 'new' &&
+                                <Row>
+                                    <Col md="12">
+                                        <label>Password</label>
+                                        <Input
+                                            type="text"
+                                            onChange={e => setPassword(e.target.value)}
+                                            className={props.bgColor}
+                                            required
+                                        />
+                                    </Col>
+                                </Row>
+                                }
                                 <Row>
                                     <Col md="12">
                                         <label>Country</label>
@@ -137,34 +165,44 @@ function User(props) {
                                 </Row>
                             </CardBody>
                             <CardFooter>
-                                <Button className="btn-fill" color={props.bgColor} type="submit">
-                                    Save
-                                </Button>
-                                <Button className="btn-fill" color="danger" type="button" onClick={handleDelete}>
-                                    Delete
-                                </Button>
+                                {id !== 'new' ?
+                                    <>
+                                        <Button className="btn-fill" color={props.bgColor} type="submit">
+                                            Save
+                                        </Button>
+                                        <Button className="btn-fill" color="danger" type="button" onClick={handleDelete}>
+                                            Delete
+                                        </Button>
+                                    </>
+                                    :
+                                    <Button className="btn-fill" color="success" type="submit">
+                                        Add
+                                    </Button>
+                                }
                             </CardFooter>
                         </Card>
                     </Form>
                 </Col>
-                <Col md="6">
-                    <Card>
-                        <CardHeader tag="h2">
-                            User orders
-                        </CardHeader>
-                        <CardBody>
-                            <OrdersList
-                                data={user.orders}
-                                bgColor={props.bgColor}
-                                fields={{
-                                    index: true,
-                                    date: true,
-                                    status: true,
-                                }}
-                            />
-                        </CardBody>
-                    </Card>
-                </Col>
+                {id !== 'new' &&
+                    <Col md="6">
+                        <Card>
+                            <CardHeader tag="h2">
+                                User orders
+                            </CardHeader>
+                            <CardBody>
+                                <OrdersList
+                                    data={user.orders}
+                                    bgColor={props.bgColor}
+                                    fields={{
+                                        index: true,
+                                        date: true,
+                                        status: true,
+                                    }}
+                                />
+                            </CardBody>
+                        </Card>
+                    </Col>
+                }
             </Row>
         </div>
     );

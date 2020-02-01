@@ -25,7 +25,7 @@ function Product(props) {
     const [product, setProduct] = useState({});
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
-    const [type, setType] = useState('');
+    const [type, setType] = useState('1');
     const [image, setImage] = useState('');
     const [productsTypes, setProductsTypes] = useState([]);
     const [redirect, setRedirect] = useState();
@@ -49,8 +49,6 @@ function Product(props) {
                 setType(product.type.id);
                 setImage(product.image);
             }
-            else
-                setType(types[0].id);
         })();
     }, []);
 
@@ -65,19 +63,19 @@ function Product(props) {
             img: image.id,
         };
 
-        if(id === 'new')
-            ProductService.add(data)
+        if(id !== 'new')
+            ProductService.edit(data)
                 .then(res => {
-                    notify.show(`${name} has been added.`, 'success');
-                    setRedirect(<Redirect to={`/admin/products/${res.data}`}/>)
+                    notify.show(res.data, 'success');
                 })
                 .catch(error => {
                     notify.show(error.response.data.message, 'error');
                 });
         else
-            ProductService.edit(data)
+            ProductService.create(data)
                 .then(res => {
-                    notify.show(res.data, 'success');
+                    notify.show(`${name} has been added.`, 'success');
+                    setRedirect(<Redirect to={`/admin/products/${res.data}`}/>)
                 })
                 .catch(error => {
                     notify.show(error.response.data.message, 'error');
@@ -96,7 +94,7 @@ function Product(props) {
     };
 
     const handleDelete = () => {
-        ProductService.delete(product.id)
+        ProductService.delete(id)
             .then(res => {
                 notify.show(res.data, 'success');
                 setRedirect(<Redirect to="/admin/products"/>)
@@ -123,7 +121,7 @@ function Product(props) {
                                         <Col md="12">
                                             <label>ID</label>
                                             <Input
-                                                defaultValue={product.id}
+                                                value={id}
                                                 type="text"
                                                 disabled
                                             />
@@ -184,7 +182,6 @@ function Product(props) {
                                         Add
                                     </Button>
                                 }
-
                             </CardFooter>
                         </Card>
                     </Form>

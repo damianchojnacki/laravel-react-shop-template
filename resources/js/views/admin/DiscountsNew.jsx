@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import {
     Card,
     CardHeader,
@@ -9,7 +8,6 @@ import {
 
 import ProductService from "../../utils/ProductService";
 import {notify} from "react-notify-toast";
-import DiscountsList from "../../components/admin/DiscountsList";
 import ProductsList from "../../components/admin/ProductsList";
 
 function DiscountsNew(props){
@@ -38,7 +36,7 @@ function DiscountsNew(props){
             ends: ends,
         };
 
-        ProductService.discounts.add(data)
+        ProductService.discounts.create(data)
             .then(res => {
                 notify.show(res.data, 'success');
 

@@ -32,9 +32,10 @@ Route::group([
     'name' => 'users',
     'middleware' => ['auth:api', 'admin'],
 ], function () {
-    Route::get('users/page/{page}', 'UserController@index');
+    Route::get('users/all/{page?}', 'UserController@index');
     Route::get('users/search/{id}', 'UserController@search');
     Route::get('users/{id}', 'UserController@show');
+    Route::post('users', 'UserController@create');
     Route::put('users', 'UserController@edit');
     Route::delete('users/{id}', 'UserController@delete');
 });
@@ -81,6 +82,7 @@ Route::group([
         Route::get('orders/recent', 'OrderController@recent');
         Route::get('orders/statuses', 'OrderController@statuses');
         Route::get('orders/search/{id}', 'OrderController@search');
+        Route::post('orders', 'OrderController@create');
         Route::put('orders', 'OrderController@edit');
         Route::delete('orders/{id}', 'OrderController@delete');
     });

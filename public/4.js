@@ -1292,7 +1292,7 @@ function ProductsList(props) {
   }, "Final price"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Added at"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.data && props.data.length > 0 ? props.data.map(function (product, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: product.id,
-      className: props.product === product.id ? "table-warning" : null
+      className: props.product && (props.product === product.id || props.products.includes(product)) ? "table-warning" : null
     }, props.fields.index && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), props.fields.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.id), props.fields.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), props.fields.type && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.type["long"]), props.fields.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, product.price, " USD"), props.fields.price_final && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
@@ -1304,12 +1304,19 @@ function ProductsList(props) {
       onClick: function onClick() {
         return props.add(product);
       }
-    }, "Select")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    }, "Add")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-right"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       className: "btn btn-".concat(props.bgColor),
       to: "/admin/products/".concat(product.id)
-    }, "Details")));
+    }, "Details")), props.remove && props.products.includes(product) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      className: "text-right"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      color: "danger",
+      onClick: function onClick() {
+        return props.remove(product.id);
+      }
+    }, "Remove")));
   }) : null));
 }
 
@@ -1353,7 +1360,12 @@ function ProductsListComplex(props) {
       className: "font-weight-bold"
     }, "Quantity: "), product.pivot.quantity))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CardFooter"], {
       className: "text-right"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      color: "danger",
+      onClick: function onClick() {
+        props.remove(product.id);
+      }
+    }, "Remove"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
       className: "btn btn-".concat(props.bgColor),
       to: "/admin/products/".concat(product.id)
     }, "Details")));
@@ -2257,6 +2269,11 @@ function () {
       });
     }
   }, {
+    key: "create",
+    value: function create(data) {
+      return window.axios.post("/api/orders", data);
+    }
+  }, {
     key: "edit",
     value: function edit(data) {
       return window.axios.put("/api/orders", data);
@@ -2304,20 +2321,23 @@ function () {
 
   _createClass(UserService, null, [{
     key: "all",
-    value: function all(page) {
-      var response;
+    value: function all() {
+      var page,
+          response,
+          _args = arguments;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function all$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/users/page/".concat(page)));
+              page = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
+              _context.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/users/all/".concat(page)));
 
-            case 2:
+            case 3:
               response = _context.sent;
               return _context.abrupt("return", response.data);
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -2372,6 +2392,11 @@ function () {
     key: "edit",
     value: function edit(data) {
       return window.axios.put("/api/users", data);
+    }
+  }, {
+    key: "create",
+    value: function create(data) {
+      return window.axios.post("/api/users", data);
     }
   }, {
     key: "delete",
@@ -2918,13 +2943,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_admin_DiscountsList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/DiscountsList */ "./resources/js/components/admin/DiscountsList.jsx");
-/* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -2934,8 +2957,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
 
 
 
@@ -2976,7 +2997,7 @@ function DiscountsNew(props) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.without());
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].discounts.without());
 
           case 2:
             products = _context.sent;
@@ -2997,41 +3018,41 @@ function DiscountsNew(props) {
       percent_off: percentOff,
       ends: ends
     };
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.add(data).then(function (res) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_6__["notify"].show(res.data, 'success');
+    _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].discounts.create(data).then(function (res) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(res.data, 'success');
       getProducts();
     })["catch"](function (error) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_6__["notify"].show(error.response.data.message, 'error');
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(error.response.data.message, 'error');
     });
   };
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Admin - New Discount")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", {
     className: "content"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-lg-6 col-12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Form"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], {
     onSubmit: handleSubmit
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "card-title"
-  }, "New discount")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+  }, "New discount")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Percent off"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Percent off"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     type: "number",
     onChange: function onChange(e) {
       return setPercentOff(e.target.value);
     },
     className: props.bgColor,
     required: true
-  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Ends at"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Ends at"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     type: "datetime-local",
     onChange: function onChange(e) {
       return setEnds(e.target.value);
     },
     className: props.bgColor,
     required: true
-  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     className: "btn-fill",
     color: "success",
     type: "submit"
@@ -3039,7 +3060,7 @@ function DiscountsNew(props) {
     className: "col-lg-6 col-12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: ""
-  }, "Products:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, "Products:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_6__["default"], {
     data: products,
     bgColor: props.bgColor,
     fields: {
@@ -3076,9 +3097,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
 /* harmony import */ var _components_admin_ProductsListComplex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/ProductsListComplex */ "./resources/js/components/admin/ProductsListComplex.jsx");
+/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./User */ "./resources/js/views/admin/User.jsx");
+/* harmony import */ var _Product__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Product */ "./resources/js/views/admin/Product.jsx");
+/* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
 
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -3096,6 +3128,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 function Order(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -3107,85 +3142,137 @@ function Order(props) {
       products = _useState4[0],
       setProducts = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      status = _useState6[0],
-      setStatus = _useState6[1];
+      productsList = _useState6[0],
+      setProductsList = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
-      statuses = _useState8[0],
-      setStatuses = _useState8[1];
+      status = _useState8[0],
+      setStatus = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      redirect = _useState10[0],
-      setRedirect = _useState10[1];
+      statuses = _useState10[0],
+      setStatuses = _useState10[1];
 
-  var getOrders = function getOrders() {
-    var order;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getOrders$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].get(props.match.params.id));
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState12 = _slicedToArray(_useState11, 2),
+      redirect = _useState12[0],
+      setRedirect = _useState12[1];
 
-          case 2:
-            order = _context.sent;
-            setProducts(order.products);
-            setStatus(order.status.id);
-            setOrder(order);
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      date = _useState14[0],
+      setDate = _useState14[1];
 
-          case 6:
-          case "end":
-            return _context.stop();
-        }
-      }
-    });
-  };
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      user = _useState16[0],
+      setUser = _useState16[1];
 
-  var getOrdersStatuses = function getOrdersStatuses() {
-    var statuses, options;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getOrdersStatuses$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/orders/statuses'));
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState18 = _slicedToArray(_useState17, 2),
+      users = _useState18[0],
+      setUsers = _useState18[1];
 
-          case 2:
-            statuses = _context2.sent;
-            options = statuses.data.map(function (status) {
-              return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-                key: status.id,
-                value: status.id
-              }, status.name);
-            });
-            setStatuses(options);
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState20 = _slicedToArray(_useState19, 2),
+      value = _useState20[0],
+      setValue = _useState20[1];
 
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    });
-  };
-
+  var id = props.match.params.id;
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    getOrders();
-    getOrdersStatuses();
+    (function _callee() {
+      var statuses, users, _order, _products;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/orders/statuses'));
+
+            case 2:
+              statuses = _context.sent;
+              setStatuses(statuses.data.map(function (status) {
+                return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+                  key: status.id,
+                  value: status.id
+                }, status.name);
+              }));
+              _context.next = 6;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(UserService.all());
+
+            case 6:
+              users = _context.sent;
+              setUsers(users.map(function (user) {
+                return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+                  key: user.id,
+                  value: user.id
+                }, user.email);
+              }));
+
+              if (!(id !== 'new')) {
+                _context.next = 18;
+                break;
+              }
+
+              _context.next = 11;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].get(id));
+
+            case 11:
+              _order = _context.sent;
+              setProducts(_order.products);
+              setStatus(_order.status.id);
+              setUser(_order.user.id);
+              setOrder(_order);
+              _context.next = 22;
+              break;
+
+            case 18:
+              _context.next = 20;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(ProductService.all());
+
+            case 20:
+              _products = _context.sent;
+              setProductsList(_products);
+
+            case 22:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    })();
   }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var value = 0;
+    products.map(function (product) {
+      value += parseFloat(product.price);
+    });
+    setValue(value.toFixed(2));
+  }, [products]);
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var data = {
       id: order.id,
       status: status,
-      products: products
+      products: products,
+      user: user,
+      date: date
     };
-    _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
+    if (id !== 'new') _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
+    })["catch"](function (error) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
+    });else _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("Order ".concat(id, " has been added."), 'success', 2000);
+      setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+        to: "/admin/orders"
+      }));
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
     });
@@ -3202,36 +3289,55 @@ function Order(props) {
     });
   };
 
+  var removeProduct = function removeProduct(id) {
+    var newProducts = products.filter(function (product) {
+      return product.id !== id;
+    });
+    setProducts(newProducts);
+  };
+
+  var addProduct = function addProduct(product) {
+    setProducts([].concat(_toConsumableArray(products), [product]));
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "content"
   }, redirect, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-    md: "8"
+    md: "6"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], {
     onSubmit: handleSubmit
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "card-title"
-  }, "Order")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+  }, "Order")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, id !== 'new' && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "ID"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    defaultValue: order.id,
+    value: id,
     type: "text",
     disabled: true
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Customer"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    defaultValue: order.user && order.user.email,
-    type: "text",
-    disabled: true
-  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+    type: "select",
+    value: user,
+    onChange: function onChange(e) {
+      return setUser(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
+  }, users))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Data zakupu"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    defaultValue: order.created_at,
-    type: "text",
-    disabled: true
+    value: id !== 'new' ? order.created_at : date,
+    className: props.bgColor,
+    onChange: function onChange(e) {
+      return setDate(e.target.value);
+    },
+    type: id !== 'new' ? "text" : "datetime-local",
+    disabled: id !== 'new'
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Value"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    defaultValue: order.value,
+    value: id !== 'new' ? order.value : value,
     type: "number",
     disabled: true
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
@@ -3254,10 +3360,21 @@ function Order(props) {
     type: "button",
     onClick: handleDelete
   }, "Delete"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-    md: "4"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Products:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsListComplex__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, props, {
+    md: "6"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Products:"), id !== 'new' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsListComplex__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({}, props, {
     data: products,
-    bgColor: props.bgColor
+    bgColor: props.bgColor,
+    remove: removeProduct
+  })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+    data: productsList,
+    bgColor: props.bgColor,
+    fields: {
+      name: true,
+      price: true
+    },
+    products: products,
+    add: addProduct,
+    remove: removeProduct
   })))));
 }
 
@@ -3327,7 +3444,7 @@ function Product(props) {
       price = _useState6[0],
       setPrice = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('1'),
       _useState8 = _slicedToArray(_useState7, 2),
       type = _useState8[0],
       setType = _useState8[1];
@@ -3370,7 +3487,7 @@ function Product(props) {
               setProductsTypes(options);
 
               if (!(id !== 'new')) {
-                _context.next = 16;
+                _context.next = 14;
                 break;
               }
 
@@ -3384,13 +3501,8 @@ function Product(props) {
               setPrice(_product.price);
               setType(_product.type.id);
               setImage(_product.image);
-              _context.next = 17;
-              break;
 
-            case 16:
-              setType(types[0].id);
-
-            case 17:
+            case 14:
             case "end":
               return _context.stop();
           }
@@ -3408,15 +3520,15 @@ function Product(props) {
       type: type,
       img: image.id
     };
-    if (id === 'new') _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].add(data).then(function (res) {
+    if (id !== 'new') _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
+    })["catch"](function (error) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
+    });else _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("".concat(name, " has been added."), 'success');
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/products/".concat(res.data)
       }));
-    })["catch"](function (error) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
-    });else _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
     });
@@ -3432,7 +3544,7 @@ function Product(props) {
   };
 
   var handleDelete = function handleDelete() {
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"](product.id).then(function (res) {
+    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"](id).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/products"
@@ -3453,7 +3565,7 @@ function Product(props) {
   }, id !== 'new' ? "Product" : "New product")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, id !== 'new' && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "ID"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    defaultValue: product.id,
+    value: id,
     type: "text",
     disabled: true
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
@@ -3807,66 +3919,66 @@ function User(props) {
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      country = _useState8[0],
-      setCountry = _useState8[1];
+      password = _useState8[0],
+      setPassword = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('1'),
       _useState10 = _slicedToArray(_useState9, 2),
-      countries = _useState10[0],
-      setCountries = _useState10[1];
+      country = _useState10[0],
+      setCountry = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      redirect = _useState12[0],
-      setRedirect = _useState12[1];
+      countries = _useState12[0],
+      setCountries = _useState12[1];
 
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState14 = _slicedToArray(_useState13, 2),
+      redirect = _useState14[0],
+      setRedirect = _useState14[1];
+
+  var id = props.match.params.id;
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     (function _callee() {
-      var user;
+      var countriesData, options, _user;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].get(props.match.params.id));
-
-            case 2:
-              user = _context.sent;
-              setUser(user);
-              setName(user.name);
-              setEmail(user.email);
-              setCountry(user.country.id);
-
-            case 7:
-            case "end":
-              return _context.stop();
-          }
-        }
-      });
-    })();
-
-    (function _callee2() {
-      var countries, options;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/countries'));
 
             case 2:
-              countries = _context2.sent;
-              options = countries.data.map(function (country) {
+              countriesData = _context.sent;
+              options = countriesData.data.map(function (country) {
                 return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
                   key: country.id,
                   value: country.id
                 }, country.name);
               });
+
+              if (!(id !== 'new')) {
+                _context.next = 12;
+                break;
+              }
+
+              _context.next = 7;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].get(id));
+
+            case 7:
+              _user = _context.sent;
+              setUser(_user);
+              setName(_user.name);
+              setEmail(_user.email);
+              setCountry(_user.country.id);
+
+            case 12:
               setCountries(options);
 
-            case 5:
+            case 13:
             case "end":
-              return _context2.stop();
+              return _context.stop();
           }
         }
       });
@@ -3876,13 +3988,21 @@ function User(props) {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var data = {
-      id: user.id,
+      id: id,
       name: name,
       email: email,
-      country: country
+      country: country,
+      password: password
     };
-    _utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
+    if (id !== 'new') _utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
+    })["catch"](function (error) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
+    });else _utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("".concat(name, " has been added."), 'success');
+      setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+        to: "/admin/users/".concat(res.data)
+      }));
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
     });
@@ -3902,15 +4022,15 @@ function User(props) {
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "content"
   }, redirect, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-    md: "6"
+    md: id !== 'new' ? 6 : 12
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], {
     onSubmit: handleSubmit
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "card-title"
-  }, "User")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+  }, "User")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, id !== 'new' && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "ID"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    defaultValue: user.id,
+    value: id,
     type: "text",
     disabled: true
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
@@ -3933,6 +4053,15 @@ function User(props) {
     },
     className: props.bgColor,
     required: true
+  }))), id === 'new' && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+    md: "12"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Password"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+    type: "text",
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Country"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
@@ -3943,7 +4072,7 @@ function User(props) {
     },
     className: props.bgColor,
     required: true
-  }, countries)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  }, countries)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, id !== 'new' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     className: "btn-fill",
     color: props.bgColor,
     type: "submit"
@@ -3952,7 +4081,11 @@ function User(props) {
     color: "danger",
     type: "button",
     onClick: handleDelete
-  }, "Delete"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+  }, "Delete")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    className: "btn-fill",
+    color: "success",
+    type: "submit"
+  }, "Add"))))), id !== 'new' && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "6"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], {
     tag: "h2"

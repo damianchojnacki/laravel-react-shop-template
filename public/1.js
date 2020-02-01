@@ -163,9 +163,9 @@ function () {
       });
     }
   }, {
-    key: "add",
-    value: function add(data) {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function add$(_context4) {
+    key: "create",
+    value: function create(data) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function create$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
@@ -224,24 +224,22 @@ function () {
     value: function all() {
       var page,
           category,
-          query,
           response,
           _args = arguments;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function all$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              page = _args.length > 0 && _args[0] !== undefined ? _args[0] : null;
-              category = _args.length > 1 && _args[1] !== undefined ? _args[1] : null;
-              query = page ? category ? "/api/products/all/".concat(page, "/").concat(category) : "/api/products/all/".concat(page) : "/api/products/all";
-              _context.next = 5;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get(query));
+              page = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
+              category = _args.length > 1 && _args[1] !== undefined ? _args[1] : '';
+              _context.next = 4;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/products/all/".concat(page, "/").concat(category)));
 
-            case 5:
+            case 4:
               response = _context.sent;
               return _context.abrupt("return", response.data);
 
-            case 7:
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -274,23 +272,21 @@ function () {
     key: "search",
     value: function search(name) {
       var category,
-          query,
           response,
           _args3 = arguments;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function search$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              category = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : null;
-              query = category ? "/api/products/search/".concat(name, "/").concat(category) : "/api/products/search/".concat(name);
-              _context3.next = 4;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get(query));
+              category = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : 'null';
+              _context3.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/products/search/".concat(name, "/").concat(category)));
 
-            case 4:
+            case 3:
               response = _context3.sent;
               return _context3.abrupt("return", response.data);
 
-            case 6:
+            case 5:
             case "end":
               return _context3.stop();
           }
@@ -320,8 +316,8 @@ function () {
       });
     }
   }, {
-    key: "add",
-    value: function add(data) {
+    key: "create",
+    value: function create(data) {
       return window.axios.post("/api/products", data);
     }
   }, {

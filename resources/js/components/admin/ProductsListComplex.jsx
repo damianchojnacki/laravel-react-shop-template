@@ -24,6 +24,7 @@ function ProductsListComplex(props){
                         </ListGroup>
                     </CardBody>
                     <CardFooter className="text-right">
+                        <Button color="danger" onClick={() => {props.remove(product.id)}}>Remove</Button>
                         <Link className={`btn btn-${props.bgColor}`} to={`/admin/products/${product.id}`}>Details</Link>
                     </CardFooter>
                 </Card>

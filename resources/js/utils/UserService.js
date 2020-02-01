@@ -1,6 +1,6 @@
 export default class UserService{
-    static async all(page) {
-        const response = await window.axios.get(`/api/users/page/${page}`);
+    static async all(page = '') {
+        const response = await window.axios.get(`/api/users/all/${page}`);
 
         return response.data;
     }
@@ -19,6 +19,10 @@ export default class UserService{
 
     static edit(data){
         return window.axios.put(`/api/users`, data);
+    }
+
+    static create(data){
+        return window.axios.post(`/api/users`, data);
     }
 
     static delete(id){

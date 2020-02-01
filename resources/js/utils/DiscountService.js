@@ -21,7 +21,7 @@ export default class DiscountService {
         return window.axios.delete(`/api/discounts/${id}`);
     };
 
-    async add(data) {
+    async create(data) {
         return window.axios.post(`/api/discounts`, data);
     };
 }

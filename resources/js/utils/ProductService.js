@@ -1,10 +1,8 @@
 import DiscountService from './DiscountService';
 
 export default class ProductService{
-    static async all(page = null, category = null) {
-        const query = page ? category ? `/api/products/all/${page}/${category}` : `/api/products/all/${page}` : `/api/products/all`;
-
-        const response = await window.axios.get(query);
+    static async all(page = '', category = '') {
+        const response = await window.axios.get(`/api/products/all/${page}/${category}`);
 
         return response.data;
     }
@@ -15,10 +13,8 @@ export default class ProductService{
         return response.data;
     }
 
-    static async search(name, category = null) {
-        const query = category ? `/api/products/search/${name}/${category}` : `/api/products/search/${name}`;
-
-        const response = await window.axios.get(query);
+    static async search(name, category = 'null') {
+        const response = await window.axios.get(`/api/products/search/${name}/${category}`);
 
         return response.data;
     }
@@ -29,7 +25,7 @@ export default class ProductService{
         return response.data;
     }
 
-    static add(data){
+    static create(data){
         return window.axios.post(`/api/products`, data);
     }
 
