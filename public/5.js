@@ -1003,7 +1003,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_shop_ProductsList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/shop/ProductsList */ "./resources/js/components/shop/ProductsList.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faUser__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons/faUser */ "./node_modules/@fortawesome/free-solid-svg-icons/faUser.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faUser__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons_faUser__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.browser.esm.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faStreetView__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons/faStreetView */ "./node_modules/@fortawesome/free-solid-svg-icons/faStreetView.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faStreetView__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons_faStreetView__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faMapMarkerAlt__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons/faMapMarkerAlt */ "./node_modules/@fortawesome/free-solid-svg-icons/faMapMarkerAlt.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons_faMapMarkerAlt__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons_faMapMarkerAlt__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../utils/helpers */ "./resources/js/utils/helpers.js");
+/* harmony import */ var _utils_AuthService__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../utils/AuthService */ "./resources/js/utils/AuthService.js");
 
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -1022,51 +1039,129 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
+
+
+
+
+
 function Checkout(props) {
-  var _React$useContext = react__WEBPACK_IMPORTED_MODULE_1___default.a.useContext(_utils_CartContext__WEBPACK_IMPORTED_MODULE_3__["CartContext"]),
-      state = _React$useContext.state,
-      dispatch = _React$useContext.dispatch;
+  var cart = react__WEBPACK_IMPORTED_MODULE_1___default.a.useContext(_utils_CartContext__WEBPACK_IMPORTED_MODULE_3__["CartContext"]);
+  var auth = react__WEBPACK_IMPORTED_MODULE_1___default.a.useContext(_utils_CartContext__WEBPACK_IMPORTED_MODULE_3__["CartContext"]);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       products = _useState2[0],
       setProducts = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      redirect = _useState4[0],
-      setRedirect = _useState4[1];
+      name = _useState4[0],
+      setName = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      email = _useState6[0],
+      setEmail = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      country = _useState8[0],
+      setCountry = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      address = _useState10[0],
+      setAddress = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      zipCode = _useState12[0],
+      setZipCode = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      terms = _useState14[0],
+      setTerms = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState16 = _slicedToArray(_useState15, 2),
+      countries = _useState16[0],
+      setCountries = _useState16[1];
+
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState18 = _slicedToArray(_useState17, 2),
+      invalids = _useState18[0],
+      setInvalids = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      redirect = _useState20[0],
+      setRedirect = _useState20[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    function get() {
-      var products;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function get$(_context) {
+    (function _callee() {
+      var countries, list;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].cart(state.cart));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/countries'));
 
             case 2:
-              products = _context.sent;
-              products.length ? setProducts(products) : setRedirect(true);
+              countries = _context.sent;
+              list = countries.data.map(function (country) {
+                return {
+                  id: country.id,
+                  value: country.name,
+                  label: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+                    className: "flag-icon flag-icon-".concat(country.iso.toLowerCase(), " align-middle")
+                  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+                    className: "ml-2 pl-2 align-middle font-weight-normal border-left"
+                  }, country.name))
+                };
+              });
+              setCountries(list);
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
         }
       });
-    }
+    })();
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    (function _callee2() {
+      var products;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].cart(cart.state.cart));
 
-    get();
-  }, [state]);
+            case 2:
+              products = _context2.sent;
+              products.length ? setProducts(products) : setRedirect(true);
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    })();
+  }, [cart.state]);
 
   var changeQuantity = function changeQuantity(product, action) {
-    action ? dispatch({
+    action ? cart.dispatch({
       type: "add",
       payload: product.id
-    }) : dispatch({
+    }) : cart.dispatch({
       type: "remove",
       payload: product.id
     });
@@ -1083,14 +1178,67 @@ function Checkout(props) {
     }
   };
 
+  var validate = function validate(credentials) {
+    var check = true;
+    var invalids = [];
+
+    if (!Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_15__["checkFullName"])(credentials.name)) {
+      invalids.push("name");
+      check = false;
+    }
+
+    if (!Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_15__["isEmail"])(credentials.email)) {
+      invalids.push("email");
+      check = false;
+    }
+
+    if (!country || country <= 0) {
+      invalids.push("country");
+      check = false;
+    }
+
+    if (!address || address.length <= 0) {
+      invalids.push("address");
+      check = false;
+    }
+
+    if (!zipCode || zipCode.length <= 0) {
+      invalids.push("zipcode");
+      check = false;
+    }
+
+    if (!terms) {
+      invalids.push("terms");
+      check = false;
+    }
+
+    setInvalids(invalids);
+    return check;
+  };
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    var credentials = {
+      email: email,
+      name: name,
+      address: address,
+      zipCode: zipCode,
+      country: country
+    };
+
+    if (validate(credentials)) {
+      console.log("validation successful");
+    } else console.log("validation failure");
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, redirect && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["Redirect"], {
     to: "/"
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_6__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Checkout")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "row w-100 align-items-center"
+    className: "row w-100 my-5 align-items-center justify-content-center"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
     className: "col-12 text-center pb-5 mb-5"
   }, "Checkout"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "col-lg-6 col-12"
+    className: "col-lg-9 col-12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_ProductsList__WEBPACK_IMPORTED_MODULE_7__["default"], {
     data: products,
     fields: {
@@ -1101,10 +1249,111 @@ function Checkout(props) {
     sum: getSumOfProducts()
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-lg-6 col-12 text-center"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+    onSubmit: handleSubmit
+  }, !auth.state.authenticated && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", null, "Please fill all the needed data:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "email"
+  }, "Email"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
+    seamless: true
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupAddon"], {
+    type: "prepend"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_10__["faEnvelope"]
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormInput"], {
+    invalid: invalids.includes("email"),
+    type: "email",
+    id: "email",
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "name"
+  }, "Full name"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
+    seamless: true
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupAddon"], {
+    type: "prepend"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons_faUser__WEBPACK_IMPORTED_MODULE_11__["faUser"]
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormInput"], {
+    invalid: invalids.includes("name"),
+    type: "text",
+    id: "name",
+    onChange: function onChange(e) {
+      return setName(e.target.value);
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "country"
+  }, "Country"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    options: countries,
+    onChange: function onChange(e) {
+      setCountry(e.id);
+    },
+    inputProps: {
+      id: 'country'
+    },
+    styles: {
+      menu: function menu(provided) {
+        return _objectSpread({}, provided, {
+          zIndex: 10,
+          textAlign: "justify"
+        });
+      },
+      container: function container(provided) {
+        return _objectSpread({}, provided, {
+          border: invalids.includes("country") ? "1px solid red" : null,
+          borderRadius: ".375rem"
+        });
+      }
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "address"
+  }, "Address"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
+    seamless: true
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupAddon"], {
+    type: "prepend"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons_faStreetView__WEBPACK_IMPORTED_MODULE_13__["faStreetView"],
+    style: {
+      zIndex: 2
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormInput"], {
+    invalid: invalids.includes("address"),
+    type: "text",
+    id: "address",
+    onChange: function onChange(e) {
+      return setAddress(e.target.value);
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+    htmlFor: "zipcode"
+  }, "ZIP Code"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
+    seamless: true
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupAddon"], {
+    type: "prepend"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons_faMapMarkerAlt__WEBPACK_IMPORTED_MODULE_14__["faMapMarkerAlt"],
+    style: {
+      zIndex: 2
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormInput"], {
+    invalid: invalids.includes("zipcode"),
+    type: "text",
+    id: "zipcode",
+    onChange: function onChange(e) {
+      return setZipCode(e.target.value);
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormCheckbox"], {
+    onChange: function onChange() {
+      setTerms(!terms);
+    },
+    checked: terms,
+    className: "my-4",
+    invalid: invalids.includes("terms")
+  }, "I agree with the terms and conditions of usage The Shop.")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    block: true,
     size: "lg",
-    color: "success"
-  }, "Proceed to payment"))));
+    color: "success",
+    className: "mt-4"
+  }, "Proceed to payment")))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Checkout);
@@ -2036,7 +2285,7 @@ function Register() {
     },
     checked: terms,
     className: "my-4"
-  }, "The terms and conditions of usage The Shop."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+  }, "I agree with the terms and conditions of usage The Shop."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_4__["Button"], {
     size: "lg",
     onClick: previousStep
   }, "Go back"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_4__["Button"], {
@@ -2067,7 +2316,6 @@ function Register() {
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
     className: "sr-only"
   }, "Loading..."))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_4__["Form"], {
-    method: "POST",
     onSubmit: handleSubmit,
     className: formClasses
   }, displayStep())));

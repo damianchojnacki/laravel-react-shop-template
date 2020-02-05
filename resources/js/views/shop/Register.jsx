@@ -230,7 +230,7 @@ export default function Register() {
                 checked={terms}
                 className="my-4"
             >
-                The terms and conditions of usage The Shop.
+                I agree with the terms and conditions of usage The Shop.
             </FormCheckbox>
             <Button size="lg" onClick={previousStep}>Go back</Button>
             <Button size="lg" onClick={handleSubmit} className="float-right">Sign in!</Button>
@@ -264,7 +264,7 @@ export default function Register() {
                             </div>
                         </div>
                     :
-                        <Form method="POST" onSubmit={handleSubmit} className={formClasses}>
+                        <Form onSubmit={handleSubmit} className={formClasses}>
                             {displayStep()}
                         </Form>
                     }
