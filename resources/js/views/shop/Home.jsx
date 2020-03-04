@@ -1,61 +1,32 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
-import ProductService from "../../utils/ProductService";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
-import {CartContext} from "../../utils/CartContext";
 import {notify} from "react-notify-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import {newArray} from "../../utils/helpers";
+import Shop from "../../layouts/Shop";
+import {usePage} from "@inertiajs/inertia-react";
+import CartService from "../../utils/CartService";
 
-function Home(props){
-    const result = props.match.params.result;
-
-    const {state, dispatch} = React.useContext(CartContext);
-
-    const [productsDiscounted, setProductsDiscounted] = useState([]);
-    const [specialOffer, setSpecialOffer] = useState([]);
-
-    useEffect(() => {
-        (async () => {
-            const productsDiscounted = await ProductService.discounts.all();
-
-            productsDiscounted.sort((previous, next) => {
-                return previous.discount.percent_off - next.discount.percent_off;
-            });
-
-            setSpecialOffer(productsDiscounted.pop());
-
-            //slice can be removed but displayed products will be moved to the edges (flex)
-            setProductsDiscounted(productsDiscounted.slice(productsDiscounted.length % 4));
-        })();
-    }, []);
+function Home({specialOffer, productsDiscounted}){
+    const {cart} = usePage();
 
     const addToCart = product => {
-        dispatch({type: "add", payload: product.id});
-
-        notify.show(`${product.name} has been added to cart.`, 'success', 1500);
+        CartService.add(product.id);
     };
 
     const removeFromCart = product => {
-        dispatch({type: "remove", payload: product.id});
-
-        notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
+        CartService.remove(product.id);
     };
 
     return (
-        <>
+        <Shop>
             <Helmet>
                 <title>Shop | Homepage</title>
             </Helmet>
 
             <main className="d-flex flex-column">
-                {result === "success" &&
-                    <Alert theme="success" className="m-2 mb-4">
-                        You've successfully registered and logged in. You can start shopping right now!
-                    </Alert>
-                }
                 <Card className="m-2">
                     <div className="row position-relative m-0">
                         <CardHeader className="h-100 col-md-3 col-12" style={{minHeight: '275px'}}>
@@ -77,27 +48,20 @@ function Home(props){
                     <CardFooter className="d-flex flex-wrap justify-content-between">
                         {specialOffer.id &&
                             <>
-                                {state.cart.includes(specialOffer.id) &&
-                                        <Button block size="big" className="btn btn-danger my-1" onClick={() => removeFromCart(specialOffer)}>Remove</Button>
+                                {cart.includes(specialOffer.id) &&
+                                        <Button block size="big" className="btn btn-danger my-1" onClick={() => CartService.remove(specialOffer.id)}>Remove</Button>
                                 }
-                                <Button block size="big" className="btn btn-secondary my-1" onClick={() => addToCart(specialOffer)}>Add to cart</Button>
+                                <Button block size="big" className="btn btn-secondary my-1" onClick={() => CartService.add(specialOffer.id)}>Add to cart</Button>
                             </>
                         }
                     </CardFooter>
                 </Card>
                 <div className="main my-2 d-flex w-100 justify-content-between flex-wrap">
-                    <ProductsListComplex {...props} data={productsDiscounted.length ? productsDiscounted : props.productsDiscounted} />
+                    <ProductsListComplex data={productsDiscounted} />
                 </div>
             </main>
-        </>
+        </Shop>
     )
 }
-
-Home.defaultProps = {
-    productsDiscounted: newArray(4, {
-        name: '',
-        price: '',
-    })
-};
 
 export default Home;

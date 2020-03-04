@@ -37,14 +37,6 @@ export default class ProductService{
         return window.axios.delete(`/api/products/${id}`);
     }
 
-    static async cart(cart) {
-        const param = JSON.stringify(cart);
-
-        const response = await window.axios.get(`/api/products/cart/${param}`);
-
-        return response.data;
-    }
-
     static discounts = new DiscountService;
 }
 

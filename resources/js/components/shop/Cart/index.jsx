@@ -6,64 +6,48 @@ import {
     DropdownMenu,
     DropdownItem, InputGroupText
 } from "shards-react";
-import {CartContext} from "../../../utils/CartContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
-import ProductService from "../../../utils/ProductService";
 import {ListGroup, ListGroupItem, Button} from "shards-react";
-import {notify} from "react-notify-toast";
+import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 
 import "./style.scss";
+import CartService from "../../../utils/CartService";
 
 function Cart(props) {
-    const {state, dispatch} = React.useContext(CartContext);
+    const {cart} = usePage();
     const [opened, setOpened] = useState(false);
-    const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        (async function () {
-            const products = await ProductService.cart(state.cart);
-
-            setProducts(products);
-        }());
-    }, [state]);
-
-    const removeFromCart = product => {
-        dispatch({type: "remove", payload: product.id});
-
-        notify.show(`${product.name} has been removed from cart.`, 'success', 1500);
-    };
-
-    const getSumOfProducts = () => {
-        if(products && products.length) {
+    function getSumOfProducts(){
+        if(cart && cart.length) {
             let sum = 0;
 
-            products.map(product => {
+            cart.map(product => {
                 sum += parseFloat(product.price_final) * product.quantity;
             });
 
             return sum.toFixed(2);
         }
-    };
+    }
 
     return (
-        <Dropdown dropup open={opened} className="cart" toggle={() => false}>
+        <Dropdown dropup open={opened} className="cart" toggle={opened}>
             <DropdownToggle className="cart__button" onClick={() => setOpened(!opened)}>
                 <FontAwesomeIcon size="lg" icon={faShoppingCart}/>
             </DropdownToggle>
-        <DropdownMenu right className={products && products.length ? null: "cart__empty"}>
+        <DropdownMenu right className={cart && cart.length ? null: "cart__empty"}>
             <h4 className="cart__header">Shopping cart</h4>
-            {products && products.length ?
+            {cart && cart.length ?
                 <>
                     <DropdownItem tag="span" className="cart__products">
                         <ListGroup>
-                            {products.map(product =>
+                            {cart.map(product =>
                                 <ListGroupItem key={product.id}>
                                     <span className="cart__field">{product.name}</span>
                                     <span className="cart__field">{product.price_final} $</span>
                                     <span className="cart__field">{product.quantity}</span>
                                     <span className="cart__field">
-                                        <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(product)}>Remove</Button>
+                                        <Button size="sm" className="btn btn-danger" onClick={() => CartService.remove(product.id)}>Remove</Button>
                                     </span>
                                 </ListGroupItem>
                             )}
@@ -71,9 +55,9 @@ function Cart(props) {
                         </ListGroup>
                     </DropdownItem>
                     <DropdownItem tag="span">
-                        <Link to="/checkout">
+                        <InertiaLink href="/checkout">
                             <Button block>Checkout</Button>
-                        </Link>
+                        </InertiaLink>
                     </DropdownItem>
                 </>
                     :

@@ -1,22 +1,23 @@
 import React from "react";
 import {Card, CardBody, CardHeader, CardTitle, CardFooter, Button} from "shards-react";
 import {notify} from "react-notify-toast";
-import {CartContext} from "../../../utils/CartContext";
 import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
+import {usePage} from "@inertiajs/inertia-react";
+import CartService from "../../../utils/CartService";
 
 function ProductsListComplex(props){
-    const {state, dispatch} = React.useContext(CartContext);
+    const {cart} = usePage();
 
     const addToCart = product => {
-        dispatch({type: "add", payload: product.id});
+        CartService.add(product.id);
 
         notify.show(`${product.name} has been added to cart.`, 'success', 1500);
     };
 
     const removeFromCart = product => {
-        dispatch({type: "remove", payload: product.id});
+        CartService.remove(product.id);
 
         notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
     };
@@ -66,7 +67,7 @@ function ProductsListComplex(props){
                     <CardFooter className="d-flex flex-wrap justify-content-between">
                         {product.name &&
                             <>
-                                {state.cart.includes(product.id) &&
+                                {cart.includes(product.id) &&
                                         <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>Remove</Button>
                                 }
                                 <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>Add to cart</Button>

@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Inertia\Inertia;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
@@ -26,5 +29,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
+
+        Inertia::share('auth.user', function () {
+            if (Auth::user()) return new UserResource(Auth::user());
+        });
     }
 }

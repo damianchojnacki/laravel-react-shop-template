@@ -723,7 +723,7 @@ var CartContextConsumer = CartContext.Consumer;
 
 /***/ "./resources/js/views/shop/Home.jsx":
 /*!******************************************!*\
-  !*** ./resources/js/views/shop/Home.jsx ***!
+  !*** ./resources/js/views/shop/Welcome.js ***!
   \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {

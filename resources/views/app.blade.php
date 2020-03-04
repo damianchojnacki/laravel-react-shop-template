@@ -7,11 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Shop</title>
-    <!-- Styles -->
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body>
-    <div id="root"></div>
-    <script src="{{ mix('js/app.js') }}"></script>
+    @inertia
 </body>
 </html>

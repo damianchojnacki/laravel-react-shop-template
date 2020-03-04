@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {
-    Form, Alert, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox
+    Form, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox
 } from "shards-react";
 import {CartContext} from "../../utils/CartContext";
 import ProductService from "../../utils/ProductService";
@@ -9,13 +9,12 @@ import {Helmet} from "react-helmet";
 import ProductsList from "../../components/shop/ProductsList";
 import {Redirect} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faLock} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import Select from "react-select";
 import {faStreetView} from "@fortawesome/free-solid-svg-icons/faStreetView";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
 import {checkFullName, equals, isEmail} from "../../utils/helpers";
-import AuthService from "../../utils/AuthService";
 
 function Checkout(props) {
     const cart = React.useContext(CartContext);

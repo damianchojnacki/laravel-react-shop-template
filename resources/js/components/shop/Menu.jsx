@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import {Nav, NavItem, Navbar, NavbarToggler, NavbarBrand, Collapse} from "shards-react";
 import AuthService from "../../utils/AuthService";
-import {Link, NavLink} from 'react-router-dom';
-import {AuthContext} from "../../utils/AuthContext";
+import {InertiaLink, usePage} from "@inertiajs/inertia-react";
+import routes from '../../routes/shop';
 
 function Menu(props) {
-    const {state, dispatch} = React.useContext(AuthContext);
     const [navbarOpened, setNavbarOpened] = useState(false);
+
+    const {auth} = usePage();
 
     const handleLogout = (e) => {
         e.preventDefault();
@@ -17,26 +18,26 @@ function Menu(props) {
 
     return (
         <Navbar type="dark" theme="primary" expand="md" className="mb-4">
-            <Link to="/">
+            <InertiaLink href="/">
                 <NavbarBrand tag="div">Shop Template</NavbarBrand>
-            </Link>
+            </InertiaLink>
             <NavbarToggler onClick={() => setNavbarOpened(!navbarOpened)} />
 
             <Collapse open={navbarOpened} navbar>
                 <Nav navbar>
-                    {props.routes && props.routes.map((prop, key) => {
-                        if (prop.name === "Login" && state.authenticated) return null;
-                        if (prop.name === "Register" && state.authenticated) return null;
+                    {routes && routes.map((prop, key) => {
+                        if (prop.name === "Login" && auth.user) return null;
+                        if (prop.name === "Register" && auth.user) return null;
                         if (prop.hidden) return null;
                         return (
                             <NavItem key={key}>
-                                <NavLink className="nav-link" to={prop.link ?? prop.path}>{prop.name}</NavLink>
+                                <InertiaLink className="nav-link" href={prop.link ?? prop.path}>{prop.name}</InertiaLink>
                             </NavItem>
                         );
                     })}
-                    {state.authenticated &&
+                    {auth.user &&
                         <NavItem>
-                            <Link className="nav-link" to="#" onClick={handleLogout}>Logout</Link>
+                            <InertiaLink className="nav-link" href="#" onClick={handleLogout}>Logout</InertiaLink>
                         </NavItem>
                     }
                 </Nav>

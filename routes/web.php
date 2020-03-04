@@ -16,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/redirect/{social}','AuthController@socialLogin')->where('social','facebook|google');
 Route::get('/login/{social}/callback','AuthController@handleProviderCallback')->where('social','facebook|google');
 
-Route::view('/{path?}', 'app')->where('path', '.*');
+Route::put("/cart/{id}", 'CartController@add');
+Route::delete("/cart/{id}", 'CartController@remove');
+
+Route::get("/", 'ShopController@homepage');
 
