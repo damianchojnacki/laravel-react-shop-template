@@ -2,8 +2,6 @@ import React, {useEffect, useState} from "react";
 import {
     Form, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox
 } from "shards-react";
-import ProductService from "../../utils/ProductService";
-import {notify} from "react-notify-toast";
 import {Helmet} from "react-helmet";
 import ProductsList from "../../components/shop/ProductsList";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -12,50 +10,50 @@ import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import Select from "react-select";
 import {faStreetView} from "@fortawesome/free-solid-svg-icons/faStreetView";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
-import {checkFullName, equals, isEmail} from "../../utils/helpers";
+import {checkFullName, isEmail} from "../../utils/helpers";
 import {usePage} from "@inertiajs/inertia-react";
+import CountryService from "../../utils/CountryService";
+import 'flag-icon-css/css/flag-icon.min.css';
+import Shop from "../../layouts/Shop";
 
-function Checkout(props) {
-    const {cart} = usePage();
+function Checkout() {
+    const {cart, auth} = usePage();
 
-    const [products, setProducts] = useState([]);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [zipCode, setZipCode] = useState('');
     const [terms, setTerms] = useState(false);
-    const [countries, setCountries] = useState([]);
     const [invalids, setInvalids] = useState([]);
-    const [redirect, setRedirect] = useState(false);
+    const [countries, setCountries] = useState([]);
 
     useEffect(() => {
-        const list = props.countries.map((country) => {
-            return {
-                id: country.id,
-                value: country.name,
-                label:
-                    <>
-                        <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
-                        <span className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
-                    </>
-            }
-        });
+        (async function() {
+            const countries = await CountryService.all();
 
-        setCountries(list);
+            const list = countries.map((country) => {
+                return {
+                    id: country.id,
+                    value: country.name,
+                    label:
+                        <>
+                            <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
+                            <span
+                                className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
+                        </>
+                }
+            });
+
+            setCountries(list);
+        })();
     }, []);
 
-    const changeQuantity = (product, action) => {
-        action ? cart.dispatch({type: "add", payload: product.id}) : cart.dispatch({type: "remove", payload: product.id});
-
-        notify.show(`Cart has been updated!.`, 'success', 1500);
-    };
-
     const getSumOfProducts = () => {
-        if (products.length) {
+        if (cart.length) {
             let sum = 0;
 
-            products.map(product => {
+            cart.map(product => {
                 sum += parseFloat(product.price_final) * product.quantity;
             });
 
@@ -115,8 +113,7 @@ function Checkout(props) {
     };
 
     return (
-        <>
-            {redirect && <Redirect to="/"/>}
+        <Shop>
             <Helmet>
                 <title>Shop | Checkout</title>
             </Helmet>
@@ -124,18 +121,17 @@ function Checkout(props) {
                 <h1 className="col-12 text-center pb-5 mb-5">Checkout</h1>
                 <div className="col-lg-9 col-12">
                     <ProductsList
-                        data={products}
+                        data={cart}
                         fields={{
                             name: true,
                             price: true,
                         }}
-                        changeQuantity={changeQuantity}
                         sum={getSumOfProducts()}
                     />
                 </div>
                 <div className="col-lg-6 col-12 text-center">
                     <Form onSubmit={handleSubmit}>
-                        {!auth.state.authenticated &&
+                        {!auth.user &&
                             <>
                                 <h4>Please fill all the needed data:</h4>
                                 <FormGroup>
@@ -216,7 +212,7 @@ function Checkout(props) {
                     </Form>
                 </div>
             </div>
-        </>
+        </Shop>
     );
 }
 

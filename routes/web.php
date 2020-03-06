@@ -24,6 +24,7 @@ Route::group([
     Route::get('products/search/{id}/{category?}', 'ShopController@productsSearch');
     Route::get('login', 'ShopController@login')->name('login');
     Route::get('register', 'ShopController@register')->name('register');
+    Route::get('checkout', 'ShopController@checkout')->name('checkout');
 });
 
 Route::group([

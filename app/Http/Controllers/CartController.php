@@ -33,7 +33,7 @@ class CartController extends Controller
         return Redirect::back();
     }
 
-    public function decrease($id){
+    public function remove($id){
         $cart = \Session::get("cart");
 
         foreach($cart as $key => $value){
@@ -44,18 +44,6 @@ class CartController extends Controller
         }
 
         \Session::put("cart", $cart);
-
-        \Session::flash('success', 'Product has been removed.');
-
-        return Redirect::back();
-    }
-
-    public function remove($id){
-        $cart = \Session::get("cart");
-
-        \Session::put("cart", array_filter($cart, function($product) use($id){
-            return $product->id != (int) $id;
-        }));
 
         \Session::flash('success', 'Product has been removed.');
 

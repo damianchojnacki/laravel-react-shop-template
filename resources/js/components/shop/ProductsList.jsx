@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Button} from "shards-react";
 import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
+import CartService from "../../utils/CartService";
 
 function ProductsList(props){
     return (
@@ -23,12 +24,12 @@ function ProductsList(props){
                         <td className="text-center">{product.price} USD</td>
                         <td className="text-center">{product.quantity}</td>
                         <td>
-                            <Button theme="light" size="sm" pill outline onClick={() => props.changeQuantity(product, true)}>
+                            <Button theme="light" size="sm" pill outline onClick={() => CartService.add(product)}>
                                 <FontAwesomeIcon icon={faPlus}/>
                             </Button>
                         </td>
                         <td>
-                            <Button theme="light" size="sm" pill outline onClick={() => props.changeQuantity(product, false)}>
+                            <Button theme="light" size="sm" pill outline onClick={() => CartService.remove(product)}>
                                 <FontAwesomeIcon icon={faMinus}/>
                             </Button>
                         </td>

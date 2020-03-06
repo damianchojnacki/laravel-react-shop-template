@@ -32,15 +32,12 @@ class AuthController extends Controller {
     }
 
     public function socialLogin($social){
-        if ($social == "facebook" || $social == "google")
-            return Socialite::with($social)
-                ->redirect();
-        else
-            return Socialite::with($social)->redirect();
+        return Socialite::with($social)->redirect();
     }
 
     public function handleProviderCallback($social){
         $userSocial = Socialite::with($social)->user();
+
         $user = User::firstOrNew(['email' => $userSocial->getEmail()]);
 
         if (!$user->id) {
@@ -48,11 +45,13 @@ class AuthController extends Controller {
                 "name" => $userSocial->getName(),
                 "password"=>Hash::make(Str::random()),
             ]);
-            // Save user social
+
             $user->save();
         }
 
         Auth::login($user);
+
+        \Session::flash('success', 'You have been successfully singed in.');
 
         return redirect()->to('/');
     }
@@ -62,7 +61,7 @@ class AuthController extends Controller {
         $validator = Validator::make($request->all(), [
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'country' => 'required|numeric',
+            'country' => 'required|string|max:64',
         ]);
 
         if ($validator->fails()) {
@@ -70,10 +69,10 @@ class AuthController extends Controller {
         }
 
         $user = new User();
-        $user->email = $request['email'];
-        $user->name = $request['name'];
-        $user->password = Hash::make($request['password']);
-        $user->country()->associate(Country::find($request['country']));
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->password = Hash::make($request->password);
+        $user->country = $request->country;
         $user->saveOrFail();
 
         Auth::login($user);

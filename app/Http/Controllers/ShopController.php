@@ -69,4 +69,8 @@ class ShopController extends Controller
     public function register(){
         return Inertia::render('shop/Register');
     }
+
+    public function checkout(){
+        return Inertia::render('shop/Checkout');
+    }
 }
