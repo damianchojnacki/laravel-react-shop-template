@@ -30,8 +30,8 @@ export default function Login() {
             setLoading(true);
 
             AuthService.login(credentials)
-                .then(user => {
-                    setUser(user);
+                .then(response => {
+                    setUser(response.user);
                     setTimeout(() => Inertia.visit('/'), 500);
                 })
                 .catch(error => {

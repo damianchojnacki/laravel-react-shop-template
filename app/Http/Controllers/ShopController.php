@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
 use App\Http\Resources\ProductResource;
 use App\Product;
 use Inertia\Inertia;
@@ -68,10 +67,6 @@ class ShopController extends Controller
     }
 
     public function register(){
-        $countries = Country::orderBy('name')->get();
-
-        return Inertia::render('shop/Register', [
-            'countries' => $countries,
-        ]);
+        return Inertia::render('shop/Register');
     }
 }

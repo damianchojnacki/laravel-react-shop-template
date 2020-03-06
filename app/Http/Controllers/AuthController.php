@@ -25,32 +25,22 @@ class AuthController extends Controller {
     }
 
     public function login(Request $request) {
-        $user = User::where('email', $request->email)->first();
-
-        if ($user && Hash::check($request->password, $user->password)) {
-            Auth::login($user);
-
-            return response($user, 200);
-        } else {
-            \Session::flash('error', 'Incorrect email or password!');
-
-            return response('Bad credentials', 422);
-        }
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
+            return response(['user' => new UserResource(Auth::user())], 200);
+        else
+            return response('Incorrect email or password.', 422);
     }
 
     public function socialLogin($social){
         if ($social == "facebook" || $social == "google")
             return Socialite::with($social)
-                ->stateless()
                 ->redirect();
         else
             return Socialite::with($social)->redirect();
     }
 
     public function handleProviderCallback($social){
-        $userSocial = Socialite::with($social)->stateless()->user();
-
-        $token = $userSocial->token;
+        $userSocial = Socialite::with($social)->user();
         $user = User::firstOrNew(['email' => $userSocial->getEmail()]);
 
         if (!$user->id) {
@@ -62,9 +52,9 @@ class AuthController extends Controller {
             $user->save();
         }
 
-        $access_token = $user->createToken($token)->accessToken;
+        Auth::login($user);
 
-        return redirect()->to('/')->withCookies([Cookie::make('access_token', $access_token, 60, '/', null, false, false)]);
+        return redirect()->to('/');
     }
 
     public function register(Request $request) {
@@ -90,7 +80,7 @@ class AuthController extends Controller {
 
         \Session::flash('success', 'You have been successfully signed up.');
 
-        return response(['user' => $user], 200);
+        return response(['user' => new UserResource($user)], 200);
     }
 
     public function logout() {
