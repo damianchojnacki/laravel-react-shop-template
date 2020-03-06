@@ -1,6 +1,6 @@
 import React from "react";
 import {Card, CardBody, CardHeader, CardTitle, CardFooter, ListGroup, ListGroupItem, Button} from "reactstrap";
-import {Link} from "react-router-dom";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 function ProductsListComplex(props){
     return (
@@ -25,7 +25,7 @@ function ProductsListComplex(props){
                     </CardBody>
                     <CardFooter className="text-right">
                         <Button color="danger" onClick={() => {props.remove(product.id)}}>Remove</Button>
-                        <Link className={`btn btn-${props.bgColor}`} to={`/admin/products/${product.id}`}>Details</Link>
+                        <InertiaLink className={`btn btn-${props.bgColor}`} href={`/admin/products/${product.id}`}>Details</InertiaLink>
                     </CardFooter>
                 </Card>
             );

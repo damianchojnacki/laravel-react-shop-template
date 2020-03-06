@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -24,24 +25,17 @@ class AuthController extends Controller {
     }
 
     public function login(Request $request) {
-
         $user = User::where('email', $request->email)->first();
 
-        if ($user) {
-            if (Hash::check($request->password, $user->password)) {
-                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                $response = ['token' => $token];
-                $status = 200;
-            } else {
-                $status = 422;
-                $response = 'Incorrect email or password!';
-            }
-        } else {
-            $response = 'Incorrect email or password!';
-            $status = 422;
-        }
+        if ($user && Hash::check($request->password, $user->password)) {
+            Auth::login($user);
 
-        return response($response, $status);
+            return response($user, 200);
+        } else {
+            \Session::flash('error', 'Incorrect email or password!');
+
+            return response('Bad credentials', 422);
+        }
     }
 
     public function socialLogin($social){
@@ -92,17 +86,18 @@ class AuthController extends Controller {
         $user->country()->associate(Country::find($request['country']));
         $user->saveOrFail();
 
-        $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-        $response = ['token' => $token];
+        Auth::login($user);
 
-        return response($response, 200);
+        \Session::flash('success', 'You have been successfully signed up.');
+
+        return response(['user' => $user], 200);
     }
 
-    public function logout (Request $request) {
-        $token = $request->user()->token();
-        $token->revoke();
+    public function logout() {
+        Auth::logout();
 
-        $response = 'You have been succesfully logged out!';
-        return response($response, 200);
+        \Session::flash('success', 'You have been successfully logged out!');
+
+        return \Redirect::back();
     }
 }

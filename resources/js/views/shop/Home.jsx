@@ -2,23 +2,14 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
 import ProductsListComplex from "../../components/shop/ProductListComplex";
-import {notify} from "react-notify-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import Shop from "../../layouts/Shop";
-import {usePage} from "@inertiajs/inertia-react";
 import CartService from "../../utils/CartService";
+import {usePage} from "@inertiajs/inertia-react";
 
 function Home({specialOffer, productsDiscounted}){
     const {cart} = usePage();
-
-    const addToCart = product => {
-        CartService.add(product.id);
-    };
-
-    const removeFromCart = product => {
-        CartService.remove(product.id);
-    };
 
     return (
         <Shop>
@@ -48,10 +39,10 @@ function Home({specialOffer, productsDiscounted}){
                     <CardFooter className="d-flex flex-wrap justify-content-between">
                         {specialOffer.id &&
                             <>
-                                {cart.includes(specialOffer.id) &&
-                                        <Button block size="big" className="btn btn-danger my-1" onClick={() => CartService.remove(specialOffer.id)}>Remove</Button>
+                                {CartService.in(cart, specialOffer) &&
+                                        <Button block size="big" className="btn btn-danger my-1" onClick={() => CartService.remove(specialOffer)}>Remove</Button>
                                 }
-                                <Button block size="big" className="btn btn-secondary my-1" onClick={() => CartService.add(specialOffer.id)}>Add to cart</Button>
+                                <Button block size="big" className="btn btn-secondary my-1" onClick={() => CartService.add(specialOffer)}>Add to cart</Button>
                             </>
                         }
                     </CardFooter>

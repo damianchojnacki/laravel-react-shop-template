@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Redirect} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -29,9 +28,7 @@ function User(props) {
 
     useEffect(() => {
         (async function() {
-            const countriesData = await window.axios.get('/api/countries');
-
-            const options =  countriesData.data.map((country) => {
+            const options =  props.countries.map((country) => {
                 return <option key={country.id} value={country.id}>{country.name}</option>
             });
 
@@ -70,7 +67,7 @@ function User(props) {
             UserService.create(data)
                 .then(res => {
                     notify.show(`${name} has been added.`, 'success');
-                    setRedirect(<Redirect to={`/admin/users/${res.data}`}/>)
+                    //setRedirect(<Redirect to={`/admin/users/${res.data}`}/>)
                 })
                 .catch(error => {
                     notify.show(error.response.data.message, 'error');
@@ -81,7 +78,7 @@ function User(props) {
         UserService.delete(user.id)
             .then(res => {
                 notify.show(res.data, 'success');
-                setRedirect(<Redirect to="/admin/users"/>)
+                //setRedirect(<Redirect to="/admin/users"/>)
             })
             .catch(error => {
                 notify.show(error.response.data.message, 'error');
@@ -90,7 +87,6 @@ function User(props) {
 
     return (
         <div className="content">
-            {redirect}
             <Row>
                 <Col md={id !== 'new' ? 6 : 12}>
                     <Form onSubmit={handleSubmit}>

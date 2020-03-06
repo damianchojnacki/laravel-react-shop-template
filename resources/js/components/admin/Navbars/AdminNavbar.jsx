@@ -36,11 +36,10 @@ import {
     Container,
     Modal
 } from "reactstrap";
-import {AuthContext} from "../../../utils/AuthContext";
 import AuthService from "../../../utils/AuthService";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 function AdminNavbar(props) {
-    const { state, dispatch } = React.useContext(AuthContext);
     const [collapseOpen, setCollapseOpen] = useState(false);
     const [modalSearch, setModalSearch] = useState(false);
     const [color, setColor] = useState("navbar-transparent");
@@ -50,13 +49,6 @@ function AdminNavbar(props) {
 
         return () => window.removeEventListener("resize", updateColor);
     }, []);
-
-    const handleLogout = (e) => {
-        e.preventDefault();
-
-        AuthService.logout();
-        dispatch({ type: "logout" });
-    };
 
     // function that adds color white/transparent to the navbar on resize (this is for the collapse)
     const updateColor = () => {
@@ -73,7 +65,6 @@ function AdminNavbar(props) {
     const toggleModalSearch = () => {
         setModalSearch(!modalSearch)
     };
-
 
     return (
         <>
@@ -184,7 +175,9 @@ function AdminNavbar(props) {
                                 </DropdownToggle>
                                 <DropdownMenu className="dropdown-navbar" right tag="ul">
                                     <NavLink tag="li">
-                                        <DropdownItem className="nav-item" onClick={handleLogout}>Log out</DropdownItem>
+                                        <DropdownItem className="nav-item">
+                                            <InertiaLink href="/logout" method="post">Logout</InertiaLink>
+                                        </DropdownItem>
                                     </NavLink>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

@@ -9,13 +9,6 @@ function Menu(props) {
 
     const {auth} = usePage();
 
-    const handleLogout = (e) => {
-        e.preventDefault();
-
-        AuthService.logout();
-        dispatch({type: "logout"});
-    };
-
     return (
         <Navbar type="dark" theme="primary" expand="md" className="mb-4">
             <InertiaLink href="/">
@@ -37,7 +30,7 @@ function Menu(props) {
                     })}
                     {auth.user &&
                         <NavItem>
-                            <InertiaLink className="nav-link" href="#" onClick={handleLogout}>Logout</InertiaLink>
+                            <InertiaLink className="nav-link" href="/logout" method="post">Logout</InertiaLink>
                         </NavItem>
                     }
                 </Nav>

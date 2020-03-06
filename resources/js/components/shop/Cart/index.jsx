@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
 import {
     Dropdown,
     DropdownToggle,
@@ -31,7 +30,7 @@ function Cart(props) {
     }
 
     return (
-        <Dropdown dropup open={opened} className="cart" toggle={opened}>
+        <Dropdown dropup open={opened} className="cart" toggle={() => false}>
             <DropdownToggle className="cart__button" onClick={() => setOpened(!opened)}>
                 <FontAwesomeIcon size="lg" icon={faShoppingCart}/>
             </DropdownToggle>
@@ -47,7 +46,7 @@ function Cart(props) {
                                     <span className="cart__field">{product.price_final} $</span>
                                     <span className="cart__field">{product.quantity}</span>
                                     <span className="cart__field">
-                                        <Button size="sm" className="btn btn-danger" onClick={() => CartService.remove(product.id)}>Remove</Button>
+                                        <Button size="sm" className="btn btn-danger" onClick={() => CartService.remove(product)}>Remove</Button>
                                     </span>
                                 </ListGroupItem>
                             )}

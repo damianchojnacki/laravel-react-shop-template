@@ -1,20 +1,21 @@
 import DiscountService from './DiscountService';
+import {Inertia} from "@inertiajs/inertia";
 
 export default class ProductService{
-    static async all(page = '', category = '') {
-        const response = await window.axios.get(`/api/products/all/${page}/${category}`);
+    static all(page = '', category = '') {
+        Inertia.replace(`/products/all/${page}/${category ? category : ''}`, {
+            preserveScroll: true,
+        });
+    }
 
-        return response.data;
+    static search(name, category = '') {
+        name ? Inertia.replace(`/products/search/${name}/${category ? category : ''}`, {
+            preserveScroll: true,
+        }) : this.all(1, category);
     }
 
     static async get(id) {
         const response = await window.axios.get(`/api/products/${id}`);
-
-        return response.data;
-    }
-
-    static async search(name, category = 'null') {
-        const response = await window.axios.get(`/api/products/search/${name}/${category}`);
 
         return response.data;
     }

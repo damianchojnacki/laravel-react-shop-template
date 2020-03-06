@@ -177,6 +177,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         \App\Providers\CartServiceProvider::class,
         \App\Providers\FlashMessageServiceProvider::class,
+        \App\Providers\ProductTypeServiceProvider::class,
     ],
 
     /*

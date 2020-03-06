@@ -12,8 +12,8 @@ export default [
         layout: "/shop"
     },
     {
-        path: "/products/:category?",
-        link: "/products",
+        path: "/products/all/:category?",
+        link: "/products/all",
         name: "Products",
         component: Products,
         layout: "/shop",

@@ -1,6 +1,6 @@
 import React from "react";
 import {Table} from "reactstrap";
-import {Link} from "react-router-dom";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 function UsersList(props){
     return (
@@ -25,7 +25,8 @@ function UsersList(props){
                         {props.fields.email && <td>{user.email}</td>}
                         {props.fields.name && <td>{index + 1}</td>}
                         {props.fields.country && <td>{user.country.name}</td>}
-                        <td className="text-right"><Link className={`btn btn-${props.bgColor}`} to={`/admin/users/${user.id}`}>Details</Link>
+                        <td className="text-right">
+                            <InertiaLink className={`btn btn-${props.bgColor}`} href={`/admin/users/${user.id}`}>Details</InertiaLink>
                         </td>
                     </tr>
                 ) : null}

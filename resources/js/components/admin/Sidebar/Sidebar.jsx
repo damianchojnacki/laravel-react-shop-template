@@ -17,7 +17,6 @@
 */
 /*eslint-disable*/
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
 
@@ -26,6 +25,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 
 // reactstrap components
 import { Nav } from "reactstrap";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 var ps;
 
@@ -72,15 +72,15 @@ class Sidebar extends React.Component {
                   }
                   key={key}
                 >
-                  <NavLink
-                    to={prop.layout + prop.path}
+                  <InertiaLink
+                    href={prop.layout + prop.path}
                     className="nav-link"
                     activeClassName="active"
                     onClick={this.props.toggleSidebar}
                   >
                     <i className={prop.icon} />
                     <p>{prop.name}</p>
-                  </NavLink>
+                  </InertiaLink>
                 </li>
               );
             })}

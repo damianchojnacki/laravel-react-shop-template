@@ -2,12 +2,10 @@ import React, {useEffect, useState} from "react";
 import {
     Form, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox
 } from "shards-react";
-import {CartContext} from "../../utils/CartContext";
 import ProductService from "../../utils/ProductService";
 import {notify} from "react-notify-toast";
 import {Helmet} from "react-helmet";
 import ProductsList from "../../components/shop/ProductsList";
-import {Redirect} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
@@ -15,10 +13,11 @@ import Select from "react-select";
 import {faStreetView} from "@fortawesome/free-solid-svg-icons/faStreetView";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
 import {checkFullName, equals, isEmail} from "../../utils/helpers";
+import {usePage} from "@inertiajs/inertia-react";
 
 function Checkout(props) {
-    const cart = React.useContext(CartContext);
-    const auth = React.useContext(CartContext);
+    const {cart} = usePage();
+
     const [products, setProducts] = useState([]);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -31,32 +30,20 @@ function Checkout(props) {
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        (async function() {
-            const countries = await window.axios.get('/api/countries');
+        const list = props.countries.map((country) => {
+            return {
+                id: country.id,
+                value: country.name,
+                label:
+                    <>
+                        <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
+                        <span className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
+                    </>
+            }
+        });
 
-            const list =  countries.data.map((country) => {
-                return {
-                    id: country.id,
-                    value: country.name,
-                    label:
-                        <>
-                            <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
-                            <span className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
-                        </>
-                }
-            });
-
-            setCountries(list);
-        })();
+        setCountries(list);
     }, []);
-
-    useEffect(() => {
-        (async function() {
-            const products = await ProductService.cart(cart.state.cart);
-
-            products.length ? setProducts(products) : setRedirect(true);
-        })();
-    }, [cart.state]);
 
     const changeQuantity = (product, action) => {
         action ? cart.dispatch({type: "add", payload: product.id}) : cart.dispatch({type: "remove", payload: product.id});

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Redirect} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -13,7 +12,7 @@ import {
     Row,
     Col
 } from "reactstrap";
-import Notifications, {notify} from 'react-notify-toast';
+import {notify} from 'react-notify-toast';
 import ProductService from "../../utils/ProductService";
 import ImageService from "../../utils/ImageService";
 import FormGroup from "reactstrap/es/FormGroup";
@@ -28,7 +27,6 @@ function Product(props) {
     const [type, setType] = useState('1');
     const [image, setImage] = useState('');
     const [productsTypes, setProductsTypes] = useState([]);
-    const [redirect, setRedirect] = useState();
     const id = props.match.params.id;
 
     useEffect(() => {
@@ -75,7 +73,7 @@ function Product(props) {
             ProductService.create(data)
                 .then(res => {
                     notify.show(`${name} has been added.`, 'success');
-                    setRedirect(<Redirect to={`/admin/products/${res.data}`}/>)
+                    //setRedirect(<Redirect to={`/admin/products/${res.data}`}/>)
                 })
                 .catch(error => {
                     notify.show(error.response.data.message, 'error');
@@ -97,7 +95,7 @@ function Product(props) {
         ProductService.delete(id)
             .then(res => {
                 notify.show(res.data, 'success');
-                setRedirect(<Redirect to="/admin/products"/>)
+                //setRedirect(<Redirect to="/admin/products"/>)
             })
             .catch(error => {
                 notify.show(error.response.data.message, 'error');
@@ -106,7 +104,6 @@ function Product(props) {
 
     return (
         <div className="content">
-            {redirect}
             <Row>
                 <Col md="8">
                     <Form onSubmit={handleSubmit}>

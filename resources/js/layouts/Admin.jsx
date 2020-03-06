@@ -16,7 +16,6 @@
 
 */
 import React, {useState, useEffect} from "react";
-import {Route, Switch, Redirect} from "react-router-dom";
 
 import Notifications from 'react-notify-toast';
 
@@ -32,39 +31,17 @@ import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";
 
 import PerfectScrollbar from "perfect-scrollbar";
-import AuthService from "../utils/AuthService";
-import {AuthContext} from "../utils/AuthContext";
 
 function Admin(props) {
-
-    const { state, dispatch } = React.useContext(AuthContext);
     const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('background'));
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode'));
     const [sidebarOpened, setSidebarOpened] =  useState(document.documentElement.className.indexOf("nav-open") !== -1);
-    const [redirectBack, setRedirectBack] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        state.authenticated ?
-            AuthService.getUser()
-                .then(res => {
-                    dispatch({type: "login", payload: res.data});
-                })
-                .catch(() => {
-                    dispatch({type: "logout"});
-                })
-                .finally(() => {
-                    setLoading(false);
-                })
-            :
-            setLoading(false);
-
         darkMode === 'light' ?  document.body.classList.add("white-content") : document.body.classList.remove("white-content");
     }, []);
 
     useEffect(() => {
-        (!loading && (!state.authenticated || state.user.name !== 'admin')) && setRedirectBack(true);
-
         let tables = document.querySelectorAll(".table-responsive");
         for (let i = 0; i < tables.length; i++) new PerfectScrollbar(tables[i]);
     });
@@ -86,19 +63,6 @@ function Admin(props) {
         color === 'light' ?  document.body.classList.add("white-content") : document.body.classList.remove("white-content");
     };
 
-    const getRoutes = routes => {
-        return routes.map((prop, key) => {
-            return (
-                <Route
-                    exact
-                    path={prop.layout + prop.path}
-                    render={(props) => <prop.component {...props} name={prop.name} bgColor={backgroundColor} />}
-                    key={key}
-                />
-            );
-        });
-    };
-
     const getBrandText = path => {
         for (let i = 0; i < routes.length; i++) {
             if (
@@ -112,43 +76,38 @@ function Admin(props) {
         return "Brand";
     };
 
-    return redirectBack ? window.location = '/'  :
-        (
-            <>
-                <Notifications/>
-                <div className="wrapper black-dashboard">
-                    <Sidebar
-                        {...props}
-                        routes={routes}
-                        bgColor={backgroundColor}
-                        toggleSidebar={toggleSidebar}
-                    />
-                    <div
-                        className={`main-panel ${backgroundColor}`}
-                    >
-                        <AdminNavbar
-                            {...props}
-                            brandText={getBrandText(props.location.pathname)}
-                            toggleSidebar={toggleSidebar}
-                            sidebarOpened={sidebarOpened}
-                        />
-                        <Switch>
-                            {getRoutes(routes)}
-                            <Redirect from="/admin" to="admin/dashboard"/>
-                        </Switch>
-                        {// we don't want the Footer to be rendered on map page
-                            props.location.pathname.indexOf("maps") !== -1 ? null : (
-                                <Footer fluid/>
-                            )}
-                    </div>
-                </div>
-                <FixedPlugin
+    return (
+        <>
+            <Notifications/>
+            <div className="wrapper black-dashboard">
+                <Sidebar
+                    {...props}
+                    routes={routes}
                     bgColor={backgroundColor}
-                    handleBgClick={handleBgClick}
-                    handleDarkModeClick={handleDarkModeClick}
+                    toggleSidebar={toggleSidebar}
                 />
-            </>
-        );
+                <div
+                    className={`main-panel ${backgroundColor}`}
+                >
+                    <AdminNavbar
+                        {...props}
+                        brandText={getBrandText(props.location.pathname)}
+                        toggleSidebar={toggleSidebar}
+                        sidebarOpened={sidebarOpened}
+                    />
+                    {// we don't want the Footer to be rendered on map page
+                        props.location.pathname.indexOf("maps") !== -1 ? null : (
+                            <Footer fluid/>
+                        )}
+                </div>
+            </div>
+            <FixedPlugin
+                bgColor={backgroundColor}
+                handleBgClick={handleBgClick}
+                handleDarkModeClick={handleDarkModeClick}
+            />
+        </>
+    );
 }
 
 export default Admin;

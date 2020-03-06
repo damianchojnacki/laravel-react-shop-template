@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Redirect} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -16,8 +15,6 @@ import {
 import {notify} from 'react-notify-toast';
 import OrderService from "../../utils/OrderService";
 import ProductsListComplex from "../../components/admin/ProductsListComplex";
-import User from "./User";
-import Product from "./Product";
 import ProductsList from "../../components/admin/ProductsList";
 
 function Order(props) {
@@ -97,7 +94,7 @@ function Order(props) {
             OrderService.create(data)
                 .then(res => {
                     notify.show(`Order ${id} has been added.`, 'success', 2000);
-                    setRedirect(<Redirect to="/admin/orders"/>)
+                    //setRedirect(<Redirect to="/admin/orders"/>)
                 })
                 .catch(error => {
                     notify.show(error.response.data.message, 'error');
@@ -108,7 +105,7 @@ function Order(props) {
         OrderService.delete(order.id)
             .then(res => {
                 notify.show(res.data, 'success');
-                setRedirect(<Redirect to="/admin/orders"/>)
+                //setRedirect(<Redirect to="/admin/orders"/>)
             })
             .catch(error => {
                 notify.show(error.response.data.message, 'error');
@@ -129,7 +126,6 @@ function Order(props) {
 
     return (
         <div className="content">
-            {redirect}
             <Row>
                 <Col md="6">
                     <Form onSubmit={handleSubmit}>

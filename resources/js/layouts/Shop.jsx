@@ -14,7 +14,7 @@ function Shop({children}) {
     useEffect(() => {
         flash.success && notify.show(flash.success, 'success', 1500);
         flash.error && notify.show(flash.error, 'error', 1500);
-    });
+    }, [flash]);
 
     return (
         <>
@@ -23,7 +23,7 @@ function Shop({children}) {
                 <Cart/>
                 <Menu/>
                 <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
-                    <article>{children}</article>
+                    {children}
                 </div>
                 <Footer/>
             </div>

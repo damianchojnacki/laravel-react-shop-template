@@ -6,16 +6,9 @@ import {
     Card,
     CardHeader,
     CardBody,
-    CardFooter,
-    Form,
-    Input,
     Row,
     Col
 } from "reactstrap";
-import Notifications, {notify} from 'react-notify-toast';
-import ProductService from "../../utils/ProductService";
-import OrderService from "../../utils/OrderService";
-import ProductsListComplex from "../../components/admin/ProductsListComplex";
 import ChartService from "../../utils/ChartService";
 import ChartDynamic from "../../components/admin/ChartDynamic";
 import {Helmet} from "react-helmet";

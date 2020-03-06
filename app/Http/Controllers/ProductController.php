@@ -9,6 +9,7 @@ use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -33,7 +34,7 @@ class ProductController extends Controller
         else
             $products = Product::all();
 
-        return response(ProductResource::collection($products), 200);
+        return Redirect::back(ProductResource::collection($products), 200)->with;
     }
 
     public function store(Request $request)
@@ -68,18 +69,7 @@ class ProductController extends Controller
 
     }
 
-    public function search($name, $category = null)
-    {
-        if ($category)
-            $product = Product::whereHas('type', function ($q) use ($category) {
-                $q->where('name', $category);
-            })->with(['type', 'image'])->where('name', $this->like, "%$name%")->take(100)->get();
 
-        else
-            $product = Product::where('name', $this->like, "%$name%")->take(100)->get();
-
-        return response(ProductResource::collection($product), 200);
-    }
 
     public function edit(Request $request)
     {

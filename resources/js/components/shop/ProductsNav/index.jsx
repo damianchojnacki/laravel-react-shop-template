@@ -1,30 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {FormInput, InputGroup, InputGroupAddon, InputGroupText, Nav, NavItem, NavLink} from "shards-react";
-import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
-import {isMobile, newArray} from "../../../utils/helpers";
-import ProductService from "../../../utils/ProductService";
+import {newArray} from "../../../utils/helpers";
 import "./style.scss";
 import Select from "react-select";
+import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 
 export default function ProductsNav(props){
 
-    const [productTypes, setProductTypes] = useState(props.productTypes);
+    const {productsTypes} = usePage();
 
-    useEffect(() => {
-        (async () => {
-            const productTypes = await ProductService.types();
-
-            setProductTypes(productTypes);
-        })();
-    }, []);
-
-    const navList = productTypes.length && productTypes.map(page =>
+    const navList = productsTypes.length && productsTypes.map(page =>
         <NavItem key={page.id}>
             <NavLink tag="span" active={props.category === page.name}>
-                <Link
-                    to={`/products/${page.name}`}
+                <InertiaLink
+                    href={`/products/all/1/${page.name}`}
                     className={props.category === page.name ? "text-light" : null}
                 >
                     <span
@@ -32,7 +23,7 @@ export default function ProductsNav(props){
                         data-shortname={page.short}
                         data-longname={page.long}
                     />
-                </Link>
+                </InertiaLink>
             </NavLink>
         </NavItem>
     );
@@ -42,9 +33,9 @@ export default function ProductsNav(props){
             <Nav className="px-2 justify-content-between align-items-center flex-wrap" pills>
                 <NavItem>
                     <NavLink tag="span" active={!props.category}>
-                        <Link to="/products" className={!props.category ? "text-light" : null}>
+                        <InertiaLink href="/products/all" className={!props.category ? "text-light" : null}>
                             All
-                        </Link>
+                        </InertiaLink>
                     </NavLink>
                 </NavItem>
 
@@ -91,7 +82,7 @@ export default function ProductsNav(props){
                                 <FontAwesomeIcon icon={faSearch} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <FormInput type="text" onChange={(e) => props.search(e.target.value)} placeholder="Search product" value={props.searchField ? props.searchField : ''} required/>
+                        <FormInput type="text" onChange={(e) => props.search(e.target.value)} placeholder="Search product" required/>
                     </InputGroup>
                 </NavItem>
             </Nav>
@@ -100,7 +91,7 @@ export default function ProductsNav(props){
 }
 
 ProductsNav.defaultProps = {
-    productTypes: newArray(4, {
+    productsTypes: newArray(4, {
         name: '',
         short: '',
         long: '',

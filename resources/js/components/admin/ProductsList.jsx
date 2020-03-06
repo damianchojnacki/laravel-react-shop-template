@@ -1,7 +1,7 @@
 import React from "react";
 import {Table} from "reactstrap";
-import {Link} from "react-router-dom";
 import Button from "reactstrap/es/Button";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 function ProductsList(props){
     return (
@@ -33,7 +33,7 @@ function ProductsList(props){
                                 <Button color="success" onClick={() => props.add(product)}>Add</Button>
                             </td> :
                             <td className="text-right">
-                                <Link className={`btn btn-${props.bgColor}`} to={`/admin/products/${product.id}`}>Details</Link>
+                                <InertiaLink className={`btn btn-${props.bgColor}`} href={`/admin/products/${product.id}`}>Details</InertiaLink>
                             </td>
                         }
                         {props.remove && props.products.includes(product) &&

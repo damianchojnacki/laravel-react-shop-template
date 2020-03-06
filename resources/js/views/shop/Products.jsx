@@ -1,58 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
 import ProductsNav from '../../components/shop/ProductsNav';
 import {Button} from "shards-react";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
 import classnames from 'classnames';
 import ProductService from "../../utils/ProductService";
-import {newArray} from "../../utils/helpers";
+import Shop from "../../layouts/Shop";
 
-export default function Products(props){
-    const [products, setProducts] = useState([]);
-    const [page, setPage] = useState(1);
-    const [searchField, setSearchField] = useState('');
+export default function Products({products, category, search, page}){
     const [sort, setSort] = useState({sort: "id", type: "asc"});
-    const [category, setCategory] = useState(props.match.params.category);
-
-    useEffect(() => {
-        getProducts();
-    }, [page, searchField, category]);
-
-    useEffect(() => {
-        if(category !== props.match.params.category){
-            setProducts([]);
-            setCategory(props.match.params.category);
-        }
-    });
-
-    useEffect(() => {
-        setPage(1);
-    }, [category]);
-
-    const getProducts = async () => {
-        if(searchField && searchField !== ""){
-            const found = await ProductService.search(searchField, category);
-
-            setProducts(found);
-        } else if(searchField === ""){
-            setProducts([]);
-            setPage(1);
-            setSearchField(null);
-        } else{
-            const newProducts = await ProductService.all(page, category);
-
-            setProducts(products.concat(newProducts));
-        }
-    };
-
-    const showMoreOrReload = () => {
-        if(searchField && searchField !== ''){
-            setSearchField('');
-            setProducts([]);
-            setPage(1);
-        } else
-            setPage(page + 1);
-    };
 
     const productsFlexClasses = classnames({
         "col-md-12": true,
@@ -64,28 +20,21 @@ export default function Products(props){
     });
 
     return (
-        <>
+        <Shop>
             <Helmet>
                 <title>Shop | Admin - Products</title>
             </Helmet>
             <main className="main my-2 d-flex flex-column flex-grow-1 w-100">
-                <ProductsNav category={category} searchField={searchField} search={value => setSearchField(value)} setSort={e => setSort(e)}/>
+                <ProductsNav category={category} search={value => ProductService.search(value, category)} setSort={e => setSort(e)}/>
 
                 <div className={productsFlexClasses}>
-                    <ProductsListComplex {...props} data={products.length ? products : props.products} sort={sort}/>
+                    <ProductsListComplex data={products} sort={sort}/>
 
-                    {(searchField || products.length % 12 === 0) &&
-                        <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
+                    {(search || products.length % 12 === 0) &&
+                        <Button className="btn-block my-4" onClick={() => ProductService.all(page + 1, category)}>{search ? "Reload" : "Show more"}</Button>
                     }
                 </div>
             </main>
-        </>
+        </Shop>
     )
 }
-
-Products.defaultProps = {
-    products: newArray(12, {
-        name: '',
-        price: '',
-    })
-};

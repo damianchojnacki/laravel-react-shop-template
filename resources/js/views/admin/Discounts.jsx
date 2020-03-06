@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import {
     Card,
     CardHeader,
@@ -10,6 +9,7 @@ import {
 import ProductService from "../../utils/ProductService";
 import {notify} from "react-notify-toast";
 import DiscountsList from "../../components/admin/DiscountsList";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 function Discounts(props){
     const [discounts, setDiscounts] = useState([]);
@@ -48,11 +48,11 @@ function Discounts(props){
                             <h2 className="col-md-3 col-12">
                                 All discounts
                             </h2>
-                            <Link to="/admin/discounts/new" className="col-md-3 col-12">
+                            <InertiaLink to="/admin/discounts/new" className="col-md-3 col-12">
                                 <Button color={props.bgColor} className="px-3" block>
                                     New discount
                                 </Button>
-                            </Link>
+                            </InertiaLink>
                         </CardHeader>
                         <CardBody>
                             <DiscountsList

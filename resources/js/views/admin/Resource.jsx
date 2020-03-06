@@ -15,7 +15,7 @@ import UserService from "../../utils/UserService";
 import ProductService from "../../utils/ProductService";
 import UsersList from "../../components/admin/UsersList";
 import ProductsList from "../../components/admin/ProductsList";
-import {Link} from "react-router-dom";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 window['OrderService'] = OrderService;
 window['UserService'] = UserService;
@@ -97,11 +97,11 @@ function Resource(props){
                             <div className="col-md-3 col-12 my-md-0 my-4">
                                 <Input type="text" className={props.bgColor} onChange={(e) => {setSearchField(e.target.value)}} placeholder={`Search by ${searchFieldBy}`}/>
                             </div>
-                            <Link to={`/admin/${props.name.toLowerCase()}/new`} className="col-md-3 col-12">
+                            <InertiaLink href={`/admin/${props.name.toLowerCase()}/new`} className="col-md-3 col-12">
                                 <Button color="success" className="px-3" block>
                                     New {props.name.slice(0, -1)}
                                 </Button>
-                            </Link>
+                            </InertiaLink>
                         </CardHeader>
                         <CardBody>
                             {props.name === "Orders" &&

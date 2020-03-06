@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {Redirect} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
 import {Helmet} from 'react-helmet';
 import {Form, FormInput, Button, Alert, InputGroupAddon, InputGroupText, InputGroup, Row, FormCheckbox} from "shards-react";
 import AuthService from '../../utils/AuthService';
-import {AuthContext} from "../../utils/AuthContext";
 import classNames from 'classnames';
 import 'animate.css';
 import 'flag-icon-css/css/flag-icon.min.css';
@@ -11,10 +9,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {checkFullName, isEmail, equals} from "../../utils/helpers";
 import Select from 'react-select';
+import {Inertia} from "@inertiajs/inertia";
+import Shop from "../../layouts/Shop";
 
-export default function Register() {
-
-    const {state, dispatch} = React.useContext(AuthContext);
+export default function Register(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,25 +24,22 @@ export default function Register() {
     const [countries, setCountries] = useState([]);
     const [terms, setTerms] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        (async function() {
-            const countries = await window.axios.get('/api/countries');
+        const list =  props.countries.map((country) => {
+            return {
+                id: country.id,
+                value: country.name,
+                label:
+                    <>
+                        <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
+                        <span className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
+                    </>
+            }
+        });
 
-            const list =  countries.data.map((country) => {
-                return {
-                    id: country.id,
-                    value: country.name,
-                    label:
-                        <>
-                            <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
-                            <span className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
-                        </>
-                }
-            });
-
-            setCountries(list);
-        })();
+        setCountries(list);
     }, []);
 
     const validate = (credentials) => {
@@ -74,14 +69,12 @@ export default function Register() {
             setLoading(true);
 
             AuthService.register(credentials)
-                .then(() => {
-                    AuthService.getUser().then(res => {
-                        dispatch({type: "login", payload: res.data});
-                    });
+                .then(user => {
+                    setUser(user);
+                    setTimeout(() => Inertia.visit('/'), 500);
                 })
                 .catch(error => {
                     setErrors(error.response.data.errors);
-
                     setStep(1);
                 })
                 .finally(() => {
@@ -133,15 +126,21 @@ export default function Register() {
         return steps[step - 1];
     };
 
+    const handleKeyDown = e => {
+        if (e.key === 'Enter'){
+            step === 6 ? handleSubmit(e) : nextStep();
+        }
+    };
+
     const steps = [
-        <>
+        <div onKeyDown={handleKeyDown}>
             <h1 className="mb-4">Sign up</h1>
             {errors &&
                 errors.map((e, index) => <Alert theme="danger" key={index}>{e}</Alert>)
             }
             <Button block onClick={nextStep} size="lg">Start</Button>
-        </>,
-        <>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
             <h1>Please enter your e-mail below:</h1>
             <InputGroup seamless className="my-4">
                 <InputGroupAddon type="prepend">
@@ -149,11 +148,11 @@ export default function Register() {
                         <FontAwesomeIcon icon={faEnvelope} size="lg"/>
                     </InputGroupText>
                 </InputGroupAddon>
-                <FormInput size="lg" invalid={!!email && !validateStep()} type="email" onChange={(e) => {setEmail(e.target.value)}} value={email} style={{paddingLeft: 50+"px"}} required/>
+                <FormInput size="lg" invalid={!!email && !validateStep()} type="email" onChange={(e) => {setEmail(e.target.value)}} value={email} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
             <Button block size="lg" onClick={nextStep}>Done</Button>
-        </>,
-        <>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
             <h1>What's your full name?</h1>
             <InputGroup seamless className="my-4">
                 <InputGroupAddon type="prepend">
@@ -161,12 +160,12 @@ export default function Register() {
                         <FontAwesomeIcon icon={faUser} size="lg"/>
                     </InputGroupText>
                 </InputGroupAddon>
-                <FormInput size="lg" invalid={!!name && !validateStep()} type="text" onChange={(e) => {setName(e.target.value)}} value={name} style={{paddingLeft: 50+"px"}} required/>
+                <FormInput size="lg" invalid={!!name && !validateStep()} type="text" onChange={(e) => {setName(e.target.value)}} value={name} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
             <Button size="lg" onClick={previousStep}>Go back</Button>
             <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
-        </>,
-        <>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
             <h1>Select safe password and retype:</h1>
             <Row className="my-4">
                 <div className="col-lg-6 col-12 my-2">
@@ -176,7 +175,7 @@ export default function Register() {
                                 <FontAwesomeIcon icon={faLock} size="lg"/>
                             </InputGroupText>
                         </InputGroupAddon>
-                        <FormInput size="lg" invalid={!!password && !validateStep()} type="password" onChange={(e) => {setPassword(e.target.value)}} value={password} style={{paddingLeft: 50+"px"}} required/>
+                        <FormInput size="lg" invalid={!!password && !validateStep()} type="password" onChange={(e) => {setPassword(e.target.value)}} value={password} style={{paddingLeft: 50+"px"}} required autoFocus/>
                     </InputGroup>
                 </div>
                 <div className="col-lg-6 col-12 my-2">
@@ -192,14 +191,15 @@ export default function Register() {
             </Row>
             <Button size="lg" onClick={previousStep}>Go back</Button>
             <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
-        </>,
-        <>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
             <h1>Where are you from?</h1>
             <Row className="my-4">
                 <div className="col-12">
                     <Select
                         options={countries}
                         onChange={(e) => {setCountry(e.id)}}
+                        autoFocus
                         styles={{
                             option: (provided) => ({
                                 ...provided,
@@ -221,8 +221,8 @@ export default function Register() {
             </Row>
             <Button size="lg" onClick={previousStep}>Go back</Button>
             <Button size="lg" onClick={nextStep} className="float-right">Last step</Button>
-        </>,
-        <>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
             <h1>We are almost done!</h1>
             <p>Please read and acceppt the terms and conditions:</p>
             <FormCheckbox
@@ -234,7 +234,7 @@ export default function Register() {
             </FormCheckbox>
             <Button size="lg" onClick={previousStep}>Go back</Button>
             <Button size="lg" onClick={handleSubmit} className="float-right">Sign in!</Button>
-        </>
+        </div>
     ];
 
     const formClasses = classNames({
@@ -243,33 +243,29 @@ export default function Register() {
         "fadeIn": !hide,
     });
 
-    return state.authenticated && !loading
-        ?
-        <Redirect to="/register/success"/>
-        :
-        (
-            <>
-                <Helmet>
-                    <title>Shop | Register</title>
-                </Helmet>
-                <div className="container col-lg-9 col-12">
-                    {loading ? state.authenticated ?
-                        <div className="d-flex justify-content-center">
-                            <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
+    return (
+        <Shop>
+            <Helmet>
+                <title>Shop | Register</title>
+            </Helmet>
+            <div className="container col-lg-9 col-12">
+                {loading ? user ?
+                    <div className="d-flex justify-content-center">
+                        <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
+                    </div>
+                :
+                    <div className="d-flex justify-content-center">
+                        <div className="spinner-grow" role="status">
+                            <span className="sr-only">Loading...</span>
                         </div>
-                    :
-                        <div className="d-flex justify-content-center">
-                            <div className="spinner-grow" role="status">
-                                <span className="sr-only">Loading...</span>
-                            </div>
-                        </div>
-                    :
-                        <Form onSubmit={handleSubmit} className={formClasses}>
-                            {displayStep()}
-                        </Form>
-                    }
+                    </div>
+                :
+                    <Form onSubmit={handleSubmit} className={formClasses}>
+                        {displayStep()}
+                    </Form>
+                }
 
-                </div>
-            </>
-        )
+            </div>
+        </Shop>
+    )
 }

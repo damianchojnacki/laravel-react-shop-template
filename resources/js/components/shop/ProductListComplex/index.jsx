@@ -10,18 +10,6 @@ import CartService from "../../../utils/CartService";
 function ProductsListComplex(props){
     const {cart} = usePage();
 
-    const addToCart = product => {
-        CartService.add(product.id);
-
-        notify.show(`${product.name} has been added to cart.`, 'success', 1500);
-    };
-
-    const removeFromCart = product => {
-        CartService.remove(product.id);
-
-        notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
-    };
-
     const sortProducts = products => {
         return products.sort((previous, next) => {
             if(props.sort.type === "desc"){
@@ -67,10 +55,10 @@ function ProductsListComplex(props){
                     <CardFooter className="d-flex flex-wrap justify-content-between">
                         {product.name &&
                             <>
-                                {cart.includes(product.id) &&
-                                        <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>Remove</Button>
+                                {CartService.in(cart, product) &&
+                                        <Button size="sm" className="btn btn-danger my-1" onClick={() => CartService.remove(product)}>Remove</Button>
                                 }
-                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>Add to cart</Button>
+                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => CartService.add(product)}>Add to cart</Button>
                             </>
                         }
                     </CardFooter>
