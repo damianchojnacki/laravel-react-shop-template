@@ -4,49 +4,23 @@ import {Form, FormInput, Button, Alert, InputGroupAddon, InputGroupText, InputGr
 import AuthService from '../../utils/AuthService';
 import classNames from 'classnames';
 import 'animate.css';
-import 'flag-icon-css/css/flag-icon.min.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {checkFullName, isEmail, equals} from "../../utils/helpers";
-import Select from 'react-select';
 import {Inertia} from "@inertiajs/inertia";
 import Shop from "../../layouts/Shop";
-import CountryService from "../../utils/CountryService";
 
 export default function Register(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
-    const [country, setCountry] = useState(1);
     const [errors, setErrors] = useState(null);
     const [step, setStep] = useState(1);
     const [hide, setHide] = useState(false);
-    const [countries, setCountries] = useState([]);
     const [terms, setTerms] = useState(false);
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        (async function() {
-            const countries = await CountryService.all();
-
-            const list = countries.map((country) => {
-                return {
-                    id: country.id,
-                    value: country.name,
-                    label:
-                        <>
-                            <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
-                            <span
-                                className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
-                        </>
-                }
-            });
-
-            setCountries(list);
-        })();
-    }, []);
 
     const validate = (credentials) => {
         let check = true;
@@ -54,7 +28,6 @@ export default function Register(props) {
         if (!checkFullName(credentials.name)) check = false;
         if (!isEmail(credentials.email)) check = false;
         if (!equals(credentials.password, credentials.passwordConfirmation)) check = false;
-        if (!country) check = false;
         if (!terms) check = false;
 
         return check;
@@ -68,7 +41,6 @@ export default function Register(props) {
             name,
             password,
             passwordConfirmation,
-            country,
         };
 
         if (validate(credentials)) {
@@ -76,15 +48,13 @@ export default function Register(props) {
 
             AuthService.register(credentials)
                 .then(response => {
-                    setUser(response.user);
+                    setUser(response.data.user);
                     setTimeout(() => Inertia.visit('/'), 500);
                 })
                 .catch(error => {
                     setErrors(error.response.data.errors);
                     setStep(1);
-                })
-                .finally(() => {
-                    setTimeout(() => setLoading(false), 2000);
+                    setLoading(false)
                 });
         } else nextStep();
     };
@@ -99,8 +69,6 @@ export default function Register(props) {
                 return !!checkFullName(name);
             case 4:
                 return !!(equals(password, passwordConfirmation) && password.length >= 8);
-            case 5:
-                return country && country > 0;
             case 6:
                 return !!terms;
         }
@@ -134,7 +102,7 @@ export default function Register(props) {
 
     const handleKeyDown = e => {
         if (e.key === 'Enter'){
-            step === 6 ? handleSubmit(e) : nextStep();
+            step === 5 ? handleSubmit(e) : nextStep();
         }
     };
 
@@ -197,36 +165,6 @@ export default function Register(props) {
             </Row>
             <Button size="lg" onClick={previousStep}>Go back</Button>
             <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
-        </div>,
-        <div onKeyDown={handleKeyDown}>
-            <h1>Where are you from?</h1>
-            <Row className="my-4">
-                <div className="col-12">
-                    <Select
-                        options={countries}
-                        onChange={(e) => {setCountry(e.value)}}
-                        autoFocus
-                        styles={{
-                            option: (provided) => ({
-                                ...provided,
-                                padding: 10,
-                                fontSize: 20,
-                            }),
-                            menu: (provided) => ({
-                                ...provided,
-                                padding: 10,
-                            }),
-                            valueContainer: (provided) => ({
-                                ...provided,
-                                padding: 10,
-                                fontSize: 20,
-                            }),
-                        }}
-                    />
-                </div>
-            </Row>
-            <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={nextStep} className="float-right">Last step</Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
             <h1>We are almost done!</h1>

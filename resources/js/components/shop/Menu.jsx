@@ -1,13 +1,34 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Nav, NavItem, Navbar, NavbarToggler, NavbarBrand, Collapse} from "shards-react";
-import AuthService from "../../utils/AuthService";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import routes from '../../routes/shop';
+import Select from "react-select";
+import {Inertia} from "@inertiajs/inertia";
 
 function Menu(props) {
     const [navbarOpened, setNavbarOpened] = useState(false);
 
-    const {auth} = usePage();
+    const {auth, currencies, currency} = usePage();
+
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        setList(currencies.map(item => {
+            return {
+                id: item.id,
+                value: item.iso,
+                label:
+                    <>
+                        <span className="font-italic">{item.iso}</span>
+                        <span className="ml-2 pl-2 border-left">{item.symbol}</span>
+                    </>
+            }
+        }));
+    }, []);
+
+    function changeCurrency(e){
+        Inertia.put(`/currency-change/${e.value}`);
+    }
 
     return (
         <Navbar type="dark" theme="primary" expand="md" className="mb-4">
@@ -33,6 +54,21 @@ function Menu(props) {
                             <InertiaLink className="nav-link" href="/logout" method="post">Logout</InertiaLink>
                         </NavItem>
                     }
+                    <NavItem className="d-flex align-items-center" style={{width: "110px"}}>
+                        <Select
+                            options={list}
+                            components={{ DropdownIndicator:() => null }}
+                            styles={{
+                                container: (provided, state) => ({
+                                    ...provided,
+                                    width: "120px",
+                                    borderRadius: "10px"
+                                })
+                            }}
+                            value={list.find(item => {return currency.iso === item.value})}
+                            onChange={e => changeCurrency(e)}
+                        />
+                    </NavItem>
                 </Nav>
             </Collapse>
         </Navbar>

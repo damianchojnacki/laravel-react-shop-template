@@ -25,6 +25,7 @@ Route::group([
     Route::get('login', 'ShopController@login')->name('login');
     Route::get('register', 'ShopController@register')->name('register');
     Route::get('checkout', 'ShopController@checkout')->name('checkout');
+    Route::put('currency-change/{iso}', 'ShopController@currencyChange')->name('currency.change');
 });
 
 Route::group([

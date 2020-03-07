@@ -7,12 +7,10 @@ import ProductsList from "../../components/shop/ProductsList";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
-import Select from "react-select";
-import {faStreetView} from "@fortawesome/free-solid-svg-icons/faStreetView";
+import AsyncSelect from 'react-select/async';
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
 import {checkFullName, isEmail} from "../../utils/helpers";
 import {usePage} from "@inertiajs/inertia-react";
-import CountryService from "../../utils/CountryService";
 import 'flag-icon-css/css/flag-icon.min.css';
 import Shop from "../../layouts/Shop";
 
@@ -21,33 +19,26 @@ function Checkout() {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [zipCode, setZipCode] = useState('');
     const [terms, setTerms] = useState(false);
     const [invalids, setInvalids] = useState([]);
-    const [countries, setCountries] = useState([]);
 
-    useEffect(() => {
-        (async function() {
-            const countries = await CountryService.all();
+    function searchAPI(input, callback){
+        input && window.axios.get(`/api/google-places/${input}`)
+            .then(response => {
+                const list = response.data.predictions.map((address) => {
+                    return {
+                        id: address.id,
+                        value: address.description,
+                        label: address.description
+                    }
+                });
 
-            const list = countries.map((country) => {
-                return {
-                    id: country.id,
-                    value: country.name,
-                    label:
-                        <>
-                            <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
-                            <span
-                                className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
-                        </>
-                }
-            });
-
-            setCountries(list);
-        })();
-    }, []);
+                callback(list);
+            })
+            .catch(error => console.log(error.response.data));
+    }
 
     const getSumOfProducts = () => {
         if (cart.length) {
@@ -72,10 +63,6 @@ function Checkout() {
         }
         if (!isEmail(credentials.email)){
             invalids.push("email");
-            check = false;
-        }
-        if (!country || country <= 0){
-            invalids.push("country");
             check = false;
         }
         if (!address || address.length <= 0){
@@ -103,8 +90,7 @@ function Checkout() {
             email,
             name,
             address,
-            zipCode,
-            country,
+            zip_code: zipCode,
         };
 
         if (validate(credentials)) {
@@ -122,92 +108,75 @@ function Checkout() {
                 <div className="col-lg-9 col-12">
                     <ProductsList
                         data={cart}
-                        fields={{
-                            name: true,
-                            price: true,
-                        }}
                         sum={getSumOfProducts()}
                     />
                 </div>
                 <div className="col-lg-6 col-12 text-center">
                     <Form onSubmit={handleSubmit}>
+                        <h4>Please fill all the shipment data:</h4>
                         {!auth.user &&
-                            <>
-                                <h4>Please fill all the needed data:</h4>
-                                <FormGroup>
-                                    <label htmlFor="email">Email</label>
-                                    <InputGroup seamless>
-                                        <InputGroupAddon type="prepend">
-                                            <InputGroupText>
-                                                <FontAwesomeIcon icon={faEnvelope} />
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <FormInput invalid={invalids.includes("email")} type="email" id="email" onChange={e => setEmail(e.target.value)} />
-                                    </InputGroup>
-                                </FormGroup>
-                                <FormGroup>
-                                    <label htmlFor="name">Full name</label>
-                                    <InputGroup seamless>
-                                        <InputGroupAddon type="prepend">
-                                            <InputGroupText>
-                                                <FontAwesomeIcon icon={faUser} />
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <FormInput invalid={invalids.includes("name")} type="text" id="name" onChange={e => setName(e.target.value)} />
-                                    </InputGroup>
-                                </FormGroup>
-                                <FormGroup>
-                                    <label htmlFor="country">Country</label>
-                                    <Select
-                                        options={countries}
-                                        onChange={(e) => {setCountry(e.id)}}
-                                        inputProps={{ id: 'country' }}
-                                        styles={{
-                                            menu: (provided) => ({
-                                                ...provided,
-                                                zIndex: 10,
-                                                textAlign: "justify"
-                                            }),
-                                            container: (provided) => ({
-                                                ...provided,
-                                                border: invalids.includes("country") ? "1px solid red" : null,
-                                                borderRadius: ".375rem",
-                                            }),
-                                        }}
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <label htmlFor="address">Address</label>
-                                    <InputGroup seamless>
-                                        <InputGroupAddon type="prepend">
-                                            <InputGroupText>
-                                                <FontAwesomeIcon icon={faStreetView} style={{zIndex: 2}}/>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <FormInput invalid={invalids.includes("address")} type="text" id="address" onChange={e => setAddress(e.target.value)} />
-                                    </InputGroup>
-                                </FormGroup>
-                                <FormGroup>
-                                    <label htmlFor="zipcode">ZIP Code</label>
-                                    <InputGroup seamless>
-                                        <InputGroupAddon type="prepend">
-                                            <InputGroupText>
-                                                <FontAwesomeIcon icon={faMapMarkerAlt} style={{zIndex: 2}}/>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
-                                        <FormInput invalid={invalids.includes("zipcode")} type="text" id="zipcode" onChange={e => setZipCode(e.target.value)} />
-                                    </InputGroup>
-                                </FormGroup>
-                                <FormCheckbox
-                                    onChange={() => {setTerms(!terms)}}
-                                    checked={terms}
-                                    className="my-4"
-                                    invalid={invalids.includes("terms")}
-                                >
-                                    I agree with the terms and conditions of usage The Shop.
-                                </FormCheckbox>
-                            </>
+                            <FormGroup>
+                                <label htmlFor="email">Email</label>
+                                <InputGroup seamless>
+                                    <InputGroupAddon type="prepend">
+                                        <InputGroupText>
+                                            <FontAwesomeIcon icon={faEnvelope} />
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <FormInput invalid={invalids.includes("email")} type="email" id="email" onChange={e => setEmail(e.target.value)} />
+                                </InputGroup>
+                            </FormGroup>
                         }
+                        <FormGroup>
+                            <label htmlFor="name">Full name</label>
+                            <InputGroup seamless>
+                                <InputGroupAddon type="prepend">
+                                    <InputGroupText>
+                                        <FontAwesomeIcon icon={faUser} />
+                                    </InputGroupText>
+                                </InputGroupAddon>
+                                <FormInput invalid={invalids.includes("name")} type="text" id="name" onChange={e => setName(e.target.value)} />
+                            </InputGroup>
+                        </FormGroup>
+                        <FormGroup>
+                            <label htmlFor="country">Address</label>
+                            <AsyncSelect
+                                onChange={e => setAddress(e.id)}
+                                inputProps={{ id: 'address' }}
+                                loadOptions={searchAPI}
+                                styles={{
+                                    menu: (provided) => ({
+                                        ...provided,
+                                        zIndex: 10,
+                                        textAlign: "justify"
+                                    }),
+                                    container: (provided) => ({
+                                        ...provided,
+                                        border: invalids.includes("address") ? "1px solid red" : null,
+                                        borderRadius: ".375rem",
+                                    }),
+                                }}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <label htmlFor="zipcode">ZIP Code</label>
+                            <InputGroup seamless>
+                                <InputGroupAddon type="prepend">
+                                    <InputGroupText>
+                                        <FontAwesomeIcon icon={faMapMarkerAlt} style={{zIndex: 2}}/>
+                                    </InputGroupText>
+                                </InputGroupAddon>
+                                <FormInput invalid={invalids.includes("zipcode")} type="text" id="zipcode" onChange={e => setZipCode(e.target.value)} />
+                            </InputGroup>
+                        </FormGroup>
+                        <FormCheckbox
+                            onChange={() => {setTerms(!terms)}}
+                            checked={terms}
+                            className="my-4"
+                            invalid={invalids.includes("terms")}
+                        >
+                            I agree with the terms and conditions of usage The Shop.
+                        </FormCheckbox>
                         <Button block size="lg" color="success" className="mt-4">Proceed to payment</Button>
                     </Form>
                 </div>

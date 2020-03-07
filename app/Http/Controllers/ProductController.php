@@ -7,13 +7,13 @@ use App\Http\Resources\ProductResource;
 use App\Image;
 use App\Product;
 use App\ProductType;
+use App\Traits\UsesCurrency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
-
     private $like = "like";
 
     public function __construct()
@@ -34,7 +34,7 @@ class ProductController extends Controller
         else
             $products = Product::all();
 
-        return Redirect::back(ProductResource::collection($products), 200)->with;
+        return Redirect::back(ProductResource::collection($products), 200);
     }
 
     public function store(Request $request)
@@ -68,8 +68,6 @@ class ProductController extends Controller
         return response(new ProductResource($product), 200);
 
     }
-
-
 
     public function edit(Request $request)
     {

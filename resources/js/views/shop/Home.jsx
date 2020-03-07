@@ -9,7 +9,7 @@ import CartService from "../../utils/CartService";
 import {usePage} from "@inertiajs/inertia-react";
 
 function Home({specialOffer, productsDiscounted}){
-    const {cart} = usePage();
+    const {cart, currency} = usePage();
 
     return (
         <Shop>
@@ -29,9 +29,9 @@ function Home({specialOffer, productsDiscounted}){
                                 <>
                                     <div className="h5 position-absolute m-4 rounded-circle bg-danger text-white d-flex justify-content-center align-items-center font-weight-bold" style={{top: 0, right: 0, height: "calc(50px + 1vw)", width: "calc(50px + 1vw)"}}>-{specialOffer.discount && specialOffer.discount.percent_off}%</div>
                                     <h3 className="w-100 text-center m-0 mb-4">Offer of the day: </h3>
-                                    <span className="display-4 text-danger" style={{textDecoration: "line-through"}}>{specialOffer.price} $</span>
+                                    <span className="display-4 text-danger" style={{textDecoration: "line-through"}}>{specialOffer.price_origin} {currency.symbol}</span>
                                     <FontAwesomeIcon icon={faArrowRight} className="product__arrow mx-4 h3"/>
-                                    <span className="display-4">{specialOffer.price_final} $</span>
+                                    <span className="display-4">{specialOffer.price_final} {currency.symbol}</span>
                                 </>
                             }
                         </CardBody>

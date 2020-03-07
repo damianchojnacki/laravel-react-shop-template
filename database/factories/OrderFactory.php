@@ -12,5 +12,7 @@ $factory->define(Order::class, function (Faker $faker) {
         'user_id' => User::where('name', '!=', 'admin')->get()->random()->id,
         'status_id' => OrderStatus::all('id')->random()->id,
         'created_at' => $faker->dateTimeBetween('-1 year', 'now'),
+        'address' => $faker->address,
+        'zip_code' => $faker->postcode,
     ];
 });

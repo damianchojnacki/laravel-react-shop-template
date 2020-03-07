@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Currency;
 use App\Http\Resources\ProductResource;
 use App\Product;
 use Inertia\Inertia;
@@ -72,5 +73,11 @@ class ShopController extends Controller
 
     public function checkout(){
         return Inertia::render('shop/Checkout');
+    }
+
+    public function currencyChange($iso){
+        \Session::put('currency', Currency::where('iso', $iso)->first());
+
+        return \Redirect::back();
     }
 }

@@ -178,6 +178,7 @@ return [
         \App\Providers\CartServiceProvider::class,
         \App\Providers\FlashMessageServiceProvider::class,
         \App\Providers\ProductTypeServiceProvider::class,
+        \App\Providers\CurrencyServiceProvider::class,
     ],
 
     /*

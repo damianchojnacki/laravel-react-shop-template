@@ -4,8 +4,11 @@ import {Button} from "shards-react";
 import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
 import CartService from "../../utils/CartService";
+import {usePage} from "@inertiajs/inertia-react";
 
 function ProductsList(props){
+    const {currency} = usePage();
+
     return (
         <table className="table">
             <thead className="text-primary">
@@ -21,7 +24,7 @@ function ProductsList(props){
                 {(props.data && props.data.length > 0) ? props.data.map((product, index) =>
                     <tr key={product.id}>
                         <td>{product.name}</td>
-                        <td className="text-center">{product.price} USD</td>
+                        <td className="text-center">{product.price_final} {currency.symbol}</td>
                         <td className="text-center">{product.quantity}</td>
                         <td>
                             <Button theme="light" size="sm" pill outline onClick={() => CartService.add(product)}>

@@ -8,7 +8,7 @@ import {usePage} from "@inertiajs/inertia-react";
 import CartService from "../../../utils/CartService";
 
 function ProductsListComplex(props){
-    const {cart} = usePage();
+    const {cart, currency} = usePage();
 
     const sortProducts = products => {
         return products.sort((previous, next) => {
@@ -37,16 +37,17 @@ function ProductsListComplex(props){
                     </CardHeader>
                     <CardBody>
                         <p>
-                            {product.price &&
+                            {product.price_origin &&
                                 <>
                                     <span className="font-weight-bold">Price: </span>
                                     {product.discount ?
                                         <>
-                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price} $</span>
+                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.symbol}</span>
                                             <FontAwesomeIcon icon={faArrowRight} className="mx-2"/>
-                                            <span>{product.price_final} $</span>
-                                        </> :
-                                        <span>{product.price} $</span>
+                                            <span>{product.price_final} {currency.symbol}</span>
+                                        </>
+                                        :
+                                        <span>{product.price_origin} {currency.symbol}</span>
                                     }
                                 </>
                             }

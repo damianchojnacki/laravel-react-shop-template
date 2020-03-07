@@ -2,12 +2,36 @@
 
 namespace App;
 
+use App\Traits\UsesCurrency;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $appends = ['price_final'];
+    use UsesCurrency;
+
+    protected $appends = ['price_final, price_origin'];
     protected $with = ['type', 'image', 'discount'];
+
+    public function getPriceFinalAttribute()
+    {
+        if($this->discount)
+            $price_final = round($this->price - $this->price * ($this->discount->percent_off / 100), 2);
+        else
+            $price_final = round($this->price, 2);
+
+        $currency = \Session::get('currency')->iso;
+
+        if($currency !== $this->baseCurrency) $price_final = $this->convert($price_final, $currency);
+
+        return $price_final;
+    }
+
+    public function getPriceOriginAttribute()
+    {
+        $currency = \Session::get('currency')->iso;
+
+        return $currency !== $this->baseCurrency ? $this->convert($this->price, $currency) : floatval($this->price);
+    }
 
     public function image()
     {
@@ -34,14 +58,5 @@ class Product extends Model
     public function discount()
     {
         return $this->hasOne(Discount::class);
-    }
-
-    public function getFinalPrice(){
-        return $this->discount ? round($this->price - $this->price * ($this->discount->percent_off / 100), 2) : round($this->price, 2);
-    }
-
-    public function getPriceFinalAttribute()
-    {
-        return $this->getFinalPrice();
     }
 }

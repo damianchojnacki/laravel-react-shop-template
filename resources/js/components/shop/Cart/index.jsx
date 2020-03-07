@@ -14,7 +14,7 @@ import "./style.scss";
 import CartService from "../../../utils/CartService";
 
 function Cart(props) {
-    const {cart} = usePage();
+    const {cart, currency} = usePage();
     const [opened, setOpened] = useState(false);
 
     function getSumOfProducts(){
@@ -43,7 +43,7 @@ function Cart(props) {
                             {cart.map(product =>
                                 <ListGroupItem key={product.id}>
                                     <span className="cart__field">{product.name}</span>
-                                    <span className="cart__field">{product.price_final} $</span>
+                                    <span className="cart__field">{product.price_final} {currency.symbol}</span>
                                     <span className="cart__field">{product.quantity}</span>
                                     <span className="cart__field">
                                         <Button size="sm" className="btn btn-danger" onClick={() => CartService.remove(product)}>Remove</Button>

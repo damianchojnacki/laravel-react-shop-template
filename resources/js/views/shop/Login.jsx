@@ -31,7 +31,7 @@ export default function Login() {
 
             AuthService.login(credentials)
                 .then(response => {
-                    setUser(response.user);
+                    setUser(response.data.user);
                     setTimeout(() => Inertia.visit('/'), 500);
                 })
                 .catch(error => {

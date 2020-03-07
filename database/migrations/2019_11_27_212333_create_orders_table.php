@@ -18,6 +18,8 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('NO ACTION');
             $table->tinyInteger('status_id')->default(0);
+            $table->string('address');
+            $table->string('zip_code');
             $table->timestamps();
         });
     }
