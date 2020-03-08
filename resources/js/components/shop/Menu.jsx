@@ -55,6 +55,7 @@ function Menu() {
                         <Select
                             options={selectOptions}
                             components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
+                            isSearchable={false}
                             styles={{
                                 container: (provided) => ({
                                     ...provided,
