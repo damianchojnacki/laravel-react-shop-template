@@ -1,11 +1,11 @@
 import React from "react";
 import {Card, CardBody, CardHeader, CardTitle, CardFooter, Button} from "shards-react";
-import {notify} from "react-notify-toast";
 import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import {usePage} from "@inertiajs/inertia-react";
 import CartService from "../../../utils/CartService";
+import {faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons/faLongArrowAltRight";
+import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
 
 function ProductsListComplex(props){
     const {cart, currency} = usePage();
@@ -43,7 +43,7 @@ function ProductsListComplex(props){
                                     {product.discount ?
                                         <>
                                             <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.symbol}</span>
-                                            <FontAwesomeIcon icon={faArrowRight} className="mx-2"/>
+                                            <FontAwesomeIcon icon={faCaretRight} className="mx-2"/>
                                             <span>{product.price_final} {currency.symbol}</span>
                                         </>
                                         :

@@ -40,7 +40,7 @@ function ProductsList(props){
                 ) : null}
                 <tr>
                     <td colSpan="5" className="text-right">
-                        Sum: {props.sum} USD
+                        Sum: {props.sum} {currency.symbol}
                     </td>
                 </tr>
             </tbody>

@@ -50,7 +50,7 @@ function Cart(props) {
                                     </span>
                                 </ListGroupItem>
                             )}
-                            <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts()} $</span></ListGroupItem>
+                            <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts()} {currency.symbol}</span></ListGroupItem>
                         </ListGroup>
                     </DropdownItem>
                     <DropdownItem tag="span">

@@ -37,6 +37,12 @@ Route::group([
 });
 
 Route::group([
+    'name' => 'order',
+], function () {
+    Route::post("order", 'OrderController@make')->name('order.make');
+});
+
+Route::group([
     'name' => 'auth',
 ], function () {
     // public routes

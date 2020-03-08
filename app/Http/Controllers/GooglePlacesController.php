@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\GooglePlacesAPI;
+
 class GooglePlacesController extends Controller
 {
     public function __invoke($input)
     {
-        $apiKey = config('services.google.places_key');
+        try{
+            $addresses = GooglePlacesAPI::autocomplete($input);
 
-        $client = new \GuzzleHttp\Client();
-
-        $request = $client->get("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$apiKey&types=address");
-
-        return response($request->getBody(), 200);
+            return response($addresses, 200);
+        } catch (\Exception $e){
+            $response = config('app.debug') ? $e->getMessage() : "Problem with Google Places API.";
+            return response($response, 500);
+        }
     }
 }

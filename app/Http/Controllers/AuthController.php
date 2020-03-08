@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class AuthController extends Controller {
 
@@ -36,7 +31,7 @@ class AuthController extends Controller {
     }
 
     public function handleProviderCallback($social){
-        $userSocial = Socialite::with($social)->user();
+        $userSocial = Socialite::with($social)->stateless()->user();
 
         $user = User::firstOrNew(['email' => $userSocial->getEmail()]);
 

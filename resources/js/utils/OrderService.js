@@ -1,4 +1,12 @@
+import {Inertia} from "@inertiajs/inertia";
+
 export default class OrderService{
+    static async make(data){
+        return Inertia.post('/order', data, {
+            preserveScroll: true,
+        });
+    }
+
     static async all(page) {
         const response = await window.axios.get(`/api/orders/all/${page}`);
 

@@ -4,31 +4,28 @@ import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import routes from '../../routes/shop';
 import Select from "react-select";
 import {Inertia} from "@inertiajs/inertia";
+import {isMobile} from "../../utils/helpers";
+import CurrencyService from "../../utils/CurrencyService";
 
-function Menu(props) {
-    const [navbarOpened, setNavbarOpened] = useState(false);
-
+function Menu() {
     const {auth, currencies, currency} = usePage();
 
-    const [list, setList] = useState([]);
+    const [selectOptions, setSelectOptions] = useState([]);
+    const [navbarOpened, setNavbarOpened] = useState(false);
 
     useEffect(() => {
-        setList(currencies.map(item => {
+        setSelectOptions(currencies.map(item => {
             return {
                 id: item.id,
                 value: item.iso,
                 label:
-                    <>
+                    <div className="font-weight-normal text-secondary">
                         <span className="font-italic">{item.iso}</span>
                         <span className="ml-2 pl-2 border-left">{item.symbol}</span>
-                    </>
+                    </div>
             }
         }));
     }, []);
-
-    function changeCurrency(e){
-        Inertia.put(`/currency-change/${e.value}`);
-    }
 
     return (
         <Navbar type="dark" theme="primary" expand="md" className="mb-4">
@@ -38,7 +35,7 @@ function Menu(props) {
             <NavbarToggler onClick={() => setNavbarOpened(!navbarOpened)} />
 
             <Collapse open={navbarOpened} navbar>
-                <Nav navbar>
+                <Nav navbar className="flex-grow-1">
                     {routes && routes.map((prop, key) => {
                         if (prop.name === "Login" && auth.user) return null;
                         if (prop.name === "Register" && auth.user) return null;
@@ -54,19 +51,29 @@ function Menu(props) {
                             <InertiaLink className="nav-link" href="/logout" method="post">Logout</InertiaLink>
                         </NavItem>
                     }
-                    <NavItem className="d-flex align-items-center" style={{width: "110px"}}>
+                    <NavItem className="d-flex align-items-center flex-grow-1 justify-content-end">
                         <Select
-                            options={list}
-                            components={{ DropdownIndicator:() => null }}
+                            options={selectOptions}
+                            components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
                             styles={{
-                                container: (provided, state) => ({
+                                container: (provided) => ({
                                     ...provided,
-                                    width: "120px",
-                                    borderRadius: "10px"
+                                    width: isMobile() ? "100%" : 85,
+                                    margin: isMobile() ? ".5rem 0" : 0,
+                                    textAlign: "center",
+                                }),
+                                control: (provided) => ({
+                                    ...provided,
+                                    borderRadius: 5
+                                }),
+                                valueContainer: (provided) => ({
+                                    ...provided,
+                                    display: "flex",
+                                    justifyContent: "center"
                                 })
                             }}
-                            value={list.find(item => {return currency.iso === item.value})}
-                            onChange={e => changeCurrency(e)}
+                            value={selectOptions.find(option => {return currency.iso === option.value})}
+                            onChange={e => CurrencyService.update(e.value)}
                         />
                     </NavItem>
                 </Nav>
