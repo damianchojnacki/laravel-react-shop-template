@@ -177,7 +177,7 @@ function Checkout() {
                 {pendingState <= 0 ?
                     <div
                         className={`row w-100 my-5 align-items-center justify-content-center ${pendingState < 0 && "animated fadeOutDown fast"}`}
-                        style={{zIndex: 2}}>
+                        style={{zIndex: 1}}>
                         <h1 className="col-12 text-center pb-5 mb-4">Checkout</h1>
                         <div className="col-lg-9 col-12">
                             <ProductsList
@@ -241,7 +241,7 @@ function Checkout() {
                                     <InputGroup seamless>
                                         <InputGroupAddon type="prepend">
                                             <InputGroupText>
-                                                <FontAwesomeIcon icon={faMapMarkerAlt} style={{zIndex: 2}}/>
+                                                <FontAwesomeIcon icon={faMapMarkerAlt} style={{zIndex: 1}}/>
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <FormInput invalid={invalids.includes("zipCode")} type="text" id="zipCode"
@@ -264,7 +264,7 @@ function Checkout() {
                         </div>
                     </div>
                     : pendingState < 5 ?
-                        <div className="animated fadeInDown fast w-50 text-center" style={{zIndex: 2}}>
+                        <div className="animated fadeInDown fast w-50 text-center" style={{zIndex: 1}}>
                             <Progress value={pendingState} max={4} className="my-4"/>
                             {getProgressText()}
                             <div ref={payPalRef} className="mt-4"/>
