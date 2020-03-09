@@ -9,7 +9,8 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "server": "php artisan serve --port=80",
-        "start": "concurrently --kill-others \"yarn run server\" \"yarn run watch\"",
+        "queue": "php artisan queue:work",
+        "start": "concurrently --kill-others \"yarn run server\" \"yarn run watch\" \"yarn run queue\"",
         "analyze": "source-map-explorer public/js/*"
     },
     "devDependencies": {

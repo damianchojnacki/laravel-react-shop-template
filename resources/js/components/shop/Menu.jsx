@@ -2,30 +2,15 @@ import React, {useState, useEffect} from "react";
 import {Nav, NavItem, Navbar, NavbarToggler, NavbarBrand, Collapse} from "shards-react";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import routes from '../../routes/shop';
-import Select from "react-select";
-import {Inertia} from "@inertiajs/inertia";
 import {isMobile} from "../../utils/helpers";
-import CurrencyService from "../../utils/CurrencyService";
+import CurrencySelect from "./CurrencySelect";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 
 function Menu() {
-    const {auth, currencies, currency} = usePage();
+    const {auth} = usePage();
 
-    const [selectOptions, setSelectOptions] = useState([]);
     const [navbarOpened, setNavbarOpened] = useState(false);
-
-    useEffect(() => {
-        setSelectOptions(currencies.map(item => {
-            return {
-                id: item.id,
-                value: item.iso,
-                label:
-                    <div className="font-weight-normal text-secondary">
-                        <span className="font-italic">{item.iso}</span>
-                        <span className="ml-2 pl-2 border-left">{item.symbol}</span>
-                    </div>
-            }
-        }));
-    }, []);
 
     return (
         <Navbar type="dark" theme="primary" expand="md" className="mb-4">
@@ -51,32 +36,14 @@ function Menu() {
                             <InertiaLink className="nav-link" href="/logout" method="post">Logout</InertiaLink>
                         </NavItem>
                     }
-                    <NavItem className="d-flex align-items-center flex-grow-1 justify-content-end">
-                        <Select
-                            options={selectOptions}
-                            components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
-                            isSearchable={false}
-                            styles={{
-                                container: (provided) => ({
-                                    ...provided,
-                                    width: isMobile() ? "100%" : 85,
-                                    margin: isMobile() ? ".5rem 0" : 0,
-                                    textAlign: "center",
-                                }),
-                                control: (provided) => ({
-                                    ...provided,
-                                    borderRadius: 5
-                                }),
-                                valueContainer: (provided) => ({
-                                    ...provided,
-                                    display: "flex",
-                                    justifyContent: "center"
-                                })
-                            }}
-                            value={selectOptions.find(option => {return currency.iso === option.value})}
-                            onChange={e => CurrencyService.update(e.value)}
-                        />
-                    </NavItem>
+                    <div className="d-flex align-items-center flex-grow-1 justify-content-end flex-wrap">
+                        <NavItem className={isMobile() ? "w-100" : null}>
+                            <CurrencySelect/>
+                        </NavItem>
+                        <NavItem className={`text-center align-self-center text-white pl-4 ${isMobile() && "flex-grow-1 p-2"}`}>
+                            <FontAwesomeIcon size={isMobile() ? "3x" : "2x"} icon={faUserCircle} className="align-middle"/>
+                        </NavItem>
+                    </div>
                 </Nav>
             </Collapse>
         </Navbar>

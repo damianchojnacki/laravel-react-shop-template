@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useState, useRef} from "react";
 import {
     Form, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox, Progress
 } from "shards-react";
@@ -9,7 +9,7 @@ import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import AsyncSelect from 'react-select/async';
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
-import {checkFullName, isEmail} from "../../utils/helpers";
+import {getSumOfProducts, shippingDataValidate} from "../../utils/helpers";
 import {usePage} from "@inertiajs/inertia-react";
 import {Inertia} from "@inertiajs/inertia";
 import Shop from "../../layouts/Shop";
@@ -19,14 +19,15 @@ import OrderService from "../../utils/OrderService";
 import CartService from "../../utils/CartService";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import 'animate.css';
+import PaymentProgress from "../../components/shop/PaymentProgress";
 
-function Checkout({paypalClientID}) {
+function Checkout({paypalClientID, order}) {
     const {cart, auth, currency} = usePage();
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const [name, setName] = useState(order.name);
+    const [email, setEmail] = useState(order.email);
+    const [address, setAddress] = useState(order.address);
+    const [zipCode, setZipCode] = useState(order.zip_code);
     const [terms, setTerms] = useState(false);
     const [invalids, setInvalids] = useState([]);
     const [pendingState, setPendingState] = useState(0);
@@ -37,49 +38,6 @@ function Checkout({paypalClientID}) {
         GoogleService.addressSearch(input, callback);
     }
 
-    const getSumOfProducts = () => {
-        if (cart.length) {
-            let sum = 0;
-
-            cart.map(product => {
-                sum += parseFloat(product.price_final) * product.quantity;
-            });
-
-            return sum.toFixed(2);
-        }
-    };
-
-    const validate = (credentials) => {
-        let check = true;
-
-        const invalids = [];
-
-        if (!checkFullName(credentials.name)) {
-            invalids.push("name");
-            check = false;
-        }
-        if (!isEmail(credentials.email)) {
-            invalids.push("email");
-            check = false;
-        }
-        if (!address || address.length <= 0) {
-            invalids.push("address");
-            check = false;
-        }
-        if (!zipCode || zipCode.length <= 0) {
-            invalids.push("zipcode");
-            check = false;
-        }
-        if (!terms) {
-            invalids.push("terms");
-            check = false;
-        }
-
-        setInvalids(invalids);
-
-        return check;
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -88,9 +46,14 @@ function Checkout({paypalClientID}) {
             name,
             address,
             zip_code: zipCode,
+            terms,
         };
 
-        if (validate(credentials) && pendingState <= 0) {
+        const validation = shippingDataValidate(credentials);
+
+        setInvalids(validation.invalids);
+
+        if (validation.passed && pendingState <= 0) {
             setPendingState(-1);
             setTimeout(() => setPendingState(1), 1000);
 
@@ -109,21 +72,9 @@ function Checkout({paypalClientID}) {
         }
     };
 
-    function getProgressText() {
-        switch (pendingState) {
-            case 1:
-                return "Creating the order...";
-            case 2:
-                return "Loading the payment options...";
-            case 3:
-                return "Processing the payment...";
-            default:
-                return "Finishing...";
-        }
-    }
-
     function loadPaypal() {
         setPendingState(3);
+
         window.paypal.Buttons({
             createOrder: (data, actions) => {
                 return actions.order.create({
@@ -135,17 +86,17 @@ function Checkout({paypalClientID}) {
                         description: "Shop-template order",
                         amount: {
                             currency_code: currency.iso,
-                            value: getSumOfProducts(),
+                            value: getSumOfProducts(cart),
                             breakdown: {
                                 item_total: {
                                     currency_code: currency.iso,
-                                    value: getSumOfProducts()
+                                    value: getSumOfProducts(cart)
                                 },
                             }
                         },
                         items: cart.map(product => {
                             return {
-                                name: product.quantity + "x " +product.name,
+                                name: product.quantity + "x " + product.name,
                                 quantity: product.quantity,
                                 unit_amount: {
                                     currency_code: currency.iso,
@@ -156,9 +107,7 @@ function Checkout({paypalClientID}) {
                     }]
                 })
             },
-            onApprove: async (data, actions) => {
-                const order = await actions.order.capture();
-
+            onApprove: (data, actions) => {
                 setPendingState(4);
 
                 setTimeout(() => setPendingState(5), 500);
@@ -186,7 +135,7 @@ function Checkout({paypalClientID}) {
                         <div className="col-lg-9 col-12">
                             <ProductsList
                                 data={cart}
-                                sum={getSumOfProducts()}
+                                sum={getSumOfProducts(cart)}
                             />
                         </div>
                         <div className="col-lg-6 col-12 text-center">
@@ -201,8 +150,11 @@ function Checkout({paypalClientID}) {
                                                 <FontAwesomeIcon icon={faEnvelope}/>
                                             </InputGroupText>
                                         </InputGroupAddon>
-                                        <FormInput invalid={invalids.includes("email")} type="email" id="email"
+                                        <FormInput invalid={invalids.includes("email")}
+                                                   type="email"
+                                                   id="email"
                                                    onChange={e => setEmail(e.target.value)}
+                                                   defaultValue={email}
                                                    disabled={pendingState > 0}/>
                                     </InputGroup>
                                 </FormGroup>
@@ -215,16 +167,21 @@ function Checkout({paypalClientID}) {
                                                 <FontAwesomeIcon icon={faUser}/>
                                             </InputGroupText>
                                         </InputGroupAddon>
-                                        <FormInput invalid={invalids.includes("name")} type="text" id="name"
-                                                   onChange={e => setName(e.target.value)} disabled={pendingState > 0}/>
+                                        <FormInput invalid={invalids.includes("name")}
+                                                   type="text"
+                                                   id="name"
+                                                   onChange={e => setName(e.target.value)}
+                                                   defaultValue={name}
+                                                   disabled={pendingState > 0}/>
                                     </InputGroup>
                                 </FormGroup>
                                 <FormGroup>
-                                    <label htmlFor="country">Address</label>
+                                    <label htmlFor="address">Address</label>
                                     <AsyncSelect
-                                        onChange={e => setAddress(e.id)}
+                                        onChange={e => setAddress(e.value)}
                                         inputProps={{id: 'address'}}
                                         loadOptions={searchForAddress}
+                                        defaultValue={{ label: address, value: address }}
                                         disabled={pendingState > 0}
                                         styles={{
                                             menu: (provided) => ({
@@ -248,7 +205,10 @@ function Checkout({paypalClientID}) {
                                                 <FontAwesomeIcon icon={faMapMarkerAlt} style={{zIndex: 1}}/>
                                             </InputGroupText>
                                         </InputGroupAddon>
-                                        <FormInput invalid={invalids.includes("zipCode")} type="text" id="zipCode"
+                                        <FormInput invalid={invalids.includes("zipCode")}
+                                                   type="text"
+                                                   id="zipCode"
+                                                   defaultValue={zipCode}
                                                    onChange={e => setZipCode(e.target.value)}
                                                    disabled={pendingState > 0}/>
                                     </InputGroup>
@@ -268,11 +228,7 @@ function Checkout({paypalClientID}) {
                         </div>
                     </div>
                     : pendingState < 5 ?
-                        <div className="animated fadeInDown fast col-9 col-md-6 text-center" style={{zIndex: 1}}>
-                            <Progress value={pendingState} max={4} className="my-4"/>
-                            {getProgressText()}
-                            <div ref={paypalRef} className="mt-4"/>
-                        </div>
+                        <PaymentProgress pendingState={pendingState} ref={paypalRef}/>
                     :
                         <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
                 }

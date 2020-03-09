@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\OrderResource;
 use App\Order;
+use App\OrderDetails;
 use App\OrderStatus;
 use App\Product;
 use App\User;
@@ -61,23 +62,43 @@ class OrderController extends Controller
     public function make(Request $request)
     {
         $request->validate([
+            'email' => 'email',
             'name' => 'required|string|min:1',
             'address' => 'required|string:min:6',
             'zip_code' => 'required|min:5|max:6',
         ]);
 
         if(count(\Session::get('cart'))){
-            $order = new Order();
+            $order = \Session::get('order');
+
+            if($order){
+                $order = Order::find($order['id']);
+                $details = $order->details;
+            } else {
+                $order = new Order();
+                $details = new OrderDetails();
+            }
 
             Auth::check() && $order->user()->associate(Auth::user());
-            $order->name = $request->name;
-            $order->address = $request->address;
-            $order->zip_code = $request->zip_code;
+            $details->email = Auth::check() ? Auth::user()->email : $request->email;
+            $details->name = $request->name;
+            $details->address = $request->address;
+            $details->zip_code = $request->zip_code;
 
             $order->save();
+            $order->details()->save($details);
+            $order->products()->sync([]);
 
             foreach(\Session::get('cart') as $product)
                 $order->products()->attach(Product::find($product->id), ['quantity' => $product->quantity]);
+
+            \Session::put('order', [
+                'id' => $order->id,
+                'email' => $order->details->email,
+                'name' => $order->details->name,
+                'address' => $order->details->address,
+                'zip_code' => $order->details->zip_code,
+            ]);
 
             return Redirect::back();
         } else{
@@ -85,6 +106,13 @@ class OrderController extends Controller
 
             return Redirect::back();
         }
+    }
+
+    public function clear(){
+        \Session::remove('order');
+        \Session::remove('cart');
+
+        return Redirect::back();
     }
 
     public function createAdmin(Request $request)

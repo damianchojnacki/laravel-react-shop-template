@@ -1,8 +1,14 @@
 import {Inertia} from "@inertiajs/inertia";
 
 export default class OrderService{
-    static async make(data){
+    static make(data){
         return Inertia.post('/order', data, {
+            preserveScroll: true,
+        });
+    }
+
+    static clear(){
+        return Inertia.delete('/order', {}, {
             preserveScroll: true,
         });
     }

@@ -16,11 +16,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->integer('user_id')->nullable();
-            //$table->foreign('user_id')->references('id')->on('users')->onDelete('NO ACTION');
-            $table->tinyInteger('status_id')->default(0);
-            $table->string('name');
-            $table->string('address');
-            $table->string('zip_code');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('NO ACTION');
+            $table->tinyInteger('status_id')->default(1);
             $table->timestamps();
         });
     }

@@ -3,7 +3,7 @@ import {
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem, InputGroupText
+    DropdownItem,
 } from "shards-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
@@ -12,22 +12,11 @@ import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 
 import "./style.scss";
 import CartService from "../../../utils/CartService";
+import {getSumOfProducts} from "../../../utils/helpers";
 
 function Cart(props) {
     const {cart, currency} = usePage();
     const [opened, setOpened] = useState(false);
-
-    function getSumOfProducts(){
-        if(cart && cart.length) {
-            let sum = 0;
-
-            cart.map(product => {
-                sum += parseFloat(product.price_final) * product.quantity;
-            });
-
-            return sum.toFixed(2);
-        }
-    }
 
     return (
         <Dropdown dropup open={opened} className="cart" toggle={() => false}>
@@ -35,7 +24,16 @@ function Cart(props) {
                 <FontAwesomeIcon size="lg" icon={faShoppingCart}/>
             </DropdownToggle>
         <DropdownMenu right className={cart && cart.length ? null: "cart__empty"}>
-            <h4 className="cart__header">Shopping cart</h4>
+            <div className="d-flex justify-content-between align-items-center">
+                <h4 className="cart__header">Shopping cart</h4>
+                {cart.length ?
+                    <div className="pr-4">
+                        <Button size="sm" className="btn btn-secondary" onClick={() => CartService.clear()}>Clear</Button>
+                    </div>
+                :
+                    null
+                }
+            </div>
             {cart && cart.length ?
                 <>
                     <DropdownItem tag="span" className="cart__products">
@@ -50,7 +48,7 @@ function Cart(props) {
                                     </span>
                                 </ListGroupItem>
                             )}
-                            <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts()} {currency.symbol}</span></ListGroupItem>
+                            <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts(cart)} {currency.symbol}</span></ListGroupItem>
                         </ListGroup>
                     </DropdownItem>
                     <DropdownItem tag="span">

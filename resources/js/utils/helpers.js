@@ -73,3 +73,47 @@ export function newArray(arrayLength, parameters){
         }
     )
 }
+
+export function shippingDataValidate(credentials){
+    let passed = true;
+
+    const invalids = [];
+
+    if (!checkFullName(credentials.name)) {
+        invalids.push("name");
+        passed = false;
+    }
+    if (!isEmail(credentials.email)) {
+        invalids.push("email");
+        passed = false;
+    }
+    if (!credentials.address || credentials.address.length <= 0) {
+        invalids.push("address");
+        passed = false;
+    }
+    if (!credentials.zip_code || credentials.zip_code.length <= 0) {
+        invalids.push("zipCode");
+        passed = false;
+    }
+    if (!credentials.terms) {
+        invalids.push("terms");
+        passed = false;
+    }
+
+    return {
+        passed,
+        invalids,
+    };
+}
+
+export function getSumOfProducts(cart){
+    if (cart.length) {
+        let sum = 0;
+
+        cart.map(product => {
+            sum += parseFloat(product.price_final) * product.quantity;
+        });
+
+        return sum.toFixed(2);
+    } else return 0;
+}

@@ -17,7 +17,6 @@ class Order extends Model
     {
         parent::boot();
 
-        // Order by created_at DESC
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('created_at', 'DESC');
         });
@@ -56,5 +55,10 @@ class Order extends Model
             $value += $product->price * $product->pivot->quantity;
 
         return number_format($value, 2, '.', '');
+    }
+
+    public function details()
+    {
+        return $this->hasOne(OrderDetails::class);
     }
 }
