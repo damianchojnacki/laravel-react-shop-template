@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/google-places/{input}', 'GooglePlacesController')->middleware('throttle:200,1');
+Route::put('currency-change/{iso}', 'CurrencyController@change')->name('currency.change');

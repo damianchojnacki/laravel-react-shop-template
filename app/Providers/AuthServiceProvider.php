@@ -28,7 +28,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Passport::routes();
 
         Inertia::share('auth.user', function () {
             if (Auth::user()) return new UserResource(Auth::user());

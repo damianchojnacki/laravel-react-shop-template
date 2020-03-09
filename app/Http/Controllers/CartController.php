@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class CartController extends Controller
 {
@@ -46,6 +47,12 @@ class CartController extends Controller
         \Session::put("cart", $cart);
 
         \Session::flash('success', 'Product has been removed.');
+
+        return Redirect::back();
+    }
+
+    public function clear(){
+        Session::remove('cart');
 
         return Redirect::back();
     }

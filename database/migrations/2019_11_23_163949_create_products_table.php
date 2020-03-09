@@ -16,8 +16,8 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->tinyInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('product_types');
+            $table->integer('type_id');
+            //$table->foreign('type_id')->references('id')->on('product_types');
             $table->decimal('price', 6, 2);
             $table->timestamps();
         });

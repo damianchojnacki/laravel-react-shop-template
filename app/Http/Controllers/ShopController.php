@@ -72,12 +72,8 @@ class ShopController extends Controller
     }
 
     public function checkout(){
-        return Inertia::render('shop/Checkout');
-    }
-
-    public function currencyChange($iso){
-        \Session::put('currency', Currency::where('iso', $iso)->first());
-
-        return \Redirect::back();
+        return Inertia::render('shop/Checkout', [
+            'paypalClientID' => config('services.paypal.client_id'),
+        ]);
     }
 }

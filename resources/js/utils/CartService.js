@@ -12,13 +12,20 @@ export default class CartService {
     };
 
     static add(product) {
-        Inertia.put(`/cart/${product.id}`, {}, {
+        return Inertia.put(`/cart/${product.id}`, {}, {
             preserveScroll: true,
         });
     };
 
     static remove(product) {
-        Inertia.delete(`/cart/${product.id}`, {
+        return Inertia.delete(`/cart/${product.id}`, {
+            preserveScroll: true,
+            preserveState: true,
+        });
+    };
+
+    static clear() {
+        return Inertia.delete(`/cart`, {
             preserveScroll: true,
             preserveState: true,
         });

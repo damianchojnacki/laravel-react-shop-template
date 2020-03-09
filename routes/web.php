@@ -25,15 +25,15 @@ Route::group([
     Route::get('login', 'ShopController@login')->name('login');
     Route::get('register', 'ShopController@register')->name('register');
     Route::get('checkout', 'ShopController@checkout')->name('checkout');
-    Route::put('currency-change/{iso}', 'ShopController@currencyChange')->name('currency.change');
 });
 
 Route::group([
     'name' => 'cart',
 ], function () {
-    Route::get("cart", 'CartController@get');
-    Route::put("cart/{id}", 'CartController@add');
-    Route::delete("cart/{id}", 'CartController@remove');
+    Route::get("cart", 'CartController@get')->name('cart');
+    Route::delete("cart", 'CartController@clear')->name('cart.clear');
+    Route::put("cart/{id}", 'CartController@add')->name('cart.add');
+    Route::delete("cart/{id}", 'CartController@remove')->name('cart.remove');
 });
 
 Route::group([
@@ -144,3 +144,4 @@ Route::group([
 ], function () {
     Route::post('images', 'ImageController@store');
 });
+*/

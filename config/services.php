@@ -37,4 +37,7 @@ return [
         'places_key' => env('GOOGLE_PLACES_API_KEY'),
     ],
 
+    'paypal' => [
+        'client_id' => env('PAYPAL_CLIENT_ID'),
+    ],
 ];

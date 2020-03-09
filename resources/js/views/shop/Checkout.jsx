@@ -11,15 +11,16 @@ import AsyncSelect from 'react-select/async';
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
 import {checkFullName, isEmail} from "../../utils/helpers";
 import {usePage} from "@inertiajs/inertia-react";
-import 'flag-icon-css/css/flag-icon.min.css';
+import {Inertia} from "@inertiajs/inertia";
 import Shop from "../../layouts/Shop";
 import GoogleService from "../../utils/GoogleService";
 import {notify} from "react-notify-toast/bin/notify";
 import OrderService from "../../utils/OrderService";
+import CartService from "../../utils/CartService";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import 'animate.css';
 
-function Checkout() {
+function Checkout({paypalClientID}) {
     const {cart, auth, currency} = usePage();
 
     const [name, setName] = useState('');
@@ -30,7 +31,7 @@ function Checkout() {
     const [invalids, setInvalids] = useState([]);
     const [pendingState, setPendingState] = useState(0);
 
-    const payPalRef = useRef();
+    const paypalRef = useRef();
 
     function searchForAddress(input, callback) {
         GoogleService.addressSearch(input, callback);
@@ -97,8 +98,8 @@ function Checkout() {
                 .then(() => setTimeout(() => {
                     setPendingState(2);
                     const script = document.createElement("script");
-                    script.src = `https://www.paypal.com/sdk/js?client-id=ATNcSiI3AwuXQY7hjV88tm1_IkR-iacWzAHo5o4PYHrTg1E-xRQCA_Ry-Lr8t7K8jqXQeM6DXeHGPGjf&currency=${currency.iso}`;
-                    script.addEventListener("load", () => loadPayPal());
+                    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalClientID}&currency=${currency.iso}`;
+                    script.addEventListener("load", () => loadPaypal());
                     document.body.appendChild(script);
                 }, 1000))
                 .catch(error => {
@@ -115,13 +116,13 @@ function Checkout() {
             case 2:
                 return "Loading the payment options...";
             case 3:
-                return "Making the payment...";
+                return "Processing the payment...";
             default:
-                return null;
+                return "Finishing...";
         }
     }
 
-    function loadPayPal() {
+    function loadPaypal() {
         setPendingState(3);
         window.paypal.Buttons({
             createOrder: (data, actions) => {
@@ -157,7 +158,10 @@ function Checkout() {
 
                 setPendingState(4);
 
-                setTimeout(() => setPendingState(5), 500);
+                setTimeout(() => {
+                    CartService.clear().then(() => Inertia.visit('/'));
+                    setPendingState(5);
+                }, 500);
 
                 console.log(order);
             },
@@ -165,7 +169,7 @@ function Checkout() {
                 console.error(err);
             }
         })
-            .render(payPalRef.current);
+            .render(paypalRef.current);
     }
 
     return (
@@ -267,7 +271,7 @@ function Checkout() {
                         <div className="animated fadeInDown fast w-50 text-center" style={{zIndex: 1}}>
                             <Progress value={pendingState} max={4} className="my-4"/>
                             {getProgressText()}
-                            <div ref={payPalRef} className="mt-4"/>
+                            <div ref={paypalRef} className="mt-4"/>
                         </div>
                     :
                         <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
