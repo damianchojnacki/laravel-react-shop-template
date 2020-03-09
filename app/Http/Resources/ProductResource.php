@@ -15,7 +15,7 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        if(Auth::check() ?? Auth::user()->isAdmin())
+        if(Auth::check() && Auth::user()->isAdmin())
             return parent::toArray($request);
         else
             return [
