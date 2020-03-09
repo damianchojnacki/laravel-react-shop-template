@@ -14,3 +14,5 @@ render(
     />,
     app
 );
+
+//TODO change isMobile to CSS rules in whole project
