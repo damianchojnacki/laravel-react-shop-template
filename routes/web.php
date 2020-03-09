@@ -56,6 +56,8 @@ Route::group([
     });
 });
 
+Route::put('/currency/{iso}', 'CurrencyController@change')->name('currency.change');
+
 /*
 
 Route::group([
