@@ -130,6 +130,12 @@ function Checkout({paypalClientID}) {
                     intent: "CAPTURE",
                     application_context: {
                         user_action: "PAY_NOW"
+                    },
+                    payer: {
+                        name: {
+                            given_name: name.split(" ")[0],
+                            surname: name.split(" ")[1]
+                        }
                     }
                     purchase_units: [{
                         description: "Shop-template order",
