@@ -131,12 +131,6 @@ function Checkout({paypalClientID}) {
                     application_context: {
                         user_action: "PAY_NOW"
                     },
-                    payer: {
-                        name: {
-                            given_name: name.split(" ")[0],
-                            surname: name.split(" ")[1]
-                        }
-                    }
                     purchase_units: [{
                         description: "Shop-template order",
                         amount: {
@@ -151,7 +145,7 @@ function Checkout({paypalClientID}) {
                         },
                         items: cart.map(product => {
                             return {
-                                name: product.name,
+                                name: product.quantity + "x " +product.name,
                                 quantity: product.quantity,
                                 unit_amount: {
                                     currency_code: currency.iso,
@@ -167,15 +161,9 @@ function Checkout({paypalClientID}) {
 
                 setPendingState(4);
 
-                setTimeout(() => {
-                    setPendingState(5);
-                }, 500);
+                setTimeout(() => setPendingState(5), 500);
 
-                setTimeout(() => {
-                    CartService.clear().then(() => Inertia.visit('/'));
-                }, 1000);
-
-                console.log(order);
+                CartService.clear().then(() => setTimeout(() => Inertia.visit('/'), 1500));
             },
             onError: err => {
                 console.error(err);
@@ -280,7 +268,7 @@ function Checkout({paypalClientID}) {
                         </div>
                     </div>
                     : pendingState < 5 ?
-                        <div className="animated fadeInDown fast w-50 text-center" style={{zIndex: 1}}>
+                        <div className="animated fadeInDown fast col-9 col-md-6 text-center" style={{zIndex: 1}}>
                             <Progress value={pendingState} max={4} className="my-4"/>
                             {getProgressText()}
                             <div ref={paypalRef} className="mt-4"/>
