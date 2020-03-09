@@ -128,6 +128,9 @@ function Checkout({paypalClientID}) {
             createOrder: (data, actions) => {
                 return actions.order.create({
                     intent: "CAPTURE",
+                    application_context: {
+                        user_action: "PAY_NOW"
+                    }
                     purchase_units: [{
                         description: "Shop-template order",
                         amount: {
@@ -159,9 +162,12 @@ function Checkout({paypalClientID}) {
                 setPendingState(4);
 
                 setTimeout(() => {
-                    CartService.clear().then(() => Inertia.visit('/'));
                     setPendingState(5);
                 }, 500);
+
+                setTimeout(() => {
+                    CartService.clear().then(() => Inertia.visit('/'));
+                }, 1000);
 
                 console.log(order);
             },
