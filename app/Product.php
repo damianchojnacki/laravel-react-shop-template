@@ -9,7 +9,7 @@ class Product extends Model
 {
     use UsesCurrency;
 
-    protected $appends = ['price_final, price_origin'];
+    protected $appends = ['price_origin, price_final'];
     protected $with = ['type', 'image', 'discount'];
 
     public function getPriceFinalAttribute()
@@ -19,7 +19,7 @@ class Product extends Model
         else
             $price_final = round($this->price, 2);
 
-        $currency = \Session::get('currency')->iso;
+        $currency = \Session::get('currency')->iso ?? $this->baseCurrency;
 
         if($currency !== $this->baseCurrency) $price_final = $this->convert($price_final, $currency);
 
@@ -28,7 +28,7 @@ class Product extends Model
 
     public function getPriceOriginAttribute()
     {
-        $currency = \Session::get('currency')->iso;
+        $currency = \Session::get('currency')->iso ?? $this->baseCurrency;
 
         return $currency !== $this->baseCurrency ? $this->convert($this->price, $currency) : floatval($this->price);
     }

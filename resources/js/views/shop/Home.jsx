@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
 import ProductsListComplex from "../../components/shop/ProductListComplex";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import Shop from "../../layouts/Shop";
 import CartService from "../../utils/CartService";
 import {usePage} from "@inertiajs/inertia-react";

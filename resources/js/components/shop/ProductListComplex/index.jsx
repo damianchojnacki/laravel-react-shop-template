@@ -4,7 +4,6 @@ import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {usePage} from "@inertiajs/inertia-react";
 import CartService from "../../../utils/CartService";
-import {faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons/faLongArrowAltRight";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
 
 function ProductsListComplex(props){
