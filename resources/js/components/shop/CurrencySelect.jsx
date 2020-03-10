@@ -38,7 +38,8 @@ function CurrencySelect() {
                 }),
                 control: provided => ({
                     ...provided,
-                    borderRadius: 5
+                    borderRadius: 5,
+                    cursor: "pointer",
                 }),
                 valueContainer: provided => ({
                     ...provided,
@@ -47,7 +48,8 @@ function CurrencySelect() {
                 }),
                 option: (provided, {isSelected}) => ({
                     ...provided,
-                    backgroundColor: isSelected && "silver"
+                    backgroundColor: isSelected && "silver",
+                    cursor: "pointer",
                 })
             }}
             value={selectOptions.find(option => {return currency.iso === option.value})}

@@ -18,7 +18,7 @@ import {notify} from "react-notify-toast/bin/notify";
 import OrderService from "../../utils/OrderService";
 import CartService from "../../utils/CartService";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons/faCheckCircle";
-import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
+import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
 import 'animate.css';
 import PaymentProgress from "../../components/shop/PaymentProgress";
 
@@ -111,14 +111,11 @@ function Checkout({paypalClientID, order}) {
             onApprove: (data, actions) => {
                 setPendingState(4);
 
-                setTimeout(() => setPendingState(0), 1500);
-
                 CartService.clear().then(() => setTimeout(() => Inertia.visit('/'), 1500));
             },
-            onCancel: (data) => {
-                setPendingState(-2);
-
-                setTimeout(() => setPendingState(1), 500);
+            onCancel: () => {
+                setTimeout(() => setPendingState(-2), 1000);
+                setTimeout(() => setPendingState(0), 2500);
             },
             onError: err => {
                 console.error(err);
@@ -133,7 +130,7 @@ function Checkout({paypalClientID, order}) {
                 <title>Shop | Checkout</title>
             </Helmet>
             <>
-                {pendingState == 0 ?
+                {(pendingState > -2 && pendingState < 1) ?
                     <div
                         className={`row w-100 my-5 align-items-center justify-content-center ${pendingState < 0 && "animated fadeOutDown fast"}`}
                         style={{zIndex: 1}}>
@@ -233,10 +230,10 @@ function Checkout({paypalClientID, order}) {
                             </Form>
                         </div>
                     </div>
-                    : (pendingState > 0 && pendingState < 5) ?
+                    : (pendingState > 0 && pendingState < 4) ?
                         <PaymentProgress pendingState={pendingState} ref={paypalRef}/>
-                    : pendingState === -2 ? 
-                        <FontAwesomeIcon size="6x" icon={faTimes} className="animated bounceIn text-danger"/>
+                    : pendingState === -2 ?
+                        <FontAwesomeIcon size="6x" icon={faTimesCircle} className="animated bounceIn text-danger"/>
                     :
                         <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
                 }
