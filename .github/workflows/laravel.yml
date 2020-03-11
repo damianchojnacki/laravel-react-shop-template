@@ -20,9 +20,9 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
     - name: Migrate and seed
+      env: 
+        APP_ENV: testing
       run: |
-        env: 
-          APP_ENV: testing
         php artisan migrate --seed
     - name: Compile JS
       run: yarn run prod
