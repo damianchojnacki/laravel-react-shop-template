@@ -16,22 +16,22 @@ class ProductsTypesTableSeeder extends Seeder
             [
                 'name' => 'cpu',
                 'long' => 'Processors',
-                'short' => 'CPU\'s',
+                'short' => 'CPUs',
             ],
             [
                 'name' => 'gpu',
                 'long' => 'Graphics cards',
-                'short' => 'GPU\'s',
+                'short' => 'GPUs',
             ],
             [
                 'name' => 'hdd',
                 'long' => 'Hard disks',
-                'short' => 'HDD\'s',
+                'short' => 'HDDs',
             ],
             [
                 'name' => 'ssd',
-                'long' => 'SSD\'s',
-                'short' => 'SSD\'s',
+                'long' => 'SSDs',
+                'short' => 'SSDs',
             ],
         ]);
     }

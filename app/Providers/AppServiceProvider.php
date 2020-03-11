@@ -15,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if(config('app.env') != "production") {
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 
     /**
@@ -25,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        URL::forceScheme('https');
+        if(config('app.env') != 'local') URL::forceScheme('https');
         Resource::withoutWrapping();
     }
 }
