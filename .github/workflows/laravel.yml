@@ -21,9 +21,9 @@ jobs:
         touch database/database.sqlite
     - name: Migrate and seed
       run: |
-        php artisan migrate --seed
         env: 
           APP_ENV: testing
+        php artisan migrate --seed
     - name: Compile JS
       run: yarn run prod
     - name: Execute tests (Unit and Feature tests) via PHPUnit
