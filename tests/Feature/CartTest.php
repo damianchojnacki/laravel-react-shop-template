@@ -17,10 +17,10 @@ class CartTest extends TestCase
         $this->seed();
     }
 
-    public function testCanProductBeAddedToCart()
+    public function CanProductBeAddedToCart()
     {
-        $product = Product::first();
+        $product = Product::find(1);
 
-        //$response = $this->put('/cart', $product->toArray());
+        $response = $this->put('/cart', $product->toArray());
     }
 }

@@ -9,7 +9,7 @@ class Product extends Model
 {
     use UsesCurrency;
 
-    protected $appends = ['price_origin, price_final'];
+    protected $appends  = ['price_origin', 'price_final'];
     protected $with = ['type', 'image', 'discount'];
 
     public function getPriceFinalAttribute()
