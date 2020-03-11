@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Http\Resources\OrderResource;
 use App\Order;
 use App\OrderDetails;
@@ -68,7 +69,7 @@ class OrderController extends Controller
             'zip_code' => 'required|min:5|max:6',
         ]);
 
-        if(count(\Session::get('cart'))){
+        if(!Cart::isEmpty()){
             $order = \Session::get('order');
 
             if($order){
@@ -110,7 +111,7 @@ class OrderController extends Controller
 
     public function clear(){
         \Session::remove('order');
-        \Session::remove('cart');
+        Cart::empty();
 
         return Redirect::back();
     }

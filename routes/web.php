@@ -33,7 +33,7 @@ Route::group([
     Route::get("cart", 'CartController@get')->name('cart');
     Route::put("cart/{id}", 'CartController@add')->name('cart.add');
     Route::delete("cart/{id}", 'CartController@remove')->name('cart.remove');
-    Route::delete("cart", 'CartController@clear')->name('cart.clear');
+    Route::delete("cart", 'CartController@empty')->name('cart.empty');
 });
 
 Route::group([

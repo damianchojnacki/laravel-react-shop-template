@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -17,10 +16,29 @@ class CartTest extends TestCase
         $this->seed();
     }
 
-    public function CanProductBeAddedToCart()
+    public function testCanProductBeAddedToCart()
     {
-        $product = Product::find(1);
+        $this->put("/cart/1")
+            ->assertRedirect()
+            ->assertSessionHas('cart')
+            ->assertSessionMissing('error')
+            ->assertSessionHas('success');
 
-        $response = $this->put('/cart', $product->toArray());
+    }
+
+    public function testCanProductBeRemovedFromCart()
+    {
+        $this->delete("/cart/1")
+            ->assertRedirect()
+            ->assertSessionHas('cart', [])
+            ->assertSessionMissing('error')
+            ->assertSessionHas('success');
+    }
+
+    public function testCanCartBeEmptied()
+    {
+        $this->delete("/cart")
+            ->assertRedirect()
+            ->assertSessionMissing('cart');
     }
 }

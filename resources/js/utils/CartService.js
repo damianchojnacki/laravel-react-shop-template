@@ -24,7 +24,7 @@ export default class CartService {
         });
     };
 
-    static clear() {
+    static empty() {
         return Inertia.delete(`/cart`, {
             preserveScroll: true,
             preserveState: true,

@@ -71,7 +71,7 @@ class AuthTest extends TestCase
         $this->assertGuest();
     }
 
-    public function testIfAdmin()
+    public function testAdminAuthenticatesAsAdmin()
     {
         $user = User::where('is_admin', true)->first();
 

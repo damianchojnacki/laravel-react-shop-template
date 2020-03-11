@@ -5,6 +5,9 @@ namespace App;
 use App\Traits\UsesCurrency;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static find($id)
+ */
 class Product extends Model
 {
     use UsesCurrency;

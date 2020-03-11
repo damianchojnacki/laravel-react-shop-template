@@ -28,7 +28,7 @@ function Cart(props) {
                 <h4 className="cart__header">Shopping cart</h4>
                 {cart.length ?
                     <div className="pr-4">
-                        <Button size="sm" className="btn btn-secondary" onClick={() => CartService.clear()}>Clear</Button>
+                        <Button size="sm" className="btn btn-secondary" onClick={() => CartService.empty()}>Clear</Button>
                     </div>
                 :
                     null

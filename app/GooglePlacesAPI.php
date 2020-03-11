@@ -4,7 +4,7 @@
 namespace App;
 
 
-use App\Exceptions\BadAPIKey;
+use App\Exceptions\GooglePlacesException;
 
 class GooglePlacesAPI
 {
@@ -21,7 +21,7 @@ class GooglePlacesAPI
         if($content->status == "OK" || $content->status == "ZERO_RESULTS")
             return $content->predictions;
         else{
-            throw new BadAPIKey($content->error_message);
+            throw new GooglePlacesException($content->error_message);
         }
     }
 }
