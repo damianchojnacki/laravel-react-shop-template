@@ -56,7 +56,8 @@
         "react-notify-toast": "^0.5.1",
         "react-select": "^3.0.8",
         "reactstrap": "^8.1.1",
-        "shards-react": "^1.0.3"
+        "shards-react": "^1.0.3",
+        "serialize-javascript": "^2.1.1"
     },
     "babel": {
         "presets": [
