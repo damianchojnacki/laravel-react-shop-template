@@ -50,7 +50,12 @@ function CurrencySelect() {
                     ...provided,
                     backgroundColor: isSelected && "silver",
                     cursor: "pointer",
-                })
+                    zIndex: 3
+                }),
+                menu: provided => ({
+                    ...provided,
+                    zIndex: 3
+                }),
             }}
             value={selectOptions.find(option => {return currency.iso === option.value})}
             onChange={e => CurrencyService.update(e.value)}
