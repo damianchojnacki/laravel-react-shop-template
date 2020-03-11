@@ -116,7 +116,7 @@ class ProductsTableSeeder extends Seeder
             ],
         ]);
 
-        if(in_array(config('app.env'), ['production', 'local'])){
+        if(config('app.env') != 'testing'){
             Cloudder::deleteResourcesByPrefix('products');
 
             Product::all()->each(function($product) use($faker) {

@@ -16,11 +16,10 @@ import Shop from "../../layouts/Shop";
 import GoogleService from "../../utils/GoogleService";
 import {notify} from "react-notify-toast/bin/notify";
 import OrderService from "../../utils/OrderService";
-import CartService from "../../utils/CartService";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
-import 'animate.css';
 import PaymentProgress from "../../components/shop/PaymentProgress";
+import 'animate.css';
 
 function Checkout({paypalClientID, order}) {
     const {cart, auth, currency} = usePage();
@@ -111,7 +110,7 @@ function Checkout({paypalClientID, order}) {
             onApprove: (data, actions) => {
                 setPendingState(4);
 
-                CartService.clear().then(() => setTimeout(() => Inertia.visit('/'), 1500));
+                OrderService.clear().then(() => setTimeout(() => Inertia.visit('/'), 1500));
             },
             onCancel: () => {
                 setTimeout(() => setPendingState(-2), 1000);

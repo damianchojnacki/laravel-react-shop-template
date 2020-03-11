@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\TelescopeServiceProvider;
+
 return [
 
     /*
@@ -173,12 +175,14 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         \App\Providers\CartServiceProvider::class,
         \App\Providers\FlashMessageServiceProvider::class,
         \App\Providers\ProductTypeServiceProvider::class,
         \App\Providers\CurrencyServiceProvider::class,
+        TelescopeServiceProvider::class,
     ],
 
     /*

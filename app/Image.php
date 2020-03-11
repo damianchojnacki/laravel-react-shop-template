@@ -23,12 +23,9 @@ class Image extends Model
     }
 
     public static function imageUpload($image, $prefix = null){
-        if(config('app.env') !== 'testing')
-            $id = Cloudder::upload($image, null, [
-                'folder' => $prefix
-            ])->getPublicId();
-        else
-            $id = null;
+        $id = Cloudder::upload($image, null, [
+            'folder' => $prefix
+        ])->getPublicId();
 
         return $id;
     }
