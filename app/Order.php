@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -27,7 +28,48 @@ class Order extends Model
     }
 
     public function products(){
-        return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity');
+        return $this->belongsToMany(Product::class, 'order_product')
+            ->withPivot('quantity');
+    }
+
+    public function productsAdd($products){
+        if(!$products instanceof Collection) $products = [$products];
+
+        $order_products = $this->products();
+
+        foreach($products as $product)
+            $order_products->attach($product->id, ['quantity' => $product->quantity]);
+    }
+
+    public function productsRemove($products){
+        if(!$products instanceof Collection) $products = [$products];
+
+        $order_products = $this->products();
+
+        $order_products->dump();
+
+        foreach($products as $product) {
+            if($order_products->find($product->id)->pivot->quantity > $product->quantity) {
+                $pivot = $order_products->find($product->id)->pivot;
+                $pivot->quantity = $product->quantity;
+                $pivot->save();
+            }
+            else
+                $order_products->detach($product->id);
+        }
+
+        $this->products()->dump();
+    }
+
+    public function productsSet($products){
+        if(!$products instanceof Collection) $products = [$products];
+
+        $order_products = $this->products();
+
+        $order_products->sync([]);
+
+        foreach($products as $product)
+            $order_products->attach(Product::find($product->id), ['quantity' => $product->quantity]);
     }
 
     public function getProductsCountAttribute(){

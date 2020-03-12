@@ -26,12 +26,12 @@ class AuthController extends Controller {
             return response('Incorrect email or password.', 422);
     }
 
-    public function socialLogin($social){
-        return Socialite::with($social)->redirect();
+    public function socialLogin(){
+        return Socialite::with('google')->redirect();
     }
 
-    public function handleProviderCallback($social){
-        $userSocial = Socialite::with($social)->stateless()->user();
+    public function handleProviderCallback(){
+        $userSocial = Socialite::with('google')->stateless()->user();
 
         $user = User::firstOrNew(['email' => $userSocial->getEmail()]);
 

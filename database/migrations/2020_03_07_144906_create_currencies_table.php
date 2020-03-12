@@ -17,7 +17,6 @@ class CreateCurrenciesTable extends Migration
             $table->smallIncrements('id');
             $table->string('iso', 3);
             $table->string('symbol', 3);
-            $table->timestamps();
         });
     }
 

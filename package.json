@@ -52,12 +52,13 @@
         "react-chartjs-2": "^2.8.0",
         "react-dom": "^16.2.0",
         "react-google-button": "^0.7.0",
+        "react-google-login": "^5.1.1",
         "react-helmet": "^5.2.1",
         "react-notify-toast": "^0.5.1",
         "react-select": "^3.0.8",
         "reactstrap": "^8.1.1",
-        "shards-react": "^1.0.3",
-        "serialize-javascript": "^2.1.1"
+        "serialize-javascript": "^2.1.1",
+        "shards-react": "^1.0.3"
     },
     "babel": {
         "presets": [

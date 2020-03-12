@@ -88,10 +88,8 @@ class OrderController extends Controller
 
             $order->save();
             $order->details()->save($details);
-            $order->products()->sync([]);
 
-            foreach(\Session::get('cart') as $product)
-                $order->products()->attach(Product::find($product->id), ['quantity' => $product->quantity]);
+            $order->productsSet(Cart::get());
 
             \Session::put('order', [
                 'id' => $order->id,

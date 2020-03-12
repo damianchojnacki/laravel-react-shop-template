@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Currency;
 use App\Http\Resources\ProductResource;
 use App\Product;
+use http\Url;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 class ShopController extends Controller
@@ -64,7 +66,10 @@ class ShopController extends Controller
     }
 
     public function login(){
-        return Inertia::render('shop/Login');
+        return Inertia::render('shop/Login', [
+            'googleClientId' => config('services.google.client_id'),
+            'googleRedirectUrl' => route('auth.google.callback'),
+        ]);
     }
 
     public function register(){

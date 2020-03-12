@@ -13,9 +13,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/redirect/{social}','AuthController@socialLogin')->where('social','facebook|google');
-Route::get('/login/{social}/callback','AuthController@handleProviderCallback')->where('social','facebook|google');
-
 Route::group([
     'name' => 'shop',
 ], function () {
@@ -49,6 +46,9 @@ Route::group([
     // public routes
     Route::post('login', 'AuthController@login')->name('auth.login');
     Route::post('register', 'AuthController@register')->name('auth.register');
+
+    Route::get('/redirect/google','AuthController@socialLogin')->name('auth.google.redirect');
+    Route::get('/login/google/callback','AuthController@handleProviderCallback')->name('auth.google.callback');
 
     // private routes
     Route::middleware('auth')->group(function () {

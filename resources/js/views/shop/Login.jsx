@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Helmet} from 'react-helmet';
 import {Form, FormInput, FormGroup, Button, Alert, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import {isEmail} from '../../utils/helpers';
-import GoogleButton from 'react-google-button';
+import GoogleLogin from 'react-google-login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import 'animate.css/animate.css';
@@ -11,7 +11,7 @@ import Shop from "../../layouts/Shop";
 import AuthService from "../../utils/AuthService";
 import {Inertia} from "@inertiajs/inertia";
 
-export default function Login() {
+export default function Login({googleClientId, googleRedirectUrl}) {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -48,7 +48,12 @@ export default function Login() {
             </Helmet>
             <div className="container col-lg-6 col-12">
                 <div className="mb-3">
-                    <a href="/redirect/google" className="d-inline-block"><GoogleButton /></a>
+                    <GoogleLogin
+                        clientId={googleClientId}
+                        onSuccess={googleRedirectUrl}
+                        onFailure={googleRedirectUrl}
+                        cookiePolicy={'single_host_origin'}
+                    />
                 </div>
                 <Form onSubmit={handleSubmit}>
                     {errors &&
