@@ -18,7 +18,7 @@ class OrderTest extends TestCase
         $this->seed();
     }
 
-    public function testCanOrderBeCreatedAndOverwritten()
+    public function testOrderCanBeCreatedAndOverwritten()
     {
         $shipment_address = [
             'email' => 'john@gmail.com',

@@ -13,4 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/google-places/{input}', 'GooglePlacesController')->middleware('throttle:200,1');
+Route::get('/google/places/{input}', 'GooglePlacesController')->middleware('throttle:200,1');
+//Route::post('/google/login', 'AuthController@loginByGoogle');

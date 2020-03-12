@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller {
 
@@ -26,27 +25,35 @@ class AuthController extends Controller {
             return response('Incorrect email or password.', 422);
     }
 
-    public function socialLogin(){
-        return Socialite::with('google')->redirect();
-    }
+    public function loginWithGoogle(Request $request){
+        $jwt = new \Firebase\JWT\JWT;
+        $jwt::$leeway = 1;
 
-    public function handleProviderCallback(){
-        $userSocial = Socialite::with('google')->stateless()->user();
+        $client = new \Google_Client([
+            'client_id' => config('services.google.client_id'),
+            'jwt' => $jwt,
+        ]);
 
-        $user = User::firstOrNew(['email' => $userSocial->getEmail()]);
+        $userGoogle = $client->verifyIdToken($request->user_id);
 
-        if (!$user->id) {
-            $user->fill([
-                "name" => $userSocial->getName(),
-                "password"=>Hash::make(Str::random()),
-            ]);
+        if ($userGoogle) {
+            $user = User::firstOrNew(['email' => $userGoogle['email']]);
 
-            $user->save();
+            if (!$user->id) {
+                $user->fill([
+                    "name" => $userGoogle['name'],
+                    "password"=>Hash::make(Str::random()),
+                ]);
+
+                $user->save();
+            }
+
+            Auth::login($user);
+
+            \Session::flash('success', 'You have been successfully singed in.');
+        } else {
+            \Session::flash('success', 'Sorry, we had a problem with signing you in. Try again or register.');
         }
-
-        Auth::login($user);
-
-        \Session::flash('success', 'You have been successfully singed in.');
 
         return redirect()->to('/');
     }

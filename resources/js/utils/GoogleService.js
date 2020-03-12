@@ -1,8 +1,9 @@
 import {notify} from "react-notify-toast/bin/notify";
+import {Inertia} from "@inertiajs/inertia";
 
 export default class GoogleService {
     static async addressSearch(input, callback) {
-        window.axios.get(`/api/google-places/${input}`)
+        window.axios.get(`/api/google/places/${input}`)
             .then(response => {
                 const list = response.data.map((address) => {
                     return {

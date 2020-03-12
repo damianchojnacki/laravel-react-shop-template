@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -40,6 +41,24 @@ class ViewsTest extends TestCase
     public function testUserCanViewRegister()
     {
         $response = $this->get('/register');
+
+        $response->assertStatus(200);
+    }
+
+    public function testUserCantViewTelescope()
+    {
+        $response = $this->get('/telescope');
+
+        $response->assertStatus(403);
+    }
+
+    public function testAdminCanViewTelescope()
+    {
+        $user = User::where('is_admin', true)->first();
+
+        \Auth::login($user);
+
+        $response = $this->get('/telescope');
 
         $response->assertStatus(200);
     }

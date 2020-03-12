@@ -16,7 +16,7 @@ class CartTest extends TestCase
         $this->seed();
     }
 
-    public function testCanProductBeAddedToCart()
+    public function testProductCanBeAddedToCart()
     {
         $this->put("/cart/1")
             ->assertRedirect()
@@ -26,7 +26,7 @@ class CartTest extends TestCase
 
     }
 
-    public function testCanProductBeRemovedFromCart()
+    public function testProductCanBeRemovedFromCart()
     {
         $this->delete("/cart/1")
             ->assertRedirect()
@@ -35,7 +35,7 @@ class CartTest extends TestCase
             ->assertSessionHas('success');
     }
 
-    public function testCanCartBeEmptied()
+    public function testCartCanBeEmptied()
     {
         $this->delete("/cart")
             ->assertRedirect()

@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Helmet} from 'react-helmet';
 import {Form, FormInput, FormGroup, Button, Alert, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import {isEmail} from '../../utils/helpers';
-import GoogleButton from 'react-google-button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import 'animate.css/animate.css';
@@ -10,15 +9,16 @@ import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import Shop from "../../layouts/Shop";
 import AuthService from "../../utils/AuthService";
 import {Inertia} from "@inertiajs/inertia";
+import GoogleButton from "react-google-button";
 
-export default function Login({googleRedirectUrl}) {
+export default function Login({googleClientId}) {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [user, setUser] = useState(null);
     const [errors, setErrors] = useState(null);
 
-    const handleSubmit = (e) => {
+    function handleSubmit(e){
         e.preventDefault();
 
         const credentials = {
@@ -39,7 +39,31 @@ export default function Login({googleRedirectUrl}) {
                     setLoading(false);
                 })
         }
-    };
+    }
+
+    function googleInit(){
+        const script = document.createElement("script");
+        script.src = `https://apis.google.com/js/platform.js?onload=init`;
+        script.addEventListener("load", () => googleLogin());
+        document.body.appendChild(script);
+    }
+
+    function googleLogin(){
+        gapi.load('auth2', async function() {
+            const GoogleAuth = await gapi.auth2.init({client_id: googleClientId});
+            setLoading(true);
+
+            GoogleAuth.signIn()
+                .then(user => {
+                    setUser(user);
+                    AuthService.loginWithGoogle(user);
+                })
+                .catch(error => {
+                    console.log(error.response);
+                    setLoading(false);
+                });
+        });
+    }
 
     return (
         <Shop>
@@ -48,7 +72,7 @@ export default function Login({googleRedirectUrl}) {
             </Helmet>
             <div className="container col-lg-6 col-12">
                 <div className="mb-3">
-                    <a href={googleRedirectUrl} className="d-inline-block">
+                    <a href="#" className="d-inline-block" onClick={() => googleInit()}>
                         <GoogleButton />
                     </a>
                 </div>

@@ -14,16 +14,19 @@ class UploadImage implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $product;
+    private $product, $seeded = false;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Product $product)
+    public function __construct(Product $product, $img = null)
     {
         $this->product = $product;
+
+        //check if product was added manually or by seeder
+        if(!$img) $this->seeded = true;
     }
 
     /**
@@ -34,7 +37,12 @@ class UploadImage implements ShouldQueue
     public function handle()
     {
         $image = new Image();
-        $image->url = Product::imageUpload('./public/images/products/' . $this->product->id . '.png');
+
+        if($this->seeded)
+            $image->url = Product::imageUpload('./public/images/products/' . $this->product->id . '.png'); //seeder
+        else
+            $image->url = Product::imageUpload($this->product->img); //admin panel
+
         $this->product->image()->save($image);
     }
 }

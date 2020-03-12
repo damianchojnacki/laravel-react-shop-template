@@ -17,7 +17,7 @@ class CheckIfAdmin
     public function handle($request, Closure $next)
     {
         if(!$request->user() || $request->user()->name != 'admin'){
-            return response('Admin role required', 403);
+            return response('Admin privileges required.', 403);
         }
 
         return $next($request);

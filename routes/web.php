@@ -47,7 +47,7 @@ Route::group([
     Route::post('login', 'AuthController@login')->name('auth.login');
     Route::post('register', 'AuthController@register')->name('auth.register');
 
-    Route::get('/redirect/google','AuthController@socialLogin')->name('auth.google.redirect');
+    Route::post('/login/google','AuthController@loginWithGoogle')->name('auth.google.login');
     Route::get('/login/google/callback','AuthController@handleProviderCallback')->name('auth.google.callback');
 
     // private routes
