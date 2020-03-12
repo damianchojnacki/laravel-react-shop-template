@@ -40,6 +40,4 @@ return [
     'paypal' => [
         'client_id' => env('PAYPAL_CLIENT_ID'),
     ],
-
-    'github' => env('GITHUB', false)
 ];
