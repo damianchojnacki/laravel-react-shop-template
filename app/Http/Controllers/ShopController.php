@@ -67,8 +67,7 @@ class ShopController extends Controller
 
     public function login(){
         return Inertia::render('shop/Login', [
-            'googleClientId' => config('services.google.client_id'),
-            'googleRedirectUrl' => route('auth.google.callback'),
+            'googleRedirectUrl' => route('auth.google.redirect'),
         ]);
     }
 
