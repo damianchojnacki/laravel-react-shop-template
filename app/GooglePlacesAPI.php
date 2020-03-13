@@ -1,15 +1,12 @@
 <?php
 
-
 namespace App;
-
 
 use App\Exceptions\GooglePlacesException;
 
-class GooglePlacesAPI
-{
-    public static function autocomplete($input)
-    {
+class GooglePlacesAPI{
+
+    public static function autocomplete($input){
         $apiKey = config('services.google.places_key');
 
         $client = new \GuzzleHttp\Client();
@@ -24,4 +21,5 @@ class GooglePlacesAPI
             throw new GooglePlacesException($content->error_message);
         }
     }
+
 }

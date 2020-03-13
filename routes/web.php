@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'name' => 'shop',
-], function () {
+], function(){
     Route::get("/", 'ShopController@homepage')->name('homepage');
     Route::get("products/all/{page?}/{category?}", 'ShopController@products')->name('products');
     Route::get('products/search/{id}/{category?}', 'ShopController@productsSearch');
@@ -26,7 +26,7 @@ Route::group([
 
 Route::group([
     'name' => 'cart',
-], function () {
+], function(){
     Route::get("cart", 'CartController@get')->name('cart');
     Route::put("cart/{id}", 'CartController@add')->name('cart.add');
     Route::delete("cart/{id}", 'CartController@remove')->name('cart.remove');
@@ -35,23 +35,23 @@ Route::group([
 
 Route::group([
     'name' => 'order',
-], function () {
+], function(){
     Route::post("order", 'OrderController@make')->name('order.make');
     Route::delete("order", 'OrderController@clear')->name('order.clear');
 });
 
 Route::group([
     'name' => 'auth',
-], function () {
+], function(){
     // public routes
     Route::post('login', 'AuthController@login')->name('auth.login');
     Route::post('register', 'AuthController@register')->name('auth.register');
 
-    Route::post('/login/google','AuthController@loginWithGoogle')->name('auth.google.login');
-    Route::get('/login/google/callback','AuthController@handleProviderCallback')->name('auth.google.callback');
+    Route::post('/login/google', 'AuthController@loginWithGoogle')->name('auth.google.login');
+    Route::get('/login/google/callback', 'AuthController@handleProviderCallback')->name('auth.google.callback');
 
     // private routes
-    Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function(){
         Route::get('user', 'AuthController@getUser')->name('auth.user');
         Route::post('logout', 'AuthController@logout')->name('auth.logout');
     });

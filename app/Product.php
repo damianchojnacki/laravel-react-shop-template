@@ -8,15 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static find($id)
  */
-class Product extends Model
-{
+class Product extends Model{
+
     use UsesCurrency;
 
-    protected $appends  = ['price_origin', 'price_final'];
-    protected $with = ['type', 'image', 'discount'];
+    protected $appends = [
+        'price_origin',
+        'price_final',
+    ];
+    protected $with = [
+        'type',
+        'image',
+        'discount',
+    ];
 
-    public function getPriceFinalAttribute()
-    {
+    public static function imageUpload($image){
+        $id = Image::imageUpload($image, 'products');
+
+        return $id;
+    }
+
+    public function getPriceFinalAttribute(){
         if($this->discount)
             $price_final = $this->price - $this->price * ($this->discount->percent_off / 100);
         else
@@ -24,13 +36,13 @@ class Product extends Model
 
         $currency = \Session::get('currency')->iso ?? $this->baseCurrency;
 
-        if($currency !== $this->baseCurrency) $price_final = $this->convert($price_final, $currency);
+        if($currency !== $this->baseCurrency)
+            $price_final = $this->convert($price_final, $currency);
 
         return number_format($price_final, 2);
     }
 
-    public function getPriceOriginAttribute()
-    {
+    public function getPriceOriginAttribute(){
         $currency = \Session::get('currency')->iso ?? $this->baseCurrency;
 
         $price_origin = $currency !== $this->baseCurrency ? $this->convert($this->price, $currency) : $this->price;
@@ -38,30 +50,20 @@ class Product extends Model
         return number_format($price_origin, 2);
     }
 
-    public function image()
-    {
+    public function image(){
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public static function imageUpload($image)
-    {
-        $id = Image::imageUpload($image, 'products');
-
-        return $id;
-    }
-
-    public function order()
-    {
+    public function order(){
         return $this->belongsToMany(Order::class, 'order_product');
     }
 
-    public function type()
-    {
+    public function type(){
         return $this->belongsTo(ProductType::class);
     }
 
-    public function discount()
-    {
+    public function discount(){
         return $this->hasOne(Discount::class);
     }
+
 }
