@@ -18,22 +18,24 @@ class Product extends Model
     public function getPriceFinalAttribute()
     {
         if($this->discount)
-            $price_final = round($this->price - $this->price * ($this->discount->percent_off / 100), 2);
+            $price_final = $this->price - $this->price * ($this->discount->percent_off / 100);
         else
-            $price_final = round($this->price, 2);
+            $price_final = $this->price;
 
         $currency = \Session::get('currency')->iso ?? $this->baseCurrency;
 
         if($currency !== $this->baseCurrency) $price_final = $this->convert($price_final, $currency);
 
-        return $price_final;
+        return number_format($price_final, 2);
     }
 
     public function getPriceOriginAttribute()
     {
         $currency = \Session::get('currency')->iso ?? $this->baseCurrency;
 
-        return $currency !== $this->baseCurrency ? $this->convert($this->price, $currency) : floatval($this->price);
+        $price_origin = $currency !== $this->baseCurrency ? $this->convert($this->price, $currency) : $this->price;
+
+        return number_format($price_origin, 2);
     }
 
     public function image()

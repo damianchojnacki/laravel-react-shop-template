@@ -54,7 +54,7 @@ class Cart
             }
         }
 
-        self::set($cart);
+        self::set(array_values($cart));
 
         return self::get();
     }

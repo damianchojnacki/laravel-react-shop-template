@@ -36,20 +36,18 @@ function ProductsListComplex(props){
                     </CardHeader>
                     <CardBody>
                         <p>
-                            {product.price_origin &&
-                                <>
-                                    <span className="font-weight-bold">Price: </span>
-                                    {product.discount ?
-                                        <>
-                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.symbol}</span>
-                                            <FontAwesomeIcon icon={faCaretRight} className="mx-2"/>
-                                            <span>{product.price_final} {currency.symbol}</span>
-                                        </>
-                                        :
-                                        <span>{product.price_origin} {currency.symbol}</span>
-                                    }
-                                </>
-                            }
+                            <>
+                                <span className="font-weight-bold">Price: </span>
+                                {product.discount ?
+                                    <>
+                                        <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.symbol}</span>
+                                        <FontAwesomeIcon icon={faCaretRight} className="mx-2"/>
+                                        <span>{product.price_final} {currency.symbol}</span>
+                                    </>
+                                :
+                                    <span>{product.price_origin} {currency.symbol}</span>
+                                }
+                            </>
                         </p>
                     </CardBody>
                     <CardFooter className="d-flex flex-wrap justify-content-between">
