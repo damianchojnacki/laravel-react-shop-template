@@ -15,6 +15,8 @@ class OrderTest extends TestCase
     {
         parent::setUp();
 
+        $this->withoutExceptionHandling();
+
         $this->seed();
     }
 
