@@ -72,22 +72,20 @@ class OrderController extends Controller
         if(!Cart::isEmpty()){
             $order = \Session::get('order');
 
+            $request->email = Auth::user()->email ?? $request->email;
+
             if($order){
                 $order = Order::find($order['id']);
-                $details = $order->details;
+                $order->details()->update($request->toArray());
             } else {
                 $order = new Order();
-                $details = new OrderDetails();
+                $details = new OrderDetails($request->toArray());
+
+                $order->save();
+                $order->details()->save($details);
             }
 
             Auth::check() && $order->user()->associate(Auth::user());
-            $details->email = Auth::check() ? Auth::user()->email : $request->email;
-            $details->name = $request->name;
-            $details->address = $request->address;
-            $details->zip_code = $request->zip_code;
-
-            $order->save();
-            $order->details()->save($details);
 
             $order->productsSet(Cart::get());
 
