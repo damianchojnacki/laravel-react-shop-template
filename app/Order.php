@@ -46,19 +46,15 @@ class Order extends Model
 
         $order_products = $this->products();
 
-        $order_products->dump();
-
         foreach($products as $product) {
             if($order_products->find($product->id)->pivot->quantity > $product->quantity) {
                 $pivot = $order_products->find($product->id)->pivot;
-                $pivot->quantity = $product->quantity;
+                $pivot->quantity -= $product->quantity;
                 $pivot->save();
             }
             else
                 $order_products->detach($product->id);
         }
-
-        $this->products()->dump();
     }
 
     public function productsSet($products){

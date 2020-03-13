@@ -18,6 +18,90 @@ class OrderTest extends TestCase
         $this->seed();
     }
 
+    public function testSingleProductCanBeAddedToOrder(){
+        $order = factory(Order::class)->create();
+
+        $product = factory(Product::class)->create();
+        $product->quantity = rand(1, 5);
+
+        $order->productsAdd($product);
+
+        $this->assertCount(1, $order->products()->get());
+    }
+
+    public function testSingleProductCanBeRemovedFromOrder(){
+        $order = factory(Order::class)->create();
+
+        $product = factory(Product::class)->create();
+        $product->quantity = 1;
+
+        $order->productsAdd($product);
+        $order->productsRemove($product);
+
+        $this->assertCount(0, $order->products()->get());
+    }
+
+    public function testProductQuantityAddedToOrderEqualsActual(){
+        $order = factory(Order::class)->create();
+
+        $product = factory(Product::class)->create();
+        $product->quantity = rand(1, 5);
+
+        $order->productsAdd($product);
+
+        $this->assertEquals($product->quantity, $order->products()->first()->pivot->quantity);
+    }
+
+    public function testProductQuantityRemovedFromOrderEqualsActual(){
+        $order = factory(Order::class)->create();
+
+        $product = factory(Product::class)->create();
+        $product->quantity = 5;
+
+        $order->productsAdd($product);
+
+        $product->quantity = 3;
+        $order->productsRemove($product);
+
+        $this->assertEquals(2, $order->products()->first()->pivot->quantity);
+    }
+
+    public function testMultipleProductsCanBeAddedToOrder(){
+        $order = factory(Order::class)->create();
+
+        $num_of_products = 5;
+
+        $products = factory(Product::class, $num_of_products)->create();
+        $products->map(function($product){
+            $product->quantity = rand(1, 5);
+        });
+
+        $order->productsAdd($products);
+
+        //assert number of products
+        $this->assertCount($num_of_products, $order->products()->get());
+
+        //assert quantity
+        $this->assertEquals($products->only('quantity'), $order->products()->get()->only('pivot.quantity'));
+    }
+
+    public function testProductsCanBeAddedOneByOne(){
+        $order = factory(Order::class)->create();
+
+        $products = factory(Product::class, 2)->create();
+        $products->map(function($product){
+            $product->quantity = rand(1, 5);
+        });
+
+        $order->productsAdd($products[0]);
+
+        $this->assertCount(1, $order->products()->get());
+
+        $order->productsAdd($products[1]);
+
+        $this->assertCount(2, $order->products()->get());
+    }
+
     public function testOrderCanBeCreatedAndOverwritten()
     {
         $shipment_address = [
@@ -43,37 +127,25 @@ class OrderTest extends TestCase
             $query->where('email', $shipment_address['email']);
         })->first();
 
-        $order_products = $order->products()->get()->map(function($product){
-            unset($product->pivot);
-            $product->quantity = 1;
-
-            return $product;
-        })->toArray();
-
-        $this->assertEquals($order_products, $products->toArray());
+        $this->assertCount($products->count(), $order->products()->get());
 
         $shipment_address['email'] = "john@yahoo.com";
 
-        $this->withSession(['cart' => $products->take(2)])
+        $take = 2;
+
+        $this->withSession(['cart' => $products->take($take)])
             ->post("/order", $shipment_address)
             ->assertRedirect()
             ->assertSessionHas("order.id")
             ->assertSessionMissing('error');
 
-        $order_id_new = Order::whereHas('details', function ($query) use($shipment_address) {
+        $order_new = Order::whereHas('details', function ($query) use($shipment_address) {
             $query->where('email', $shipment_address['email']);
-        })->first()->id;
+        })->first();
 
-        $order_products = $order->products()->get()->map(function($product){
-            unset($product->pivot);
-            $product->quantity = 1;
-
-            return $product;
-        })->toArray();
-
-        $this->assertEquals($order_products, $products->take(2)->toArray());
+        $this->assertCount($take, $order_new->products()->get());
 
         //check if new order have not been created
-        $this->assertEquals($order->id, $order_id_new, 'Two others orders has been created!');
+        $this->assertEquals($order->id, $order_new->id, 'Two other orders has been created!');
     }
 }
