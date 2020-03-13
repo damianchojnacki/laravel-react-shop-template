@@ -39,6 +39,8 @@ class Order extends Model
 
         foreach($products as $product)
             $order_products->attach($product->id, ['quantity' => $product->quantity]);
+
+        return $this->products();
     }
 
     public function productsRemove($products){
@@ -47,7 +49,7 @@ class Order extends Model
         $order_products = $this->products();
 
         foreach($products as $product) {
-            if($order_products->find($product->id)->pivot->quantity > $product->quantity) {
+            if($order_products->get()->find($product->id)->pivot->quantity > $product->quantity){
                 $pivot = $order_products->find($product->id)->pivot;
                 $pivot->quantity -= $product->quantity;
                 $pivot->save();
@@ -55,6 +57,8 @@ class Order extends Model
             else
                 $order_products->detach($product->id);
         }
+
+        return $this->products();
     }
 
     public function productsSet($products){
@@ -66,6 +70,8 @@ class Order extends Model
 
         foreach($products as $product)
             $order_products->attach(Product::find($product->id), ['quantity' => $product->quantity]);
+
+        return $this->products();
     }
 
     public function getProductsCountAttribute(){

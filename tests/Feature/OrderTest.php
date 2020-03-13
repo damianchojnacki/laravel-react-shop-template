@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Order;
 use App\Product;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,8 +15,6 @@ class OrderTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->withoutExceptionHandling();
 
         $this->seed();
     }
@@ -80,11 +79,24 @@ class OrderTest extends TestCase
 
         $order->productsAdd($products);
 
-        //assert number of products
         $this->assertCount($num_of_products, $order->products()->get());
+    }
 
-        //assert quantity
-        $this->assertEquals($products->only('quantity'), $order->products()->get()->only('pivot.quantity'));
+    public function testMultipleProductsCanBeRemovedFromOrder(){
+        $order = factory(Order::class)->create();
+
+        $num_of_products = 5;
+
+        $products = factory(Product::class, $num_of_products)->create();
+        $products->map(function($product){
+            $product->quantity = rand(1, 5);
+        });
+
+        $order->productsAdd($products);
+
+        $order->productsRemove($products->take(3));
+
+        $this->assertCount(2, $order->products()->get());
     }
 
     public function testProductsCanBeAddedOneByOne(){
