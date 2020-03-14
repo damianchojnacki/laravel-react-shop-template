@@ -79,6 +79,7 @@ class ShopController extends Controller
         return Inertia::render('shop/Checkout', [
             'paypalClientID' => config('services.paypal.client_id'),
             'order' => \Session::get('order') ?? [],
+            'coupon' => \Session::get('coupon'),
         ]);
     }
 }

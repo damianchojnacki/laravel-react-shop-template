@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Flash;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 
@@ -26,8 +27,8 @@ class FlashMessageServiceProvider extends ServiceProvider
     {
         Inertia::share('flash', function () {
             return [
-                'success' => \Session::get('success'),
-                'error' => \Session::get('error'),
+                'success' => Flash::success(),
+                'error' => Flash::error(),
             ];
         });
     }

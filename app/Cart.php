@@ -25,7 +25,7 @@ class Cart{
 
             if(!$duplicate){
                 $product->quantity = 1;
-                \Session::push("cart", new ProductResource($product));
+                \Session::push("cart", $product);
             }
             else
                 self::set($cart);

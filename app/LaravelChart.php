@@ -30,9 +30,12 @@ class LaravelChart{
             else
                 $order_by = $this->options['group_by_field'];
 
-            $query = $this->options['model']::orderBy($order_by)->when(isset($this->options['filter_field']), function($query){
+            $query = $this->options['model']::orderBy($order_by)
+                ->when(isset($this->options['filter_field']), function($query){
                     if(isset($this->options['filter_days'])){
-                        return $query->where($this->options['filter_field'], '>=', now()->subDays($this->options['filter_days'])->format('Y-m-d'));
+                        return $query->where($this->options['filter_field'], '>=', now()
+                            ->subDays($this->options['filter_days'])
+                            ->format('Y-m-d'));
                     }
                     else if(isset($this->options['filter_period'])){
                         switch($this->options['filter_period']){
@@ -65,28 +68,29 @@ class LaravelChart{
             }
 
             return $query->get()->groupBy(function($entry){
-                    if($this->options['report_type'] == 'group_by_string'){
-                        return $entry->{$this->options['group_by_field']};
-                    }
-                    else if($entry->{$this->options['group_by_field']} instanceof \Carbon\Carbon){
-                        return $entry->{$this->options['group_by_field']}->format(self::GROUP_PERIODS[$this->options['group_by_period']]);
-                    }
-                    else if($this->options['report_type'] == 'group_by_relation'){
-                        if(isset($this->options['relation_field2']))
-                            $return = $entry->{$this->options['group_by_field']}->{$this->options['relation_field']}->{$this->options['relation_field2']};
-                        else if(isset($this->options['relation_field']))
-                            $return = $entry->{$this->options['group_by_field']}->{$this->options['relation_field']};
-                        else
-                            $return = $entry->{$this->options['group_by_field']};
+                if($this->options['report_type'] == 'group_by_string'){
+                    return $entry->{$this->options['group_by_field']};
+                }
+                else if($entry->{$this->options['group_by_field']} instanceof \Carbon\Carbon){
+                    return $entry->{$this->options['group_by_field']}->format(self::GROUP_PERIODS[$this->options['group_by_period']]);
+                }
+                else if($this->options['report_type'] == 'group_by_relation'){
+                    if(isset($this->options['relation_field2']))
+                        $return = $entry->{$this->options['group_by_field']}->{$this->options['relation_field']}->{$this->options['relation_field2']};
+                    else if(isset($this->options['relation_field']))
+                        $return = $entry->{$this->options['group_by_field']}->{$this->options['relation_field']};
+                    else
+                        $return = $entry->{$this->options['group_by_field']};
 
-                        return $return;
-                    }
-                    else{
-                        return \Carbon\Carbon::createFromFormat($this->options['group_by_field_format'] ?? 'Y-m-d H:i:s', $entry->{$this->options['group_by_field']})->format(self::GROUP_PERIODS[$this->options['group_by_period']]);
-                    }
-                })->map(function($entries){
-                    return $entries->{$this->options['aggregate_function'] ?? 'count'}($this->options['aggregate_field'] ?? '');
-                });
+                    return $return;
+                }
+                else{
+                    return \Carbon\Carbon::createFromFormat($this->options['group_by_field_format'] ?? 'Y-m-d H:i:s', $entry->{$this->options['group_by_field']})
+                        ->format(self::GROUP_PERIODS[$this->options['group_by_period']]);
+                }
+            })->map(function($entries){
+                return $entries->{$this->options['aggregate_function'] ?? 'count'}($this->options['aggregate_field'] ?? '');
+            });
         } catch(\Error $ex){
             throw new \Exception('Laravel Charts error: ' . $ex->getMessage());
         }

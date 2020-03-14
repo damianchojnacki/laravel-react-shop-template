@@ -9,7 +9,11 @@ import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import AsyncSelect from 'react-select/async';
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
-import {getSumOfProducts, shippingDataValidate} from "../../utils/helpers";
+import {
+    getSumOfProducts,
+    getSumOfProductsWithDiscount,
+    shippingDataValidate
+} from "../../utils/helpers";
 import {usePage} from "@inertiajs/inertia-react";
 import {Inertia} from "@inertiajs/inertia";
 import Shop from "../../layouts/Shop";
@@ -20,8 +24,9 @@ import {faCheckCircle} from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
 import PaymentProgress from "../../components/shop/PaymentProgress";
 import 'animate.css';
+import Coupon from "../../components/shop/Coupon";
 
-function Checkout({paypalClientID, order}) {
+function Checkout({paypalClientID, order, coupon}) {
     const {cart, auth, currency} = usePage();
 
     const [name, setName] = useState(order.name);
@@ -75,6 +80,8 @@ function Checkout({paypalClientID, order}) {
     function loadPaypal() {
         setPendingState(3);
 
+        const sum = coupon ? getSumOfProductsWithDiscount(cart, coupon) : getSumOfProducts(cart);
+
         window.paypal.Buttons({
             createOrder: (data, actions) => {
                 return actions.order.create({
@@ -86,24 +93,15 @@ function Checkout({paypalClientID, order}) {
                         description: "Shop-template order",
                         amount: {
                             currency_code: currency.iso,
-                            value: getSumOfProducts(cart),
+                            value: sum,
                             breakdown: {
                                 item_total: {
                                     currency_code: currency.iso,
-                                    value: getSumOfProducts(cart)
+                                    value: sum,
                                 },
                             }
                         },
-                        items: cart.map(product => {
-                            return {
-                                name: product.quantity + "x " + product.name,
-                                quantity: product.quantity,
-                                unit_amount: {
-                                    currency_code: currency.iso,
-                                    value: product.price_final
-                                },
-                            }
-                        })
+
                     }]
                 })
             },
@@ -138,7 +136,9 @@ function Checkout({paypalClientID, order}) {
                             <ProductsList
                                 data={cart}
                                 sum={getSumOfProducts(cart)}
+                                sumWithDiscount={coupon && getSumOfProductsWithDiscount(cart, coupon)}
                             />
+                            <Coupon coupon={coupon ?? {}}/>
                         </div>
                         <div className="col-lg-6 col-12 text-center">
                             <Form onSubmit={handleSubmit}>
@@ -186,16 +186,20 @@ function Checkout({paypalClientID, order}) {
                                         defaultValue={{ label: address, value: address }}
                                         disabled={pendingState > 0}
                                         styles={{
-                                            menu: (provided) => ({
+                                            menu: provided => ({
                                                 ...provided,
                                                 zIndex: 10,
-                                                textAlign: "justify"
+                                                textAlign: "justify",
                                             }),
-                                            container: (provided) => ({
+                                            container: provided => ({
                                                 ...provided,
                                                 border: invalids.includes("address") ? "1px solid red" : null,
                                                 borderRadius: ".375rem",
                                             }),
+                                            valueContainer: provided => ({
+                                                ...provided,
+                                                cursor: "text",
+                                            })
                                         }}
                                     />
                                 </FormGroup>

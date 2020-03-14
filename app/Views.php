@@ -29,7 +29,9 @@ class Views extends Model{
 
     public static function getChangeDay(){
         $views_current = self::where('created_at', '>', Carbon::now()->subDay())->value('views');
-        $views_previous = self::where('created_at', '<', Carbon::now()->subDay())->where('created_at', '>=', Carbon::now()->subDays(2))->value('views');
+        $views_previous = self::where('created_at', '<', Carbon::now()->subDay())
+            ->where('created_at', '>=', Carbon::now()->subDays(2))
+            ->value('views');
 
         return self::getPercentChange($views_current, $views_previous);
     }
@@ -53,7 +55,9 @@ class Views extends Model{
 
     public static function getChangeMonth(){
         $views_current = self::where('created_at', '>', Carbon::now()->subMonth())->sum('views');
-        $views_previous = self::where('created_at', '<', Carbon::now()->subMonth())->where('created_at', '>=', Carbon::now()->subMonths(2))->sum('views');
+        $views_previous = self::where('created_at', '<', Carbon::now()->subMonth())
+            ->where('created_at', '>=', Carbon::now()->subMonths(2))
+            ->sum('views');
 
         return self::getPercentChange($views_current, $views_previous);
     }
@@ -82,7 +86,9 @@ class Views extends Model{
 
     public static function getChangeUniqueDay(){
         $views_current = self::where('created_at', '>', Carbon::now()->subDay())->value('views_unique');
-        $views_previous = self::where('created_at', '<', Carbon::now()->subDay())->where('created_at', '>=', Carbon::now()->subDays(2))->value('views_unique');
+        $views_previous = self::where('created_at', '<', Carbon::now()->subDay())
+            ->where('created_at', '>=', Carbon::now()->subDays(2))
+            ->value('views_unique');
 
         return self::getPercentChange($views_current, $views_previous);
     }
@@ -93,7 +99,9 @@ class Views extends Model{
 
     public static function getChangeUniqueMonth(){
         $views_current = self::where('created_at', '>', Carbon::now()->subMonth())->sum('views_unique');
-        $views_previous = self::where('created_at', '<', Carbon::now()->subMonth())->where('created_at', '>=', Carbon::now()->subMonths(2))->sum('views_unique');
+        $views_previous = self::where('created_at', '<', Carbon::now()->subMonth())
+            ->where('created_at', '>=', Carbon::now()->subMonths(2))
+            ->sum('views_unique');
 
         return self::getPercentChange($views_current, $views_previous);
     }

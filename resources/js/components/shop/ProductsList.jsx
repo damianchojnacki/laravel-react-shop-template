@@ -5,12 +5,13 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
 import CartService from "../../utils/CartService";
 import {usePage} from "@inertiajs/inertia-react";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons/faCaretRight";
 
 function ProductsList(props){
     const {currency} = usePage();
 
     return (
-        <table className="table">
+        <table className="table mb-0">
             <thead className="text-primary">
             <tr>
                 <th>Name</th>
@@ -23,9 +24,9 @@ function ProductsList(props){
             <tbody>
                 {(props.data && props.data.length > 0) ? props.data.map((product, index) =>
                     <tr key={product.id}>
-                        <td>{product.name}</td>
-                        <td className="text-center">{product.price_final} {currency.symbol}</td>
-                        <td className="text-center">{product.quantity}</td>
+                        <td className="align-middle">{product.name}</td>
+                        <td className="text-center align-middle">{product.price_final} {currency.symbol}</td>
+                        <td className="text-center align-middle">{product.quantity}</td>
                         <td>
                             <Button theme="light" size="sm" pill outline onClick={() => CartService.add(product)}>
                                 <FontAwesomeIcon icon={faPlus}/>
@@ -40,7 +41,20 @@ function ProductsList(props){
                 ) : null}
                 <tr>
                     <td colSpan="5" className="text-right">
-                        Sum: {props.sum} {currency.symbol}
+                        {props.sumWithDiscount ?
+                            <>
+                                <span>
+                                    <span>Sum: </span>
+                                    <del className="line-through text-danger">{props.sum} {currency.symbol}</del>
+                                </span>
+                                <FontAwesomeIcon icon={faCaretRight} className="mx-2"/>
+                                {props.sumWithDiscount} {currency.symbol}
+                            </>
+                        :
+                            <>
+                                Sum: {props.sum} {currency.symbol}
+                            </>
+                        }
                     </td>
                 </tr>
             </tbody>

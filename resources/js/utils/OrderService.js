@@ -14,6 +14,18 @@ export default class OrderService{
         });
     }
 
+    static appendCoupon(coupon){
+        return coupon && Inertia.put(`/coupon/${coupon}`,{}, {
+            preserveScroll: true,
+        });
+    }
+
+    static removeCoupon(){
+        return Inertia.delete(`/coupon`, {}, {
+            preserveScroll: true,
+        });
+    }
+
     static async all(page) {
         const response = await window.axios.get(`/api/orders/all/${page}`);
 

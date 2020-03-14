@@ -23,7 +23,6 @@ class OrderTest extends TestCase
         $order = factory(Order::class)->create();
 
         $product = factory(Product::class)->create();
-        $product->quantity = rand(1, 5);
 
         $order->productsAdd($product);
 
@@ -34,7 +33,6 @@ class OrderTest extends TestCase
         $order = factory(Order::class)->create();
 
         $product = factory(Product::class)->create();
-        $product->quantity = 1;
 
         $order->productsAdd($product);
         $order->productsRemove($product);
@@ -73,9 +71,6 @@ class OrderTest extends TestCase
         $num_of_products = 5;
 
         $products = factory(Product::class, $num_of_products)->create();
-        $products->map(function($product){
-            $product->quantity = rand(1, 5);
-        });
 
         $order->productsAdd($products);
 
@@ -88,9 +83,6 @@ class OrderTest extends TestCase
         $num_of_products = 5;
 
         $products = factory(Product::class, $num_of_products)->create();
-        $products->map(function($product){
-            $product->quantity = rand(1, 5);
-        });
 
         $order->productsAdd($products);
 
@@ -103,9 +95,6 @@ class OrderTest extends TestCase
         $order = factory(Order::class)->create();
 
         $products = factory(Product::class, 2)->create();
-        $products->map(function($product){
-            $product->quantity = rand(1, 5);
-        });
 
         $order->productsAdd($products[0]);
 

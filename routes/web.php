@@ -41,6 +41,13 @@ Route::group([
 });
 
 Route::group([
+    'name' => 'coupon',
+], function(){
+    Route::put("coupon/{code}", 'CouponController@append')->name('coupon.append');
+    Route::delete("coupon", 'CouponController@remove')->name('coupon.remove');
+});
+
+Route::group([
     'name' => 'auth',
 ], function(){
     // public routes

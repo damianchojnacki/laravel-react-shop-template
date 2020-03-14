@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\UsesCoupon;
 use App\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model{
 
-    use UsesUuid;
+    use UsesUuid, UsesCoupon;
 
     protected $guarded = [
         'id',
@@ -30,13 +31,13 @@ class Order extends Model{
     }
 
     public function productsAdd($products){
-        if(!$products instanceof Collection)
+        if(!$products instanceof Collection && !is_array($products))
             $products = [$products];
 
         $order_products = $this->products();
 
         foreach($products as $product)
-            $order_products->attach($product->id, ['quantity' => $product->quantity]);
+            $order_products->attach($product->id, ['quantity' => $product->quantity ?? 1]);
 
         return $this->products();
     }
@@ -46,15 +47,15 @@ class Order extends Model{
     }
 
     public function productsRemove($products){
-        if(!$products instanceof Collection)
+        if(!$products instanceof Collection && !is_array($products))
             $products = [$products];
 
         $order_products = $this->products();
 
         foreach($products as $product){
-            if($order_products->get()->find($product->id)->pivot->quantity > $product->quantity){
+            if($order_products->get()->find($product->id)->pivot->quantity > ($product->quantity ?? 1)){
                 $pivot = $order_products->find($product->id)->pivot;
-                $pivot->quantity -= $product->quantity;
+                $pivot->quantity -= $product->quantity ?? 1;
                 $pivot->save();
             }
             else
@@ -65,7 +66,7 @@ class Order extends Model{
     }
 
     public function productsSet($products){
-        if(!$products instanceof Collection)
+        if(!$products instanceof Collection && !is_array($products))
             $products = [$products];
 
         $order_products = $this->products();
@@ -73,7 +74,7 @@ class Order extends Model{
         $order_products->sync([]);
 
         foreach($products as $product)
-            $order_products->attach(Product::find($product->id), ['quantity' => $product->quantity]);
+            $order_products->attach($product->id, ['quantity' => $product->quantity ?? 1]);
 
         return $this->products();
     }
@@ -101,7 +102,14 @@ class Order extends Model{
         foreach($products as $product)
             $value += $product->price * $product->pivot->quantity;
 
+        if(self::isUsingCoupons())
+            $value = $this->appendDiscount($value);
+
         return number_format($value, 2, '.', '');
+    }
+
+    public static function isUsingCoupons(){
+        return in_array(UsesCoupon::class, class_uses(self::class));
     }
 
     public function details(){

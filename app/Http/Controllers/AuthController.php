@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Flash;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
@@ -50,9 +51,9 @@ class AuthController extends Controller {
 
             Auth::login($user);
 
-            \Session::flash('success', 'You have been successfully singed in.');
+            Flash::success('You have been successfully singed in.');
         } else {
-            \Session::flash('success', 'Sorry, we had a problem with signing you in. Try again or register.');
+            Flash::success('Sorry, we had a problem with signing you in. Try again or register.');
         }
 
         return redirect()->to('/');
@@ -77,7 +78,7 @@ class AuthController extends Controller {
 
         Auth::login($user);
 
-        \Session::flash('success', 'You have been successfully signed up.');
+        Flash::success('You have been successfully signed up.');
 
         return response(['user' => new UserResource($user)], 200);
     }
@@ -85,7 +86,7 @@ class AuthController extends Controller {
     public function logout() {
         Auth::logout();
 
-        \Session::flash('success', 'You have been successfully logged out!');
+        Flash::success('You have been successfully logged out!');
 
         return \Redirect::back();
     }

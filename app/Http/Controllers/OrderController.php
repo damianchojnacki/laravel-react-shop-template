@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Coupon;
+use App\Flash;
 use App\Http\Resources\OrderResource;
 use App\Order;
 use App\OrderDetails;
@@ -76,7 +78,7 @@ class OrderController extends Controller
 
             if($order){
                 $order = Order::find($order['id']);
-                $order->details()->update($request->toArray());
+                $order->details()->update($request->except('terms'));
             } else {
                 $order = new Order();
                 $details = new OrderDetails($request->toArray());
@@ -89,6 +91,11 @@ class OrderController extends Controller
 
             $order->productsSet(Cart::get());
 
+            $coupon = \Session::get('coupon');
+            $coupon && $order->appendCoupon($coupon);
+
+            $order->save();
+
             \Session::put('order', [
                 'id' => $order->id,
                 'email' => $order->details->email,
@@ -99,7 +106,7 @@ class OrderController extends Controller
 
             return Redirect::back();
         } else{
-            \Session::flash('error', 'Your cart is empty.');
+            Flash::error('Your cart is empty.');
 
             return Redirect::back();
         }
@@ -107,6 +114,7 @@ class OrderController extends Controller
 
     public function clear(){
         \Session::remove('order');
+        \Session::remove('coupon');
         Cart::empty();
 
         return Redirect::back();
@@ -125,7 +133,7 @@ class OrderController extends Controller
         ]);
 
         if((Auth::check() && !Auth::user()->isAdmin()) || empty(\Session::get('cart'))){
-            \Session::flash('error', 'Your cart is empty.');
+            Flash::error('Your cart is empty.');
 
             return Redirect::route('checkout')->setStatusCode(400);
         }

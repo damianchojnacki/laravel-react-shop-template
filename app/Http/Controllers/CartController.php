@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Flash;
 use App\Product;
 use Illuminate\Support\Facades\Redirect;
 use Session;
@@ -13,7 +14,7 @@ class CartController extends Controller
     {
         Cart::add(Product::find($id));
 
-        \Session::flash('success', 'Product has been added to cart.');
+        Flash::success('Product has been added to cart.');
 
         return Redirect::back();
     }
@@ -22,7 +23,7 @@ class CartController extends Controller
     {
         Cart::remove(Product::find($id));
 
-        Session::flash('success', 'Product has been removed.');
+        Flash::success('Product has been removed.');
 
         return Redirect::back();
     }

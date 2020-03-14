@@ -39,7 +39,7 @@ class Product extends Model{
         if($currency !== $this->baseCurrency)
             $price_final = $this->convert($price_final, $currency);
 
-        return number_format($price_final, 2);
+        return number_format($price_final, 2, '.', '');
     }
 
     public function getPriceOriginAttribute(){
@@ -47,7 +47,7 @@ class Product extends Model{
 
         $price_origin = $currency !== $this->baseCurrency ? $this->convert($this->price, $currency) : $this->price;
 
-        return number_format($price_origin, 2);
+        return number_format($price_origin, 2, '.', '');
     }
 
     public function image(){
