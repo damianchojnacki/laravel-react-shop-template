@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\ProductType;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +30,11 @@ class AppServiceProvider extends ServiceProvider
     {
         if(config('app.env') != 'local') URL::forceScheme('https');
         Resource::withoutWrapping();
+
+        Inertia::share('app', function () {
+            return [
+              'name' => config('app.name'),
+            ];
+        });
     }
 }

@@ -20,7 +20,7 @@ function Coupon({coupon}) {
         <div className="float-right">
             {coupon.code ?
                 <FormGroup>
-                    <label htmlFor="coupon" className="d-block text-right">Delete</label>
+                    <label htmlFor="coupon" className="d-block">Coupon:</label>
                     <InputGroup seamless className="w-auto d-inline-block">
                         <InputGroupAddon type="prepend">
                             <InputGroupText>
@@ -34,7 +34,7 @@ function Coupon({coupon}) {
                                    disabled
                         />
                         <InputGroupAddon type="append">
-                            <Button theme="secondary" onClick={() => OrderService.removeCoupon()}><FontAwesomeIcon
+                            <Button theme="danger" onClick={() => OrderService.removeCoupon()}><FontAwesomeIcon
                                 icon={faTimes}/></Button>
                         </InputGroupAddon>
                     </InputGroup>

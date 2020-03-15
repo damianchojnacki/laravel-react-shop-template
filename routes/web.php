@@ -22,6 +22,10 @@ Route::group([
     Route::get('login', 'ShopController@login')->name('login');
     Route::get('register', 'ShopController@register')->name('register');
     Route::get('checkout', 'ShopController@checkout')->name('checkout');
+
+    Route::middleware('auth')->group(function(){
+        Route::get('user', 'ShopController@user')->name('user');
+    });
 });
 
 Route::group([
@@ -59,7 +63,6 @@ Route::group([
 
     // private routes
     Route::middleware('auth')->group(function(){
-        Route::get('user', 'AuthController@getUser')->name('auth.user');
         Route::post('logout', 'AuthController@logout')->name('auth.logout');
     });
 });

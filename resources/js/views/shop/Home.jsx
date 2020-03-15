@@ -13,11 +13,7 @@ function Home({specialOffer, productsDiscounted}){
 
     return (
         <Shop>
-            <Helmet>
-                <title>Shop | Homepage</title>
-            </Helmet>
-
-            <main className="d-flex flex-column">
+            <div className="d-flex flex-column">
                 <Card className="m-2">
                     <div className="row position-relative m-0">
                         <CardHeader className="h-100 col-md-3 col-12" style={{minHeight: '275px'}}>
@@ -50,7 +46,7 @@ function Home({specialOffer, productsDiscounted}){
                 <div className="main my-2 d-flex w-100 justify-content-between flex-wrap">
                     <ProductsListComplex data={productsDiscounted} />
                 </div>
-            </main>
+            </div>
         </Shop>
     )
 }

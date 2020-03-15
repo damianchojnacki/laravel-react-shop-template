@@ -67,9 +67,6 @@ export default function Login({googleClientId}) {
 
     return (
         <Shop>
-            <Helmet>
-                <title>Shop | Login</title>
-            </Helmet>
             <div className="container col-lg-6 col-12">
                 <div className="mb-3">
                     <a href="#" className="d-inline-block" onClick={() => googleInit()}>

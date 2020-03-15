@@ -7,9 +7,11 @@ import Menu from "../components/shop/Menu";
 import Footer from "../components/shop/Footer";
 import Cart from "../components/shop/Cart";
 import {usePage} from "@inertiajs/inertia-react";
+import { Helmet } from "react-helmet";
+import { getComponentName } from "../utils/helpers";
 
 function Shop({children}) {
-    const { flash } = usePage();
+    const { flash, app } = usePage();
 
     useEffect(() => {
         flash.success && notify.show(flash.success, 'success', 1500);
@@ -18,15 +20,18 @@ function Shop({children}) {
 
     return (
         <>
+            <Helmet>
+                <title>{app.name + " - " + getComponentName()}</title>
+            </Helmet>
             <Notifications/>
-            <div className="p-0 container d-flex flex-column" style={{minHeight: "100vh"}}>
+            <main className="p-0 container d-flex flex-column" style={{minHeight: "100vh"}}>
                 <Cart/>
                 <Menu/>
                 <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
                     {children}
                 </div>
                 <Footer/>
-            </div>
+            </main>
         </>
     );
 }

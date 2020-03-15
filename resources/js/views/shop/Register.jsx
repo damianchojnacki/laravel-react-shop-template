@@ -10,7 +10,7 @@ import {checkFullName, isEmail, equals} from "../../utils/helpers";
 import {Inertia} from "@inertiajs/inertia";
 import Shop from "../../layouts/Shop";
 
-export default function Register(props) {
+export default function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

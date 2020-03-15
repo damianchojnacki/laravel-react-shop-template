@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Currency;
 use App\Http\Resources\ProductResource;
 use App\Product;
-use http\Url;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 class ShopController extends Controller
@@ -81,5 +78,9 @@ class ShopController extends Controller
             'order' => \Session::get('order') ?? [],
             'coupon' => \Session::get('coupon'),
         ]);
+    }
+
+    public function user(){
+        return Inertia::render('shop/User');
     }
 }

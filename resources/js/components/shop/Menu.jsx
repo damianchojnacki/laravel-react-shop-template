@@ -41,7 +41,9 @@ function Menu() {
                             <CurrencySelect/>
                         </NavItem>
                         <NavItem className={`text-center align-self-center text-white pl-4 ${isMobile() && "flex-grow-1 p-2"}`}>
-                            <FontAwesomeIcon size={isMobile() ? "3x" : "2x"} icon={faUserCircle} className="align-middle"/>
+                            <InertiaLink href="/user">
+                                <FontAwesomeIcon size={isMobile() ? "3x" : "2x"} icon={faUserCircle} className="align-middle text-white"/>
+                            </InertiaLink>
                         </NavItem>
                     </div>
                 </Nav>

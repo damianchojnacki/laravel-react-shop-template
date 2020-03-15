@@ -21,10 +21,7 @@ export default function Products({products, category, search, page}){
 
     return (
         <Shop>
-            <Helmet>
-                <title>Shop | Admin - Products</title>
-            </Helmet>
-            <main className="main my-2 d-flex flex-column flex-grow-1 w-100">
+            <div className="main my-2 d-flex flex-column flex-grow-1 w-100">
                 <ProductsNav category={category} search={value => ProductService.search(value, category)} setSort={e => setSort(e)}/>
 
                 <div className={productsFlexClasses}>
@@ -34,7 +31,7 @@ export default function Products({products, category, search, page}){
                         <Button className="btn-block my-4" onClick={() => ProductService.all(page + 1, category)}>{search ? "Reload" : "Show more"}</Button>
                     }
                 </div>
-            </main>
+            </div>
         </Shop>
     )
 }
