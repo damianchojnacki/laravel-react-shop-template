@@ -2,9 +2,13 @@
     &__card{
         transition: .3s;
         width: 47%;
+        color: inherit;
+
 
         &:hover{
-            transform:scale(1.05);
+            transform:scale(1.02);
+            color: inherit;
+            text-decoration: none !important;
         }
 
         *{
@@ -19,3 +23,5 @@
         }
     }
 }
+
+
