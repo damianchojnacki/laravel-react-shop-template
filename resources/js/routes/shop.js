@@ -1,4 +1,4 @@
-import Home from "../views/shop/Home";
+import Homepage from "../views/shop/Homepage";
 import Login from "../views/shop/Login";
 import Products from "../views/shop/Products";
 import Register from "../views/shop/Register";
@@ -8,7 +8,7 @@ export default [
     {
         path: "/",
         name: "Homepage",
-        component: Home,
+        component: Homepage,
         layout: "/shop"
     },
     {
@@ -32,7 +32,7 @@ export default [
     },
     {
         path: "/register/:result",
-        component: Home,
+        component: Homepage,
         layout: "/shop",
         hidden: true
     },

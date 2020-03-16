@@ -8,14 +8,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 
 function Menu() {
-    const {auth} = usePage();
+    const {auth, app} = usePage();
 
     const [navbarOpened, setNavbarOpened] = useState(false);
 
     return (
         <Navbar type="dark" theme="primary" expand="md" className="mb-4">
             <InertiaLink href="/">
-                <NavbarBrand tag="div">Shop Template</NavbarBrand>
+                <NavbarBrand tag="div">{app.name}</NavbarBrand>
             </InertiaLink>
             <NavbarToggler onClick={() => setNavbarOpened(!navbarOpened)} />
 
@@ -40,11 +40,13 @@ function Menu() {
                         <NavItem className={isMobile() ? "w-100" : null}>
                             <CurrencySelect/>
                         </NavItem>
-                        <NavItem className={`text-center align-self-center text-white pl-4 ${isMobile() && "flex-grow-1 p-2"}`}>
-                            <InertiaLink href="/user">
-                                <FontAwesomeIcon size={isMobile() ? "3x" : "2x"} icon={faUserCircle} className="align-middle text-white"/>
-                            </InertiaLink>
-                        </NavItem>
+                        {auth.user &&
+                            <NavItem className={`text-center align-self-center text-white pl-4 ${isMobile() && "flex-grow-1 p-2"}`}>
+                                <InertiaLink href="/user">
+                                    <FontAwesomeIcon size={isMobile() ? "3x" : "2x"} icon={faUserCircle} className="align-middle text-white"/>
+                                </InertiaLink>
+                            </NavItem>
+                        }
                     </div>
                 </Nav>
             </Collapse>

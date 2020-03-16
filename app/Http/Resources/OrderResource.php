@@ -23,7 +23,7 @@ class OrderResource extends JsonResource
                 'created_at' => $this->created_at,
                 'value' => $this->value,
                 'products' => ProductResource::collection($this->whenLoaded('products')),
-                'user' => new UserResource($this->whenLoaded('user')),
+                'details' => new OrderDetailsResource($this->whenLoaded('details')),
             ];
     }
 }

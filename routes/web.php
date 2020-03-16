@@ -21,11 +21,12 @@ Route::group([
     Route::get('products/search/{id}/{category?}', 'ShopController@productsSearch');
     Route::get('login', 'ShopController@login')->name('login');
     Route::get('register', 'ShopController@register')->name('register');
-    Route::get('checkout', 'ShopController@checkout')->name('checkout');
 
     Route::middleware('auth')->group(function(){
         Route::get('user', 'ShopController@user')->name('user');
     });
+
+    Route::get('checkout', 'ShopController@checkout')->name('checkout')->middleware('cart');
 });
 
 Route::group([
@@ -39,6 +40,7 @@ Route::group([
 
 Route::group([
     'name' => 'order',
+    'middleware' => 'cart'
 ], function(){
     Route::post("order", 'OrderController@make')->name('order.make');
     Route::delete("order", 'OrderController@clear')->name('order.clear');
@@ -46,6 +48,7 @@ Route::group([
 
 Route::group([
     'name' => 'coupon',
+    'middleware' => 'cart'
 ], function(){
     Route::put("coupon/{code}", 'CouponController@append')->name('coupon.append');
     Route::delete("coupon", 'CouponController@remove')->name('coupon.remove');
@@ -54,14 +57,12 @@ Route::group([
 Route::group([
     'name' => 'auth',
 ], function(){
-    // public routes
     Route::post('login', 'AuthController@login')->name('auth.login');
     Route::post('register', 'AuthController@register')->name('auth.register');
 
     Route::post('/login/google', 'AuthController@loginWithGoogle')->name('auth.google.login');
     Route::get('/login/google/callback', 'AuthController@handleProviderCallback')->name('auth.google.callback');
 
-    // private routes
     Route::middleware('auth')->group(function(){
         Route::post('logout', 'AuthController@logout')->name('auth.logout');
     });

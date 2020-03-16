@@ -34,8 +34,6 @@ class CouponTest extends TestCase{
     public function CouponCanBeAppliedToOrder(){
         $coupon = factory(Coupon::class)->create();
 
-        $products = factory(Product::class, 3)->create();
-
         $this->put("/coupon", $coupon)
             ->assertSessionHas("order.coupon")
             ->assertSessionMissing('error');
@@ -50,7 +48,8 @@ class CouponTest extends TestCase{
     public function testCouponCanBeAdded(){
         $coupon = factory(Coupon::class)->create();
 
-        $this->put("/coupon/$coupon->code")
+        $this->withSession(['cart' => factory(Product::class, 5)])
+            ->put("/coupon/$coupon->code")
             ->assertSessionHas("coupon.code", $coupon->code)
             ->assertSessionHas("coupon.percent_off", $coupon->percent_off)
             ->assertSessionHas('success')
