@@ -31,10 +31,8 @@ class AppServiceProvider extends ServiceProvider
         if(config('app.env') != 'local') URL::forceScheme('https');
         Resource::withoutWrapping();
 
-        Inertia::share('app', function () {
-            return [
-              'name' => config('app.name'),
-            ];
+        Inertia::share('app.name', function () {
+            return config('app.name');
         });
     }
 }

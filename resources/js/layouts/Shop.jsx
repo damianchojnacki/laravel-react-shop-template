@@ -8,7 +8,6 @@ import Footer from "../components/shop/Footer";
 import Cart from "../components/shop/Cart";
 import {usePage} from "@inertiajs/inertia-react";
 import { Helmet } from "react-helmet";
-import { getComponentName } from "../utils/helpers";
 
 function Shop({children}) {
     const { flash, app } = usePage();
@@ -21,7 +20,7 @@ function Shop({children}) {
     return (
         <>
             <Helmet>
-                <title>{app.name + " - " + getComponentName()}</title>
+                <title>{app.name + " - " + app.page}</title>
             </Helmet>
             <Notifications/>
             <main className="p-0 container d-flex flex-column" style={{minHeight: "100vh"}}>

@@ -173,7 +173,3 @@ export function getSumOfProductsWithDiscount(cart, coupon){
 
     return (sum - coupon.percent_off / 100 * sum).toFixed(2);
 }
-
-export function getComponentName(){
-    return JSON.parse(app.dataset.page).component.split("/")[1];
-}

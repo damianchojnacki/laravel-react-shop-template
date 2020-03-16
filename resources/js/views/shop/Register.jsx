@@ -189,9 +189,6 @@ export default function Register() {
 
     return (
         <Shop>
-            <Helmet>
-                <title>Shop | Register</title>
-            </Helmet>
             <div className="container col-lg-9 col-12">
                 {loading ? user ?
                     <div className="d-flex justify-content-center">

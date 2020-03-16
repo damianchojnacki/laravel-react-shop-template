@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductResource;
+use App\InertiaPage;
 use App\Product;
 use Inertia\Inertia;
 
@@ -23,7 +24,7 @@ class ShopController extends Controller
                 return $product->discount->percent_off;
             });
 
-        return Inertia::render('shop/Home', [
+        return Inertia::render(InertiaPage::load('shop/Home'), [
             'specialOffer' => new ProductResource($productsWithDiscount->shift()),
             'productsDiscounted' => ProductResource::collection($productsWithDiscount),
         ]);
@@ -41,7 +42,7 @@ class ShopController extends Controller
         else
             $products = Product::all();
 
-        return Inertia::render('shop/Products', [
+        return Inertia::render(InertiaPage::load('shop/Products'), [
             'products' => ProductResource::collection($products),
             'category' => $category,
             'page' => $page,
@@ -56,24 +57,24 @@ class ShopController extends Controller
         else
             $products = Product::where('name', $this->like, "%$name%")->take(100)->get();
 
-        return Inertia::render('shop/Products', [
+        return Inertia::render(InertiaPage::load('shop/Products'), [
             'products' => ProductResource::collection($products),
             'category' => $category,
         ]);
     }
 
     public function login(){
-        return Inertia::render('shop/Login', [
+        return Inertia::render(InertiaPage::load('shop/Login'), [
             'googleClientId' => config('services.google.client_id'),
         ]);
     }
 
     public function register(){
-        return Inertia::render('shop/Register');
+        return Inertia::render(InertiaPage::load('shop/Register'));
     }
 
     public function checkout(){
-        return Inertia::render('shop/Checkout', [
+        return Inertia::render(InertiaPage::load('shop/Checkout'), [
             'paypalClientID' => config('services.paypal.client_id'),
             'order' => \Session::get('order') ?? [],
             'coupon' => \Session::get('coupon'),
@@ -81,6 +82,6 @@ class ShopController extends Controller
     }
 
     public function user(){
-        return Inertia::render('shop/User');
+        return Inertia::render(InertiaPage::load('shop/User'));
     }
 }
