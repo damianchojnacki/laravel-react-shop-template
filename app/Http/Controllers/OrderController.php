@@ -104,11 +104,11 @@ class OrderController extends Controller
                 'zip_code' => $order->details->zip_code,
             ]);
 
-            return Redirect::back();
+            return redirect()->back();
         } else{
             Flash::error('Your cart is empty.');
 
-            return Redirect::back();
+            return redirect()->back();
         }
     }
 
@@ -117,7 +117,7 @@ class OrderController extends Controller
         \Session::remove('coupon');
         Cart::empty();
 
-        return Redirect::back();
+        return redirect('/');
     }
 
     public function createAdmin(Request $request)
@@ -135,7 +135,7 @@ class OrderController extends Controller
         if((Auth::check() && !Auth::user()->isAdmin()) || empty(\Session::get('cart'))){
             Flash::error('Your cart is empty.');
 
-            return Redirect::route('checkout')->setStatusCode(400);
+            return redirect()->route('checkout')->setStatusCode(400);
         }
 
         $order = new Order();
@@ -171,7 +171,7 @@ class OrderController extends Controller
             }
         }
 
-        return Redirect::back('checkout');
+        return redirect()->back();
     }
 
     public function edit(Request $request)

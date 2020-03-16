@@ -16,6 +16,7 @@ class Order extends Model{
         'id',
         'value',
     ];
+
     protected $appends = ['value'];
 
     protected static function boot(){
@@ -95,12 +96,12 @@ class Order extends Model{
     }
 
     public function getValueAttribute(){
-        $products = $this->products()->select('price')->get();
+        $products = $this->products()->get();
 
         $value = 0;
 
         foreach($products as $product)
-            $value += $product->price * $product->pivot->quantity;
+            $value += $product->price_final * $product->pivot->quantity;
 
         if(self::isUsingCoupons())
             $value = $this->appendDiscount($value);

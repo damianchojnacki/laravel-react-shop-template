@@ -47,7 +47,7 @@ function Checkout({paypalClientID, order, coupon}) {
         e.preventDefault();
 
         const credentials = {
-            email,
+            email: auth.user.email ?? email,
             name,
             address,
             zip_code: zipCode,
@@ -108,7 +108,7 @@ function Checkout({paypalClientID, order, coupon}) {
             onApprove: (data, actions) => {
                 setPendingState(4);
 
-                OrderService.clear().then(() => setTimeout(() => Inertia.visit('/'), 1500));
+                setTimeout(() => OrderService.clear(), 1500);
             },
             onCancel: () => {
                 setTimeout(() => setPendingState(-2), 1000);

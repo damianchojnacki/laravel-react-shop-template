@@ -30,7 +30,7 @@ function Orders({orders}){
                             <td>{index + 1}</td>
                             <td>{order.id}</td>
                             <td>{order.created_at}</td>
-                            <td className="text-center">{order.value} {currency.sign}</td>
+                            <td className="text-center">{order.value} {currency.symbol}</td>
                             <td>{order.status.name}</td>
                             <td className="text-right">
                                 <InertiaLink className="btn btn-primary" href="/user/orders/products">Details</InertiaLink>

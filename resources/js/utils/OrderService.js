@@ -8,9 +8,8 @@ export default class OrderService{
     }
 
     static clear(){
-        return Inertia.delete('/order', {}, {
-            preserveScroll: true,
-            preserveState: true,
+        return Inertia.visit('/order/clear', {
+            method: "DELETE",
         });
     }
 

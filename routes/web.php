@@ -44,7 +44,7 @@ Route::group([
     'middleware' => 'cart'
 ], function(){
     Route::post("order", 'OrderController@make')->name('order.make');
-    Route::delete("order", 'OrderController@clear')->name('order.clear');
+    Route::delete("order/clear", 'OrderController@clear')->name('order.clear');
 });
 
 Route::group([
