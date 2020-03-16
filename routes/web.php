@@ -24,6 +24,7 @@ Route::group([
 
     Route::middleware('auth')->group(function(){
         Route::get('user', 'ShopController@user')->name('user');
+        Route::get('user/orders', 'ShopController@userOrders')->name('user.orders');
     });
 
     Route::get('checkout', 'ShopController@checkout')->name('checkout')->middleware('cart');

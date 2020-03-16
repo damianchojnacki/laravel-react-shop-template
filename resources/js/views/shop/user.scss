@@ -1,9 +1,13 @@
 .user{
     &__card{
         transition: .3s;
-        width: 47%;
+        width: calc(50% - 2rem);
         color: inherit;
+        margin: 1rem 1rem;
 
+        @media (max-width: "765px") {
+            width: 100%;
+        }
 
         &:hover{
             transform:scale(1.02);
@@ -18,7 +22,7 @@
             cursor: pointer;
         }
 
-        &:first-child{
+        &:nth-child(2){
             width: 100%;
         }
     }

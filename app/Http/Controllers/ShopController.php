@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use App\Http\Resources\ProductResource;
 use App\InertiaPage;
+use App\Order;
 use App\Product;
 use Inertia\Inertia;
 
@@ -83,5 +85,23 @@ class ShopController extends Controller
 
     public function user(){
         return InertiaPage::render('shop/User');
+    }
+
+    public function userOrders(){
+        $orders = Order::whereHas('user', function($query){
+            return $query->where('email', \Auth::user()->email);
+        })->with('status')->get();
+
+        return InertiaPage::render('shop/User/Orders', [
+            'orders' => OrderResource::collection($orders),
+        ]);
+    }
+
+    public function userDiscounts(){
+        return InertiaPage::render('shop/User/Discounts');
+    }
+
+    public function userSettings(){
+        return InertiaPage::render('shop/User/Settings');
     }
 }

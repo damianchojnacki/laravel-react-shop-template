@@ -29,7 +29,7 @@ function ProductsListComplex(props){
     return (
         (data && data.length) && data.map(product => {
             return (
-                <Card key={product.id} className="product m-2">
+                <Card key={product.id} className="product my-2">
                     <CardHeader className="h-75 product__header">
                         <CardTitle tag="h5">{product.name}</CardTitle>
                         {product.image && <img className="rounded mx-auto mw-100 d-block" style={{maxHeight: '200px'}} src={product.image.src} alt={product.name}/>}

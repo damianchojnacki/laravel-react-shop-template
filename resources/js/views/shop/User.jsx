@@ -6,13 +6,20 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/faShoppingCart
 import './user.scss';
 import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
 import { faPercentage } from "@fortawesome/free-solid-svg-icons/faPercentage";
-import { InertiaLink } from "@inertiajs/inertia-react";
+import {
+    InertiaLink,
+    usePage
+} from "@inertiajs/inertia-react";
 
-function User({user}){
+function User(){
+    const {auth} = usePage();
+
     return (
         <Shop>
-            <div className="container d-flex flex-wrap justify-content-around">
-                <InertiaLink href="/user/orders" className="user__card m-2 text-center p-0">
+            <div className="d-flex flex-wrap justify-content-around w-100">
+                <h3 className="text-left w-100 mx-3 mt-5 mb-4">Welcome again <span className="font-italic">{auth.user.name}</span></h3>
+
+                <InertiaLink href="/user/orders" className="user__card text-center p-0">
                     <Card>
                         <CardBody className="p-5">
                             <FontAwesomeIcon size="6x" icon={faShoppingCart}/>
@@ -23,7 +30,7 @@ function User({user}){
                     </Card>
                 </InertiaLink>
 
-                <InertiaLink href="/user/discounts" className="user__card m-2 text-center p-0">
+                <InertiaLink href="/user/discounts" className="user__card text-center p-0">
                     <Card>
                         <CardBody className="p-5">
                             <FontAwesomeIcon size="6x" icon={faPercentage}/>
@@ -34,7 +41,7 @@ function User({user}){
                     </Card>
                 </InertiaLink>
 
-                <InertiaLink href="/user/settings" className="user__card m-2 text-center p-0">
+                <InertiaLink href="/user/settings" className="user__card text-center p-0">
                     <Card>
                         <CardBody className="p-5">
                             <FontAwesomeIcon size="6x" icon={faCog}/>

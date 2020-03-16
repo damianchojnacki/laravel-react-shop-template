@@ -13,8 +13,8 @@ function Homepage({specialOffer, productsDiscounted}){
 
     return (
         <Shop>
-            <div className="d-flex flex-column">
-                <Card className="m-2">
+            <div className="w-100 d-flex flex-column">
+                <Card className="mb-2">
                     <div className="row position-relative m-0">
                         <CardHeader className="h-100 col-md-3 col-12" style={{minHeight: '275px'}}>
                             <CardTitle tag="h5">{specialOffer.name}</CardTitle>
