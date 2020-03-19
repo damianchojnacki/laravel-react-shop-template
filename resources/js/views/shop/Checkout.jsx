@@ -47,7 +47,7 @@ function Checkout({paypalClientID, order, coupon}) {
         e.preventDefault();
 
         const credentials = {
-            email: auth.user && (auth.user.email ?? email),
+            email: (auth.user && auth.user.email) ?? email,
             name,
             address,
             zip_code: zipCode,
