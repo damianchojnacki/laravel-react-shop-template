@@ -6,38 +6,53 @@
 </p>
 
 ---
-Master branch is working application ready for deployment on:
+Master branch is working application, ready to deploy on:
 <p align="center">
     <img src="https://cdn-images-1.medium.com/max/1600/1*fIjRtO5P8zc3pjs0E5hYkw.png" height="200">
 </p>
 ---
 
-### 
+## Installation
 
 Laravel-react-shop-template require a **Heroku Dyno** and extension **Heroku Postgres**.
 
-1. Deploy an app from github repo.
+1. Deploy application.
 2. Generate APP_KEY:
 
 ```bash
 php artisan key:generate --show
 ```
 
-3. Set up an ENV vars:
-
-| KEY | VALUE |
-| ------ | ------ |
-| APP_KEY | ^^ generated above ^^ |
+3. Copy .env.example to .env and set up required ENV vars:
+- APP (APP_KEY generated above)
+- DATABASE
+- MAIL
+- GOOGLE
+- CLOUDINARY
+- PAYPAL
 
 4. Create required databases and seed:
 
 ```bash
-php artisan migrate
-php artisan db:seed
+php artisan migrate --seed
 ```
 
 5. Done
 
-# License
+## Used technologies
+- [Laravel 6 Framework](https://github.com/laravel/laravel)
+- [Laravel Telescope](https://github.com/laravel/telescope)
+- [Inertia.js](https://inertiajs.com)
+- [React.js](https://github.com/facebook/react)
+- [Cloudinary with Laravel wrapper](https://github.com/jrm2k6/cloudder)
+- [Font Awesome](https://fontawesome.com)
+- [Animate.css](https://github.com/daneden/animate.css)
+- [Shards React UI Kit](https://github.com/DesignRevision/shards-react)
+- [PayPal Express Checkout](https://developer.paypal.com/docs/checkout)
+- [Google Sing-in Authentication](https://developers.google.com/identity/sign-in/web/sign-in)
+- [Real-time address autocomplete with Google Places API](https://developers.google.com/places/web-service/intro)
+- [Real-time Currency Exchange API](https://exchangeratesapi.io)
+
+## License
 
 MIT license
