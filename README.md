@@ -45,13 +45,14 @@ php artisan migrate --seed
 - [Inertia.js](https://inertiajs.com)
 - [React.js](https://github.com/facebook/react)
 - [Cloudinary with Laravel wrapper](https://github.com/jrm2k6/cloudder)
-- [Font Awesome](https://fontawesome.com)
-- [Animate.css](https://github.com/daneden/animate.css)
-- [Shards React UI Kit](https://github.com/DesignRevision/shards-react)
 - [PayPal Express Checkout](https://developer.paypal.com/docs/checkout)
 - [Google Sing-in Authentication](https://developers.google.com/identity/sign-in/web/sign-in)
 - [Real-time address autocomplete with Google Places API](https://developers.google.com/places/web-service/intro)
 - [Real-time Currency Exchange API](https://exchangeratesapi.io)
+- [Font Awesome](https://fontawesome.com)
+- [Animate.css](https://github.com/daneden/animate.css)
+- [Sass](https://sass-lang.com/)
+- [Shards React UI Kit](https://github.com/DesignRevision/shards-react)
 
 ## License
 
