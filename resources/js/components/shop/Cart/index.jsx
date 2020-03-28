@@ -13,6 +13,7 @@ import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import "./style.scss";
 import CartService from "../../../utils/CartService";
 import {getSumOfProducts} from "../../../utils/helpers";
+import Text from "../../Text";
 
 function Cart(props) {
     const {cart, currency} = usePage();
@@ -25,10 +26,14 @@ function Cart(props) {
             </DropdownToggle>
         <DropdownMenu right className={cart && cart.length ? null: "cart__empty"}>
             <div className="d-flex justify-content-between align-items-center">
-                <h4 className="cart__header">Shopping cart</h4>
+                <h4 className="cart__header">
+                    <Text id="cart-header"/>
+                </h4>
                 {cart.length ?
                     <div className="pr-4">
-                        <Button size="sm" className="btn btn-secondary" onClick={() => CartService.empty()}>Clear</Button>
+                        <Button size="sm" className="btn btn-secondary" onClick={() => CartService.empty()}>
+                            <Text id="cart-clear"/>
+                        </Button>
                     </div>
                 :
                     null
@@ -44,21 +49,27 @@ function Cart(props) {
                                     <span className="cart__field">{product.price_final} {currency.symbol}</span>
                                     <span className="cart__field">{product.quantity}</span>
                                     <span className="cart__field">
-                                        <Button size="sm" className="btn btn-danger" onClick={() => CartService.remove(product)}>Remove</Button>
+                                        <Button size="sm" className="btn btn-danger" onClick={() => CartService.remove(product)}>
+                                            <Text id="cart-remove"/>
+                                        </Button>
                                     </span>
                                 </ListGroupItem>
                             )}
-                            <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts(cart)} {currency.symbol}</span></ListGroupItem>
+                            <ListGroupItem className="text-right"><span className="cart__sum"><Text id="cart-sum"/> {getSumOfProducts(cart)} {currency.symbol}</span></ListGroupItem>
                         </ListGroup>
                     </DropdownItem>
                     <DropdownItem tag="span">
                         <InertiaLink href="/checkout">
-                            <Button block>Checkout</Button>
+                            <Button block>
+                                <Text id="cart-checkout"/>
+                            </Button>
                         </InertiaLink>
                     </DropdownItem>
                 </>
                     :
-                <DropdownItem tag="span">Your shopping cart is empty.</DropdownItem>
+                <DropdownItem tag="span">
+                    <Text id="cart-empty"/>
+                </DropdownItem>
             }
         </DropdownMenu>
         </Dropdown>

@@ -7,26 +7,26 @@ import Checkout from "../views/shop/Checkout";
 export default [
     {
         path: "/",
-        name: "Homepage",
+        name: "menu-homepage",
         component: Homepage,
         layout: "/shop"
     },
     {
         path: "/products/all/:category?",
         link: "/products/all",
-        name: "Products",
+        name: "menu-products",
         component: Products,
         layout: "/shop",
     },
     {
         path: "/login",
-        name: "Login",
+        name: "menu-login",
         component: Login,
         layout: "/shop"
     },
     {
         path: "/register",
-        name: "Register",
+        name: "menu-register",
         component: Register,
         layout: "/shop"
     },

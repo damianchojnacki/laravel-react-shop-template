@@ -8,7 +8,7 @@ function ProductsList(props){
         <Table responsive>
             <thead className="text-primary">
             <tr>
-                {props.fields.index && <th>#</th>}
+                {props.fields.languages && <th>#</th>}
                 {props.fields.id && <th>ID</th>}
                 {props.fields.name && <th>Name</th>}
                 {props.fields.type && <th>Type</th>}
@@ -21,7 +21,7 @@ function ProductsList(props){
             <tbody>
                 {(props.data && props.data.length > 0) ? props.data.map((product, index) =>
                     <tr key={product.id} className={props.product && (props.product === product.id || props.products.includes(product)) ? "table-warning" : null}>
-                        {props.fields.index && <td>{index + 1}</td>}
+                        {props.fields.languages && <td>{index + 1}</td>}
                         {props.fields.id && <td>{product.id}</td>}
                         {props.fields.name && <td>{product.name}</td>}
                         {props.fields.type && <td>{product.type.long}</td>}

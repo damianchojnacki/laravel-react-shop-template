@@ -7,7 +7,7 @@ function OrdersList(props){
         <Table responsive>
             <thead className="text-primary">
             <tr>
-                {props.fields.index && <th>#</th>}
+                {props.fields.languages && <th>#</th>}
                 {props.fields.id && <th>ID</th>}
                 {props.fields.date && <th>Purchase date</th>}
                 {props.fields.email && <th>Customer email</th>}
@@ -19,7 +19,7 @@ function OrdersList(props){
             <tbody>
                 {(props.data && props.data.length > 0) ? props.data.map((order, index) =>
                     <tr key={order.id}>
-                        {props.fields.index && <td>{index + 1}</td>}
+                        {props.fields.languages && <td>{index + 1}</td>}
                         {props.fields.id && <td>{order.id}</td>}
                         {props.fields.date && <td>{order.created_at}</td>}
                         {props.fields.email && <td>{order.user.email}</td>}

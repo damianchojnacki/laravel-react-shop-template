@@ -6,6 +6,7 @@ import ProductsListComplex from "../../components/shop/ProductListComplex";
 import classnames from 'classnames';
 import ProductService from "../../utils/ProductService";
 import Shop from "../../layouts/Shop";
+import Text from "../../components/Text";
 
 export default function Products({products, category, search, page}){
     const [sort, setSort] = useState({sort: "id", type: "asc"});
@@ -16,7 +17,7 @@ export default function Products({products, category, search, page}){
         "mt-4": true,
         "d-flex": true,
         "flex-wrap": true,
-        "justify-content-between": products.length % 4 === 0,
+        "justify-content-between": true,
     });
 
     return (
@@ -28,7 +29,7 @@ export default function Products({products, category, search, page}){
                     <ProductsListComplex data={products} sort={sort}/>
 
                     {(search || products.length % 12 === 0) &&
-                        <Button className="btn-block mt-4" onClick={() => ProductService.all(page + 1, category)}>{search ? "Reload" : "Show more"}</Button>
+                        <Button className="btn-block mt-4" onClick={() => ProductService.all(page + 1, category)}>{search ? <Text id="products-reload"/> : <Text id="products-showMore"/>}</Button>
                     }
                 </div>
             </div>

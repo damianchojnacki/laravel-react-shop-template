@@ -6,6 +6,7 @@ import {isMobile} from "../../utils/helpers";
 import CurrencySelect from "./CurrencySelect";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
+import Text from '../Text';
 
 function Menu() {
     const {auth, app} = usePage();
@@ -22,12 +23,12 @@ function Menu() {
             <Collapse open={navbarOpened} navbar>
                 <Nav navbar className="flex-grow-1">
                     {routes && routes.map((prop, key) => {
-                        if (prop.name === "Login" && auth.user) return null;
-                        if (prop.name === "Register" && auth.user) return null;
+                        if (prop.name === "login" && auth.user) return null;
+                        if (prop.name === "register" && auth.user) return null;
                         if (prop.hidden) return null;
                         return (
                             <NavItem key={key}>
-                                <InertiaLink className="nav-link" href={prop.link ?? prop.path}>{prop.name}</InertiaLink>
+                                <InertiaLink className="nav-link" href={prop.link ?? prop.path}><Text id={prop.name}/></InertiaLink>
                             </NavItem>
                         );
                     })}

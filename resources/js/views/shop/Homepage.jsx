@@ -7,6 +7,7 @@ import Shop from "../../layouts/Shop";
 import CartService from "../../utils/CartService";
 import {usePage} from "@inertiajs/inertia-react";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
+import Text from "../../components/Text";
 
 function Homepage({specialOffer, productsDiscounted}){
     const {cart, currency} = usePage();
@@ -24,7 +25,9 @@ function Homepage({specialOffer, productsDiscounted}){
                             {specialOffer.id &&
                                 <>
                                     <div className="h5 position-absolute m-4 rounded-circle bg-danger text-white d-flex justify-content-center align-items-center font-weight-bold" style={{top: 0, right: 0, height: "calc(50px + 1vw)", width: "calc(50px + 1vw)"}}>-{specialOffer.discount && specialOffer.discount.percent_off}%</div>
-                                    <h3 className="w-100 text-center m-0 mb-4">Offer of the day: </h3>
+                                    <h3 className="w-100 text-center m-0 mb-4">
+                                        <Text id="products-special-header"/>
+                                    </h3>
                                     <span className="display-4 text-danger" style={{textDecoration: "line-through"}}>{specialOffer.price_origin} {currency.symbol}</span>
                                     <FontAwesomeIcon icon={faCaretRight} className="product__arrow mx-4 h3"/>
                                     <span className="display-4">{specialOffer.price_final} {currency.symbol}</span>
@@ -36,9 +39,13 @@ function Homepage({specialOffer, productsDiscounted}){
                         {specialOffer.id &&
                             <>
                                 {CartService.in(cart, specialOffer) &&
-                                        <Button block size="big" className="btn btn-danger my-1" onClick={() => CartService.remove(specialOffer)}>Remove</Button>
+                                        <Button block size="big" className="btn btn-danger my-1" onClick={() => CartService.remove(specialOffer)}>
+                                            <Text id="cart-remove"/>
+                                        </Button>
                                 }
-                                <Button block size="big" className="btn btn-secondary my-1" onClick={() => CartService.add(specialOffer)}>Add to cart</Button>
+                                <Button block size="big" className="btn btn-secondary my-1" onClick={() => CartService.add(specialOffer)}>
+                                    <Text id="cart-add"/>
+                                </Button>
                             </>
                         }
                     </CardFooter>

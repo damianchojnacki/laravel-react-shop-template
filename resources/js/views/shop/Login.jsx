@@ -10,6 +10,7 @@ import Shop from "../../layouts/Shop";
 import AuthService from "../../utils/AuthService";
 import {Inertia} from "@inertiajs/inertia";
 import GoogleButton from "react-google-button";
+import Text from "../../components/Text";
 
 export default function Login({googleClientId}) {
     const [loading, setLoading] = useState(false);
@@ -80,7 +81,9 @@ export default function Login({googleClientId}) {
                         </Alert>
                     }
                     <FormGroup>
-                        <label htmlFor="#email">Email</label>
+                        <label htmlFor="#email">
+                            <Text id="login-email"/>
+                        </label>
                         <InputGroup seamless>
                             <InputGroupAddon type="prepend">
                                 <InputGroupText>
@@ -91,7 +94,9 @@ export default function Login({googleClientId}) {
                         </InputGroup>
                     </FormGroup>
                     <FormGroup>
-                        <label htmlFor="#password">Password</label>
+                        <label htmlFor="#password">
+                            <Text id="login-password"/>
+                        </label>
                         <InputGroup seamless>
                             <InputGroupAddon type="prepend">
                                 <InputGroupText>
@@ -106,14 +111,20 @@ export default function Login({googleClientId}) {
                             <FontAwesomeIcon size="lg" icon={faCheckCircle} className="animated fadeIn"/>
                             :
                             <div className="spinner-border spinner-border-sm" role="status">
-                                <span className="sr-only">Loading...</span>
+                                <span className="sr-only">
+                                    <Text id="login-loading"/>
+                                </span>
                             </div>
                             :
-                            <span>Log in</span>
+                            <span>
+                                <Text id="login-submit"/>
+                            </span>
                         }
                     </Button>
                     <p className="mt-3">
-                        <InertiaLink href="/register">Don't have an account? You can create one there.</InertiaLink>
+                        <InertiaLink href="/register">
+                            <Text id="login-register"/>
+                        </InertiaLink>
                     </p>
                 </Form>
             </div>

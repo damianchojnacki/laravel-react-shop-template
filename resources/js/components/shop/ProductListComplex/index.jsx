@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {usePage} from "@inertiajs/inertia-react";
 import CartService from "../../../utils/CartService";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
+import Text from "../../Text";
 
 function ProductsListComplex(props){
     const {cart, currency} = usePage();
@@ -37,7 +38,9 @@ function ProductsListComplex(props){
                     <CardBody>
                         <p>
                             <>
-                                <span className="font-weight-bold">Price: </span>
+                                <span className="font-weight-bold">
+                                    <Text id="products-block-price"/>
+                                </span>
                                 {product.discount ?
                                     <>
                                         <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.symbol}</span>
@@ -54,9 +57,13 @@ function ProductsListComplex(props){
                         {product.name &&
                             <>
                                 {CartService.in(cart, product) &&
-                                        <Button size="sm" className="btn btn-danger my-1" onClick={() => CartService.remove(product)}>Remove</Button>
+                                        <Button size="sm" className="btn btn-danger my-1" onClick={() => CartService.remove(product)}>
+                                            <Text id="cart-remove"/>
+                                        </Button>
                                 }
-                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => CartService.add(product)}>Add to cart</Button>
+                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => CartService.add(product)}>
+                                    <Text id="cart-add"/>
+                                </Button>
                             </>
                         }
                     </CardFooter>

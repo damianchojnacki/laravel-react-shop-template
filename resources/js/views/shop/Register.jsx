@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Helmet} from 'react-helmet';
 import {Form, FormInput, Button, Alert, InputGroupAddon, InputGroupText, InputGroup, Row, FormCheckbox} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import classNames from 'classnames';
@@ -9,6 +8,7 @@ import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid
 import {checkFullName, isEmail, equals} from "../../utils/helpers";
 import {Inertia} from "@inertiajs/inertia";
 import Shop from "../../layouts/Shop";
+import Text from "../../components/Text";
 
 export default function Register() {
     const [name, setName] = useState('');
@@ -108,14 +108,20 @@ export default function Register() {
 
     const steps = [
         <div onKeyDown={handleKeyDown}>
-            <h1 className="mb-4">Sign up</h1>
+            <h1 className="mb-4">
+                <Text id="register-welcome"/>
+            </h1>
             {errors &&
                 errors.map((e, index) => <Alert theme="danger" key={index}>{e}</Alert>)
             }
-            <Button block onClick={nextStep} size="lg">Start</Button>
+            <Button block onClick={nextStep} size="lg">
+                <Text id="register-start"/>
+            </Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
-            <h1>Please enter your e-mail below:</h1>
+            <h2 className="h1">
+                <Text id="register-email"/>
+            </h2>
             <InputGroup seamless className="my-4">
                 <InputGroupAddon type="prepend">
                     <InputGroupText>
@@ -124,10 +130,14 @@ export default function Register() {
                 </InputGroupAddon>
                 <FormInput size="lg" invalid={!!email && !validateStep()} type="email" onChange={(e) => {setEmail(e.target.value)}} value={email} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
-            <Button block size="lg" onClick={nextStep}>Done</Button>
+            <Button block size="lg" onClick={nextStep}>
+                <Text id="register-done"/>
+            </Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
-            <h1>What's your full name?</h1>
+            <h2 className="h1">
+                <Text id="register-name"/>
+            </h2>
             <InputGroup seamless className="my-4">
                 <InputGroupAddon type="prepend">
                     <InputGroupText>
@@ -136,11 +146,17 @@ export default function Register() {
                 </InputGroupAddon>
                 <FormInput size="lg" invalid={!!name && !validateStep()} type="text" onChange={(e) => {setName(e.target.value)}} value={name} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
-            <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
+            <Button size="lg" onClick={previousStep}>
+                <Text id="register-back"/>
+            </Button>
+            <Button size="lg" onClick={nextStep} className="float-right">
+                <Text id="register-next"/>
+            </Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
-            <h1>Select safe password and retype:</h1>
+            <h2 className="h2">
+                <Text id="register-password"/>
+            </h2>
             <Row className="my-4">
                 <div className="col-lg-6 col-12 my-2">
                     <InputGroup seamless>
@@ -163,21 +179,33 @@ export default function Register() {
                     </InputGroup>
                 </div>
             </Row>
-            <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
+            <Button size="lg" onClick={previousStep}>
+                <Text id="register-back"/>
+            </Button>
+            <Button size="lg" onClick={nextStep} className="float-right">
+                <Text id="register-next"/>
+            </Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
-            <h1>We are almost done!</h1>
-            <p>Please read and acceppt the terms and conditions:</p>
+            <h2 className="h1">
+                <Text id="register-terms-title"/>
+            </h2>
+            <p>
+                <Text id="register-terms-subtitle"/>
+            </p>
             <FormCheckbox
                 onChange={() => {setTerms(!terms)}}
                 checked={terms}
                 className="my-4"
             >
-                I agree with the terms and conditions of usage The Shop.
+                <Text id="register-terms-label"/>
             </FormCheckbox>
-            <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={handleSubmit} className="float-right">Sign in!</Button>
+            <Button size="lg" onClick={previousStep}>
+                <Text id="register-back"/>
+            </Button>
+            <Button size="lg" onClick={handleSubmit} className="float-right">
+                <Text id="register-submit"/>
+            </Button>
         </div>
     ];
 
@@ -197,7 +225,9 @@ export default function Register() {
                 :
                     <div className="d-flex justify-content-center">
                         <div className="spinner-grow" role="status">
-                            <span className="sr-only">Loading...</span>
+                            <span className="sr-only">
+                                <Text id="register-loading"/>
+                            </span>
                         </div>
                     </div>
                 :
