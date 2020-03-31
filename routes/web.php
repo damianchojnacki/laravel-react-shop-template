@@ -19,8 +19,11 @@ Route::group([
     Route::get("/", 'ShopController@homepage')->name('homepage');
     Route::get("products/all/{page?}/{category?}", 'ShopController@products')->name('products');
     Route::get('products/search/{id}/{category?}', 'ShopController@productsSearch');
-    Route::get('login', 'ShopController@login')->name('login');
-    Route::get('register', 'ShopController@register')->name('register');
+
+    Route::middleware('guest')->group(function(){
+        Route::get('login', 'ShopController@login')->name('login');
+        Route::get('register', 'ShopController@register')->name('register');
+    });
 
     Route::middleware('auth')->group(function(){
         Route::get('user', 'ShopController@user')->name('user');

@@ -6,6 +6,7 @@ import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
 import CartService from "../../utils/CartService";
 import {usePage} from "@inertiajs/inertia-react";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
+import Text from "../Text";
 
 function ProductsList(props){
     const {currency} = usePage();
@@ -14,9 +15,15 @@ function ProductsList(props){
         <table className="table mb-0">
             <thead className="text-primary">
             <tr>
-                <th>Name</th>
-                <th className="text-center">Price</th>
-                <th className="text-center">Quantity</th>
+                <th>
+                    <Text id="products-list-name"/>
+                </th>
+                <th className="text-center">
+                    <Text id="products-list-price"/>
+                </th>
+                <th className="text-center">
+                    <Text id="products-list-quantity"/>
+                </th>
                 <th/>
                 <th/>
             </tr>
@@ -52,7 +59,7 @@ function ProductsList(props){
                             </>
                         :
                             <>
-                                Sum: {props.sum} {currency.symbol}
+                                <Text id="products-list-sum"/> {props.sum} {currency.symbol}
                             </>
                         }
                     </td>

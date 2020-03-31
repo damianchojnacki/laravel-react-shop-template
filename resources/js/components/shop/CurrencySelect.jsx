@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {isMobile} from "../../utils/helpers";
 import CurrencyService from "../../utils/CurrencyService";
 import Select from "react-select";
 import {usePage} from "@inertiajs/inertia-react";
+import {useMediaQuery} from "react-responsive";
 
 function CurrencySelect() {
     const {currency, currencies} = usePage();
 
     const [selectOptions, setSelectOptions] = useState([]);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     useEffect(() => {
         setSelectOptions(currencies.map(item => {
@@ -31,8 +33,8 @@ function CurrencySelect() {
             styles={{
                 container: provided => ({
                     ...provided,
-                    width: isMobile() ? "100%" : 85,
-                    margin: isMobile() ? ".75rem 0" : 0,
+                    width: isMobile ? "100%" : 85,
+                    margin: isMobile ? ".75rem 0" : 0,
                     textAlign: "center",
                 }),
                 control: provided => ({

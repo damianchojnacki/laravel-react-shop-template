@@ -5,7 +5,7 @@ import {Inertia} from "@inertiajs/inertia";
 export default class LanguageService{
 
     static set(lang){
-        return Inertia.put(`language/${lang}`, {}, {
+        return Inertia.put(`/language/${lang}`, {}, {
             preserveScroll: true,
         });
     }
@@ -32,8 +32,6 @@ export default class LanguageService{
         if(!Array.isArray(id)) id = [id];
 
         let output = this.dictionary();
-
-        console.log(Cookies.get('lang'));
 
         for(let i = 0; i < id.length; i++){
             output = output[id[i]];

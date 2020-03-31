@@ -1,52 +1,79 @@
 {
-  "menu": {
-    "homepage": "Homepage",
-    "products": "Products",
-    "login": "Login",
-    "register": "Register"
-  },
-  "products": {
-    "special": {
-      "header": "Offer of the day"
+    "menu": {
+        "homepage": "Homepage",
+        "products": "Products",
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout"
     },
-    "block": {
-      "price": "Price: "
+    "products": {
+        "special": {
+            "header": "Offer of the day"
+        },
+        "block": {
+            "price": "Price: "
+        },
+        "list": {
+            "name": "Name",
+            "price": "Price",
+            "quantity": "Quantity",
+            "sum": "Sum: "
+        },
+        "reload": "Reload",
+        "showMore": "Show more"
     },
-    "reload": "Reload",
-    "showMore": "Show more"
-  },
-  "cart": {
-    "header": "Shopping cart",
-    "clear": "Clear",
-    "add": "Add to cart",
-    "remove": "Remove",
-    "checkout": "Checkout",
-    "empty": "Your shopping cart is empty.",
-    "sum": "Sum:"
-  },
-  "login": {
-    "google": "Sign in with Google",
-    "email": "Email",
-    "password": "Password",
-    "submit": "Sign in",
-    "register": "Don't have an account? You can create one there.",
-    "loading": "Loading..."
-  },
-  "register": {
-    "welcome": "Sign up",
-    "done": "Done",
-    "back": "Go back",
-    "next": "Continue",
-    "start": "Let's start!",
-    "email": "Please enter your e-mail below:",
-    "name": "What's your full name?",
-    "password": "Select safe password and retype:",
-    "terms": {
-      "title": "We are almost done!",
-      "subtitle": "Please read and accept the terms and conditions:",
-      "label": "I agree with the terms and conditions of usage."
+    "cart": {
+        "header": "Shopping cart",
+        "clear": "Clear",
+        "add": "Add to cart",
+        "remove": "Remove",
+        "checkout": "Checkout",
+        "empty": "Your shopping cart is empty.",
+        "sum": "Sum:"
     },
-    "submit": "Sign in!",
-    "loading": "Loading..."
-  }
+    "login": {
+        "google": "Sign in with Google",
+        "email": "Email",
+        "password": "Password",
+        "submit": "Sign in",
+        "register": "Don't have an account? You can create one there.",
+        "loading": "Loading..."
+    },
+    "register": {
+        "welcome": "Sign up",
+        "done": "Done",
+        "back": "Go back",
+        "next": "Continue",
+        "start": "Let's start!",
+        "email": "Please enter your e-mail below:",
+        "name": "What's your full name?",
+        "password": "Select safe password and retype:",
+        "terms": {
+            "title": "We are almost done!",
+            "subtitle": "Please read and accept the terms and conditions:",
+            "label": "I agree with the terms and conditions of usage."
+        },
+        "submit": "Sign in!",
+        "loading": "Loading..."
+    },
+    "alert": {
+        "login": {
+            "badCredentials": "Incorrect email or password."
+        }
+    },
+    "orders": {
+        "header": "Your last orders",
+        "date": "Purchase date",
+        "value": "Value",
+        "status": "Delivery status",
+        "details": "Details"
+    },
+    "order": {
+        "status": {
+            "1": "unpaid",
+            "2": "preparing",
+            "3": "shipped",
+            "4": "delivered"
+        }
+    }
 }

@@ -23,7 +23,7 @@ class AuthController extends Controller {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
             return response(['user' => new UserResource(Auth::user())], 200);
         else
-            return response('Incorrect email or password.', 422);
+            return response('alert-login-badCredentials', 422);
     }
 
     public function loginWithGoogle(Request $request){

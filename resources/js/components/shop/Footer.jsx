@@ -1,6 +1,5 @@
 import React from "react";
 import {Badge} from "shards-react";
-import LanguageSelect from "./LanguageSelect";
 
 function Footer() {
     return (

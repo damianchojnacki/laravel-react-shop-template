@@ -16,7 +16,7 @@ export default function Login({googleClientId}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [user, setUser] = useState(null);
-    const [errors, setErrors] = useState(null);
+    const [error, setError] = useState(null);
 
     function handleSubmit(e){
         e.preventDefault();
@@ -35,7 +35,7 @@ export default function Login({googleClientId}) {
                     setTimeout(() => Inertia.visit('/'), 500);
                 })
                 .catch(error => {
-                    setErrors(error.response.data);
+                    setError(error.response.data);
                     setLoading(false);
                 })
         }
@@ -70,15 +70,16 @@ export default function Login({googleClientId}) {
             <div className="container col-lg-6 col-12">
                 <div className="mb-3">
                     <a href="#" className="d-inline-block" onClick={() => googleInit()}>
-                        <GoogleButton />
+                        <GoogleButton label={<Text id="login-google"/>} />
                     </a>
                 </div>
                 <Form onSubmit={handleSubmit}>
-                    {errors &&
+                    {error &&
                         <Alert theme="danger">
-                            {errors}
+                            <Text id={error}/>
                         </Alert>
                     }
+
                     <FormGroup>
                         <label htmlFor="#email">
                             <Text id="login-email"/>
@@ -89,7 +90,7 @@ export default function Login({googleClientId}) {
                                     <FontAwesomeIcon icon={faEnvelope} />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <FormInput invalid={!!errors} type="email" id="#email" name="email" onChange={e => setEmail(e.target.value)} disabled={loading} required/>
+                            <FormInput invalid={!!error} type="email" id="#email" name="email" onChange={e => setEmail(e.target.value)} disabled={loading} required/>
                         </InputGroup>
                     </FormGroup>
                     <FormGroup>
@@ -102,7 +103,7 @@ export default function Login({googleClientId}) {
                                     <FontAwesomeIcon icon={faLock} />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <FormInput invalid={!!errors} type="password" id="#password" name="password" onChange={e => setPassword(e.target.value)} disabled={loading} required/>
+                            <FormInput invalid={!!error} type="password" id="#password" name="password" onChange={e => setPassword(e.target.value)} disabled={loading} required/>
                         </InputGroup>
                     </FormGroup>
                     <Button block>

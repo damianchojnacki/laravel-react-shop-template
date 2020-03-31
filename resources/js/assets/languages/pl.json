@@ -1,52 +1,79 @@
 {
-  "menu": {
-    "homepage": "Strona główna",
-    "products": "Produkty",
-    "login": "Logowanie",
-    "register": "Rejestracja"
-  },
-  "products": {
-    "special": {
-      "header": "Okazja dnia"
+    "menu": {
+        "homepage": "Strona główna",
+        "products": "Produkty",
+        "login": "Logowanie",
+        "register": "Rejestracja",
+        "logout": "Wyloguj się"
     },
-    "block": {
-      "price": "Cena: "
+    "products": {
+        "special": {
+            "header": "Okazja dnia"
+        },
+        "block": {
+            "price": "Cena: "
+        },
+        "list": {
+            "name": "Nazwa",
+            "price": "Cena",
+            "quantity": "Ilość",
+            "sum": "Razem: "
+        },
+        "reload": "Odśwież",
+        "showMore": "Pokaż więcej"
     },
-    "reload": "Odśwież",
-    "showMore": "Pokaż więcej"
-  },
-  "cart": {
-    "header": "Koszyk",
-    "clear": "Wyczyść",
-    "add": "Dodaj do koszyka",
-    "remove": "Usuń",
-    "checkout": "Przejdź do podsumowania",
-    "empty": "Koszyk jest pusty.",
-    "sum": "Suma:"
-  },
-  "login": {
-    "google": "Kontynuuj przy użyciu Google",
-    "email": "Email",
-    "password": "Hasło",
-    "submit": "Zaloguj się",
-    "register": "Nie masz jeszcze konta? Możesz je założyć tutaj.",
-    "loading": "Ładowanie..."
-  },
-  "register": {
-    "welcome": "Rejestracja",
-    "done": "Gotowe",
-    "back": "Wróć",
-    "next": "Dalej",
-    "start": "Zaczynamy!",
-    "email": "Wpisz swój email poniżej:",
-    "name": "Jak się nazywasz?",
-    "password": "Wybierz bezpieczne hasło i powtórz:",
-    "terms": {
-      "title": "Został już ostatni krok.",
-      "subtitle": "Przeczytaj i zaakceptuj regulamin i warunki użytkowania:",
-      "label": "Zgadzam się i akceptuję."
+    "cart": {
+        "header": "Koszyk",
+        "clear": "Wyczyść",
+        "add": "Dodaj do koszyka",
+        "remove": "Usuń",
+        "checkout": "Przejdź do podsumowania",
+        "empty": "Koszyk jest pusty.",
+        "sum": "Razem: "
     },
-    "submit": "Zarejestruj się!",
-    "loading": "Ładowanie..."
-  }
+    "login": {
+        "google": "Kontynuuj z Google",
+        "email": "Email",
+        "password": "Hasło",
+        "submit": "Zaloguj się",
+        "register": "Nie masz jeszcze konta? Możesz je założyć tutaj.",
+        "loading": "Ładowanie..."
+    },
+    "register": {
+        "welcome": "Rejestracja",
+        "done": "Gotowe",
+        "back": "Wróć",
+        "next": "Dalej",
+        "start": "Zaczynamy!",
+        "email": "Wpisz swój email poniżej:",
+        "name": "Jak się nazywasz?",
+        "password": "Wybierz bezpieczne hasło i powtórz:",
+        "terms": {
+            "title": "Został już ostatni krok.",
+            "subtitle": "Przeczytaj i zaakceptuj regulamin i warunki użytkowania:",
+            "label": "Zgadzam się i akceptuję."
+        },
+        "submit": "Zarejestruj się!",
+        "loading": "Ładowanie..."
+    },
+    "alert": {
+        "login": {
+            "badCredentials": "Niepoprawny email lub hasło."
+        }
+    },
+    "orders": {
+        "header": "Twoje zamówienia",
+        "date": "Data zakupu",
+        "value": "Cena",
+        "status": "Status przesyłki",
+        "details": "Szczegóły"
+    },
+    "order": {
+        "status": {
+            "1": "płatność",
+            "2": "przygotowywanie",
+            "3": "wysłano",
+            "4": "dostarczono"
+        }
+    }
 }
