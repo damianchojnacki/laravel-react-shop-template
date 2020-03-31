@@ -1,11 +1,25 @@
 import {dictionary, languages} from '../assets/languages';
+import Cookies from 'js-cookie'
+import {Inertia} from "@inertiajs/inertia";
 
 export default class LanguageService{
 
-    static dictionary(){
-        !localStorage.getItem('lang') && localStorage.setItem('lang', languages[0].short);
+    static set(lang){
+        return Inertia.put(`language/${lang}`, {}, {
+            preserveScroll: true,
+        });
+    }
 
-        return dictionary[localStorage.getItem('lang')];
+    static available(){
+        return languages;
+    }
+
+    static current(){
+        return Cookies.get('lang') ?? languages[0].short;
+    }
+
+    static dictionary(){
+        return dictionary[this.current()];
     }
 
     static transformId(id){
@@ -18,6 +32,8 @@ export default class LanguageService{
         if(!Array.isArray(id)) id = [id];
 
         let output = this.dictionary();
+
+        console.log(Cookies.get('lang'));
 
         for(let i = 0; i < id.length; i++){
             output = output[id[i]];

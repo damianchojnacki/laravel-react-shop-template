@@ -70,6 +70,7 @@ Route::group([
 });
 
 Route::put('/currency/{iso}', 'CurrencyController@change')->name('currency.change');
+Route::put('/language/{name}', 'LanguageController@change')->name('language.change');
 
 /*
 

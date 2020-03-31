@@ -10,7 +10,7 @@
       "header": "Offer of the day"
     },
     "block": {
-      "price": "Price"
+      "price": "Price: "
     },
     "reload": "Reload",
     "showMore": "Show more"

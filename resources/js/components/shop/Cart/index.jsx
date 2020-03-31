@@ -19,7 +19,7 @@ function Cart() {
             <DropdownToggle className="cart__button" onClick={() => setOpened(!opened)}>
                 <FontAwesomeIcon size="lg" icon={faShoppingCart}/>
             </DropdownToggle>
-        <DropdownMenu right className={cart && cart.length <= 0 && "cart__empty"}>
+        <DropdownMenu right className={(cart && cart.length <= 0) ? "cart__empty" : ""}>
             <div className="d-flex justify-content-between align-items-center">
                 <h4 className="cart__header">
                     <Text id="cart-header"/>
