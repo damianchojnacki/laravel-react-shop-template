@@ -7,6 +7,7 @@ import CurrencySelect from "./CurrencySelect";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import Text from '../Text';
+import LanguageSelect from "./LanguageSelect";
 
 function Menu() {
     const {auth, app} = usePage();
@@ -38,8 +39,9 @@ function Menu() {
                         </NavItem>
                     }
                     <div className="d-flex align-items-center flex-grow-1 justify-content-end flex-wrap">
-                        <NavItem className={isMobile() ? "w-100" : null}>
+                        <NavItem className={`d-flex align-items-center ${isMobile() ? "w-100" : null}`}>
                             <CurrencySelect/>
+                            <LanguageSelect/>
                         </NavItem>
                         {auth.user &&
                             <NavItem className={`text-center align-self-center text-white pl-4 ${isMobile() && "flex-grow-1 p-2"}`}>
