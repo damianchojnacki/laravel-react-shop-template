@@ -16,13 +16,9 @@
 
 */
 import React from "react";
-import {Line, Bar} from "react-chartjs-2";
-
+import {Bar, Line} from "react-chartjs-2";
 // reactstrap components
-import {
-    Row,
-    Col,
-} from "reactstrap";
+import {Col, Row,} from "reactstrap";
 
 import {Helmet} from "react-helmet";
 import OrderService from "../../utils/OrderService";

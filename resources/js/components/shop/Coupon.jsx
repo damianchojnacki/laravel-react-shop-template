@@ -1,17 +1,10 @@
 import React, {useState} from "react";
-import {
-    InputGroup,
-    InputGroupAddon,
-    InputGroupText,
-    FormInput,
-    FormGroup,
-    Button
-} from "shards-react";
+import {Button, FormGroup, FormInput, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faPercentage } from "@fortawesome/free-solid-svg-icons/faPercentage";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
+import {faPercentage} from "@fortawesome/free-solid-svg-icons/faPercentage";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import OrderService from "../../utils/OrderService";
-import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
+import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 
 function Coupon({coupon}) {
     const [code, setCode] = useState();

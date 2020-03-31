@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { Helmet } from 'react-helmet';
-import {
-    Card,
-    CardHeader,
-    CardBody, Button, Row, Col, Input, CardFooter, Form,
-} from 'reactstrap';
+import {Helmet} from 'react-helmet';
+import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row,} from 'reactstrap';
 
 import ProductService from "../../utils/ProductService";
 import {notify} from "react-notify-toast";

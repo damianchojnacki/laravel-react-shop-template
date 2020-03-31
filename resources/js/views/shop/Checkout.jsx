@@ -1,21 +1,22 @@
-import React, {useState, useRef} from "react";
+import React, {useRef, useState} from "react";
 import {
-    Form, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox, Progress
+    Button,
+    Form,
+    FormCheckbox,
+    FormGroup,
+    FormInput,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText
 } from "shards-react";
-import {Helmet} from "react-helmet";
 import ProductsList from "../../components/shop/ProductsList";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import AsyncSelect from 'react-select/async';
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
-import {
-    getSumOfProducts,
-    getSumOfProductsWithDiscount,
-    shippingDataValidate
-} from "../../utils/helpers";
+import {getSumOfProducts, getSumOfProductsWithDiscount, shippingDataValidate} from "../../utils/helpers";
 import {usePage} from "@inertiajs/inertia-react";
-import {Inertia} from "@inertiajs/inertia";
 import Shop from "../../layouts/Shop";
 import GoogleService from "../../utils/GoogleService";
 import {notify} from "react-notify-toast/bin/notify";

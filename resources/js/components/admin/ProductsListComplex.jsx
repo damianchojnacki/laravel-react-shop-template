@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, CardBody, CardHeader, CardTitle, CardFooter, ListGroup, ListGroupItem, Button} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, CardHeader, CardTitle, ListGroup, ListGroupItem} from "reactstrap";
 import {InertiaLink} from "@inertiajs/inertia-react";
 
 function ProductsListComplex(props){

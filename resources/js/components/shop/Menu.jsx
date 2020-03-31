@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {Nav, NavItem, Navbar, NavbarToggler, NavbarBrand, Collapse} from "shards-react";
+import React, {useState} from "react";
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem} from "shards-react";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 import routes from '../../routes/shop';
 import {isMobile} from "../../utils/helpers";

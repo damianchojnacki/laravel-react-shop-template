@@ -1,9 +1,6 @@
 import React from 'react';
 import Shop from "../../../layouts/Shop";
-import {
-    InertiaLink,
-    usePage
-} from "@inertiajs/inertia-react";
+import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 
 function Orders({orders}){
     const {currency} = usePage();
@@ -25,7 +22,7 @@ function Orders({orders}){
                 </tr>
                 </thead>
                 <tbody>
-                    {orders.length && orders.map((order, index) =>
+                    {orders.length > 0 && orders.map((order, index) =>
                         <tr key={order.id}>
                             <td>{index + 1}</td>
                             <td>{order.id}</td>

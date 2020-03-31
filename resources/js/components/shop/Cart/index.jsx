@@ -1,21 +1,16 @@
-import React, {useEffect, useState} from "react";
-import {
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-} from "shards-react";
+import React, {useState} from "react";
+import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, ListGroup, ListGroupItem,} from "shards-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
-import {ListGroup, ListGroupItem, Button} from "shards-react";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 
-import "./style.scss";
 import CartService from "../../../utils/CartService";
 import {getSumOfProducts} from "../../../utils/helpers";
 import Text from "../../Text";
 
-function Cart(props) {
+import "./style.scss";
+
+function Cart() {
     const {cart, currency} = usePage();
     const [opened, setOpened] = useState(false);
 
@@ -24,22 +19,20 @@ function Cart(props) {
             <DropdownToggle className="cart__button" onClick={() => setOpened(!opened)}>
                 <FontAwesomeIcon size="lg" icon={faShoppingCart}/>
             </DropdownToggle>
-        <DropdownMenu right className={cart && cart.length ? null: "cart__empty"}>
+        <DropdownMenu right className={cart && cart.length <= 0 && "cart__empty"}>
             <div className="d-flex justify-content-between align-items-center">
                 <h4 className="cart__header">
                     <Text id="cart-header"/>
                 </h4>
-                {cart.length ?
+                {cart && cart.length > 0 &&
                     <div className="pr-4">
                         <Button size="sm" className="btn btn-secondary" onClick={() => CartService.empty()}>
                             <Text id="cart-clear"/>
                         </Button>
                     </div>
-                :
-                    null
                 }
             </div>
-            {cart && cart.length ?
+            {cart && cart.length > 0 ?
                 <>
                     <DropdownItem tag="span" className="cart__products">
                         <ListGroup>

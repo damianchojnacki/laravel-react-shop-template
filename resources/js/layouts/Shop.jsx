@@ -7,7 +7,7 @@ import Menu from "../components/shop/Menu";
 import Footer from "../components/shop/Footer";
 import Cart from "../components/shop/Cart";
 import {usePage} from "@inertiajs/inertia-react";
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 
 function Shop({children}) {
     const { flash, app } = usePage();

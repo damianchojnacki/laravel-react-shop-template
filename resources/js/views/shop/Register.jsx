@@ -1,11 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {Form, FormInput, Button, Alert, InputGroupAddon, InputGroupText, InputGroup, Row, FormCheckbox} from "shards-react";
+import React, {useState} from 'react';
+import {
+    Alert,
+    Button,
+    Form,
+    FormCheckbox,
+    FormInput,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    Row
+} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import classNames from 'classnames';
 import 'animate.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
-import {checkFullName, isEmail, equals} from "../../utils/helpers";
+import {checkFullName, equals, isEmail} from "../../utils/helpers";
 import {Inertia} from "@inertiajs/inertia";
 import Shop from "../../layouts/Shop";
 import Text from "../../components/Text";

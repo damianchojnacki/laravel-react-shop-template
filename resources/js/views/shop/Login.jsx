@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import {Helmet} from 'react-helmet';
-import {Form, FormInput, FormGroup, Button, Alert, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
+import {Alert, Button, Form, FormGroup, FormInput, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import {isEmail} from '../../utils/helpers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import 'animate.css/animate.css';
-import {InertiaLink, usePage} from "@inertiajs/inertia-react";
+import {InertiaLink} from "@inertiajs/inertia-react";
 import Shop from "../../layouts/Shop";
 import AuthService from "../../utils/AuthService";
 import {Inertia} from "@inertiajs/inertia";

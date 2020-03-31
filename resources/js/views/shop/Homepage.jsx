@@ -1,6 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
-import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
+import {Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
 import ProductsListComplex from "../../components/shop/ProductListComplex";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Shop from "../../layouts/Shop";

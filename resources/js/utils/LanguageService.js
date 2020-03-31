@@ -1,5 +1,4 @@
-import {dictionary} from '../assets/languages';
-import {languages} from '../assets/languages';
+import {dictionary, languages} from '../assets/languages';
 
 export default class LanguageService{
 

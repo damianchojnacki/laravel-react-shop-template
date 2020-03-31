@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, CardBody, CardHeader, CardTitle, CardFooter, Button} from "shards-react";
+import {Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from "shards-react";
 import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {usePage} from "@inertiajs/inertia-react";

@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Badge} from "shards-react";
 import {isMobile} from "../../utils/helpers";
 import CurrencyService from "../../utils/CurrencyService";
 import Select from "react-select";

@@ -1,17 +1,6 @@
 import React, {useEffect, useState} from "react";
-
 // reactstrap components
-import {
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Form,
-    Input,
-    Row,
-    Col
-} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row} from "reactstrap";
 import {notify} from 'react-notify-toast';
 import ProductService from "../../utils/ProductService";
 import ImageService from "../../utils/ImageService";

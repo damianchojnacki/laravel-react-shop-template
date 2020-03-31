@@ -5,7 +5,7 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
 import CartService from "../../utils/CartService";
 import {usePage} from "@inertiajs/inertia-react";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons/faCaretRight";
+import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
 
 function ProductsList(props){
     const {currency} = usePage();

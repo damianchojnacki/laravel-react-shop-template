@@ -1,6 +1,6 @@
-import { InertiaApp } from "@inertiajs/inertia-react";
+import {InertiaApp} from "@inertiajs/inertia-react";
 import React from "react";
-import { render } from "react-dom";
+import {render} from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 require("./bootstrap");

@@ -1,5 +1,4 @@
 import {notify} from "react-notify-toast/bin/notify";
-import {Inertia} from "@inertiajs/inertia";
 
 export default class GoogleService {
     static async addressSearch(input, callback) {

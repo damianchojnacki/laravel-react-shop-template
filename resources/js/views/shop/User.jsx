@@ -1,15 +1,12 @@
 import React from 'react';
-import {Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
+import {Card, CardBody, CardFooter} from 'shards-react';
 import Shop from "../../layouts/Shop";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/faShoppingCart";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
 import './user.scss';
-import { faCog } from "@fortawesome/free-solid-svg-icons/faCog";
-import { faPercentage } from "@fortawesome/free-solid-svg-icons/faPercentage";
-import {
-    InertiaLink,
-    usePage
-} from "@inertiajs/inertia-react";
+import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";
+import {faPercentage} from "@fortawesome/free-solid-svg-icons/faPercentage";
+import {InertiaLink, usePage} from "@inertiajs/inertia-react";
 
 function User(){
     const {auth} = usePage();
