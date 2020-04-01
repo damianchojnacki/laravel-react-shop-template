@@ -20,7 +20,38 @@
             "sum": "Sum: "
         },
         "reload": "Reload",
-        "showMore": "Show more"
+        "showMore": "Show more",
+        "category": {
+            "all": "All",
+            "cpu": {
+                "long": "Processors",
+                "short": "CPUs"
+            },
+            "gpu": {
+                "long": "Graphics cards",
+                "short": "GPUs"
+            },
+            "hdd": {
+                "long": "Hard disks",
+                "short": "HDDs"
+            },
+            "ssd": {
+                "long": "SSDs",
+                "short": "SSDs"
+            }
+        },
+        "sort": {
+            "label": "Sorting",
+            "name": {
+                "asc": "Sort by name (asc)",
+                "desc": "Sort by name (desc)"
+            },
+            "price": {
+                "asc": "Sort by price (asc)",
+                "desc": "Sort by price (desc)"
+            }
+        },
+        "search": "Search product"
     },
     "cart": {
         "header": "Shopping cart",

@@ -18,7 +18,7 @@ function Shop({children}) {
     }, [flash]);
 
     return (
-        <>
+        <div className="overflow-hidden">
             <Helmet>
                 <title>{app.name + " - " + app.page}</title>
             </Helmet>
@@ -31,7 +31,7 @@ function Shop({children}) {
                 </div>
                 <Footer/>
             </main>
-        </>
+        </div>
     );
 }
 

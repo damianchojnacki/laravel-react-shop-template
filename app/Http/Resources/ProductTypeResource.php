@@ -16,7 +16,6 @@ class ProductTypeResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'name_display' => $this->name_display,
         ];
     }
 }

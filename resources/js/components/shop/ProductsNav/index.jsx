@@ -6,6 +6,8 @@ import {newArray} from "../../../utils/helpers";
 import "./style.scss";
 import Select from "react-select";
 import {InertiaLink, usePage} from "@inertiajs/inertia-react";
+import Text from "../../Text";
+import LanguageService from "../../../utils/LanguageService";
 
 export default function ProductsNav(props){
 
@@ -20,8 +22,8 @@ export default function ProductsNav(props){
                 >
                     <span
                         className="products-nav__dynamic"
-                        data-shortname={page.short}
-                        data-longname={page.long}
+                        data-shortname={LanguageService.translate(`products-category-${page.name}-short`)}
+                        data-longname={LanguageService.translate(`products-category-${page.name}-long`)}
                     />
                 </InertiaLink>
             </NavLink>
@@ -34,7 +36,7 @@ export default function ProductsNav(props){
                 <NavItem>
                     <NavLink tag="span" active={!props.category}>
                         <InertiaLink href="/products/all" className={!props.category ? "text-light" : null}>
-                            All
+                            <Text id="products-category-all"/>
                         </InertiaLink>
                     </NavLink>
                 </NavItem>
@@ -48,28 +50,28 @@ export default function ProductsNav(props){
                                 value: 1,
                                 sort: "name",
                                 type: "asc",
-                                label: "Sort by name (asc)",
+                                label: <Text id="products-sort-name-asc"/>,
                             },
                             {
                                 value: 2,
                                 sort: "name",
                                 type: "desc",
-                                label: "Sort by name (desc)",
+                                label: <Text id="products-sort-name-desc"/>,
                             },
                             {
                                 value: 3,
                                 sort: "price",
                                 type: "asc",
-                                label: "Sort by price (asc)",
+                                label: <Text id="products-sort-price-asc"/>,
                             },
                             {
                                 value: 4,
                                 sort: "price",
                                 type: "desc",
-                                label: "Sort by price (desc)",
+                                label: <Text id="products-sort-price-desc"/>,
                             },
                         ]}
-                        placeholder="Sort by"
+                        placeholder=<Text id="products-sort-label"/>
                         onChange={(e) => {props.setSort(e)}}
                         value={props.sort}
                     />
@@ -82,7 +84,7 @@ export default function ProductsNav(props){
                                 <FontAwesomeIcon icon={faSearch} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <FormInput type="text" onChange={(e) => props.search(e.target.value)} placeholder="Search product" required/>
+                        <FormInput type="text" onChange={(e) => props.search(e.target.value)} placeholder={LanguageService.translate("products-search")} required/>
                     </InputGroup>
                 </NavItem>
             </Nav>

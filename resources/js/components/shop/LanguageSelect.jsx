@@ -10,7 +10,11 @@ function LanguageSelect() {
         setSelectOptions(LanguageService.available().map(item => {
             return {
                 value: item.short,
-                label: <img src={`/images/${item.short}.svg`} alt={item.long} width="28px"/>
+                label:
+                    <>
+                        {item.long}
+                        <img src={`/images/${item.short}.svg`} alt={item.long} width="28px" className="ml-2"/>
+                    </>
             }
         }));
     }, []);
@@ -35,7 +39,7 @@ function LanguageSelect() {
                 }),
                 option: provided => ({
                     ...provided,
-                    width: "50px",
+                    width: "100px",
                     display: "flex",
                     justifyContent: "center",
                 }),
@@ -44,6 +48,8 @@ function LanguageSelect() {
                     width: "50px",
                     display: "flex",
                     justifyContent: "center",
+                    color: "transparent",
+                    fontSize: 0
                 }),
                 singleValue: provided => ({
                     margin: 0
@@ -55,6 +61,12 @@ function LanguageSelect() {
                     boxShadow: "none",
                     cursor: "pointer"
                 }),
+                menu: provided => ({
+                    ...provided,
+                    width: "100px",
+                    left: "-50%",
+                    zIndex: 3
+                })
             }}
         />
     );

@@ -18,8 +18,8 @@ function CurrencySelect() {
                 value: item.iso,
                 label:
                     <div className="font-weight-normal text-secondary">
-                        <span className="font-italic">{item.iso}</span>
-                        <span className="ml-2 pl-2 border-left">{item.symbol}</span>
+                        <span>{item.iso}</span>
+                        <span className="ml-2 pl-2 border-left font-weight-bold">{item.symbol}</span>
                     </div>
             }
         }));
