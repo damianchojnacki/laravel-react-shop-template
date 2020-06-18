@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\Redirect;
 class OrderController extends Controller
 {
     public function index($page){
-        $orders = Order::with(['user.country', 'status'])->skip(($page - 1) * 10)->take(10)->get();
+        $orders = Order::with(['user', 'status'])->skip(($page - 1) * 10)->take(10)->get();
 
         return response(OrderResource::collection($orders), 200);
     }
 
     public function recent(){
-        $orders = Order::with('user.country')->whereHas('status', function($status){
+        $orders = Order::with('user')->whereHas('status', function($status){
             $status->where('name', 'preparing');
         })->orderBy('created_at', 'DESC')->take(10)->get();
 
@@ -40,7 +40,7 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = Order::with(['products.image', 'status', 'user.country'])->findOrFail($id);
+        $order = Order::with(['products.image', 'status', 'user'])->findOrFail($id);
 
         if(!Auth::user()->isAdmin() && Auth::user()->id != $order->user->id)
             return response("You are not authorized to see this order.", 401);
@@ -50,7 +50,7 @@ class OrderController extends Controller
 
     public function search($id)
     {
-        $order = Order::with(['status', 'user.country'])->where('id', 'like', "%$id%")->take(100)->get();
+        $order = Order::with(['status', 'user'])->where('id', 'like', "%$id%")->take(100)->get();
 
         return response(OrderResource::collection($order), 200);
     }

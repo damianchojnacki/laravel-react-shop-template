@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
 use App\Http\Resources\UserResource;
-use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +26,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::with(['orders.status', 'country'])->findOrFail($id);
+        $user = User::with('orders.status')->findOrFail($id);
 
         return response(new UserResource($user), 200);
     }
@@ -53,7 +51,6 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('email'));
-        $user->country()->associate(Country::findOrFail($request->input('country')));
         $user->save();
 
         return response($user->id, 200);
@@ -71,7 +68,6 @@ class UserController extends Controller
         $user = User::findOrFail($request->input('id'));
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->country()->associate(Country::findOrFail($request->input('country')));
         $user->save();
 
         return response('User has been updated', 200);

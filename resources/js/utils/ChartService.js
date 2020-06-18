@@ -2,13 +2,13 @@ import addAlpha, {colors} from "./helpers";
 
 export default class ChartService {
     static async get(name) {
-        const chart = await window.axios.get(`/api/charts/${name}`);
+        const chart = await window.axios.get(`/admin/charts/${name}`);
 
         return chart.data;
     }
 
     static async dynamic(resource, group, range) {
-        const chart = await window.axios.get(`/api/charts/dynamic/${resource}/${group}/${range}`);
+        const chart = await window.axios.get(`/admin/charts/dynamic/${resource}/${group}/${range}`);
 
         return chart.data;
     }

@@ -31,18 +31,12 @@ class CouponTest extends TestCase{
         $this->assertEquals($value_correct, $order->value);
     }
 
-    public function CouponCanBeAppliedToOrder(){
+    public function testCouponCanBeAppliedToOrder(){
         $coupon = factory(Coupon::class)->create();
 
         $this->put("/coupon", $coupon)
             ->assertSessionHas("order.coupon")
             ->assertSessionMissing('error');
-
-        //$order = Order::whereHas('details', function($query) use ($order_data){
-        //    $query->where('email', $order_data['email']);
-        //})->first();
-
-        //$this->assertIsObject($order->coupon);
     }
 
     public function testCouponCanBeAdded(){

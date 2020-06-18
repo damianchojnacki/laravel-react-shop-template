@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Discount;
 use App\Http\Resources\ProductResource;
 use App\Image;
+use App\InertiaPage;
 use App\Product;
 use App\ProductType;
 use App\Traits\UsesCurrency;
@@ -18,23 +19,24 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        Auth::shouldUse('api');
-
         $this->like = config('database.default') == "pgsql" ? "ilike" : "like";
     }
 
-    public function index($page = null, $category = null)
-    {
-        if ($category && $page)
+    public function index($page = 1, $category = null){
+        $page = (int) $page;
+
+        if($category)
             $products = Product::whereHas('type', function ($q) use ($category) {
                 $q->where('name', $category);
-            })->skip(($page - 1) * 12)->take(12)->get();
+            })->take($page * 12)->get();
         else if($page)
-            $products = Product::skip(($page - 1) * 12)->take(12)->get();
+            $products = Product::take($page * 12)->get();
         else
             $products = Product::all();
 
-        return Redirect::back(ProductResource::collection($products), 200);
+        return response([
+            'products' => ProductResource::collection($products),
+        ]);
     }
 
     public function store(Request $request)

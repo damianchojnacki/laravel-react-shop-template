@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Helmet} from 'react-helmet';
-import {Button, Card, CardBody, CardFooter, CardHeader, Input,} from 'reactstrap';
+import {Button, Card, CardBody, CardFooter, CardHeader, Input} from 'reactstrap';
 
 import OrdersList from "../../components/admin/OrdersList";
 import OrderService from "../../utils/OrderService";
@@ -9,6 +9,7 @@ import ProductService from "../../utils/ProductService";
 import UsersList from "../../components/admin/UsersList";
 import ProductsList from "../../components/admin/ProductsList";
 import {InertiaLink} from "@inertiajs/inertia-react";
+import Admin from "../../layouts/Admin";
 
 window['OrderService'] = OrderService;
 window['UserService'] = UserService;
@@ -28,7 +29,7 @@ function Resource(props){
 
     const getResource = async () => {
         if(searchField && searchField !== ""){
-            const found = await window[service].search(searchField);
+            const found = await window[service].admin.search(searchField);
 
             setData(found);
         } else if(searchField === ""){
@@ -36,7 +37,7 @@ function Resource(props){
             setPage(1);
             setSearchField(null);
         } else{
-            const newData = await window[service].all(page);
+            const newData = await window[service].admin.all(page);
 
             setData(data.concat(newData));
         }
@@ -55,17 +56,17 @@ function Resource(props){
         let field, classname;
 
         switch(name){
-            case 'Users':
+            case 'users':
                 field = 'email';
                 classname = 'UserService';
                 break;
 
-            case 'Orders':
+            case 'orders':
                 field = 'ID';
                 classname = 'OrderService';
                 break;
 
-            case 'Products':
+            case 'products':
                 field = 'name';
                 classname = 'ProductService';
                 break;
@@ -76,7 +77,7 @@ function Resource(props){
     };
 
     return (
-        <>
+        <Admin>
             <Helmet>
                 <title>Shop | Admin - {props.name}</title>
             </Helmet>
@@ -141,7 +142,7 @@ function Resource(props){
                     </Card>
                 </div>
             </main>
-        </>
+        </Admin>
     )
 }
 

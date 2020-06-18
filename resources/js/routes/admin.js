@@ -26,7 +26,7 @@ import DiscountsNew from "../views/admin/DiscountsNew";
 
 export default [
     {
-        path: "/dashboard",
+        path: "/",
         name: "Dashboard",
         icon: "tim-icons icon-chart-pie-36",
         component: Dashboard,

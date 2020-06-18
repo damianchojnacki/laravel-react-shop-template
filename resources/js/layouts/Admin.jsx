@@ -30,8 +30,11 @@ import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";
 
 import PerfectScrollbar from "perfect-scrollbar";
+import {usePage} from "@inertiajs/inertia-react";
 
 function Admin(props) {
+    const { app } = usePage();
+
     const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('background'));
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode'));
     const [sidebarOpened, setSidebarOpened] =  useState(document.documentElement.className.indexOf("nav-open") !== -1);
@@ -43,7 +46,7 @@ function Admin(props) {
     useEffect(() => {
         let tables = document.querySelectorAll(".table-responsive");
         for (let i = 0; i < tables.length; i++) new PerfectScrollbar(tables[i]);
-    });
+    }, []);
 
     const toggleSidebar = () => {
         document.documentElement.classList.toggle("nav-open");
@@ -62,19 +65,6 @@ function Admin(props) {
         color === 'light' ?  document.body.classList.add("white-content") : document.body.classList.remove("white-content");
     };
 
-    const getBrandText = path => {
-        for (let i = 0; i < routes.length; i++) {
-            if (
-                props.location.pathname.indexOf(
-                    routes[i].layout + routes[i].path
-                ) !== -1
-            ) {
-                return routes[i].name;
-            }
-        }
-        return "Brand";
-    };
-
     return (
         <>
             <Notifications/>
@@ -90,14 +80,11 @@ function Admin(props) {
                 >
                     <AdminNavbar
                         {...props}
-                        brandText={getBrandText(props.location.pathname)}
+                        brandText={app.page}
                         toggleSidebar={toggleSidebar}
                         sidebarOpened={sidebarOpened}
                     />
-                    {// we don't want the Footer to be rendered on map page
-                        props.location.pathname.indexOf("maps") !== -1 ? null : (
-                            <Footer fluid/>
-                        )}
+                    { props.children }
                 </div>
             </div>
             <FixedPlugin
@@ -105,6 +92,7 @@ function Admin(props) {
                 handleBgClick={handleBgClick}
                 handleDarkModeClick={handleDarkModeClick}
             />
+            <Footer fluid/>
         </>
     );
 }

@@ -39,5 +39,11 @@ export default class ProductService{
     }
 
     static discounts = new DiscountService;
-}
+
+    static admin = {
+        all: async (page = '', category = '') => {
+            return await axios.get(`/admin/products/all/${page}/${category ? category : ''}`)
+        }
+    };
+};
 

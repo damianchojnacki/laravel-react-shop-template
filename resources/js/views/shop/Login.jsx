@@ -32,7 +32,9 @@ export default function Login({googleClientId}) {
             AuthService.login(credentials)
                 .then(response => {
                     setUser(response.data.user);
-                    setTimeout(() => Inertia.visit('/'), 500);
+                    setTimeout(() => {
+                        response.data.user.name === "admin" ? Inertia.visit('/admin') : Inertia.visit('/');
+                    }, 500);
                 })
                 .catch(error => {
                     setError(error.response.data);
