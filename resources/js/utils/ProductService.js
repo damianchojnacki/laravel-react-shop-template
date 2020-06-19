@@ -41,9 +41,9 @@ export default class ProductService{
     static discounts = new DiscountService;
 
     static admin = {
-        all: async (page = '', category = '') => {
-            return await axios.get(`/admin/products/all/${page}/${category ? category : ''}`)
-        }
+        all: () => Inertia.replace(`/admin/products`),
+
+        search: name => name ? Inertia.replace(`/admin/products/search/${name}`) : this.admin.all()
     };
 };
 

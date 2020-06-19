@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Discount;
 use App\Http\Resources\ProductResource;
 use App\Image;
 use App\InertiaPage;
 use App\Product;
 use App\ProductType;
-use App\Traits\UsesCurrency;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -22,20 +18,11 @@ class ProductController extends Controller
         $this->like = config('database.default') == "pgsql" ? "ilike" : "like";
     }
 
-    public function index($page = 1, $category = null){
-        $page = (int) $page;
+    public function search($name){
+        $products = Product::where('name', $this->like, "%$name%")->take(100)->get();
 
-        if($category)
-            $products = Product::whereHas('type', function ($q) use ($category) {
-                $q->where('name', $category);
-            })->take($page * 12)->get();
-        else if($page)
-            $products = Product::take($page * 12)->get();
-        else
-            $products = Product::all();
-
-        return response([
-            'products' => ProductResource::collection($products),
+        return InertiaPage::render('admin/Resource', [
+            'data' => ProductResource::collection($products),
         ]);
     }
 

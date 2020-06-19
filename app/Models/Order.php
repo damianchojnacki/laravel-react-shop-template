@@ -19,6 +19,10 @@ class Order extends Model{
 
     protected $appends = ['value'];
 
+    protected $with = [
+        'status',
+    ];
+
     protected static function boot(){
         parent::boot();
 

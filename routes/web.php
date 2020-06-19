@@ -79,6 +79,7 @@ Route::group([
 ], function(){
     Route::get("/", 'AdminController@dashboard')->name('admin.dashboard');
     Route::get("{resource}", 'AdminController@resource')->where('resource', '(products|orders|users)')->name('admin.resource');
+    Route::get('{resource}/search/{id}', 'AdminController@searchResource');
 });
 
 Route::put('/currency/{iso}', 'CurrencyController@change')->name('currency.change');
@@ -93,8 +94,6 @@ Route::group([
     Route::group([
         'name' => 'products',
     ], function () {
-        Route::get('products/all/{page?}/{category?}', 'ProductController@index');
-        Route::get('products/search/{id}/{category?}', 'ProductController@search');
         Route::get('products/cart/{cart}', 'ProductController@cart');
         Route::get('products/discounted', 'ProductController@discounted');
         Route::get('products/{id}', 'ProductController@show');

@@ -16,6 +16,7 @@ class Product extends Model{
         'price_origin',
         'price_final',
     ];
+
     protected $with = [
         'type',
         'image',

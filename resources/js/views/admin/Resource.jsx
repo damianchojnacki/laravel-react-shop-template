@@ -10,70 +10,30 @@ import UsersList from "../../components/admin/UsersList";
 import ProductsList from "../../components/admin/ProductsList";
 import {InertiaLink} from "@inertiajs/inertia-react";
 import Admin from "../../layouts/Admin";
+import ResourceService from "../../utils/ResourceService";
 
 window['OrderService'] = OrderService;
 window['UserService'] = UserService;
 window['ProductService'] = ProductService;
 
 function Resource(props){
-    const [data, setData] = useState([]);
-    const [page, setPage] = useState(1);
     const [searchField, setSearchField] = useState(null);
-    const [searchFieldBy, setSearchFieldBy] = useState('');
-    const [service, setService] = useState(null);
 
     useEffect(() => {
-        initialLoad();
-        service && getResource();
-    }, [page, searchField, service]);
+        ResourceService.search(props.name, searchField);
+    }, [searchField]);
 
-    const getResource = async () => {
-        if(searchField && searchField !== ""){
-            const found = await window[service].admin.search(searchField);
-
-            setData(found);
-        } else if(searchField === ""){
-            setData([]);
-            setPage(1);
-            setSearchField(null);
-        } else{
-            const newData = await window[service].admin.all(page);
-
-            setData(data.concat(newData));
-        }
-    };
-
-    const showMoreOrReload = () => {
-        if(searchField){
-            setSearchField(null);
-            setData([]);
-            setPage(1);
-        } else
-            setPage(page + 1);
-    };
-
-    const initialLoad = (name = props.name) => {
-        let field, classname;
-
+    const getSearchFieldBy = (name = props.name) => {
         switch(name){
             case 'users':
-                field = 'email';
-                classname = 'UserService';
-                break;
+                return 'email';
 
             case 'orders':
-                field = 'ID';
-                classname = 'OrderService';
-                break;
+                return 'ID';
 
             case 'products':
-                field = 'name';
-                classname = 'ProductService';
-                break;
+                return 'name';
         }
-
-        setSearchFieldBy(field);
-        setService(classname);
     };
 
     return (
@@ -89,7 +49,7 @@ function Resource(props){
                                 All {props.name}
                             </h2>
                             <div className="col-md-3 col-12 my-md-0 my-4">
-                                <Input type="text" className={props.bgColor} onChange={(e) => {setSearchField(e.target.value)}} placeholder={`Search by ${searchFieldBy}`}/>
+                                <Input type="text" className={props.bgColor} onChange={(e) => {setSearchField(e.target.value)}} placeholder={`Search by ${getSearchFieldBy()}`}/>
                             </div>
                             <InertiaLink href={`/admin/${props.name.toLowerCase()}/new`} className="col-md-3 col-12">
                                 <Button color="success" className="px-3" block>
@@ -98,9 +58,9 @@ function Resource(props){
                             </InertiaLink>
                         </CardHeader>
                         <CardBody>
-                            {props.name === "Orders" &&
+                            {props.name === "orders" &&
                                 <OrdersList
-                                    data={data}
+                                    data={props.data}
                                     bgColor={props.bgColor}
                                     fields={{
                                         index: true,
@@ -111,9 +71,9 @@ function Resource(props){
                                 />
                             }
 
-                            {props.name === "Users" &&
+                            {props.name === "users" &&
                                 <UsersList
-                                    data={data}
+                                    data={props.data}
                                     bgColor={props.bgColor}
                                     fields={{
                                         index: true,
@@ -123,9 +83,9 @@ function Resource(props){
                                 />
                             }
 
-                            {props.name === "Products" &&
+                            {props.name === "products" &&
                                 <ProductsList
-                                    data={data}
+                                    data={props.data}
                                     bgColor={props.bgColor}
                                     fields={{
                                         index: true,
@@ -136,9 +96,6 @@ function Resource(props){
                                 />
                             }
                         </CardBody>
-                        <CardFooter>
-                            <Button className="btn-block" onClick={showMoreOrReload}>{searchField ? "Reload" : "Show more"}</Button>
-                        </CardFooter>
                     </Card>
                 </div>
             </main>
