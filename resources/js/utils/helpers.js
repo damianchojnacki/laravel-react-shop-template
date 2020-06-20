@@ -173,3 +173,9 @@ export function getSumOfProductsWithDiscount(cart, coupon){
 
     return (sum - coupon.percent_off / 100 * sum).toFixed(2);
 }
+
+
+export function capitalize(word){
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
+

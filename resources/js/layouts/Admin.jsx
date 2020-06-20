@@ -35,7 +35,7 @@ import {usePage} from "@inertiajs/inertia-react";
 function Admin(props) {
     const { app } = usePage();
 
-    const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('background'));
+    const [themeColor, setThemeColor] = useState(localStorage.getItem('theme'));
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode'));
     const [sidebarOpened, setSidebarOpened] =  useState(document.documentElement.className.indexOf("nav-open") !== -1);
 
@@ -54,8 +54,8 @@ function Admin(props) {
     };
 
     const handleBgClick = color => {
-        localStorage.setItem('background', color);
-        setBackgroundColor(color);
+        localStorage.setItem('theme', color);
+        setThemeColor(color);
     };
 
     const handleDarkModeClick = color => {
@@ -72,11 +72,11 @@ function Admin(props) {
                 <Sidebar
                     {...props}
                     routes={routes}
-                    bgColor={backgroundColor}
+                    bgColor={themeColor}
                     toggleSidebar={toggleSidebar}
                 />
                 <div
-                    className={`main-panel ${backgroundColor}`}
+                    className={`main-panel ${themeColor}`}
                 >
                     <AdminNavbar
                         {...props}
@@ -88,7 +88,7 @@ function Admin(props) {
                 </div>
             </div>
             <FixedPlugin
-                bgColor={backgroundColor}
+                bgColor={themeColor}
                 handleBgClick={handleBgClick}
                 handleDarkModeClick={handleDarkModeClick}
             />

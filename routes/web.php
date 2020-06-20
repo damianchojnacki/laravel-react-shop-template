@@ -78,6 +78,7 @@ Route::group([
     'middleware' => ['auth', 'admin'],
 ], function(){
     Route::get("/", 'AdminController@dashboard')->name('admin.dashboard');
+    Route::get('analytics', 'AdminController@analytics');
     Route::get("{resource}", 'AdminController@resource')->where('resource', '(products|orders|users)')->name('admin.resource');
     Route::get('{resource}/search/{id}', 'AdminController@searchResource');
 });

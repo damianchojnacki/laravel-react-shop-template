@@ -23,6 +23,10 @@ class AdminController extends Controller
         return InertiaPage::render('admin/Dashboard');
     }
 
+    public function analytics(){
+        return InertiaPage::render('admin/Analytics');
+    }
+
     public static function getResource($name){
         $resources = [
             'products' => [

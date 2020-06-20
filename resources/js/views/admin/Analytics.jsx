@@ -4,6 +4,8 @@ import {Button, Card, CardBody, CardHeader, Col, Row} from "reactstrap";
 import ChartService from "../../utils/ChartService";
 import ChartDynamic from "../../components/admin/ChartDynamic";
 import {Helmet} from "react-helmet";
+import Admin from "../../layouts/Admin";
+import {getColor} from "../../utils/ThemeHelper";
 
 function Analytics(props) {
     const [data, setData] = useState(null);
@@ -11,29 +13,18 @@ function Analytics(props) {
     const [group, setGroup] = useState(null);
     const [resource, setResource] = useState(null);
 
-    const getThemeColor = theme => {
-        const style = getComputedStyle(document.body);
-        let color;
-
-        theme === 'green' ? color = style.getPropertyValue('--success') :
-        theme === 'green' ? color = style.getPropertyValue('--info') :
-        color = style.getPropertyValue('--primary');
-
-        return color;
-    };
-
     useEffect(() => {
         async function gen(){
             const chart = await ChartService.dynamic(resource, group, range);
 
-            setData(ChartService.generate(chart, getThemeColor(props.bgColor), 'line'));
+            setData(ChartService.generate(chart, getColor(), 'line'));
         }
 
         (range && group && resource) && gen();
     }, [range, group, resource]);
 
     return (
-        <>
+        <Admin>
             <Helmet>
                 <title>Shop | Admin - Analytics</title>
             </Helmet>
@@ -124,7 +115,7 @@ function Analytics(props) {
                     </Col>
                 </Row>
             </div>
-        </>
+        </Admin>
     );
 }
 

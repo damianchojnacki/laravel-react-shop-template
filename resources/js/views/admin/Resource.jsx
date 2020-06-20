@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Helmet} from 'react-helmet';
-import {Button, Card, CardBody, CardFooter, CardHeader, Input} from 'reactstrap';
+import {Button, Card, CardBody, CardHeader, Input} from 'reactstrap';
 
 import OrdersList from "../../components/admin/OrdersList";
 import OrderService from "../../utils/OrderService";
@@ -11,6 +11,8 @@ import ProductsList from "../../components/admin/ProductsList";
 import {InertiaLink} from "@inertiajs/inertia-react";
 import Admin from "../../layouts/Admin";
 import ResourceService from "../../utils/ResourceService";
+import {capitalize} from "../../utils/helpers";
+import {getTheme} from "../../utils/ThemeHelper";
 
 window['OrderService'] = OrderService;
 window['UserService'] = UserService;
@@ -18,6 +20,8 @@ window['ProductService'] = ProductService;
 
 function Resource(props){
     const [searchField, setSearchField] = useState(null);
+
+    const theme = getTheme();
 
     useEffect(() => {
         ResourceService.search(props.name, searchField);
@@ -39,7 +43,7 @@ function Resource(props){
     return (
         <Admin>
             <Helmet>
-                <title>Shop | Admin - {props.name}</title>
+                <title>Shop | Admin - {capitalize(props.name)}</title>
             </Helmet>
             <main className="content">
                 <div className="col-md-12">
@@ -49,9 +53,9 @@ function Resource(props){
                                 All {props.name}
                             </h2>
                             <div className="col-md-3 col-12 my-md-0 my-4">
-                                <Input type="text" className={props.bgColor} onChange={(e) => {setSearchField(e.target.value)}} placeholder={`Search by ${getSearchFieldBy()}`}/>
+                                <Input type="text" className={theme} onChange={(e) => {setSearchField(e.target.value)}} placeholder={`Search by ${getSearchFieldBy()}`}/>
                             </div>
-                            <InertiaLink href={`/admin/${props.name.toLowerCase()}/new`} className="col-md-3 col-12">
+                            <InertiaLink href={`/admin/${props.name}/new`} className="col-md-3 col-12">
                                 <Button color="success" className="px-3" block>
                                     New {props.name.slice(0, -1)}
                                 </Button>
@@ -61,7 +65,7 @@ function Resource(props){
                             {props.name === "orders" &&
                                 <OrdersList
                                     data={props.data}
-                                    bgColor={props.bgColor}
+                                    bgColor={theme}
                                     fields={{
                                         index: true,
                                         id: true,
@@ -74,7 +78,7 @@ function Resource(props){
                             {props.name === "users" &&
                                 <UsersList
                                     data={props.data}
-                                    bgColor={props.bgColor}
+                                    bgColor={theme}
                                     fields={{
                                         index: true,
                                         date: true,
@@ -86,7 +90,7 @@ function Resource(props){
                             {props.name === "products" &&
                                 <ProductsList
                                     data={props.data}
-                                    bgColor={props.bgColor}
+                                    bgColor={theme}
                                     fields={{
                                         index: true,
                                         name: true,
