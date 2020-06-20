@@ -27,6 +27,14 @@ class AdminController extends Controller
         return InertiaPage::render('admin/Analytics');
     }
 
+    public function discounts(){
+        $productsWithDiscount = Product::has('discount')->get();
+
+        return InertiaPage::render('admin/Discounts', [
+            'discounts' => ProductResource::collection($productsWithDiscount),
+        ]);
+    }
+
     public static function getResource($name){
         $resources = [
             'products' => [

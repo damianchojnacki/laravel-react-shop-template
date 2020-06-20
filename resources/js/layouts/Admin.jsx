@@ -17,7 +17,7 @@
 */
 import React, {useEffect, useState} from "react";
 
-import Notifications from 'react-notify-toast';
+import Notifications, {notify} from 'react-notify-toast';
 // core components
 import AdminNavbar from "../components/admin/Navbars/AdminNavbar.jsx";
 import Footer from "../components/admin/Footer/Footer.jsx";
@@ -33,11 +33,16 @@ import PerfectScrollbar from "perfect-scrollbar";
 import {usePage} from "@inertiajs/inertia-react";
 
 function Admin(props) {
-    const { app } = usePage();
+    const { app, flash } = usePage();
 
     const [themeColor, setThemeColor] = useState(localStorage.getItem('theme'));
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode'));
     const [sidebarOpened, setSidebarOpened] =  useState(document.documentElement.className.indexOf("nav-open") !== -1);
+
+    useEffect(() => {
+        flash.success && notify.show(flash.success, 'success', 1500);
+        flash.error && notify.show(flash.error, 'error', 1500);
+    }, [flash]);
 
     useEffect(() => {
         darkMode === 'light' ?  document.body.classList.add("white-content") : document.body.classList.remove("white-content");

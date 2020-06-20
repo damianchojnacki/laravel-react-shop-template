@@ -103,11 +103,4 @@ class ProductController extends Controller
 
         return response(ProductResource::collection($products), 200);
     }
-
-    public function discounted()
-    {
-        $productsWithDiscount = Product::has('discount')->get();
-
-        return response(ProductResource::collection($productsWithDiscount), 200);
-    }
 }

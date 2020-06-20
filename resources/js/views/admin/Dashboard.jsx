@@ -29,7 +29,6 @@ import OrdersList from "../../components/admin/OrdersList";
 function Dashboard(props){
 
     const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     const chartMultiple = [
         {
@@ -56,7 +55,7 @@ function Dashboard(props){
         (async function(){
             const orders = await OrderService.recent();
 
-            setOrders(orders).then(() => setLoading(false));
+            setOrders(orders);
         })();
     }, []);
 

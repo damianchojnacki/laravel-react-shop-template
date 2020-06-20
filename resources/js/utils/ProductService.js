@@ -24,21 +24,21 @@ export default class ProductService{
         const response = await window.axios.get(`/api/product-types`);
 
         return response.data;
-    }
+    };
 
     static create(data){
         return window.axios.post(`/api/products`, data);
-    }
+    };
 
     static edit(data){
         return window.axios.put(`/api/products`, data);
-    }
+    };
 
     static delete(id){
         return window.axios.delete(`/api/products/${id}`);
-    }
+    };
 
-    static discounts = new DiscountService;
+    static discounts = DiscountService;
 
     static admin = {
         all: () => Inertia.replace(`/admin/products`),

@@ -1,4 +1,5 @@
 import ProductService from "./ProductService";
+import {Inertia} from "@inertiajs/inertia";
 
 export default class DiscountService {
     async all(){
@@ -17,8 +18,12 @@ export default class DiscountService {
         });
     };
 
-    async delete(id) {
-        return window.axios.delete(`/api/discounts/${id}`);
+    static search(name) {
+        return name ? Inertia.replace(`/admin/discounts/${name}`) : Inertia.replace(`/admin/discounts`);
+    };
+
+    static delete(id) {
+        return Inertia.delete(`/admin/discounts/${id}`);
     };
 
     async create(data) {

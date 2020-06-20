@@ -78,9 +78,10 @@ Route::group([
     'middleware' => ['auth', 'admin'],
 ], function(){
     Route::get("/", 'AdminController@dashboard')->name('admin.dashboard');
-    Route::get('analytics', 'AdminController@analytics');
+    Route::get('analytics', 'AdminController@analytics')->name('admin.analytics');;
+    Route::get('discounts', 'AdminController@discounts')->name('admin.discounts');;
     Route::get("{resource}", 'AdminController@resource')->where('resource', '(products|orders|users)')->name('admin.resource');
-    Route::get('{resource}/search/{id}', 'AdminController@searchResource');
+    Route::get('{resource}/search/{id}', 'AdminController@searchResource')->name('admin.resource.search');
 });
 
 Route::put('/currency/{iso}', 'CurrencyController@change')->name('currency.change');
@@ -128,6 +129,7 @@ Route::group([
     Route::group([
         'name' => 'discounts',
     ], function () {
+        Route::get('discounts/{name}', 'DiscountController@search');
         Route::post('discounts', 'DiscountController@create');
 
         Route::middleware('auth')->group(function () {
