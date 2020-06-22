@@ -109,6 +109,12 @@ Route::group([
 });
 
 Route::group([
+    'name' => 'currency',
+], function () {
+    Route::get('currencies', 'CurrencyController@index');
+});
+
+Route::group([
     'name' => 'images',
     'middleware' => ['auth:api', 'admin'],
 ], function () {

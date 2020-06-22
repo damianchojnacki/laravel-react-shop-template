@@ -13,6 +13,7 @@ import Menu from "../components/shop/Menu";
 import Footer from "../components/shop/Footer";
 import {CartContextProvider} from "../utils/CartContext";
 import Cart from "../components/shop/Cart";
+import {CurrencyContextProvider} from "../utils/CurrencyContext";
 
 function Shop(props) {
     const {state, dispatch} = React.useContext(AuthContext);
@@ -41,19 +42,21 @@ function Shop(props) {
     };
 
     return (
-        <CartContextProvider>
-            <Notifications/>
-            <div className="p-0 container d-flex flex-column" style={{minHeight: "100vh"}}>
-                <Cart/>
-                <Menu {...props} routes={routes}/>
-                <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
-                    <Switch>
-                        {getRoutes(routes)}
-                    </Switch>
+        <CurrencyContextProvider>
+            <CartContextProvider>
+                <Notifications/>
+                <div className="p-0 container d-flex flex-column" style={{minHeight: "100vh"}}>
+                    <Cart/>
+                    <Menu {...props} routes={routes}/>
+                    <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
+                        <Switch>
+                            {getRoutes(routes)}
+                        </Switch>
+                    </div>
+                    <Footer/>
                 </div>
-                <Footer/>
-            </div>
-        </CartContextProvider>
+            </CartContextProvider>
+        </CurrencyContextProvider>
     );
 }
 

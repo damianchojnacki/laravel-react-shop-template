@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { Helmet } from 'react-helmet';
 import ProductsNav from '../../components/shop/ProductsNav';
 import {Button} from "shards-react";
@@ -6,13 +6,20 @@ import ProductsListComplex from "../../components/shop/ProductListComplex";
 import classnames from 'classnames';
 import ProductService from "../../utils/ProductService";
 import {newArray} from "../../utils/helpers";
+import {CurrencyContext} from "../../utils/CurrencyContext";
 
 export default function Products(props){
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
-    const [searchField, setSearchField] = useState('');
+    const [searchField, setSearchField] = useState("");
     const [sort, setSort] = useState({sort: "id", type: "asc"});
     const [category, setCategory] = useState(props.match.params.category);
+
+    const {state} = useContext(CurrencyContext);
+
+    useEffect(() => {
+        getProducts(true);
+    }, [state]);
 
     useEffect(() => {
         getProducts();
@@ -29,8 +36,12 @@ export default function Products(props){
         setPage(1);
     }, [category]);
 
-    const getProducts = async () => {
-        if(searchField && searchField !== ""){
+    const getProducts = async fresh => {
+        if(fresh){
+            const newProducts = await ProductService.all(page, category);
+
+            setProducts(newProducts);
+        } else if(searchField && searchField !== ""){
             const found = await ProductService.search(searchField, category);
 
             setProducts(found);

@@ -6,7 +6,7 @@
 
 window.axios = require('axios');
 
-import cookie from 'react-cookies'
+import cookie from 'react-cookies';
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 const token = cookie.load('access_token');

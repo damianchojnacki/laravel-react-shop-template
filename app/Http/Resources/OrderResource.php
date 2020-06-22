@@ -20,10 +20,11 @@ class OrderResource extends JsonResource
         else
             return [
                 'id' => $this->id,
-                'created_at' => $this->created_at,
+                'created_at' => date("d.m.Y", strtotime($this->created_at)),
                 'value' => $this->value,
                 'products' => ProductResource::collection($this->whenLoaded('products')),
-                'user' => new UserResource($this->whenLoaded('user')),
+                'details' => new OrderDetailsResource($this->whenLoaded('details')),
+                'status' => $this->whenLoaded('status'),
             ];
     }
 }

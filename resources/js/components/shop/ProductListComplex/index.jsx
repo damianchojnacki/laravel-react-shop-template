@@ -1,13 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Card, CardBody, CardHeader, CardTitle, CardFooter, Button} from "shards-react";
 import {notify} from "react-notify-toast";
 import {CartContext} from "../../../utils/CartContext";
 import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
+import {CurrencyContext} from "../../../utils/CurrencyContext";
 
 function ProductsListComplex(props){
     const {state, dispatch} = React.useContext(CartContext);
+    const currency = useContext(CurrencyContext).state.currency;
+
+    console.log(currency);
 
     const addToCart = product => {
         dispatch({type: "add", payload: product.id});
@@ -48,16 +52,17 @@ function ProductsListComplex(props){
                     </CardHeader>
                     <CardBody>
                         <p>
-                            {product.price &&
+                            {product.price_origin &&
                                 <>
                                     <span className="font-weight-bold">Price: </span>
                                     {product.discount ?
                                         <>
-                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price} $</span>
+                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.symbol}</span>
                                             <FontAwesomeIcon icon={faArrowRight} className="mx-2"/>
-                                            <span>{product.price_final} $</span>
-                                        </> :
-                                        <span>{product.price} $</span>
+                                            <span>{product.price_final} {currency.symbol}</span>
+                                        </>
+                                        :
+                                        <span>{product.price_origin} {currency.symbol}</span>
                                     }
                                 </>
                             }

@@ -14,9 +14,12 @@ import {ListGroup, ListGroupItem, Button} from "shards-react";
 import {notify} from "react-notify-toast";
 
 import "./style.scss";
+import {CurrencyContext} from "../../../utils/CurrencyContext";
 
 function Cart(props) {
     const {state, dispatch} = React.useContext(CartContext);
+    const currency = React.useContext(CurrencyContext).state.currency;
+
     const [opened, setOpened] = useState(false);
     const [products, setProducts] = useState([]);
 
@@ -26,7 +29,7 @@ function Cart(props) {
 
             setProducts(products);
         }());
-    }, [state]);
+    }, [state, currency]);
 
     const removeFromCart = product => {
         dispatch({type: "remove", payload: product.id});
@@ -60,14 +63,14 @@ function Cart(props) {
                             {products.map(product =>
                                 <ListGroupItem key={product.id}>
                                     <span className="cart__field">{product.name}</span>
-                                    <span className="cart__field">{product.price_final} $</span>
+                                    <span className="cart__field">{product.price_final} {currency.symbol}</span>
                                     <span className="cart__field">{product.quantity}</span>
                                     <span className="cart__field">
                                         <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(product)}>Remove</Button>
                                     </span>
                                 </ListGroupItem>
                             )}
-                            <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts()} $</span></ListGroupItem>
+                            <ListGroupItem className="text-right"><span className="cart__sum">Sum: {getSumOfProducts()} {currency.symbol}</span></ListGroupItem>
                         </ListGroup>
                     </DropdownItem>
                     <DropdownItem tag="span">

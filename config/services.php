@@ -34,6 +34,12 @@ return [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_SECRET_KEY'),
         'redirect' => env('GOOGLE_CALLBACK_URL', '127.0.0.1'),
+        'places_key' => env('GOOGLE_PLACES_API_KEY'),
     ],
 
+    'paypal' => [
+        'client_id' => env('PAYPAL_CLIENT_ID'),
+    ],
+
+    'github' => env('GITHUB', false)
 ];

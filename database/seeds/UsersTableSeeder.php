@@ -28,7 +28,5 @@ class UsersTableSeeder extends Seeder
         ]);
 
         factory(User::class, 10)->create();
-
-        Artisan::call('passport:install');
     }
 }

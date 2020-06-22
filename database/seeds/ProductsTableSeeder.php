@@ -116,15 +116,16 @@ class ProductsTableSeeder extends Seeder
             ],
         ]);
 
-        config('app.env') !== 'testing' &&  Cloudder::deleteResourcesByPrefix('products');
+        if(config('app.env') != 'testing'){
+            Cloudder::deleteResourcesByPrefix('products');
 
-        Product::all()->each(function($product) use($faker) {
-            UploadImage::dispatch($product);
+            Product::all()->each(function($product) use($faker) {
+                UploadImage::dispatch($product);
 
-            $product->created_at = $faker->dateTimeBetween('-1 year', 'now');
-            $product->updated_at = $product->created_at;
-            $product->save();
-        });
-
+                $product->created_at = $faker->dateTimeBetween('-1 year', 'now');
+                $product->updated_at = $product->created_at;
+                $product->save();
+            });
+        }
     }
 }

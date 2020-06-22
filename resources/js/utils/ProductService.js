@@ -13,7 +13,7 @@ export default class ProductService{
         return response.data;
     }
 
-    static async search(name, category = 'null') {
+    static async search(name, category = '') {
         const response = await window.axios.get(`/api/products/search/${name}/${category}`);
 
         return response.data;

@@ -278,7 +278,7 @@ function () {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              category = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : 'null';
+              category = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : '';
               _context3.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/products/search/".concat(name, "/").concat(category)));
 

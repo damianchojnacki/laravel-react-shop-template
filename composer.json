@@ -1,19 +1,23 @@
 {
-    "name": "laravel/laravel",
+    "name": "damianchojnacki/laravel-react-shop-template",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Laravel + React Shop Template",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "react"
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
+        "ext-json": "*",
         "fideloper/proxy": "^4.0",
+        "google/apiclient": "^2.4",
         "jrm2k6/cloudder": "^0.6.0",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.0",
         "laravel/socialite": "^4.3",
+        "laravel/telescope": "^3.5",
         "laravel/tinker": "^1.0",
         "mbezhanov/faker-provider-collection": "^1.2"
     },
