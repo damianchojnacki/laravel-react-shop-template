@@ -20,6 +20,6 @@ export default class CurrencyService{
     }
 
     static default(){
-        return {iso: "USD", sign: "$"};
+        return {iso: "USD", symbol: "$"};
     }
 }

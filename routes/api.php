@@ -18,8 +18,13 @@ Route::group([
     'name' => 'auth',
 ], function () {
     // public routes
-    Route::post('login', 'AuthController@login')->name('auth.login');
     Route::post('register', 'AuthController@register')->name('auth.register');
+
+    Route::post('login', 'AuthController@login')->name('auth.login');
+    Route::post('/login/google', 'AuthController@loginWithGoogle')->name('auth.google.login');
+    Route::get('/login/google/callback', 'AuthController@handleProviderCallback')->name('auth.google.callback');
+
+    Route::get('/google-client-id', 'AuthController@getGoogleClientId')->name('auth.google.client.id');
 
     // private routes
     Route::middleware('auth:api')->group(function () {

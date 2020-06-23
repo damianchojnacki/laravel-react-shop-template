@@ -11,7 +11,6 @@ import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-ico
 import 'animate.css/animate.css';
 
 export default function Login() {
-
     const {state, dispatch} = React.useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
@@ -45,6 +44,22 @@ export default function Login() {
         }
     };
 
+    function googleLogin(googleClientId){
+        gapi.load('auth2', async function() {
+            const GoogleAuth = await gapi.auth2.init({client_id: googleClientId});
+            setLoading(true);
+
+            GoogleAuth.signIn()
+                .then(user => {
+                    AuthService.loginWithGoogle(user);
+                })
+                .catch(error => {
+                    console.log(error.response);
+                    setLoading(false);
+                });
+        });
+    }
+
     return state.authenticated && !loading
             ?
             <Redirect to="/"/>
@@ -56,8 +71,9 @@ export default function Login() {
                     </Helmet>
                     <div className="container col-lg-6 col-12">
                         <div className="mb-3">
-                            <a href="./redirect/google" className="d-inline-block"><GoogleButton /></a>
-                        </div>
+                            <a href="#" className="d-inline-block" onClick={() => AuthService.googleInit(googleLogin)}>
+                                <GoogleButton label="Sign in with Google" />
+                            </a>                        </div>
                         <Form method="POST" onSubmit={handleSubmit}>
                             {errors.data
                             && (

@@ -11,8 +11,6 @@ function ProductsListComplex(props){
     const {state, dispatch} = React.useContext(CartContext);
     const currency = useContext(CurrencyContext).state.currency;
 
-    console.log(currency);
-
     const addToCart = product => {
         dispatch({type: "add", payload: product.id});
 

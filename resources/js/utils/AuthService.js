@@ -1,12 +1,25 @@
-import cookie from 'react-cookies';
+import Cookies from 'js-cookie';
 
 class AuthService{
     static login(credentials) {
         return window.axios.post('/api/login', credentials)
             .then(res => {
-                cookie.save('access_token', res.data.token, {maxAge: 3600});
+                Cookies.save('access_token', res.data.token, {maxAge: 3600});
                 window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
             });
+    }
+
+    static async googleInit(callback){
+        const googleClientId = await window.axios.get('/api/google-client-id');
+
+        const script = document.createElement("script");
+        script.src = `https://apis.google.com/js/platform.js?onload=init`;
+        script.addEventListener("load", () => callback(googleClientId.data));
+        document.body.appendChild(script);
+    }
+
+    static loginWithGoogle(user) {
+        return window.axios.post('/api/login/google', {user_id: user.getAuthResponse().id_token});
     }
 
     static register(credentials) {
@@ -14,7 +27,7 @@ class AuthService{
 
         return window.axios.post('/api/register', credentials)
             .then(res => {
-                cookie.save('access_token', res.data.token, {maxAge: 3600});
+                Cookies.save('access_token', res.data.token, {maxAge: 3600});
                 window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
             });
     }
@@ -26,7 +39,7 @@ class AuthService{
     static logout() {
         const response = window.axios.post('/api/logout');
 
-        cookie.remove('access_token');
+        Cookies.remove('access_token');
 
         return response;
     }

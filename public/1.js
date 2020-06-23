@@ -9,8 +9,12 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_cookies__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-cookies */ "./node_modules/react-cookies/build/cookie.js");
-/* harmony import */ var react_cookies__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_cookies__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
+
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -30,10 +34,44 @@ function () {
     key: "login",
     value: function login(credentials) {
       return window.axios.post('/api/login', credentials).then(function (res) {
-        react_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.save('access_token', res.data.token, {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.save('access_token', res.data.token, {
           maxAge: 3600
         });
         window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+      });
+    }
+  }, {
+    key: "googleInit",
+    value: function googleInit(callback) {
+      var googleClientId, script;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function googleInit$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/google-client-id'));
+
+            case 2:
+              googleClientId = _context.sent;
+              script = document.createElement("script");
+              script.src = "https://apis.google.com/js/platform.js?onload=init";
+              script.addEventListener("load", function () {
+                return callback(googleClientId.data);
+              });
+              document.body.appendChild(script);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "loginWithGoogle",
+    value: function loginWithGoogle(user) {
+      return window.axios.post('/api/login/google', {
+        user_id: user.getAuthResponse().id_token
       });
     }
   }, {
@@ -41,7 +79,7 @@ function () {
     value: function register(credentials) {
       credentials.password_confirmation = credentials.passwordConfirmation;
       return window.axios.post('/api/register', credentials).then(function (res) {
-        react_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.save('access_token', res.data.token, {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.save('access_token', res.data.token, {
           maxAge: 3600
         });
         window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
@@ -56,7 +94,7 @@ function () {
     key: "logout",
     value: function logout() {
       var response = window.axios.post('/api/logout');
-      react_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('access_token');
+      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('access_token');
       return response;
     }
   }]);

@@ -2088,213 +2088,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/cookie/index.js":
-/*!**************************************!*\
-  !*** ./node_modules/cookie/index.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*!
- * cookie
- * Copyright(c) 2012-2014 Roman Shtylman
- * Copyright(c) 2015 Douglas Christopher Wilson
- * MIT Licensed
- */
-
-
-
-/**
- * Module exports.
- * @public
- */
-
-exports.parse = parse;
-exports.serialize = serialize;
-
-/**
- * Module variables.
- * @private
- */
-
-var decode = decodeURIComponent;
-var encode = encodeURIComponent;
-var pairSplitRegExp = /; */;
-
-/**
- * RegExp to match field-content in RFC 7230 sec 3.2
- *
- * field-content = field-vchar [ 1*( SP / HTAB ) field-vchar ]
- * field-vchar   = VCHAR / obs-text
- * obs-text      = %x80-FF
- */
-
-var fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
-
-/**
- * Parse a cookie header.
- *
- * Parse the given cookie header string into an object
- * The object has the various cookies as keys(names) => values
- *
- * @param {string} str
- * @param {object} [options]
- * @return {object}
- * @public
- */
-
-function parse(str, options) {
-  if (typeof str !== 'string') {
-    throw new TypeError('argument str must be a string');
-  }
-
-  var obj = {}
-  var opt = options || {};
-  var pairs = str.split(pairSplitRegExp);
-  var dec = opt.decode || decode;
-
-  for (var i = 0; i < pairs.length; i++) {
-    var pair = pairs[i];
-    var eq_idx = pair.indexOf('=');
-
-    // skip things that don't look like key=value
-    if (eq_idx < 0) {
-      continue;
-    }
-
-    var key = pair.substr(0, eq_idx).trim()
-    var val = pair.substr(++eq_idx, pair.length).trim();
-
-    // quoted values
-    if ('"' == val[0]) {
-      val = val.slice(1, -1);
-    }
-
-    // only assign once
-    if (undefined == obj[key]) {
-      obj[key] = tryDecode(val, dec);
-    }
-  }
-
-  return obj;
-}
-
-/**
- * Serialize data into a cookie header.
- *
- * Serialize the a name value pair into a cookie string suitable for
- * http headers. An optional options object specified cookie parameters.
- *
- * serialize('foo', 'bar', { httpOnly: true })
- *   => "foo=bar; httpOnly"
- *
- * @param {string} name
- * @param {string} val
- * @param {object} [options]
- * @return {string}
- * @public
- */
-
-function serialize(name, val, options) {
-  var opt = options || {};
-  var enc = opt.encode || encode;
-
-  if (typeof enc !== 'function') {
-    throw new TypeError('option encode is invalid');
-  }
-
-  if (!fieldContentRegExp.test(name)) {
-    throw new TypeError('argument name is invalid');
-  }
-
-  var value = enc(val);
-
-  if (value && !fieldContentRegExp.test(value)) {
-    throw new TypeError('argument val is invalid');
-  }
-
-  var str = name + '=' + value;
-
-  if (null != opt.maxAge) {
-    var maxAge = opt.maxAge - 0;
-    if (isNaN(maxAge)) throw new Error('maxAge should be a Number');
-    str += '; Max-Age=' + Math.floor(maxAge);
-  }
-
-  if (opt.domain) {
-    if (!fieldContentRegExp.test(opt.domain)) {
-      throw new TypeError('option domain is invalid');
-    }
-
-    str += '; Domain=' + opt.domain;
-  }
-
-  if (opt.path) {
-    if (!fieldContentRegExp.test(opt.path)) {
-      throw new TypeError('option path is invalid');
-    }
-
-    str += '; Path=' + opt.path;
-  }
-
-  if (opt.expires) {
-    if (typeof opt.expires.toUTCString !== 'function') {
-      throw new TypeError('option expires is invalid');
-    }
-
-    str += '; Expires=' + opt.expires.toUTCString();
-  }
-
-  if (opt.httpOnly) {
-    str += '; HttpOnly';
-  }
-
-  if (opt.secure) {
-    str += '; Secure';
-  }
-
-  if (opt.sameSite) {
-    var sameSite = typeof opt.sameSite === 'string'
-      ? opt.sameSite.toLowerCase() : opt.sameSite;
-
-    switch (sameSite) {
-      case true:
-        str += '; SameSite=Strict';
-        break;
-      case 'lax':
-        str += '; SameSite=Lax';
-        break;
-      case 'strict':
-        str += '; SameSite=Strict';
-        break;
-      default:
-        throw new TypeError('option sameSite is invalid');
-    }
-  }
-
-  return str;
-}
-
-/**
- * Try decoding a string using a decoding function.
- *
- * @param {string} str
- * @param {function} decode
- * @private
- */
-
-function tryDecode(str, decode) {
-  try {
-    return decode(str);
-  } catch (e) {
-    return str;
-  }
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/bootstrap/dist/css/bootstrap.min.css":
 /*!*******************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--5-1!./node_modules/postcss-loader/src??ref--5-2!./node_modules/bootstrap/dist/css/bootstrap.min.css ***!
@@ -3477,6 +3270,184 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 }
 
 module.exports = hoistNonReactStatics;
+
+
+/***/ }),
+
+/***/ "./node_modules/js-cookie/src/js.cookie.js":
+/*!*************************************************!*\
+  !*** ./node_modules/js-cookie/src/js.cookie.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * JavaScript Cookie v2.2.1
+ * https://github.com/js-cookie/js-cookie
+ *
+ * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+ * Released under the MIT license
+ */
+;(function (factory) {
+	var registeredInModuleLoader;
+	if (true) {
+		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		registeredInModuleLoader = true;
+	}
+	if (true) {
+		module.exports = factory();
+		registeredInModuleLoader = true;
+	}
+	if (!registeredInModuleLoader) {
+		var OldCookies = window.Cookies;
+		var api = window.Cookies = factory();
+		api.noConflict = function () {
+			window.Cookies = OldCookies;
+			return api;
+		};
+	}
+}(function () {
+	function extend () {
+		var i = 0;
+		var result = {};
+		for (; i < arguments.length; i++) {
+			var attributes = arguments[ i ];
+			for (var key in attributes) {
+				result[key] = attributes[key];
+			}
+		}
+		return result;
+	}
+
+	function decode (s) {
+		return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
+	}
+
+	function init (converter) {
+		function api() {}
+
+		function set (key, value, attributes) {
+			if (typeof document === 'undefined') {
+				return;
+			}
+
+			attributes = extend({
+				path: '/'
+			}, api.defaults, attributes);
+
+			if (typeof attributes.expires === 'number') {
+				attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e+5);
+			}
+
+			// We're using "expires" because "max-age" is not supported by IE
+			attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+			try {
+				var result = JSON.stringify(value);
+				if (/^[\{\[]/.test(result)) {
+					value = result;
+				}
+			} catch (e) {}
+
+			value = converter.write ?
+				converter.write(value, key) :
+				encodeURIComponent(String(value))
+					.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+
+			key = encodeURIComponent(String(key))
+				.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
+				.replace(/[\(\)]/g, escape);
+
+			var stringifiedAttributes = '';
+			for (var attributeName in attributes) {
+				if (!attributes[attributeName]) {
+					continue;
+				}
+				stringifiedAttributes += '; ' + attributeName;
+				if (attributes[attributeName] === true) {
+					continue;
+				}
+
+				// Considers RFC 6265 section 5.2:
+				// ...
+				// 3.  If the remaining unparsed-attributes contains a %x3B (";")
+				//     character:
+				// Consume the characters of the unparsed-attributes up to,
+				// not including, the first %x3B (";") character.
+				// ...
+				stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
+			}
+
+			return (document.cookie = key + '=' + value + stringifiedAttributes);
+		}
+
+		function get (key, json) {
+			if (typeof document === 'undefined') {
+				return;
+			}
+
+			var jar = {};
+			// To prevent the for loop in the first place assign an empty array
+			// in case there are no cookies at all.
+			var cookies = document.cookie ? document.cookie.split('; ') : [];
+			var i = 0;
+
+			for (; i < cookies.length; i++) {
+				var parts = cookies[i].split('=');
+				var cookie = parts.slice(1).join('=');
+
+				if (!json && cookie.charAt(0) === '"') {
+					cookie = cookie.slice(1, -1);
+				}
+
+				try {
+					var name = decode(parts[0]);
+					cookie = (converter.read || converter)(cookie, name) ||
+						decode(cookie);
+
+					if (json) {
+						try {
+							cookie = JSON.parse(cookie);
+						} catch (e) {}
+					}
+
+					jar[name] = cookie;
+
+					if (key === name) {
+						break;
+					}
+				} catch (e) {}
+			}
+
+			return key ? jar[key] : jar;
+		}
+
+		api.set = set;
+		api.get = function (key) {
+			return get(key, false /* read as raw */);
+		};
+		api.getJSON = function (key) {
+			return get(key, true /* read as json */);
+		};
+		api.remove = function (key, attributes) {
+			set(key, '', extend(attributes, {
+				expires: -1
+			}));
+		};
+
+		api.defaults = {};
+
+		api.withConverter = init;
+
+		return api;
+	}
+
+	return init(function () {});
+}));
 
 
 /***/ }),
@@ -5190,190 +5161,6 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-
-/***/ }),
-
-/***/ "./node_modules/react-cookies/build/cookie.js":
-/*!****************************************************!*\
-  !*** ./node_modules/react-cookies/build/cookie.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-exports.load = load;
-exports.loadAll = loadAll;
-exports.select = select;
-exports.save = save;
-exports.remove = remove;
-exports.setRawCookie = setRawCookie;
-exports.plugToRequest = plugToRequest;
-
-var _cookie = __webpack_require__(/*! cookie */ "./node_modules/cookie/index.js");
-
-var _cookie2 = _interopRequireDefault(_cookie);
-
-var _objectAssign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var IS_NODE = typeof document === 'undefined' || typeof process !== 'undefined' && process.env && "development" === 'test';
-var _rawCookie = {};
-var _res = void 0;
-
-function _isResWritable() {
-  return _res && !_res.headersSent;
-}
-
-function load(name, doNotParse) {
-  var cookies = IS_NODE ? _rawCookie : _cookie2.default.parse(document.cookie);
-  var cookieVal = cookies && cookies[name];
-
-  if (typeof doNotParse === 'undefined') {
-    doNotParse = !cookieVal || cookieVal[0] !== '{' && cookieVal[0] !== '[';
-  }
-
-  if (!doNotParse) {
-    try {
-      cookieVal = JSON.parse(cookieVal);
-    } catch (err) {
-      // Not serialized object
-    }
-  }
-
-  return cookieVal;
-}
-
-function loadAll(doNotParse) {
-  var cookies = IS_NODE ? _rawCookie : _cookie2.default.parse(document.cookie);
-  var cookieVal = cookies;
-
-  if (typeof doNotParse === 'undefined') {
-    doNotParse = !cookieVal || cookieVal[0] !== '{' && cookieVal[0] !== '[';
-  }
-
-  if (!doNotParse) {
-    try {
-      cookieVal = JSON.parse(cookieVal);
-    } catch (err) {
-      // Not serialized object
-    }
-  }
-
-  return cookieVal;
-}
-
-function select(regex) {
-  var cookies = IS_NODE ? _rawCookie : _cookie2.default.parse(document.cookie);
-
-  if (!cookies) {
-    return {};
-  }
-
-  if (!regex) {
-    return cookies;
-  }
-
-  return Object.keys(cookies).reduce(function (accumulator, name) {
-    if (!regex.test(name)) {
-      return accumulator;
-    }
-
-    var newCookie = {};
-    newCookie[name] = cookies[name];
-    return (0, _objectAssign2.default)({}, accumulator, newCookie);
-  }, {});
-}
-
-function save(name, val, opt) {
-  _rawCookie[name] = val;
-
-  // Allow you to work with cookies as objects.
-  if ((typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object') {
-    _rawCookie[name] = JSON.stringify(val);
-  }
-
-  // Cookies only work in the browser
-  if (!IS_NODE) {
-    document.cookie = _cookie2.default.serialize(name, _rawCookie[name], opt);
-  }
-
-  if (_isResWritable() && _res.cookie) {
-    _res.cookie(name, val, opt);
-  }
-}
-
-function remove(name, opt) {
-  delete _rawCookie[name];
-
-  if (typeof opt === 'undefined') {
-    opt = {};
-  } else if (typeof opt === 'string') {
-    // Will be deprecated in future versions
-    opt = { path: opt };
-  } else {
-    // Prevent mutation of opt below
-    opt = (0, _objectAssign2.default)({}, opt);
-  }
-
-  if (typeof document !== 'undefined') {
-    opt.expires = new Date(1970, 1, 1, 0, 0, 1);
-    opt.maxAge = 0;
-    document.cookie = _cookie2.default.serialize(name, '', opt);
-  }
-
-  if (_isResWritable() && _res.clearCookie) {
-    _res.clearCookie(name, opt);
-  }
-}
-
-function setRawCookie(rawCookie) {
-  if (rawCookie) {
-    _rawCookie = _cookie2.default.parse(rawCookie);
-  } else {
-    _rawCookie = {};
-  }
-}
-
-function plugToRequest(req, res) {
-  if (req.cookie) {
-    _rawCookie = req.cookie;
-  } else if (req.cookies) {
-    _rawCookie = req.cookies;
-  } else if (req.headers && req.headers.cookie) {
-    setRawCookie(req.headers.cookie);
-  } else {
-    _rawCookie = {};
-  }
-
-  _res = res;
-
-  return function unplug() {
-    _res = null;
-    _rawCookie = {};
-  };
-}
-
-exports.default = {
-  setRawCookie: setRawCookie,
-  load: load,
-  loadAll: loadAll,
-  select: select,
-  save: save,
-  remove: remove,
-  plugToRequest: plugToRequest
-};
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
@@ -33430,7 +33217,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39264,8 +39051,8 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_cookies__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-cookies */ "./node_modules/react-cookies/build/cookie.js");
-/* harmony import */ var react_cookies__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_cookies__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -39274,12 +39061,12 @@ __webpack_require__.r(__webpack_exports__);
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-var token = react_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.load('access_token');
-token ? window.axios.defaults.headers.common.Authorization = "Bearer ".concat(token) : null;
+var token = js_cookie__WEBPACK_IMPORTED_MODULE_0___default.a.get('access_token');
+window.axios.defaults.headers.common.Authorization = token ? "Bearer ".concat(token) : null;
 window.axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
-  if (error.response.status === 401) react_cookies__WEBPACK_IMPORTED_MODULE_0___default.a.remove('access_token');
+  if (error.response.status === 401) js_cookie__WEBPACK_IMPORTED_MODULE_0___default.a.remove('access_token');
   console.warn("Error - " + error.response.data.message);
   return Promise.reject(error);
 });
@@ -39333,8 +39120,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthContextConsumer", function() { return AuthContextConsumer; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_cookies__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-cookies */ "./node_modules/react-cookies/build/cookie.js");
-/* harmony import */ var react_cookies__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_cookies__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -39353,7 +39140,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var AuthContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
 var initialState = {
-  authenticated: !!react_cookies__WEBPACK_IMPORTED_MODULE_1___default.a.load('access_token'),
+  authenticated: !!js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('access_token'),
   user: {}
 };
 
@@ -39403,7 +39190,7 @@ var AuthContextConsumer = AuthContext.Consumer;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Damian\Documents\webprojects\laravel-react-shop-template\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-react-shop-template\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

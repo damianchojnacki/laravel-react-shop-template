@@ -1,5 +1,5 @@
 import {dictionary, languages} from '../assets/languages';
-import cookie from 'react-cookies';
+import Cookies from 'js-cookie';
 
 export default class LanguageService{
 
@@ -14,7 +14,7 @@ export default class LanguageService{
     }
 
     static current(){
-        return cookie.load('lang') ?? languages[0].short;
+        return Cookies.get('lang') ?? languages[0].short;
     }
 
     static dictionary(){

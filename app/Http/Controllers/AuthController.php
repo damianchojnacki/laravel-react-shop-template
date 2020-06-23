@@ -2,79 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class AuthController extends Controller {
 
     public function getUser (Request $request) {
         $response = new UserResource($request->user());
 
-        return response($response, 200);
+        return response($response);
     }
 
     public function login(Request $request) {
-
         $user = User::where('email', $request->email)->first();
 
-        if ($user) {
-            if (Hash::check($request->password, $user->password)) {
-                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                $response = ['token' => $token];
-                $status = 200;
-            } else {
-                $status = 422;
-                $response = 'Incorrect email or password!';
-            }
-        } else {
-            $response = 'Incorrect email or password!';
-            $status = 422;
-        }
+        if($user && Hash::check($request->password, $user->password)) {
+            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
 
-        return response($response, $status);
-    }
-
-    public function socialLogin($social){
-        if ($social == "facebook" || $social == "google")
-            return Socialite::with($social)
-                ->stateless()
-                ->redirect();
-        else
-            return Socialite::with($social)->redirect();
-    }
-
-    public function handleProviderCallback($social){
-        $userSocial = Socialite::with($social)->stateless()->user();
-
-        $token = $userSocial->token;
-        $user = User::firstOrNew(['email' => $userSocial->getEmail()]);
-
-        if (!$user->id) {
-            $user->fill([
-                "name" => $userSocial->getName(),
-                "password"=>Hash::make(Str::random()),
+            return response([
+                'token' => $token,
             ]);
-            // Save user social
-            $user->save();
         }
 
-        $access_token = $user->createToken($token)->accessToken;
+        return response('Incorrect email or password!', 422);
+    }
 
-        return redirect()->to('/')->withCookies([Cookie::make('access_token', $access_token, 60, '/', null, false, false)]);
+    public function loginWithGoogle(Request $request){
+        $jwt = new \Firebase\JWT\JWT;
+        $jwt::$leeway = 1;
+
+        $client = new \Google_Client([
+            'client_id' => config('services.google.client_id'),
+            'jwt' => $jwt,
+        ]);
+
+        $userGoogle = $client->verifyIdToken($request->user_id);
+
+        if ($userGoogle) {
+            $user = User::firstOrNew(['email' => $userGoogle['email']]);
+
+            if (!$user->id) {
+                $user->fill([
+                    "name" => $userGoogle['name'],
+                    "password"=>Hash::make(Str::random()),
+                ]);
+
+                $user->save();
+            }
+
+            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+
+            return response([
+                'token' => $token,
+            ]);
+        } else {
+            return response('Authentication failed.', 403);
+        }
     }
 
     public function register(Request $request) {
-
         $validator = Validator::make($request->all(), [
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -95,7 +86,7 @@ class AuthController extends Controller {
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
         $response = ['token' => $token];
 
-        return response($response, 200);
+        return response($response);
     }
 
     public function logout (Request $request) {
@@ -103,6 +94,10 @@ class AuthController extends Controller {
         $token->revoke();
 
         $response = 'You have been succesfully logged out!';
-        return response($response, 200);
+        return response($response);
+    }
+
+    public function getGoogleClientId() {
+        return response(config('services.google.client_id'));
     }
 }
