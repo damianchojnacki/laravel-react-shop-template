@@ -4,17 +4,17 @@ import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from '
 import ProductService from "../../utils/ProductService";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
 import {CartContext} from "../../utils/CartContext";
-import {notify} from "react-notify-toast";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import {newArray} from "../../utils/helpers";
 import {CurrencyContext} from "../../utils/CurrencyContext";
+import Text from "../../components/Text";
 
-function Home(props){
+function Homepage(props){
     const result = props.match.params.result;
 
     const {state, dispatch} = React.useContext(CartContext);
-    const currency = React.useContext(CurrencyContext).state.currency;
+    const currency = React.useContext(CurrencyContext);
 
     const [productsDiscounted, setProductsDiscounted] = useState([]);
     const [specialOffer, setSpecialOffer] = useState([]);
@@ -32,18 +32,18 @@ function Home(props){
             //slice can be removed but displayed products will be moved to the edges (flex)
             setProductsDiscounted(productsDiscounted.slice(productsDiscounted.length % 4));
         })();
-    }, [currency]);
+    }, [currency.state]);
 
     const addToCart = product => {
         dispatch({type: "add", payload: product.id});
 
-        notify.show(`${product.name} has been added to cart.`, 'success', 1500);
+        //notify.show(`${product.name} ${<Text id="cart-alert-add"/>}`, 'success', 1500);
     };
 
     const removeFromCart = product => {
         dispatch({type: "remove", payload: product.id});
 
-        notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
+        //notify.show(`${product.name} <Text id="cart-alert-remove"/>`, 'success', 1500);
     };
 
     return (
@@ -55,7 +55,7 @@ function Home(props){
             <main className="d-flex flex-column">
                 {result === "success" &&
                     <Alert theme="success" className="m-2 mb-4">
-                        You've successfully registered and logged in. You can start shopping right now!
+                        <Text id="welcome"/>
                     </Alert>
                 }
                 <Card className="m-2">
@@ -68,10 +68,12 @@ function Home(props){
                             {specialOffer.id &&
                                 <>
                                     <div className="h5 position-absolute m-4 rounded-circle bg-danger text-white d-flex justify-content-center align-items-center font-weight-bold" style={{top: 0, right: 0, height: "calc(50px + 1vw)", width: "calc(50px + 1vw)"}}>-{specialOffer.discount && specialOffer.discount.percent_off}%</div>
-                                    <h3 className="w-100 text-center m-0 mb-4">Offer of the day: </h3>
-                                    <span className="display-4 text-danger" style={{textDecoration: "line-through"}}>{specialOffer.price_origin} {currency.symbol}</span>
+                                    <h3 className="w-100 text-center m-0 mb-4">
+                                        <Text id="products-special-header"/>
+                                    </h3>
+                                    <span className="display-4 text-danger" style={{textDecoration: "line-through"}}>{specialOffer.price_origin} {currency.state.symbol}</span>
                                     <FontAwesomeIcon icon={faArrowRight} className="product__arrow mx-4 h3"/>
-                                    <span className="display-4">{specialOffer.price_final} {currency.symbol}</span>
+                                    <span className="display-4">{specialOffer.price_final} {currency.state.symbol}</span>
                                 </>
                             }
                         </CardBody>
@@ -80,9 +82,13 @@ function Home(props){
                         {specialOffer.id &&
                             <>
                                 {state.cart.includes(specialOffer.id) &&
-                                        <Button block size="big" className="btn btn-danger my-1" onClick={() => removeFromCart(specialOffer)}>Remove</Button>
+                                        <Button block size="big" className="btn btn-danger my-1" onClick={() => removeFromCart(specialOffer)}>
+                                            <Text id="cart-remove"/>
+                                        </Button>
                                 }
-                                <Button block size="big" className="btn btn-secondary my-1" onClick={() => addToCart(specialOffer)}>Add to cart</Button>
+                                <Button block size="big" className="btn btn-secondary my-1" onClick={() => addToCart(specialOffer)}>
+                                    <Text id="cart-add"/>
+                                </Button>
                             </>
                         }
                     </CardFooter>
@@ -95,11 +101,11 @@ function Home(props){
     )
 }
 
-Home.defaultProps = {
+Homepage.defaultProps = {
     productsDiscounted: newArray(4, {
         name: '',
         price: '',
     })
 };
 
-export default Home;
+export default Homepage;

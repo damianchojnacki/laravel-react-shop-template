@@ -31,15 +31,18 @@ require('./bootstrap');
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loading from "./components/Loading";
+import {LanguageContextProvider} from "./utils/LanguageContext";
 
 ReactDOM.render(
     <Router history={hist}>
         <Suspense fallback={<Loading/>}>
             <AuthContextProvider>
-                <Switch>
-                    <Route path="/admin" render={props => <AdminLayout {...props} />}/>
-                    <Route path="/" render={(props) => <ShopLayout {...props} />}/>
-                </Switch>
+                <LanguageContextProvider>
+                    <Switch>
+                        <Route path="/admin" render={props => <AdminLayout {...props} />}/>
+                        <Route path="/" render={(props) => <ShopLayout {...props} />}/>
+                    </Switch>
+                </LanguageContextProvider>
             </AuthContextProvider>
         </Suspense>
     </Router>,

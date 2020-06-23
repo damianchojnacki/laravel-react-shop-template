@@ -1,4 +1,5 @@
 {
+    "welcome": "You've successfully registered and logged in. You can start shopping right now!",
     "menu": {
         "homepage": "Homepage",
         "products": "Products",
@@ -60,7 +61,11 @@
         "remove": "Remove",
         "checkout": "Checkout",
         "empty": "Your shopping cart is empty.",
-        "sum": "Sum:"
+        "sum": "Sum:",
+        "alert": {
+            "add": " has been added to cart.",
+            "remove": " has been remove from cart."
+        }
     },
     "login": {
         "google": "Sign in with Google",

@@ -16,7 +16,7 @@ export default class CurrencyService{
     }
 
     static get(){
-        return Cookies.get('currency') ? JSON.parse(Cookies.get('currency')) : null;
+        return Cookies.get('currency') ? JSON.parse(Cookies.get('currency')) : this.default();
     }
 
     static default(){

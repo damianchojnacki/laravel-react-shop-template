@@ -80,7 +80,6 @@ Route::group([
 
 Route::group([
     'name' => 'orders',
-    'middleware' => 'auth:api',
 ], function () {
     Route::middleware('auth:api')->group(function () {
         Route::get('orders/all/{page}', 'OrderController@index');
@@ -92,7 +91,9 @@ Route::group([
         Route::delete('orders/{id}', 'OrderController@delete');
     });
 
+    Route::post('order', 'OrderController@make');
     Route::get('orders/{id}', 'OrderController@show');
+    Route::put("coupon/{code}", 'OrderController@couponCheck');
 });
 
 Route::group([
@@ -125,3 +126,5 @@ Route::group([
 ], function () {
     Route::post('images', 'ImageController@store');
 });
+
+Route::get('/google/places/{input}', 'GooglePlacesController')->middleware('throttle:200,1');

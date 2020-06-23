@@ -1,4 +1,4 @@
-import Home from "../views/shop/Home";
+import Homepage from "../views/shop/Homepage";
 import Login from "../views/shop/Login";
 import Products from "../views/shop/Products";
 import Register from "../views/shop/Register";
@@ -7,32 +7,32 @@ import Checkout from "../views/shop/Checkout";
 export default [
     {
         path: "/",
-        name: "Homepage",
-        component: Home,
+        name: "menu-homepage",
+        component: Homepage,
         layout: "/shop"
     },
     {
         path: "/products/:category?",
         link: "/products",
-        name: "Products",
+        name: "menu-products",
         component: Products,
         layout: "/shop",
     },
     {
         path: "/login",
-        name: "Login",
+        name: "menu-login",
         component: Login,
         layout: "/shop"
     },
     {
         path: "/register",
-        name: "Register",
+        name: "menu-register",
         component: Register,
         layout: "/shop"
     },
     {
         path: "/register/:result",
-        component: Home,
+        component: Homepage,
         layout: "/shop",
         hidden: true
     },

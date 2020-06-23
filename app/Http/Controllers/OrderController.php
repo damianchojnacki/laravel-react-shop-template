@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Coupon;
 use App\Http\Resources\OrderResource;
 use App\Order;
+use App\OrderDetails;
 use App\OrderStatus;
 use App\Product;
 use App\User;
@@ -112,5 +114,49 @@ class OrderController extends Controller
         $order->save();
 
         return response('Order has been updated', 200);
+    }
+
+    public function make(Request $request)
+    {
+        $request->validate([
+            'email' => 'email',
+            'name' => 'required|string|min:1',
+            'address' => 'required|string:min:6',
+            'zip_code' => 'required|min:5|max:6',
+            'coupon' => 'required',
+            'cart' => 'required',
+        ]);
+
+        if(count($request->cart) > 0){
+            $request->email = Auth::user()->email ?? $request->email;
+
+            $order = new Order();
+            $details = new OrderDetails($request->toArray());
+
+            $order->save();
+            $order->details()->save($details);
+
+            Auth::check() && $order->user()->associate(Auth::user());
+
+            $order->productsSet(Product::whereIn('id', $request->cart)->get());
+
+            $order->appendCoupon($request->coupon);
+
+            $order->save();
+
+            return response([
+                'paypalClientId' => config('services.paypal.client_id')
+            ]);
+        } else
+            return response('Ordering failed', 400);
+    }
+
+    public function couponCheck($code){
+        $coupon = Coupon::findByCode($code);
+
+        if($coupon)
+            return response($coupon, 200);
+        else
+            return response('Coupon does not exist', 422);
     }
 }

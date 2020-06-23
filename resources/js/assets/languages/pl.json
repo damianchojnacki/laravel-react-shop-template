@@ -1,4 +1,5 @@
 {
+    "welcome": "Zostałeś pomyślnie zarejestrowany. Miłych zakupów!",
     "menu": {
         "homepage": "Strona główna",
         "products": "Produkty",
@@ -58,9 +59,13 @@
         "clear": "Wyczyść",
         "add": "Dodaj do koszyka",
         "remove": "Usuń",
-        "checkout": "Przejdź do podsumowania",
+        "checkout": "Podsumowanie",
         "empty": "Koszyk jest pusty.",
-        "sum": "Razem: "
+        "sum": "Razem: ",
+        "alert": {
+            "add": " został dodany do koszyka.",
+            "remove": " został usunięty z koszyka."
+        }
     },
     "login": {
         "google": "Kontynuuj z Google",

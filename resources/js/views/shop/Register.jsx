@@ -6,11 +6,10 @@ import AuthService from '../../utils/AuthService';
 import {AuthContext} from "../../utils/AuthContext";
 import classNames from 'classnames';
 import 'animate.css';
-import 'flag-icon-css/css/flag-icon.min.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {checkFullName, isEmail, equals} from "../../utils/helpers";
-import Select from 'react-select';
+import Text from "../../components/Text";
 
 export default function Register() {
 
@@ -19,33 +18,11 @@ export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
-    const [country, setCountry] = useState(1);
     const [errors, setErrors] = useState(null);
     const [step, setStep] = useState(1);
     const [hide, setHide] = useState(false);
-    const [countries, setCountries] = useState([]);
     const [terms, setTerms] = useState(false);
     const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        (async function() {
-            const countries = await window.axios.get('/api/countries');
-
-            const list =  countries.data.map((country) => {
-                return {
-                    id: country.id,
-                    value: country.name,
-                    label:
-                        <>
-                            <i className={`flag-icon flag-icon-${country.iso.toLowerCase()} align-middle`}/>
-                            <span className="ml-2 pl-2 align-middle font-weight-normal border-left">{country.name}</span>
-                        </>
-                }
-            });
-
-            setCountries(list);
-        })();
-    }, []);
 
     const validate = (credentials) => {
         let check = true;
@@ -53,7 +30,6 @@ export default function Register() {
         if (!checkFullName(credentials.name)) check = false;
         if (!isEmail(credentials.email)) check = false;
         if (!equals(credentials.password, credentials.passwordConfirmation)) check = false;
-        if (!country || country <= 0) check = false;
         if (!terms) check = false;
 
         return check;
@@ -67,7 +43,6 @@ export default function Register() {
             name,
             password,
             passwordConfirmation,
-            country,
         };
 
         if (validate(credentials)) {
@@ -81,7 +56,6 @@ export default function Register() {
                 })
                 .catch(error => {
                     setErrors(error.response.data.errors);
-
                     setStep(1);
                 })
                 .finally(() => {
@@ -100,8 +74,6 @@ export default function Register() {
                 return !!checkFullName(name);
             case 4:
                 return !!(equals(password, passwordConfirmation) && password.length >= 8);
-            case 5:
-                return country && country > 0;
             case 6:
                 return !!terms;
         }
@@ -133,41 +105,63 @@ export default function Register() {
         return steps[step - 1];
     };
 
+    const handleKeyDown = e => {
+        if (e.key === 'Enter'){
+            step === 5 ? handleSubmit(e) : nextStep();
+        }
+    };
+
     const steps = [
-        <>
-            <h1 className="mb-4">Sign up</h1>
+        <div onKeyDown={handleKeyDown}>
+            <h1 className="mb-4">
+                <Text id="register-welcome"/>
+            </h1>
             {errors &&
-                errors.map((e, index) => <Alert theme="danger" key={index}>{e}</Alert>)
+            errors.map((e, index) => <Alert theme="danger" key={index}>{e}</Alert>)
             }
-            <Button block onClick={nextStep} size="lg">Start</Button>
-        </>,
-        <>
-            <h1>Please enter your e-mail below:</h1>
+            <Button block onClick={nextStep} size="lg">
+                <Text id="register-start"/>
+            </Button>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
+            <h2 className="h1">
+                <Text id="register-email"/>
+            </h2>
             <InputGroup seamless className="my-4">
                 <InputGroupAddon type="prepend">
                     <InputGroupText>
                         <FontAwesomeIcon icon={faEnvelope} size="lg"/>
                     </InputGroupText>
                 </InputGroupAddon>
-                <FormInput size="lg" invalid={!!email && !validateStep()} type="email" onChange={(e) => {setEmail(e.target.value)}} value={email} style={{paddingLeft: 50+"px"}} required/>
+                <FormInput size="lg" invalid={!!email && !validateStep()} type="email" onChange={(e) => {setEmail(e.target.value)}} value={email} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
-            <Button block size="lg" onClick={nextStep}>Done</Button>
-        </>,
-        <>
-            <h1>What's your full name?</h1>
+            <Button block size="lg" onClick={nextStep}>
+                <Text id="register-done"/>
+            </Button>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
+            <h2 className="h1">
+                <Text id="register-name"/>
+            </h2>
             <InputGroup seamless className="my-4">
                 <InputGroupAddon type="prepend">
                     <InputGroupText>
                         <FontAwesomeIcon icon={faUser} size="lg"/>
                     </InputGroupText>
                 </InputGroupAddon>
-                <FormInput size="lg" invalid={!!name && !validateStep()} type="text" onChange={(e) => {setName(e.target.value)}} value={name} style={{paddingLeft: 50+"px"}} required/>
+                <FormInput size="lg" invalid={!!name && !validateStep()} type="text" onChange={(e) => {setName(e.target.value)}} value={name} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
-            <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
-        </>,
-        <>
-            <h1>Select safe password and retype:</h1>
+            <Button size="lg" onClick={previousStep}>
+                <Text id="register-back"/>
+            </Button>
+            <Button size="lg" onClick={nextStep} className="float-right">
+                <Text id="register-next"/>
+            </Button>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
+            <h2 className="h2">
+                <Text id="register-password"/>
+            </h2>
             <Row className="my-4">
                 <div className="col-lg-6 col-12 my-2">
                     <InputGroup seamless>
@@ -176,7 +170,7 @@ export default function Register() {
                                 <FontAwesomeIcon icon={faLock} size="lg"/>
                             </InputGroupText>
                         </InputGroupAddon>
-                        <FormInput size="lg" invalid={!!password && !validateStep()} type="password" onChange={(e) => {setPassword(e.target.value)}} value={password} style={{paddingLeft: 50+"px"}} required/>
+                        <FormInput size="lg" invalid={!!password && !validateStep()} type="password" onChange={(e) => {setPassword(e.target.value)}} value={password} style={{paddingLeft: 50+"px"}} required autoFocus/>
                     </InputGroup>
                 </div>
                 <div className="col-lg-6 col-12 my-2">
@@ -190,51 +184,34 @@ export default function Register() {
                     </InputGroup>
                 </div>
             </Row>
-            <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={nextStep} className="float-right">Continue</Button>
-        </>,
-        <>
-            <h1>Where are you from?</h1>
-            <Row className="my-4">
-                <div className="col-12">
-                    <Select
-                        options={countries}
-                        onChange={(e) => {setCountry(e.id)}}
-                        styles={{
-                            option: (provided) => ({
-                                ...provided,
-                                padding: 10,
-                                fontSize: 20,
-                            }),
-                            menu: (provided) => ({
-                                ...provided,
-                                padding: 10,
-                            }),
-                            valueContainer: (provided) => ({
-                                ...provided,
-                                padding: 10,
-                                fontSize: 20,
-                            }),
-                        }}
-                    />
-                </div>
-            </Row>
-            <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={nextStep} className="float-right">Last step</Button>
-        </>,
-        <>
-            <h1>We are almost done!</h1>
-            <p>Please read and acceppt the terms and conditions:</p>
+            <Button size="lg" onClick={previousStep}>
+                <Text id="register-back"/>
+            </Button>
+            <Button size="lg" onClick={nextStep} className="float-right">
+                <Text id="register-next"/>
+            </Button>
+        </div>,
+        <div onKeyDown={handleKeyDown}>
+            <h2 className="h1">
+                <Text id="register-terms-title"/>
+            </h2>
+            <p>
+                <Text id="register-terms-subtitle"/>
+            </p>
             <FormCheckbox
                 onChange={() => {setTerms(!terms)}}
                 checked={terms}
                 className="my-4"
             >
-                I agree with the terms and conditions of usage The Shop.
+                <Text id="register-terms-label"/>
             </FormCheckbox>
-            <Button size="lg" onClick={previousStep}>Go back</Button>
-            <Button size="lg" onClick={handleSubmit} className="float-right">Sign in!</Button>
-        </>
+            <Button size="lg" onClick={previousStep}>
+                <Text id="register-back"/>
+            </Button>
+            <Button size="lg" onClick={handleSubmit} className="float-right">
+                <Text id="register-submit"/>
+            </Button>
+        </div>
     ];
 
     const formClasses = classNames({

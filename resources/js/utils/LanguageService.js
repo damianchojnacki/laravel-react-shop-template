@@ -2,11 +2,8 @@ import {dictionary, languages} from '../assets/languages';
 import Cookies from 'js-cookie';
 
 export default class LanguageService{
-
     static set(lang){
-        //return Inertia.put(`/language/${lang}`, {}, {
-        //    preserveScroll: true,
-        //});
+        Cookies.set('lang', lang);
     }
 
     static available(){
@@ -33,7 +30,11 @@ export default class LanguageService{
         let output = this.dictionary();
 
         for(let i = 0; i < id.length; i++){
-            output = output[id[i]];
+            try{
+                output = output[id[i]];
+            }catch(e){
+                //console.log(e);
+            }
         }
 
         return output ?? "";

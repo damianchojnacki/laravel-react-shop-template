@@ -7,10 +7,15 @@ import {isMobile, newArray} from "../../../utils/helpers";
 import ProductService from "../../../utils/ProductService";
 import "./style.scss";
 import Select from "react-select";
+import LanguageService from "../../../utils/LanguageService";
+import {LanguageContext} from "../../../utils/LanguageContext";
+import Text from "../../Text";
 
 export default function ProductsNav(props){
+    const language = React.useContext(LanguageContext);
 
     const [productTypes, setProductTypes] = useState(props.productTypes);
+    const [navList, setNavList] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -20,22 +25,26 @@ export default function ProductsNav(props){
         })();
     }, []);
 
-    const navList = productTypes.length && productTypes.map(page =>
-        <NavItem key={page.id}>
-            <NavLink tag="span" active={props.category === page.name}>
-                <Link
-                    to={`/products/${page.name}`}
-                    className={props.category === page.name ? "text-light" : null}
-                >
+    useEffect(() => {
+        const navList = productTypes.length && productTypes.map(page =>
+            <NavItem key={page.id}>
+                <NavLink tag="span" active={props.category === page.name}>
+                    <Link
+                        to={`/products/${page.name}`}
+                        className={props.category === page.name ? "text-light" : null}
+                    >
                     <span
                         className="products-nav__dynamic"
-                        data-shortname={page.short}
-                        data-longname={page.long}
+                        data-shortname={LanguageService.translate(`products-category-${page.name}-short`)}
+                        data-longname={LanguageService.translate(`products-category-${page.name}-long`)}
                     />
-                </Link>
-            </NavLink>
-        </NavItem>
-    );
+                    </Link>
+                </NavLink>
+            </NavItem>
+        );
+
+        setNavList(navList);
+    }, [productTypes, language.state]);
 
     return (
         <>
@@ -43,7 +52,7 @@ export default function ProductsNav(props){
                 <NavItem>
                     <NavLink tag="span" active={!props.category}>
                         <Link to="/products" className={!props.category ? "text-light" : null}>
-                            All
+                            <Text id="products-category-all"/>
                         </Link>
                     </NavLink>
                 </NavItem>
@@ -57,28 +66,28 @@ export default function ProductsNav(props){
                                 value: 1,
                                 sort: "name",
                                 type: "asc",
-                                label: "Sort by name (asc)",
+                                label: <Text id="products-sort-name-asc"/>,
                             },
                             {
                                 value: 2,
                                 sort: "name",
                                 type: "desc",
-                                label: "Sort by name (desc)",
+                                label: <Text id="products-sort-name-desc"/>,
                             },
                             {
                                 value: 3,
                                 sort: "price",
                                 type: "asc",
-                                label: "Sort by price (asc)",
+                                label: <Text id="products-sort-price-asc"/>,
                             },
                             {
                                 value: 4,
                                 sort: "price",
                                 type: "desc",
-                                label: "Sort by price (desc)",
+                                label: <Text id="products-sort-price-desc"/>,
                             },
                         ]}
-                        placeholder="Sort by"
+                        placeholder=<Text id="products-sort-label"/>
                         onChange={(e) => {props.setSort(e)}}
                         value={props.sort}
                     />
@@ -91,7 +100,7 @@ export default function ProductsNav(props){
                                 <FontAwesomeIcon icon={faSearch} />
                             </InputGroupText>
                         </InputGroupAddon>
-                        <FormInput type="text" onChange={(e) => props.search(e.target.value)} placeholder="Search product" value={props.searchField ? props.searchField : ''} required/>
+                        <FormInput type="text" onChange={(e) => props.search(e.target.value)} placeholder={LanguageService.translate("products-search")} value={props.searchField ? props.searchField : ''} required/>
                     </InputGroup>
                 </NavItem>
             </Nav>

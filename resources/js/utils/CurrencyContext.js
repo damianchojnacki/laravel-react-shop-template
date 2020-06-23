@@ -3,9 +3,7 @@ import CurrencyService from "./CurrencyService";
 
 const CurrencyContext = React.createContext();
 
-const initialState = {
-    currency: CurrencyService.get() ?? CurrencyService.default(),
-};
+const initialState = CurrencyService.get();
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -16,7 +14,7 @@ const reducer = (state, action) => {
         case "change":
             CurrencyService.change(action.payload);
 
-            return {...state, currency: action.payload};
+            return action.payload;
     }
 };
 

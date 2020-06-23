@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import Select from "react-select";
 import LanguageService from "../../utils/LanguageService";
+import {LanguageContext} from "../../utils/LanguageContext";
 
 function LanguageSelect() {
-    const [language, setLanguage] = useState(LanguageService.current());
+    const language = React.useContext(LanguageContext);
+
     const [selectOptions, setSelectOptions] = useState([]);
 
     useEffect(() => {
@@ -19,19 +21,13 @@ function LanguageSelect() {
         }));
     }, []);
 
-    function change(lang) {
-        LanguageService.set(lang);
-
-        setLanguage(lang);
-    }
-
     return (
         <Select
             options={selectOptions}
             components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
             isSearchable={false}
-            value={selectOptions.find(option => {return language === option.value})}
-            onChange={e => change(e.value)}
+            value={selectOptions.find(option => {return language.state === option.value})}
+            onChange={e => language.dispatch({type: "change", payload: e.value})}
             styles={{
                 container: provided => ({
                     ...provided,

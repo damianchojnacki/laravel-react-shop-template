@@ -8,6 +8,7 @@ import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {useMediaQuery} from "react-responsive";
 import CurrencySelect from "./CurrencySelect";
 import LanguageSelect from "./LanguageSelect";
+import Text from "../Text";
 
 function Menu(props) {
     const {state, dispatch} = React.useContext(AuthContext);
@@ -32,18 +33,22 @@ function Menu(props) {
             <Collapse open={navbarOpened} navbar>
                 <Nav navbar className="flex-grow-1">
                     {props.routes && props.routes.map((prop, key) => {
-                        if (prop.name === "Login" && state.authenticated) return null;
-                        if (prop.name === "Register" && state.authenticated) return null;
+                        if (prop.name === "menu-login" && state.authenticated) return null;
+                        if (prop.name === "menu-register" && state.authenticated) return null;
                         if (prop.hidden) return null;
                         return (
                             <NavItem key={key}>
-                                <NavLink className="nav-link" to={prop.link ?? prop.path}>{prop.name}</NavLink>
+                                <NavLink className="nav-link" to={prop.link ?? prop.path}>
+                                    <Text id={prop.name}/>
+                                </NavLink>
                             </NavItem>
                         );
                     })}
                     {state.authenticated &&
                         <NavItem>
-                            <Link className="nav-link" to="#" onClick={handleLogout}>Logout</Link>
+                            <Link className="nav-link" to="#" onClick={handleLogout}>
+                                <Text id="menu-logout"/>
+                            </Link>
                         </NavItem>
                     }
                     <div className="d-flex align-items-center flex-grow-1 justify-content-end flex-wrap">

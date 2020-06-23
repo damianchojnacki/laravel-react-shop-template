@@ -4,7 +4,7 @@ class AuthService{
     static login(credentials) {
         return window.axios.post('/api/login', credentials)
             .then(res => {
-                Cookies.save('access_token', res.data.token, {maxAge: 3600});
+                Cookies.set('access_token', res.data.token, {expires: 7});
                 window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
             });
     }
@@ -19,7 +19,11 @@ class AuthService{
     }
 
     static loginWithGoogle(user) {
-        return window.axios.post('/api/login/google', {user_id: user.getAuthResponse().id_token});
+        return window.axios.post('/api/login/google', {user_id: user.getAuthResponse().id_token})
+            .then(res => {
+                Cookies.set('access_token', res.data.token, {expires: 7});
+                window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
+            });
     }
 
     static register(credentials) {
@@ -27,7 +31,7 @@ class AuthService{
 
         return window.axios.post('/api/register', credentials)
             .then(res => {
-                Cookies.save('access_token', res.data.token, {maxAge: 3600});
+                Cookies.set('access_token', res.data.token, {expires: 7});
                 window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
             });
     }

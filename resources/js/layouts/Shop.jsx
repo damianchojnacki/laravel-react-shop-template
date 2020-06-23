@@ -31,9 +31,8 @@ function Shop(props) {
         return routes.map((prop, key) => {
             return (
                 <Route
-                    exact
                     {...props}
-                    path={prop.path}
+                    exact path={prop.path}
                     render={(props) => <prop.component {...props} />}
                     key={key}
                 />

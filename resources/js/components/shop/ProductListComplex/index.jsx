@@ -6,21 +6,22 @@ import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import {CurrencyContext} from "../../../utils/CurrencyContext";
+import Text from "../../Text";
 
 function ProductsListComplex(props){
     const {state, dispatch} = React.useContext(CartContext);
-    const currency = useContext(CurrencyContext).state.currency;
+    const currency = useContext(CurrencyContext);
 
     const addToCart = product => {
         dispatch({type: "add", payload: product.id});
 
-        notify.show(`${product.name} has been added to cart.`, 'success', 1500);
+        //notify.show(`${product.name} has been added to cart.`, 'success', 1500);
     };
 
     const removeFromCart = product => {
         dispatch({type: "remove", payload: product.id});
 
-        notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
+        //notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
     };
 
     const sortProducts = products => {
@@ -52,15 +53,17 @@ function ProductsListComplex(props){
                         <p>
                             {product.price_origin &&
                                 <>
-                                    <span className="font-weight-bold">Price: </span>
+                                    <span className="font-weight-bold">
+                                        <Text id="products-block-price"/>
+                                    </span>
                                     {product.discount ?
                                         <>
-                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.symbol}</span>
+                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.state.symbol}</span>
                                             <FontAwesomeIcon icon={faArrowRight} className="mx-2"/>
-                                            <span>{product.price_final} {currency.symbol}</span>
+                                            <span>{product.price_final} {currency.state.symbol}</span>
                                         </>
                                         :
-                                        <span>{product.price_origin} {currency.symbol}</span>
+                                        <span>{product.price_origin} {currency.state.symbol}</span>
                                     }
                                 </>
                             }
@@ -70,9 +73,13 @@ function ProductsListComplex(props){
                         {product.name &&
                             <>
                                 {state.cart.includes(product.id) &&
-                                        <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>Remove</Button>
+                                        <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>
+                                            <Text id="cart-remove"/>
+                                        </Button>
                                 }
-                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>Add to cart</Button>
+                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>
+                                    <Text id="cart-add"/>
+                                </Button>
                             </>
                         }
                     </CardFooter>

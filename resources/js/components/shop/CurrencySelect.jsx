@@ -63,7 +63,7 @@ function CurrencySelect() {
                     zIndex: 3
                 }),
             }}
-            value={selectOptions.find(option => {return state.currency.iso === option.value})}
+            value={selectOptions.find(option => {return state.iso === option.value})}
             onChange={e => dispatch({type: "change", payload: ({iso: e.value, symbol: e.symbol})})}
         />
     );

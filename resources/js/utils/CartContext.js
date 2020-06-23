@@ -4,6 +4,7 @@ const CartContext = React.createContext();
 
 const initialState = {
     cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : [],
+    coupon: localStorage.getItem('coupon') ? JSON.parse(localStorage.getItem("coupon")) : {},
 };
 
 const reducer = (state, action) => {
@@ -13,7 +14,7 @@ const reducer = (state, action) => {
         case "reset":
             localStorage.removeItem('cart');
 
-            return {...state, cart: []};
+            return {...state, cart: [], coupon: {}};
         case "add":
             cart.push(action.payload);
 
@@ -27,6 +28,14 @@ const reducer = (state, action) => {
             localStorage.setItem('cart', JSON.stringify(cart));
 
             return {...state, cart: cart};
+        case "appendCoupon":
+            localStorage.setItem('coupon', JSON.stringify(action.payload));
+
+            return {...state, coupon: action.payload};
+        case "removeCoupon":
+            localStorage.removeItem('coupon');
+
+            return {...state, coupon: {}};
     }
 };
 

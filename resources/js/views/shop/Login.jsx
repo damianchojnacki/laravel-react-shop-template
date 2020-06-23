@@ -9,6 +9,7 @@ import GoogleButton from 'react-google-button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import 'animate.css/animate.css';
+import Text from "../../components/Text";
 
 export default function Login() {
     const {state, dispatch} = React.useContext(AuthContext);
@@ -51,7 +52,13 @@ export default function Login() {
 
             GoogleAuth.signIn()
                 .then(user => {
-                    AuthService.loginWithGoogle(user);
+                    AuthService.loginWithGoogle(user).then(() => {
+                        AuthService.getUser().then(res => {
+                            setErrors({});
+                            dispatch({type: "login", payload: res.data});
+                            setTimeout(() => setLoading(false), 1000);
+                        });
+                    });
                 })
                 .catch(error => {
                     console.log(error.response);
@@ -72,17 +79,18 @@ export default function Login() {
                     <div className="container col-lg-6 col-12">
                         <div className="mb-3">
                             <a href="#" className="d-inline-block" onClick={() => AuthService.googleInit(googleLogin)}>
-                                <GoogleButton label="Sign in with Google" />
+                                <GoogleButton label={<Text id="login-google"/>} />
                             </a>                        </div>
                         <Form method="POST" onSubmit={handleSubmit}>
-                            {errors.data
-                            && (
+                            {errors.data && (
                                 <Alert theme="danger">
-                                    {errors.data}
+                                    <Text id={errors.data}/>
                                 </Alert>
                             )}
                             <FormGroup>
-                                <label htmlFor="#email">Email</label>
+                                <label htmlFor="#email">
+                                    <Text id="login-email"/>
+                                </label>
                                 <InputGroup seamless>
                                     <InputGroupAddon type="prepend">
                                         <InputGroupText>
@@ -93,7 +101,9 @@ export default function Login() {
                                 </InputGroup>
                             </FormGroup>
                             <FormGroup>
-                                <label htmlFor="#password">Password</label>
+                                <label htmlFor="#password">
+                                    <Text id="login-password"/>
+                                </label>
                                 <InputGroup seamless>
                                     <InputGroupAddon type="prepend">
                                         <InputGroupText>
@@ -108,14 +118,20 @@ export default function Login() {
                                     <FontAwesomeIcon size="lg" icon={faCheckCircle} className="animated fadeIn"/>
                                     :
                                     <div className="spinner-border spinner-border-sm" role="status">
-                                        <span className="sr-only">Loading...</span>
+                                        <span className="sr-only">
+                                             <Text id="login-loading"/>
+                                        </span>
                                     </div>
                                     :
-                                    <span>Log in</span>
+                                    <span>
+                                        <Text id="login-submit"/>
+                                    </span>
                                 }
                             </Button>
                             <p className="mt-3">
-                                <Link to="./register">Don't have an account? You can create one there.</Link>
+                                <Link to="./register">
+                                    <Text id="login-register"/>
+                                </Link>
                             </p>
                         </Form>
                     </div>

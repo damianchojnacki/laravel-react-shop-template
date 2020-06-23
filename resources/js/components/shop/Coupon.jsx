@@ -1,13 +1,25 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {Button, FormGroup, FormInput, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPercentage} from "@fortawesome/free-solid-svg-icons/faPercentage";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import OrderService from "../../utils/OrderService";
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
+import {CartContext} from "../../utils/CartContext";
 
 function Coupon({coupon}) {
     const [code, setCode] = useState();
+    const [wrongCode, setWrongCode] = useState(false);
+
+    const cart = useContext(CartContext);
+
+    function append(){
+        code && OrderService.appendCoupon(code)
+            .then(response => {
+                response && cart.dispatch({type: "appendCoupon", payload: response.data});
+            })
+            .catch(() => setWrongCode(true));
+    }
 
     return (
         <div className="float-right">
@@ -27,7 +39,7 @@ function Coupon({coupon}) {
                                    disabled
                         />
                         <InputGroupAddon type="append">
-                            <Button theme="danger" onClick={() => OrderService.removeCoupon()}><FontAwesomeIcon
+                            <Button theme="danger" onClick={() => cart.dispatch({type: "removeCoupon"})}><FontAwesomeIcon
                                 icon={faTimes}/></Button>
                         </InputGroupAddon>
                     </InputGroup>
@@ -46,9 +58,10 @@ function Coupon({coupon}) {
                                    onChange={e => setCode(e.target.value)}
                                    defaultValue={coupon.code}
                                    className="d-inline-block"
+                                   invalid={wrongCode}
                         />
                         <InputGroupAddon type="append">
-                            <Button theme="secondary" onClick={() => OrderService.appendCoupon(code)}><FontAwesomeIcon
+                            <Button theme="secondary" onClick={() => append()}><FontAwesomeIcon
                                 icon={faArrowRight}/></Button>
                         </InputGroupAddon>
                     </InputGroup>

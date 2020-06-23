@@ -34,8 +34,8 @@ function () {
     key: "login",
     value: function login(credentials) {
       return window.axios.post('/api/login', credentials).then(function (res) {
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.save('access_token', res.data.token, {
-          maxAge: 3600
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+          expires: 7
         });
         window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
       });
@@ -72,6 +72,11 @@ function () {
     value: function loginWithGoogle(user) {
       return window.axios.post('/api/login/google', {
         user_id: user.getAuthResponse().id_token
+      }).then(function (res) {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+          expires: 7
+        });
+        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
       });
     }
   }, {
@@ -79,8 +84,8 @@ function () {
     value: function register(credentials) {
       credentials.password_confirmation = credentials.passwordConfirmation;
       return window.axios.post('/api/register', credentials).then(function (res) {
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.save('access_token', res.data.token, {
-          maxAge: 3600
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+          expires: 7
         });
         window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
       });
@@ -219,6 +224,172 @@ function () {
   }]);
 
   return DiscountService;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/utils/OrderService.js":
+/*!********************************************!*\
+  !*** ./resources/js/utils/OrderService.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OrderService; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var OrderService =
+/*#__PURE__*/
+function () {
+  function OrderService() {
+    _classCallCheck(this, OrderService);
+  }
+
+  _createClass(OrderService, null, [{
+    key: "all",
+    value: function all(page) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function all$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/orders/all/".concat(page)));
+
+            case 2:
+              response = _context.sent;
+              return _context.abrupt("return", response.data);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "recent",
+    value: function recent() {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function recent$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/orders/recent'));
+
+            case 2:
+              response = _context2.sent;
+              return _context2.abrupt("return", response.data);
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "get",
+    value: function get(id) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function get$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/orders/".concat(id)));
+
+            case 2:
+              response = _context3.sent;
+              return _context3.abrupt("return", response.data);
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "search",
+    value: function search(id) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function search$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/orders/search/".concat(id)));
+
+            case 2:
+              response = _context4.sent;
+              return _context4.abrupt("return", response.data);
+
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "create",
+    value: function create(data) {
+      return window.axios.post("/api/orders", data);
+    }
+  }, {
+    key: "edit",
+    value: function edit(data) {
+      return window.axios.put("/api/orders", data);
+    }
+  }, {
+    key: "delete",
+    value: function _delete(id) {
+      return window.axios["delete"]("/api/orders/".concat(id));
+    }
+  }, {
+    key: "make",
+    value: function make(data) {
+      return window.axios.post("/api/order", data);
+    }
+  }, {
+    key: "appendCoupon",
+    value: function appendCoupon(coupon) {
+      return window.axios.put("api/coupon/".concat(coupon));
+    }
+  }, {
+    key: "getSumOfProducts",
+    value: function getSumOfProducts(products) {
+      if (products && products.length) {
+        var sum = 0;
+        products.map(function (product) {
+          sum += parseFloat(product.price_final) * product.quantity;
+        });
+        return sum.toFixed(2);
+      }
+    }
+  }, {
+    key: "getSumOfProductsWithDiscount",
+    value: function getSumOfProductsWithDiscount(products, coupon) {
+      var sum = this.getSumOfProducts(products);
+      return (sum - coupon.percent_off / 100 * sum).toFixed(2);
+    }
+  }]);
+
+  return OrderService;
 }();
 
 
@@ -406,7 +577,7 @@ _defineProperty(ProductService, "discounts", new _DiscountService__WEBPACK_IMPOR
 /*!***************************************!*\
   !*** ./resources/js/utils/helpers.js ***!
   \***************************************/
-/*! exports provided: default, separateHundreds, getRandomColor, colors, checkFullName, isMobile, isDesktop, isEmail, equals, newArray */
+/*! exports provided: default, separateHundreds, getRandomColor, colors, checkFullName, isMobile, isDesktop, isEmail, equals, newArray, shippingDataValidate */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -421,6 +592,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEmail", function() { return isEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "equals", function() { return equals; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newArray", function() { return newArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shippingDataValidate", function() { return shippingDataValidate; });
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -483,6 +655,40 @@ function newArray(arrayLength, parameters) {
       id: i
     }, parameters);
   });
+}
+function shippingDataValidate(credentials) {
+  var passed = true;
+  var invalids = [];
+
+  if (!checkFullName(credentials.name)) {
+    invalids.push("name");
+    passed = false;
+  }
+
+  if (!isEmail(credentials.email)) {
+    invalids.push("email");
+    passed = false;
+  }
+
+  if (!credentials.address || credentials.address.length <= 0) {
+    invalids.push("address");
+    passed = false;
+  }
+
+  if (!credentials.zip_code || credentials.zip_code.length <= 0) {
+    invalids.push("zipCode");
+    passed = false;
+  }
+
+  if (!credentials.terms) {
+    invalids.push("terms");
+    passed = false;
+  }
+
+  return {
+    passed: passed,
+    invalids: invalids
+  };
 }
 
 /***/ })

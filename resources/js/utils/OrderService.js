@@ -34,5 +34,31 @@ export default class OrderService{
     static delete(id){
         return window.axios.delete(`/api/orders/${id}`);
     }
+
+    static make(data){
+        return window.axios.post(`/api/order`, data);
+    }
+
+    static appendCoupon(coupon){
+        return window.axios.put(`api/coupon/${coupon}`);
+    }
+
+    static getSumOfProducts(products) {
+        if(products && products.length) {
+            let sum = 0;
+
+            products.map(product => {
+                sum += parseFloat(product.price_final) * product.quantity;
+            });
+
+            return sum.toFixed(2);
+        }
+    };
+
+    static getSumOfProductsWithDiscount(products, coupon) {
+        const sum = this.getSumOfProducts(products);
+
+        return (sum - coupon.percent_off / 100 * sum).toFixed(2);
+    }
 }
 
