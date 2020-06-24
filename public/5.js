@@ -183,7 +183,7 @@ function Cart() {
         }
       });
     })();
-  }, [cart.state.products, currency.state]);
+  }, [cart.state, currency.state]);
 
   var removeFromCart = function removeFromCart(product) {
     cart.dispatch({

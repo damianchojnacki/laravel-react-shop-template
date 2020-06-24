@@ -31,7 +31,7 @@ function Cart() {
 
             //products.length <= 0 && OrderService.clearCookie();
         }());
-    }, [cart.state.products, currency.state]);
+    }, [cart.state, currency.state]);
 
     const removeFromCart = product => {
         cart.dispatch({type: "remove", payload: product.id});
