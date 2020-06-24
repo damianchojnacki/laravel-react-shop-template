@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import Select from "react-select";
 import LanguageService from "../../utils/LanguageService";
-import {LanguageContext} from "../../utils/LanguageContext";
+import {useLanguage} from "../../utils/LanguageContext";
 
 function LanguageSelect() {
-    const language = React.useContext(LanguageContext);
+    const language = useLanguage();
 
     const [selectOptions, setSelectOptions] = useState([]);
 

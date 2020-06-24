@@ -71,7 +71,9 @@ class Order extends Model{
     }
 
     public function productsSet($products){
-        if(!$products instanceof Collection && !is_array($products))
+        if($products instanceof Collection)
+            $products = $products->toArray();
+        else if(!is_array($products))
             $products = [$products];
 
         $order_products = $this->products();
@@ -79,7 +81,7 @@ class Order extends Model{
         $order_products->sync([]);
 
         foreach($products as $product)
-            $order_products->attach($product->id, ['quantity' => $product->quantity ?? 1]);
+            $order_products->attach($product['id'], ['quantity' => $product['quantity'] ?? 1]);
 
         return $this->products();
     }

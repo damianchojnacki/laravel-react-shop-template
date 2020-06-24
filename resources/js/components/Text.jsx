@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import LanguageService from '../utils/LanguageService';
-import {LanguageContext} from "../utils/LanguageContext";
+import {useLanguage} from "../utils/LanguageContext";
 
 function Text({id}) {
-    const language = React.useContext(LanguageContext);
+    const language = useLanguage();
 
     const [translated, setTranslated] = useState("");
 
     useEffect(() => {
         setTranslated(LanguageService.translate(id))
-    }, [language]);
+    }, [language.state]);
 
     return translated;
 }

@@ -4,7 +4,7 @@ import {Route, Switch} from "react-router-dom";
 import routes from "../routes/shop.js";
 
 import AuthService from "../utils/AuthService";
-import {AuthContext} from "../utils/AuthContext";
+import {useAuth} from "../utils/AuthContext";
 
 import Notifications from 'react-notify-toast';
 
@@ -16,10 +16,10 @@ import Cart from "../components/shop/Cart";
 import {CurrencyContextProvider} from "../utils/CurrencyContext";
 
 function Shop(props) {
-    const {state, dispatch} = React.useContext(AuthContext);
+    const auth = useAuth();
 
     useEffect(() => {
-        state.authenticated &&
+        auth.state.authenticated &&
             AuthService.getUser()
                 .then(res => {
                     dispatch({type: "login", payload: res.data});

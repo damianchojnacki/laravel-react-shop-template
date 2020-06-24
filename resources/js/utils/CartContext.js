@@ -2,32 +2,34 @@ import * as React from "react";
 
 const CartContext = React.createContext();
 
+const useCart = () => React.useContext(CartContext);
+
 const initialState = {
-    cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : [],
+    products: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : [],
     coupon: localStorage.getItem('coupon') ? JSON.parse(localStorage.getItem("coupon")) : {},
 };
 
 const reducer = (state, action) => {
-    const cart = state.cart;
+    const products = state.products;
 
     switch (action.type) {
         case "reset":
             localStorage.removeItem('cart');
 
-            return {...state, cart: [], coupon: {}};
+            return {...state, products: [], coupon: {}};
         case "add":
-            cart.push(action.payload);
+            products.push(action.payload);
 
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('cart', JSON.stringify(products));
 
-            return {...state, cart: cart};
+            return {...state, products: products};
         case "remove":
-            const index = cart.indexOf(action.payload);
-            cart.splice(index, 1);
+            const index = products.indexOf(action.payload);
+            products.splice(index, 1);
 
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('cart', JSON.stringify(products));
 
-            return {...state, cart: cart};
+            return {...state, products: products};
         case "appendCoupon":
             localStorage.setItem('coupon', JSON.stringify(action.payload));
 
@@ -50,4 +52,4 @@ function CartContextProvider(props) {
 
 const CartContextConsumer = CartContext.Consumer;
 
-export { CartContext, CartContextProvider, CartContextConsumer };
+export { CartContextProvider, useCart };

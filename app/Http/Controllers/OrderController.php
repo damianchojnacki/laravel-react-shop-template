@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Coupon;
+use App\Http\Resources\CouponResource;
 use App\Http\Resources\OrderResource;
 use App\Order;
 use App\OrderDetails;
@@ -123,28 +124,35 @@ class OrderController extends Controller
             'name' => 'required|string|min:1',
             'address' => 'required|string:min:6',
             'zip_code' => 'required|min:5|max:6',
-            'coupon' => 'required',
-            'cart' => 'required',
+            'coupon' => 'max:12',
+            'products' => 'required',
         ]);
 
-        if(count($request->cart) > 0){
+        if(count($request->products) > 0){
             $request->email = Auth::user()->email ?? $request->email;
 
-            $order = new Order();
-            $details = new OrderDetails($request->toArray());
+            $order = Order::find(\Cookie::get('order_id'));
 
-            $order->save();
-            $order->details()->save($details);
+            if($order){
+                $order->details()->update($request->except('terms'));
+            } else {
+                $order = new Order();
+                $details = new OrderDetails($request->toArray());
+
+                $order->save();
+                $order->details()->save($details);
+            }
 
             Auth::check() && $order->user()->associate(Auth::user());
 
-            $order->productsSet(Product::whereIn('id', $request->cart)->get());
+            $order->productsSet($request->products);
 
-            $order->appendCoupon($request->coupon);
+            $order->appendCoupon(Coupon::findByCode($request->coupon));
 
             $order->save();
 
             return response([
+                'order' => $request->except(['terms', 'products', 'coupon']),
                 'paypalClientId' => config('services.paypal.client_id')
             ]);
         } else
@@ -155,7 +163,7 @@ class OrderController extends Controller
         $coupon = Coupon::findByCode($code);
 
         if($coupon)
-            return response($coupon, 200);
+            return response(new CouponResource($coupon), 200);
         else
             return response('Coupon does not exist', 422);
     }

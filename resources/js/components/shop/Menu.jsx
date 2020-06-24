@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {Nav, NavItem, Navbar, NavbarToggler, NavbarBrand, Collapse} from "shards-react";
-import AuthService from "../../utils/AuthService";
 import {Link, NavLink} from 'react-router-dom';
-import {AuthContext} from "../../utils/AuthContext";
+import {useAuth} from "../../utils/AuthContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {useMediaQuery} from "react-responsive";
@@ -11,7 +10,7 @@ import LanguageSelect from "./LanguageSelect";
 import Text from "../Text";
 
 function Menu(props) {
-    const {state, dispatch} = React.useContext(AuthContext);
+    const auth = useAuth();
     const [navbarOpened, setNavbarOpened] = useState(false);
 
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -19,7 +18,6 @@ function Menu(props) {
     const handleLogout = (e) => {
         e.preventDefault();
 
-        AuthService.logout();
         dispatch({type: "logout"});
     };
 
@@ -33,8 +31,8 @@ function Menu(props) {
             <Collapse open={navbarOpened} navbar>
                 <Nav navbar className="flex-grow-1">
                     {props.routes && props.routes.map((prop, key) => {
-                        if (prop.name === "menu-login" && state.authenticated) return null;
-                        if (prop.name === "menu-register" && state.authenticated) return null;
+                        if (prop.name === "menu-login" && auth.state.authenticated) return null;
+                        if (prop.name === "menu-register" && auth.state.authenticated) return null;
                         if (prop.hidden) return null;
                         return (
                             <NavItem key={key}>
@@ -44,7 +42,7 @@ function Menu(props) {
                             </NavItem>
                         );
                     })}
-                    {state.authenticated &&
+                    {auth.state.authenticated &&
                         <NavItem>
                             <Link className="nav-link" to="#" onClick={handleLogout}>
                                 <Text id="menu-logout"/>
@@ -56,7 +54,7 @@ function Menu(props) {
                             <CurrencySelect/>
                             <LanguageSelect/>
                         </NavItem>
-                        {state.authenticated &&
+                        {auth.state.authenticated &&
                         <NavItem className={`text-center align-self-center text-white pl-3 ${isMobile && "flex-grow-1 p-2"}`}>
                             <NavLink to="/user">
                                 <FontAwesomeIcon size={isMobile ? "3x" : "2x"} icon={faUserCircle} className="align-middle text-white"/>

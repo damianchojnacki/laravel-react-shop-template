@@ -5,12 +5,12 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
 import Text from "../Text";
-import {CurrencyContext} from "../../utils/CurrencyContext";
-import {CartContext} from "../../utils/CartContext";
+import {useCurrency} from "../../utils/CurrencyContext";
+import {useCart} from "../../utils/CartContext";
 
 function ProductsList(props){
-    const currency = useContext(CurrencyContext);
-    const cart = useContext(CartContext);
+    const currency = useCurrency();
+    const cart = useCart();
 
     return (
         <table className="table mb-0">

@@ -39914,18 +39914,18 @@ function Cart() {
 /*!*******************************************!*\
   !*** ./resources/js/utils/AuthContext.js ***!
   \*******************************************/
-/*! exports provided: AuthContext, AuthContextProvider, AuthContextConsumer */
+/*! exports provided: AuthContextProvider, useAuth */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthContext", function() { return AuthContext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthContextProvider", function() { return AuthContextProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthContextConsumer", function() { return AuthContextConsumer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useAuth", function() { return useAuth; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _AuthService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AuthService */ "./resources/js/utils/AuthService.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -39942,7 +39942,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var AuthContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
+
+var useAuth = function useAuth() {
+  return react__WEBPACK_IMPORTED_MODULE_0__["useContext"](AuthContext);
+};
+
 var initialState = {
   authenticated: !!js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('access_token'),
   user: {}
@@ -39960,6 +39966,7 @@ var reducer = function reducer(state, action) {
       });
 
     case "logout":
+      _AuthService__WEBPACK_IMPORTED_MODULE_2__["default"].logout();
       return _objectSpread({}, state, {
         authenticated: false,
         user: null
@@ -39987,16 +39994,15 @@ var AuthContextConsumer = AuthContext.Consumer;
 
 /***/ }),
 
-/***/ "./resources/js/utils/CurrencyService.js":
-/*!***********************************************!*\
-  !*** ./resources/js/utils/CurrencyService.js ***!
-  \***********************************************/
+/***/ "./resources/js/utils/AuthService.js":
+/*!*******************************************!*\
+  !*** ./resources/js/utils/AuthService.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CurrencyService; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
@@ -40011,29 +40017,44 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var CurrencyService =
+var AuthService =
 /*#__PURE__*/
 function () {
-  function CurrencyService() {
-    _classCallCheck(this, CurrencyService);
+  function AuthService() {
+    _classCallCheck(this, AuthService);
   }
 
-  _createClass(CurrencyService, null, [{
-    key: "all",
-    value: function all() {
-      var currencies;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function all$(_context) {
+  _createClass(AuthService, null, [{
+    key: "login",
+    value: function login(credentials) {
+      return window.axios.post('/api/login', credentials).then(function (res) {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+          expires: 7
+        });
+        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+      });
+    }
+  }, {
+    key: "googleInit",
+    value: function googleInit(callback) {
+      var googleClientId, script;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function googleInit$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/currencies"));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/google-client-id'));
 
             case 2:
-              currencies = _context.sent;
-              return _context.abrupt("return", currencies.data);
+              googleClientId = _context.sent;
+              script = document.createElement("script");
+              script.src = "https://apis.google.com/js/platform.js?onload=init";
+              script.addEventListener("load", function () {
+                return callback(googleClientId.data);
+              });
+              document.body.appendChild(script);
 
-            case 4:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -40041,34 +40062,46 @@ function () {
       });
     }
   }, {
-    key: "change",
-    value: function change(value) {
-      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('currency', JSON.stringify(value));
+    key: "loginWithGoogle",
+    value: function loginWithGoogle(user) {
+      return window.axios.post('/api/login/google', {
+        user_id: user.getAuthResponse().id_token
+      }).then(function (res) {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+          expires: 7
+        });
+        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+      });
     }
   }, {
-    key: "reset",
-    value: function reset() {
-      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('currency');
+    key: "register",
+    value: function register(credentials) {
+      credentials.password_confirmation = credentials.passwordConfirmation;
+      return window.axios.post('/api/register', credentials).then(function (res) {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+          expires: 7
+        });
+        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+      });
     }
   }, {
-    key: "get",
-    value: function get() {
-      return js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('currency') ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('currency')) : this["default"]();
+    key: "getUser",
+    value: function getUser() {
+      return window.axios.get('/api/user');
     }
   }, {
-    key: "default",
-    value: function _default() {
-      return {
-        iso: "USD",
-        symbol: "$"
-      };
+    key: "logout",
+    value: function logout() {
+      var response = window.axios.post('/api/logout');
+      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('access_token');
+      return response;
     }
   }]);
 
-  return CurrencyService;
+  return AuthService;
 }();
 
-
+/* harmony default export */ __webpack_exports__["default"] = (AuthService);
 
 /***/ }),
 
@@ -40076,18 +40109,16 @@ function () {
 /*!***********************************************!*\
   !*** ./resources/js/utils/LanguageContext.js ***!
   \***********************************************/
-/*! exports provided: LanguageContext, LanguageContextProvider, LanguageContextConsumer */
+/*! exports provided: LanguageContextProvider, useLanguage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LanguageContext", function() { return LanguageContext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LanguageContextProvider", function() { return LanguageContextProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LanguageContextConsumer", function() { return LanguageContextConsumer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useLanguage", function() { return useLanguage; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _CurrencyService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrencyService */ "./resources/js/utils/CurrencyService.js");
-/* harmony import */ var _LanguageService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LanguageService */ "./resources/js/utils/LanguageService.js");
+/* harmony import */ var _LanguageService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LanguageService */ "./resources/js/utils/LanguageService.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -40098,18 +40129,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var LanguageContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
-var initialState = _LanguageService__WEBPACK_IMPORTED_MODULE_2__["default"].current();
+
+var useLanguage = function useLanguage() {
+  return react__WEBPACK_IMPORTED_MODULE_0__["useContext"](LanguageContext);
+};
+
+var initialState = _LanguageService__WEBPACK_IMPORTED_MODULE_1__["default"].current();
 
 var reducer = function reducer(state, action) {
   switch (action.type) {
     case "reset":
-      _LanguageService__WEBPACK_IMPORTED_MODULE_2__["default"].reset();
+      _LanguageService__WEBPACK_IMPORTED_MODULE_1__["default"].reset();
       return initialState;
 
     case "change":
-      _LanguageService__WEBPACK_IMPORTED_MODULE_2__["default"].set(action.payload);
+      _LanguageService__WEBPACK_IMPORTED_MODULE_1__["default"].set(action.payload);
       return action.payload;
   }
 };
@@ -40224,7 +40259,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Damian\Documents\webprojects\laravel-react-shop-template\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-react-shop-template\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

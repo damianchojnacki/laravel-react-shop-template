@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {
-    Form, Alert, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox
+    Form, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox
 } from "shards-react";
-import {CartContext} from "../../utils/CartContext";
+import {useCart} from "../../utils/CartContext";
 import ProductService from "../../utils/ProductService";
 import {notify} from "react-notify-toast";
 import {Helmet} from "react-helmet";
@@ -13,25 +13,25 @@ import {faEnvelope, faLock} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
 import {shippingDataValidate} from "../../utils/helpers";
-import {CurrencyContext} from "../../utils/CurrencyContext";
+import {useCurrency} from "../../utils/CurrencyContext";
 import GoogleService from "../../utils/GoogleService";
 import AsyncSelect from "react-select/async/dist/react-select.esm";
 import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import Coupon from "../../components/shop/Coupon";
 import PaymentProgress from "../../components/shop/PaymentProgress";
-import {AuthContext} from "../../utils/AuthContext";
+import {useAuth} from "../../utils/AuthContext";
 import OrderService from "../../utils/OrderService";
 
-function Checkout(props) {
-    const cart = React.useContext(CartContext);
-    const auth = React.useContext(AuthContext);
-    const currency = React.useContext(CurrencyContext);
+function Checkout() {
+    const cart = useCart();
+    const auth = useAuth();
+    const currency = useCurrency();
 
     const coupon = cart.state.coupon;
 
     const [products, setProducts] = useState([]);
-    const [name, setName] = useState('');
+    const [name, setName] = useState();
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [zipCode, setZipCode] = useState('');
@@ -40,31 +40,43 @@ function Checkout(props) {
     const [redirect, setRedirect] = useState(false);
     const [pendingState, setPendingState] = useState(0);
 
+    const paypalRef = useRef();
+
     function searchForAddress(input, callback) {
         GoogleService.addressSearch(input, callback);
     }
 
     useEffect(() => {
+        const order = OrderService.fromCookie();
+
+        if(order){
+            setName(order.name);
+            setEmail(order.email);
+            setAddress(order.address);
+            setZipCode(order.zip_code);
+            setTerms(true);
+        }
+    }, []);
+
+    useEffect(() => {
         (async function() {
-            const products = await ProductService.cart(cart.state.cart);
+            const products = await ProductService.cart(cart.state.products);
 
             products.length ? setProducts(products) : setRedirect(true);
         })();
     }, [cart.state, currency.state]);
 
-    const changeQuantity = (product, action) => {
-        action ? cart.dispatch({type: "add", payload: product.id}) : cart.dispatch({type: "remove", payload: product.id});
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const credentials = {
-            email: (auth.user && auth.user.email) ?? email,
+            email: (auth.state.user && auth.state.user.email) ?? email,
             name,
             address,
             zip_code: zipCode,
             terms,
+            products,
+            coupon: cart.state.coupon.code
         };
 
         const validation = shippingDataValidate(credentials);
@@ -76,13 +88,15 @@ function Checkout(props) {
             setTimeout(() => setPendingState(1), 1000);
 
             OrderService.make(credentials)
-                .then(response => setTimeout(() => {
-                    setPendingState(2);
-                    const script = document.createElement("script");
-                    script.src = `https://www.paypal.com/sdk/js?client-id=${response.paypalClientId}&currency=${currency.state.iso}`;
-                    script.addEventListener("load", () => loadPaypal());
-                    document.body.appendChild(script);
-                }, 1000))
+                .then(response => {
+                        OrderService.toCookie(response.data.order);
+
+                        setPendingState(2);
+                        const script = document.createElement("script");
+                        script.src = `https://www.paypal.com/sdk/js?client-id=${response.data.paypalClientId}&currency=${currency.state.iso}`;
+                        script.addEventListener("load", () => loadPaypal());
+                        document.body.appendChild(script);
+                })
                 .catch(error => {
                     setPendingState(0);
                     notify.show(error.response.data);
@@ -93,7 +107,7 @@ function Checkout(props) {
     function loadPaypal() {
         setPendingState(3);
 
-        const sum = coupon ? OrderService.getSumOfProductsWithDiscount(products, coupon) : OrderService.getSumOfProducts(products);
+        const sum = coupon.percent_off ? OrderService.getSumOfProductsWithDiscount(products, coupon) : OrderService.getSumOfProducts(products);
 
         window.paypal.Buttons({
             createOrder: (data, actions) => {

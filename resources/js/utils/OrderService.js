@@ -1,3 +1,7 @@
+import React from 'react';
+import {CartContext} from "./CartContext";
+import Cookies from "js-cookie";
+
 export default class OrderService{
     static async all(page) {
         const response = await window.axios.get(`/api/orders/all/${page}`);
@@ -59,6 +63,18 @@ export default class OrderService{
         const sum = this.getSumOfProducts(products);
 
         return (sum - coupon.percent_off / 100 * sum).toFixed(2);
+    }
+
+    static fromCookie(){
+        return Cookies.get("order") ? JSON.parse(Cookies.get("order")) : null;
+    }
+
+    static toCookie(order){
+        order && Cookies.set("order", JSON.stringify(order), {expires: 1})
+    }
+
+    static clearCookie(){
+        Cookies.remove("order");
     }
 }
 

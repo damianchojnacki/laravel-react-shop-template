@@ -1,25 +1,25 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Card, CardBody, CardHeader, CardTitle, CardFooter, Button} from "shards-react";
 import {notify} from "react-notify-toast";
-import {CartContext} from "../../../utils/CartContext";
+import {useCart} from "../../../utils/CartContext";
 import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import {CurrencyContext} from "../../../utils/CurrencyContext";
+import {useCurrency} from "../../../utils/CurrencyContext";
 import Text from "../../Text";
 
 function ProductsListComplex(props){
-    const {state, dispatch} = React.useContext(CartContext);
-    const currency = useContext(CurrencyContext);
+    const cart = useCart();
+    const currency = useCurrency();
 
     const addToCart = product => {
-        dispatch({type: "add", payload: product.id});
+        cart.dispatch({type: "add", payload: product.id});
 
         //notify.show(`${product.name} has been added to cart.`, 'success', 1500);
     };
 
     const removeFromCart = product => {
-        dispatch({type: "remove", payload: product.id});
+        cart.dispatch({type: "remove", payload: product.id});
 
         //notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
     };
@@ -72,7 +72,7 @@ function ProductsListComplex(props){
                     <CardFooter className="d-flex flex-wrap justify-content-between">
                         {product.name &&
                             <>
-                                {state.cart.includes(product.id) &&
+                                {cart.state.products.includes(product.id) &&
                                         <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>
                                             <Text id="cart-remove"/>
                                         </Button>

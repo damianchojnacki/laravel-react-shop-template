@@ -3,18 +3,18 @@ import { Helmet } from 'react-helmet';
 import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
 import ProductService from "../../utils/ProductService";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
-import {CartContext} from "../../utils/CartContext";
+import {useCart} from "../../utils/CartContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import {newArray} from "../../utils/helpers";
-import {CurrencyContext} from "../../utils/CurrencyContext";
+import {useCurrency} from "../../utils/CurrencyContext";
 import Text from "../../components/Text";
 
 function Homepage(props){
     const result = props.match.params.result;
 
-    const {state, dispatch} = React.useContext(CartContext);
-    const currency = React.useContext(CurrencyContext);
+    const cart = useCart();
+    const currency = useCurrency();
 
     const [productsDiscounted, setProductsDiscounted] = useState([]);
     const [specialOffer, setSpecialOffer] = useState([]);
@@ -35,13 +35,13 @@ function Homepage(props){
     }, [currency.state]);
 
     const addToCart = product => {
-        dispatch({type: "add", payload: product.id});
+        cart.dispatch({type: "add", payload: product.id});
 
         //notify.show(`${product.name} ${<Text id="cart-alert-add"/>}`, 'success', 1500);
     };
 
     const removeFromCart = product => {
-        dispatch({type: "remove", payload: product.id});
+        cart.dispatch({type: "remove", payload: product.id});
 
         //notify.show(`${product.name} <Text id="cart-alert-remove"/>`, 'success', 1500);
     };
@@ -81,7 +81,7 @@ function Homepage(props){
                     <CardFooter className="d-flex flex-wrap justify-content-between">
                         {specialOffer.id &&
                             <>
-                                {state.cart.includes(specialOffer.id) &&
+                                {cart.state.products.includes(specialOffer.id) &&
                                         <Button block size="big" className="btn btn-danger my-1" onClick={() => removeFromCart(specialOffer)}>
                                             <Text id="cart-remove"/>
                                         </Button>

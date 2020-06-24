@@ -1,8 +1,9 @@
 import * as React from "react";
-import CurrencyService from "./CurrencyService";
 import LanguageService from "./LanguageService";
 
 const LanguageContext = React.createContext();
+
+const useLanguage = () => React.useContext(LanguageContext);
 
 const initialState = LanguageService.current();
 
@@ -30,4 +31,4 @@ function LanguageContextProvider(props) {
 
 const LanguageContextConsumer = LanguageContext.Consumer;
 
-export { LanguageContext, LanguageContextProvider, LanguageContextConsumer };
+export { LanguageContextProvider, useLanguage };

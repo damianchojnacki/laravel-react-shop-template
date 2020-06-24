@@ -3,6 +3,8 @@ import CurrencyService from "./CurrencyService";
 
 const CurrencyContext = React.createContext();
 
+const useCurrency = () => React.useContext(CurrencyContext);
+
 const initialState = CurrencyService.get();
 
 const reducer = (state, action) => {
@@ -29,4 +31,4 @@ function CurrencyContextProvider(props) {
 
 const CurrencyContextConsumer = CurrencyContext.Consumer;
 
-export { CurrencyContext, CurrencyContextProvider, CurrencyContextConsumer };
+export { CurrencyContextProvider, useCurrency };

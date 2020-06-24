@@ -1,113 +1,101 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ "./resources/js/utils/AuthService.js":
+/***/ "./resources/js/utils/CartContext.js":
 /*!*******************************************!*\
-  !*** ./resources/js/utils/AuthService.js ***!
+  !*** ./resources/js/utils/CartContext.js ***!
   \*******************************************/
-/*! exports provided: default */
+/*! exports provided: CartContextProvider, useCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartContextProvider", function() { return CartContextProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useCart", function() { return useCart; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var CartContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+var useCart = function useCart() {
+  return react__WEBPACK_IMPORTED_MODULE_0__["useContext"](CartContext);
+};
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+var initialState = {
+  products: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : [],
+  coupon: localStorage.getItem('coupon') ? JSON.parse(localStorage.getItem("coupon")) : {}
+};
 
+var reducer = function reducer(state, action) {
+  var products = state.products;
 
+  switch (action.type) {
+    case "reset":
+      localStorage.removeItem('cart');
+      return _objectSpread({}, state, {
+        products: [],
+        coupon: {}
+      });
 
-var AuthService =
-/*#__PURE__*/
-function () {
-  function AuthService() {
-    _classCallCheck(this, AuthService);
+    case "add":
+      products.push(action.payload);
+      localStorage.setItem('cart', JSON.stringify(products));
+      return _objectSpread({}, state, {
+        products: products
+      });
+
+    case "remove":
+      var index = products.indexOf(action.payload);
+      products.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(products));
+      return _objectSpread({}, state, {
+        products: products
+      });
+
+    case "appendCoupon":
+      localStorage.setItem('coupon', JSON.stringify(action.payload));
+      return _objectSpread({}, state, {
+        coupon: action.payload
+      });
+
+    case "removeCoupon":
+      localStorage.removeItem('coupon');
+      return _objectSpread({}, state, {
+        coupon: {}
+      });
   }
+};
 
-  _createClass(AuthService, null, [{
-    key: "login",
-    value: function login(credentials) {
-      return window.axios.post('/api/login', credentials).then(function (res) {
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
-          expires: 7
-        });
-        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
-      });
-    }
-  }, {
-    key: "googleInit",
-    value: function googleInit(callback) {
-      var googleClientId, script;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function googleInit$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/google-client-id'));
+function CartContextProvider(props) {
+  var _React$useReducer = react__WEBPACK_IMPORTED_MODULE_0__["useReducer"](reducer, initialState),
+      _React$useReducer2 = _slicedToArray(_React$useReducer, 2),
+      state = _React$useReducer2[0],
+      dispatch = _React$useReducer2[1];
 
-            case 2:
-              googleClientId = _context.sent;
-              script = document.createElement("script");
-              script.src = "https://apis.google.com/js/platform.js?onload=init";
-              script.addEventListener("load", function () {
-                return callback(googleClientId.data);
-              });
-              document.body.appendChild(script);
+  var value = {
+    state: state,
+    dispatch: dispatch
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](CartContext.Provider, {
+    value: value
+  }, props.children);
+}
 
-            case 7:
-            case "end":
-              return _context.stop();
-          }
-        }
-      });
-    }
-  }, {
-    key: "loginWithGoogle",
-    value: function loginWithGoogle(user) {
-      return window.axios.post('/api/login/google', {
-        user_id: user.getAuthResponse().id_token
-      }).then(function (res) {
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
-          expires: 7
-        });
-        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
-      });
-    }
-  }, {
-    key: "register",
-    value: function register(credentials) {
-      credentials.password_confirmation = credentials.passwordConfirmation;
-      return window.axios.post('/api/register', credentials).then(function (res) {
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
-          expires: 7
-        });
-        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
-      });
-    }
-  }, {
-    key: "getUser",
-    value: function getUser() {
-      return window.axios.get('/api/user');
-    }
-  }, {
-    key: "logout",
-    value: function logout() {
-      var response = window.axios.post('/api/logout');
-      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('access_token');
-      return response;
-    }
-  }]);
+var CartContextConsumer = CartContext.Consumer;
 
-  return AuthService;
-}();
-
-/* harmony default export */ __webpack_exports__["default"] = (AuthService);
 
 /***/ }),
 
@@ -242,6 +230,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OrderService; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _CartContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CartContext */ "./resources/js/utils/CartContext.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -249,6 +242,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
 
 var OrderService =
 /*#__PURE__*/
@@ -386,6 +383,23 @@ function () {
     value: function getSumOfProductsWithDiscount(products, coupon) {
       var sum = this.getSumOfProducts(products);
       return (sum - coupon.percent_off / 100 * sum).toFixed(2);
+    }
+  }, {
+    key: "fromCookie",
+    value: function fromCookie() {
+      return js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get("order") ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get("order")) : null;
+    }
+  }, {
+    key: "toCookie",
+    value: function toCookie(order) {
+      order && js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.set("order", JSON.stringify(order), {
+        expires: 1
+      });
+    }
+  }, {
+    key: "clearCookie",
+    value: function clearCookie() {
+      js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.remove("order");
     }
   }]);
 

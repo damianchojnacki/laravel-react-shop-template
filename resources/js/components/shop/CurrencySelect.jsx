@@ -2,12 +2,12 @@ import React, {useEffect, useState, useContext} from "react";
 import CurrencyService from "../../utils/CurrencyService";
 import Select from "react-select";
 import {useMediaQuery} from "react-responsive";
-import {CurrencyContext} from "../../utils/CurrencyContext";
+import {useCurrency} from "../../utils/CurrencyContext";
 
 function CurrencySelect() {
     const [selectOptions, setSelectOptions] = useState([]);
 
-    const {state, dispatch} = useContext(CurrencyContext);
+    const currency = useCurrency();
 
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
@@ -63,8 +63,8 @@ function CurrencySelect() {
                     zIndex: 3
                 }),
             }}
-            value={selectOptions.find(option => {return state.iso === option.value})}
-            onChange={e => dispatch({type: "change", payload: ({iso: e.value, symbol: e.symbol})})}
+            value={selectOptions.find(option => {return currency.state.iso === option.value})}
+            onChange={e => currency.dispatch({type: "change", payload: ({iso: e.value, symbol: e.symbol})})}
         />
     );
 }

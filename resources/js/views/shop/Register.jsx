@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import {Form, FormInput, Button, Alert, InputGroupAddon, InputGroupText, InputGroup, Row, FormCheckbox} from "shards-react";
 import AuthService from '../../utils/AuthService';
-import {AuthContext} from "../../utils/AuthContext";
+import {useAuth} from "../../utils/AuthContext";
 import classNames from 'classnames';
 import 'animate.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -13,7 +13,8 @@ import Text from "../../components/Text";
 
 export default function Register() {
 
-    const {state, dispatch} = React.useContext(AuthContext);
+    const auth = useAuth();
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -220,7 +221,7 @@ export default function Register() {
         "fadeIn": !hide,
     });
 
-    return state.authenticated && !loading
+    return auth.state.authenticated && !loading
         ?
         <Redirect to="/register/success"/>
         :
@@ -230,7 +231,7 @@ export default function Register() {
                     <title>Shop | Register</title>
                 </Helmet>
                 <div className="container col-lg-9 col-12">
-                    {loading ? state.authenticated ?
+                    {loading ? auth.state.authenticated ?
                         <div className="d-flex justify-content-center">
                             <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
                         </div>

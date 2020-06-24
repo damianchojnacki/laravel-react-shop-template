@@ -93,7 +93,7 @@ Route::group([
 
     Route::post('order', 'OrderController@make');
     Route::get('orders/{id}', 'OrderController@show');
-    Route::put("coupon/{code}", 'OrderController@couponCheck');
+    Route::put("coupon/{code}", 'OrderController@couponCheck')->middleware('throttle:10,1');
 });
 
 Route::group([

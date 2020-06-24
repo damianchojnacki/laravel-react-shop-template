@@ -5,20 +5,24 @@ import {faPercentage} from "@fortawesome/free-solid-svg-icons/faPercentage";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import OrderService from "../../utils/OrderService";
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
-import {CartContext} from "../../utils/CartContext";
+import {useCart} from "../../utils/CartContext";
+import {notify} from "react-notify-toast";
 
 function Coupon({coupon}) {
     const [code, setCode] = useState();
     const [wrongCode, setWrongCode] = useState(false);
 
-    const cart = useContext(CartContext);
+    const cart = useCart();
 
     function append(){
         code && OrderService.appendCoupon(code)
             .then(response => {
                 response && cart.dispatch({type: "appendCoupon", payload: response.data});
             })
-            .catch(() => setWrongCode(true));
+            .catch(error => {
+                error.response.status === 429 && notify.show("Too many attempts, make sure you have correct coupon.", 'error', 1500);
+                setWrongCode(true);
+            });
     }
 
     return (

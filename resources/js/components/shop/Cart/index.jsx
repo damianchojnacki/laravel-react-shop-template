@@ -4,40 +4,41 @@ import {
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem, InputGroupText
+    DropdownItem,
 } from "shards-react";
-import {CartContext} from "../../../utils/CartContext";
+import {useCart} from "../../../utils/CartContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import ProductService from "../../../utils/ProductService";
 import {ListGroup, ListGroupItem, Button} from "shards-react";
 import OrderService from "../../../utils/OrderService";
-
 import "./style.scss";
-import {CurrencyContext} from "../../../utils/CurrencyContext";
+import {useCurrency} from "../../../utils/CurrencyContext";
 import Text from "../../Text";
 
-function Cart(props) {
-    const {state, dispatch} = React.useContext(CartContext);
-    const currency = React.useContext(CurrencyContext);
+function Cart() {
+    const cart = useCart();
+    const currency = useCurrency();
 
     const [opened, setOpened] = useState(false);
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
         (async function () {
-            const products = await ProductService.cart(state.cart);
+            const products = await ProductService.cart(cart.state.products);
 
             setProducts(products);
+
+            //products.length <= 0 && OrderService.clearCookie();
         }());
-    }, [state, currency.state]);
+    }, [cart.state.products, currency.state]);
 
     const removeFromCart = product => {
-        dispatch({type: "remove", payload: product.id});
+        cart.dispatch({type: "remove", payload: product.id});
     };
 
-    const clearCart = product => {
-        dispatch({type: "reset"});
+    const clearCart = () => {
+        cart.dispatch({type: "reset"});
     };
 
     return (

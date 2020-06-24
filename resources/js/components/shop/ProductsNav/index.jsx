@@ -8,11 +8,11 @@ import ProductService from "../../../utils/ProductService";
 import "./style.scss";
 import Select from "react-select";
 import LanguageService from "../../../utils/LanguageService";
-import {LanguageContext} from "../../../utils/LanguageContext";
+import {useLanguage} from "../../../utils/LanguageContext";
 import Text from "../../Text";
 
 export default function ProductsNav(props){
-    const language = React.useContext(LanguageContext);
+    const language = useLanguage();
 
     const [productTypes, setProductTypes] = useState(props.productTypes);
     const [navList, setNavList] = useState([]);

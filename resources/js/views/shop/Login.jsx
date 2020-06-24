@@ -3,7 +3,7 @@ import {Redirect, Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import {Form, FormInput, FormGroup, Button, Alert, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import AuthService from '../../utils/AuthService';
-import {AuthContext} from "../../utils/AuthContext";
+import {useAuth} from "../../utils/AuthContext";
 import {isEmail} from '../../utils/helpers';
 import GoogleButton from 'react-google-button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +12,8 @@ import 'animate.css/animate.css';
 import Text from "../../components/Text";
 
 export default function Login() {
-    const {state, dispatch} = React.useContext(AuthContext);
+    const auth = useAuth();
+
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -61,13 +62,13 @@ export default function Login() {
                     });
                 })
                 .catch(error => {
-                    console.log(error.response);
+                    console.warn(error.response);
                     setLoading(false);
                 });
         });
     }
 
-    return state.authenticated && !loading
+    return auth.state.authenticated && !loading
             ?
             <Redirect to="/"/>
             :
@@ -114,7 +115,7 @@ export default function Login() {
                                 </InputGroup>
                             </FormGroup>
                             <Button block>
-                                {loading ? state.authenticated ?
+                                {loading ? auth.state.authenticated ?
                                     <FontAwesomeIcon size="lg" icon={faCheckCircle} className="animated fadeIn"/>
                                     :
                                     <div className="spinner-border spinner-border-sm" role="status">

@@ -6,7 +6,7 @@ import ProductsListComplex from "../../components/shop/ProductListComplex";
 import classnames from 'classnames';
 import ProductService from "../../utils/ProductService";
 import {newArray} from "../../utils/helpers";
-import {CurrencyContext} from "../../utils/CurrencyContext";
+import {useCurrency} from "../../utils/CurrencyContext";
 import Text from "../../components/Text";
 
 export default function Products(props){
@@ -16,11 +16,11 @@ export default function Products(props){
     const [sort, setSort] = useState({sort: "id", type: "asc"});
     const [category, setCategory] = useState(props.match.params.category);
 
-    const {state} = useContext(CurrencyContext);
+    const currency = useCurrency();
 
     useEffect(() => {
         getProducts(true);
-    }, [state]);
+    }, [currency.state]);
 
     useEffect(() => {
         getProducts();
