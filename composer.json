@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4.7",
+        "php": "^7.4.3",
         "ext-json": "*",
         "fideloper/proxy": "^4.0",
         "google/apiclient": "^2.4",
@@ -19,7 +19,8 @@
         "laravel/socialite": "^4.3",
         "laravel/telescope": "^3.5",
         "laravel/tinker": "^1.0",
-        "mbezhanov/faker-provider-collection": "^1.2"
+        "mbezhanov/faker-provider-collection": "^1.2",
+        "phpseclib/bcmath_compat": "1.0.4"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",
