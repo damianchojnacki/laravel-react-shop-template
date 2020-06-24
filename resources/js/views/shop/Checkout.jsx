@@ -85,10 +85,11 @@ function Checkout() {
 
         if (validation.passed && pendingState <= 0) {
             setPendingState(-1);
-            setTimeout(() => setPendingState(1), 1000);
+            setTimeout(() => {
+                setPendingState(1);
 
-            OrderService.make(credentials)
-                .then(response => {
+                OrderService.make(credentials)
+                    .then(response => {
                         OrderService.toCookie(response.data.order);
 
                         setPendingState(2);
@@ -96,11 +97,12 @@ function Checkout() {
                         script.src = `https://www.paypal.com/sdk/js?client-id=${response.data.paypalClientId}&currency=${currency.state.iso}`;
                         script.addEventListener("load", () => loadPaypal());
                         document.body.appendChild(script);
-                })
-                .catch(error => {
-                    setPendingState(0);
-                    notify.show(error.response.data);
-                });
+                    })
+                    .catch(error => {
+                        setPendingState(0);
+                        notify.show(error.response.data);
+                    });
+            }, 1000);
         }
     };
 

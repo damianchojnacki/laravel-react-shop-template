@@ -1925,21 +1925,21 @@ function Checkout() {
     if (validation.passed && pendingState <= 0) {
       setPendingState(-1);
       setTimeout(function () {
-        return setPendingState(1);
-      }, 1000);
-      _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].make(credentials).then(function (response) {
-        _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].toCookie(response.data.order);
-        setPendingState(2);
-        var script = document.createElement("script");
-        script.src = "https://www.paypal.com/sdk/js?client-id=".concat(response.data.paypalClientId, "&currency=").concat(currency.state.iso);
-        script.addEventListener("load", function () {
-          return loadPaypal();
+        setPendingState(1);
+        _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].make(credentials).then(function (response) {
+          _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].toCookie(response.data.order);
+          setPendingState(2);
+          var script = document.createElement("script");
+          script.src = "https://www.paypal.com/sdk/js?client-id=".concat(response.data.paypalClientId, "&currency=").concat(currency.state.iso);
+          script.addEventListener("load", function () {
+            return loadPaypal();
+          });
+          document.body.appendChild(script);
+        })["catch"](function (error) {
+          setPendingState(0);
+          react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(error.response.data);
         });
-        document.body.appendChild(script);
-      })["catch"](function (error) {
-        setPendingState(0);
-        react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(error.response.data);
-      });
+      }, 1000);
     }
   };
 
