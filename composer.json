@@ -9,7 +9,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4.7",
         "ext-json": "*",
         "fideloper/proxy": "^4.0",
         "google/apiclient": "^2.4",
