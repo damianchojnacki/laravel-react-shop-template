@@ -7,7 +7,7 @@ import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {useMediaQuery} from "react-responsive";
 import CurrencySelect from "./CurrencySelect";
 import LanguageSelect from "./LanguageSelect";
-import Text from "../Text";
+import Translate from "../Translate";
 
 function Menu(props) {
     const auth = useAuth();
@@ -37,7 +37,7 @@ function Menu(props) {
                         return (
                             <NavItem key={key}>
                                 <NavLink className="nav-link" to={prop.link ?? prop.path}>
-                                    <Text id={prop.name}/>
+                                    <Translate id={prop.name}/>
                                 </NavLink>
                             </NavItem>
                         );
@@ -45,7 +45,7 @@ function Menu(props) {
                     {auth.state.authenticated &&
                         <NavItem>
                             <Link className="nav-link" to="#" onClick={handleLogout}>
-                                <Text id="menu-logout"/>
+                                <Translate id="menu-logout"/>
                             </Link>
                         </NavItem>
                     }

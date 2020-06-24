@@ -4,7 +4,7 @@ import {Button} from "shards-react";
 import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
-import Text from "../Text";
+import Translate from "../Translate";
 import {useCurrency} from "../../utils/CurrencyContext";
 import {useCart} from "../../utils/CartContext";
 
@@ -17,13 +17,13 @@ function ProductsList(props){
             <thead className="text-primary">
             <tr>
                 <th>
-                    <Text id="products-list-name"/>
+                    <Translate id="products-list-name"/>
                 </th>
                 <th className="text-center">
-                    <Text id="products-list-price"/>
+                    <Translate id="products-list-price"/>
                 </th>
                 <th className="text-center">
-                    <Text id="products-list-quantity"/>
+                    <Translate id="products-list-quantity"/>
                 </th>
                 <th/>
                 <th/>
@@ -60,7 +60,7 @@ function ProductsList(props){
                         </>
                         :
                         <>
-                            <Text id="products-list-sum"/> {props.sum} {currency.state.symbol}
+                            <Translate id="products-list-sum"/> {props.sum} {currency.state.symbol}
                         </>
                     }
                 </td>

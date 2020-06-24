@@ -8,7 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import {newArray} from "../../utils/helpers";
 import {useCurrency} from "../../utils/CurrencyContext";
-import Text from "../../components/Text";
+import Translate from "../../components/Translate";
 
 function Homepage(props){
     const result = props.match.params.result;
@@ -37,13 +37,13 @@ function Homepage(props){
     const addToCart = product => {
         cart.dispatch({type: "add", payload: product.id});
 
-        //notify.show(`${product.name} ${<Text id="cart-alert-add"/>}`, 'success', 1500);
+        //notify.show(`${product.name} ${<Translate id="cart-alert-add"/>}`, 'success', 1500);
     };
 
     const removeFromCart = product => {
         cart.dispatch({type: "remove", payload: product.id});
 
-        //notify.show(`${product.name} <Text id="cart-alert-remove"/>`, 'success', 1500);
+        //notify.show(`${product.name} <Translate id="cart-alert-remove"/>`, 'success', 1500);
     };
 
     return (
@@ -55,7 +55,7 @@ function Homepage(props){
             <main className="d-flex flex-column">
                 {result === "success" &&
                     <Alert theme="success" className="m-2 mb-4">
-                        <Text id="welcome"/>
+                        <Translate id="welcome"/>
                     </Alert>
                 }
                 <Card className="m-2">
@@ -69,7 +69,7 @@ function Homepage(props){
                                 <>
                                     <div className="h5 position-absolute m-4 rounded-circle bg-danger text-white d-flex justify-content-center align-items-center font-weight-bold" style={{top: 0, right: 0, height: "calc(50px + 1vw)", width: "calc(50px + 1vw)"}}>-{specialOffer.discount && specialOffer.discount.percent_off}%</div>
                                     <h3 className="w-100 text-center m-0 mb-4">
-                                        <Text id="products-special-header"/>
+                                        <Translate id="products-special-header"/>
                                     </h3>
                                     <span className="display-4 text-danger" style={{textDecoration: "line-through"}}>{specialOffer.price_origin} {currency.state.symbol}</span>
                                     <FontAwesomeIcon icon={faArrowRight} className="product__arrow mx-4 h3"/>
@@ -83,11 +83,11 @@ function Homepage(props){
                             <>
                                 {cart.state.products.includes(specialOffer.id) &&
                                         <Button block size="big" className="btn btn-danger my-1" onClick={() => removeFromCart(specialOffer)}>
-                                            <Text id="cart-remove"/>
+                                            <Translate id="cart-remove"/>
                                         </Button>
                                 }
                                 <Button block size="big" className="btn btn-secondary my-1" onClick={() => addToCart(specialOffer)}>
-                                    <Text id="cart-add"/>
+                                    <Translate id="cart-add"/>
                                 </Button>
                             </>
                         }

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import LanguageService from '../utils/LanguageService';
 import {useLanguage} from "../utils/LanguageContext";
 
-function Text({id}) {
+function Translate({id}) {
     const language = useLanguage();
 
     const [translated, setTranslated] = useState("");
@@ -14,4 +14,4 @@ function Text({id}) {
     return translated;
 }
 
-export default Text;
+export default Translate;

@@ -9,7 +9,7 @@ import 'animate.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {checkFullName, isEmail, equals} from "../../utils/helpers";
-import Text from "../../components/Text";
+import Translate from "../../components/Translate";
 
 export default function Register() {
 
@@ -115,18 +115,18 @@ export default function Register() {
     const steps = [
         <div onKeyDown={handleKeyDown}>
             <h1 className="mb-4">
-                <Text id="register-welcome"/>
+                <Translate id="register-welcome"/>
             </h1>
             {errors &&
             errors.map((e, index) => <Alert theme="danger" key={index}>{e}</Alert>)
             }
             <Button block onClick={nextStep} size="lg">
-                <Text id="register-start"/>
+                <Translate id="register-start"/>
             </Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
             <h2 className="h1">
-                <Text id="register-email"/>
+                <Translate id="register-email"/>
             </h2>
             <InputGroup seamless className="my-4">
                 <InputGroupAddon type="prepend">
@@ -137,12 +137,12 @@ export default function Register() {
                 <FormInput size="lg" invalid={!!email && !validateStep()} type="email" onChange={(e) => {setEmail(e.target.value)}} value={email} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
             <Button block size="lg" onClick={nextStep}>
-                <Text id="register-done"/>
+                <Translate id="register-done"/>
             </Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
             <h2 className="h1">
-                <Text id="register-name"/>
+                <Translate id="register-name"/>
             </h2>
             <InputGroup seamless className="my-4">
                 <InputGroupAddon type="prepend">
@@ -153,15 +153,15 @@ export default function Register() {
                 <FormInput size="lg" invalid={!!name && !validateStep()} type="text" onChange={(e) => {setName(e.target.value)}} value={name} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
             <Button size="lg" onClick={previousStep}>
-                <Text id="register-back"/>
+                <Translate id="register-back"/>
             </Button>
             <Button size="lg" onClick={nextStep} className="float-right">
-                <Text id="register-next"/>
+                <Translate id="register-next"/>
             </Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
             <h2 className="h2">
-                <Text id="register-password"/>
+                <Translate id="register-password"/>
             </h2>
             <Row className="my-4">
                 <div className="col-lg-6 col-12 my-2">
@@ -186,31 +186,31 @@ export default function Register() {
                 </div>
             </Row>
             <Button size="lg" onClick={previousStep}>
-                <Text id="register-back"/>
+                <Translate id="register-back"/>
             </Button>
             <Button size="lg" onClick={nextStep} className="float-right">
-                <Text id="register-next"/>
+                <Translate id="register-next"/>
             </Button>
         </div>,
         <div onKeyDown={handleKeyDown}>
             <h2 className="h1">
-                <Text id="register-terms-title"/>
+                <Translate id="register-terms-title"/>
             </h2>
             <p>
-                <Text id="register-terms-subtitle"/>
+                <Translate id="register-terms-subtitle"/>
             </p>
             <FormCheckbox
                 onChange={() => {setTerms(!terms)}}
                 checked={terms}
                 className="my-4"
             >
-                <Text id="register-terms-label"/>
+                <Translate id="register-terms-label"/>
             </FormCheckbox>
             <Button size="lg" onClick={previousStep}>
-                <Text id="register-back"/>
+                <Translate id="register-back"/>
             </Button>
             <Button size="lg" onClick={handleSubmit} className="float-right">
-                <Text id="register-submit"/>
+                <Translate id="register-submit"/>
             </Button>
         </div>
     ];

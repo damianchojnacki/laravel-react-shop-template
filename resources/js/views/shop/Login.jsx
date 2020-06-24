@@ -9,7 +9,8 @@ import GoogleButton from 'react-google-button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import 'animate.css/animate.css';
-import Text from "../../components/Text";
+import Translate from "../../components/Translate";
+import LanguageService from "../../utils/LanguageService";
 
 export default function Login() {
     const auth = useAuth();
@@ -80,17 +81,18 @@ export default function Login() {
                     <div className="container col-lg-6 col-12">
                         <div className="mb-3">
                             <a href="#" className="d-inline-block" onClick={() => AuthService.googleInit(googleLogin)}>
-                                <GoogleButton label={<Text id="login-google"/>} />
-                            </a>                        </div>
+                                <GoogleButton label={LanguageService.translate("login-google")} />
+                            </a>
+                        </div>
                         <Form method="POST" onSubmit={handleSubmit}>
                             {errors.data && (
                                 <Alert theme="danger">
-                                    <Text id={errors.data}/>
+                                    <Translate id={errors.data}/>
                                 </Alert>
                             )}
                             <FormGroup>
                                 <label htmlFor="#email">
-                                    <Text id="login-email"/>
+                                    <Translate id="login-email"/>
                                 </label>
                                 <InputGroup seamless>
                                     <InputGroupAddon type="prepend">
@@ -103,7 +105,7 @@ export default function Login() {
                             </FormGroup>
                             <FormGroup>
                                 <label htmlFor="#password">
-                                    <Text id="login-password"/>
+                                    <Translate id="login-password"/>
                                 </label>
                                 <InputGroup seamless>
                                     <InputGroupAddon type="prepend">
@@ -120,18 +122,18 @@ export default function Login() {
                                     :
                                     <div className="spinner-border spinner-border-sm" role="status">
                                         <span className="sr-only">
-                                             <Text id="login-loading"/>
+                                             <Translate id="login-loading"/>
                                         </span>
                                     </div>
                                     :
                                     <span>
-                                        <Text id="login-submit"/>
+                                        <Translate id="login-submit"/>
                                     </span>
                                 }
                             </Button>
                             <p className="mt-3">
                                 <Link to="./register">
-                                    <Text id="login-register"/>
+                                    <Translate id="login-register"/>
                                 </Link>
                             </p>
                         </Form>

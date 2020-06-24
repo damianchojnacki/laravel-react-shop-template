@@ -9,7 +9,7 @@ import "./style.scss";
 import Select from "react-select";
 import LanguageService from "../../../utils/LanguageService";
 import {useLanguage} from "../../../utils/LanguageContext";
-import Text from "../../Text";
+import Translate from "../../Translate";
 
 export default function ProductsNav(props){
     const language = useLanguage();
@@ -52,7 +52,7 @@ export default function ProductsNav(props){
                 <NavItem>
                     <NavLink tag="span" active={!props.category}>
                         <Link to="/products" className={!props.category ? "text-light" : null}>
-                            <Text id="products-category-all"/>
+                            <Translate id="products-category-all"/>
                         </Link>
                     </NavLink>
                 </NavItem>
@@ -66,28 +66,28 @@ export default function ProductsNav(props){
                                 value: 1,
                                 sort: "name",
                                 type: "asc",
-                                label: <Text id="products-sort-name-asc"/>,
+                                label: <Translate id="products-sort-name-asc"/>,
                             },
                             {
                                 value: 2,
                                 sort: "name",
                                 type: "desc",
-                                label: <Text id="products-sort-name-desc"/>,
+                                label: <Translate id="products-sort-name-desc"/>,
                             },
                             {
                                 value: 3,
                                 sort: "price",
                                 type: "asc",
-                                label: <Text id="products-sort-price-asc"/>,
+                                label: <Translate id="products-sort-price-asc"/>,
                             },
                             {
                                 value: 4,
                                 sort: "price",
                                 type: "desc",
-                                label: <Text id="products-sort-price-desc"/>,
+                                label: <Translate id="products-sort-price-desc"/>,
                             },
                         ]}
-                        placeholder=<Text id="products-sort-label"/>
+                        placeholder=<Translate id="products-sort-label"/>
                         onChange={(e) => {props.setSort(e)}}
                         value={props.sort}
                     />

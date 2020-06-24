@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import ProductService from "../../utils/ProductService";
 import {newArray} from "../../utils/helpers";
 import {useCurrency} from "../../utils/CurrencyContext";
-import Text from "../../components/Text";
+import Translate from "../../components/Translate";
 
 export default function Products(props){
     const [products, setProducts] = useState([]);
@@ -87,7 +87,7 @@ export default function Products(props){
                     <ProductsListComplex {...props} data={products.length ? products : props.products} sort={sort}/>
 
                     {(searchField || products.length % 12 === 0) &&
-                        <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? <Text id="products-reload"/> : <Text id="products-showMore"/>}</Button>
+                        <Button className="btn-block my-4" onClick={showMoreOrReload}>{searchField ? <Translate id="products-reload"/> : <Translate id="products-showMore"/>}</Button>
                     }
                 </div>
             </main>

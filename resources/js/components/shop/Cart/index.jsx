@@ -14,7 +14,7 @@ import {ListGroup, ListGroupItem, Button} from "shards-react";
 import OrderService from "../../../utils/OrderService";
 import "./style.scss";
 import {useCurrency} from "../../../utils/CurrencyContext";
-import Text from "../../Text";
+import Translate from "../../Translate";
 
 function Cart() {
     const cart = useCart();
@@ -49,12 +49,12 @@ function Cart() {
         <DropdownMenu right className={products && products.length ? null: "cart__empty"}>
             <div className="d-flex justify-content-between align-items-center">
                 <h4 className="cart__header">
-                    <Text id="cart-header"/>
+                    <Translate id="cart-header"/>
                 </h4>
                 {products && products.length > 0 &&
                     <div className="pr-4">
                         <Button size="sm" className="btn btn-secondary" onClick={() => clearCart()}>
-                            <Text id="cart-clear"/>
+                            <Translate id="cart-clear"/>
                         </Button>
                     </div>
                 }
@@ -70,14 +70,14 @@ function Cart() {
                                     <span className="cart__field">{product.quantity}</span>
                                     <span className="cart__field">
                                         <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(product)}>
-                                            <Text id="cart-remove"/>
+                                            <Translate id="cart-remove"/>
                                         </Button>
                                     </span>
                                 </ListGroupItem>
                             )}
                             <ListGroupItem className="text-right">
                                 <span className="cart__sum">
-                                    <Text id="cart-sum"/> {OrderService.getSumOfProducts(products)} {currency.state.symbol}
+                                    <Translate id="cart-sum"/> {OrderService.getSumOfProducts(products)} {currency.state.symbol}
                                 </span>
                             </ListGroupItem>
                         </ListGroup>
@@ -85,14 +85,14 @@ function Cart() {
                     <DropdownItem tag="span">
                         <Link to="/checkout">
                             <Button block>
-                                <Text id="cart-checkout"/>
+                                <Translate id="cart-checkout"/>
                             </Button>
                         </Link>
                     </DropdownItem>
                 </>
                     :
                 <DropdownItem tag="span">
-                    <Text id="cart-empty"/>
+                    <Translate id="cart-empty"/>
                 </DropdownItem>
             }
         </DropdownMenu>

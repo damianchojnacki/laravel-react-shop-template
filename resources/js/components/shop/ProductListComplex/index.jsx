@@ -6,7 +6,7 @@ import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import {useCurrency} from "../../../utils/CurrencyContext";
-import Text from "../../Text";
+import Translate from "../../Translate";
 
 function ProductsListComplex(props){
     const cart = useCart();
@@ -54,7 +54,7 @@ function ProductsListComplex(props){
                             {product.price_origin &&
                                 <>
                                     <span className="font-weight-bold">
-                                        <Text id="products-block-price"/>
+                                        <Translate id="products-block-price"/>
                                     </span>
                                     {product.discount ?
                                         <>
@@ -74,11 +74,11 @@ function ProductsListComplex(props){
                             <>
                                 {cart.state.products.includes(product.id) &&
                                         <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>
-                                            <Text id="cart-remove"/>
+                                            <Translate id="cart-remove"/>
                                         </Button>
                                 }
                                 <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>
-                                    <Text id="cart-add"/>
+                                    <Translate id="cart-add"/>
                                 </Button>
                             </>
                         }
