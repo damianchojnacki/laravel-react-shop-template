@@ -9,7 +9,7 @@ import {useAuth} from "../utils/AuthContext";
 import Notifications from 'react-notify-toast';
 
 import "shards-ui/dist/css/shards.min.css";
-import Menu from "../components/shop/Menu";
+import Menu from "../components/shop/Menu/index";
 import Footer from "../components/shop/Footer";
 import {CartContextProvider} from "../utils/CartContext";
 import Cart from "../components/shop/Cart";
@@ -21,10 +21,8 @@ function Shop(props) {
     useEffect(() => {
         auth.state.authenticated &&
             AuthService.getUser()
-                .then(res => {
-                    dispatch({type: "login", payload: res.data});
-                })
-                .catch(dispatch({type: "logout"}));
+                .then(res => auth.dispatch({type: "login", payload: res.data}))
+                .catch(() => auth.dispatch({type: "logout"}));
     }, []);
 
     const getRoutes = routes => {

@@ -21,6 +21,7 @@ class Order extends Model{
 
     protected $with = [
         'status',
+        'details'
     ];
 
     protected static function boot(){

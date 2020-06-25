@@ -1022,9 +1022,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function AdminNavbar(props) {
-  var _React$useContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_utils_AuthContext__WEBPACK_IMPORTED_MODULE_3__["AuthContext"]),
-      state = _React$useContext.state,
-      dispatch = _React$useContext.dispatch;
+  var auth = Object(_utils_AuthContext__WEBPACK_IMPORTED_MODULE_3__["useAuth"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1050,8 +1048,7 @@ function AdminNavbar(props) {
 
   var handleLogout = function handleLogout(e) {
     e.preventDefault();
-    _utils_AuthService__WEBPACK_IMPORTED_MODULE_4__["default"].logout();
-    dispatch({
+    auth.dispatch({
       type: "logout"
     });
   }; // function that adds color white/transparent to the navbar on resize (this is for the collapse)
@@ -1602,14 +1599,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_Footer_Footer_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/admin/Footer/Footer.jsx */ "./resources/js/components/admin/Footer/Footer.jsx");
 /* harmony import */ var _components_admin_Sidebar_Sidebar_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/admin/Sidebar/Sidebar.jsx */ "./resources/js/components/admin/Sidebar/Sidebar.jsx");
 /* harmony import */ var _components_admin_FixedPlugin_FixedPlugin_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/admin/FixedPlugin/FixedPlugin.jsx */ "./resources/js/components/admin/FixedPlugin/FixedPlugin.jsx");
-/* harmony import */ var _routes_admin_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../routes/admin.js */ "./resources/js/routes/admin.js");
-/* harmony import */ var _assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../assets/scss/black-dashboard-react.scss */ "./resources/js/assets/scss/black-dashboard-react.scss");
-/* harmony import */ var _assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _assets_css_nucleo_icons_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../assets/css/nucleo-icons.css */ "./resources/js/assets/css/nucleo-icons.css");
-/* harmony import */ var _assets_css_nucleo_icons_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_assets_css_nucleo_icons_css__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var perfect_scrollbar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js");
-/* harmony import */ var _utils_AuthService__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utils/AuthService */ "./resources/js/utils/AuthService.js");
-/* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
+/* harmony import */ var perfect_scrollbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js");
+/* harmony import */ var _utils_AuthService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/AuthService */ "./resources/js/utils/AuthService.js");
+/* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
+/* harmony import */ var _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../routes/admin.js */ "./resources/js/routes/admin.js");
+/* harmony import */ var _assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../assets/scss/black-dashboard-react.scss */ "./resources/js/assets/scss/black-dashboard-react.scss");
+/* harmony import */ var _assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _assets_css_nucleo_icons_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../assets/css/nucleo-icons.css */ "./resources/js/assets/css/nucleo-icons.css");
+/* harmony import */ var _assets_css_nucleo_icons_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_assets_css_nucleo_icons_css__WEBPACK_IMPORTED_MODULE_12__);
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -1653,9 +1650,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Admin(props) {
-  var _React$useContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_utils_AuthContext__WEBPACK_IMPORTED_MODULE_12__["AuthContext"]),
-      state = _React$useContext.state,
-      dispatch = _React$useContext.dispatch;
+  var auth = Object(_utils_AuthContext__WEBPACK_IMPORTED_MODULE_9__["useAuth"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(localStorage.getItem('background')),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1683,26 +1678,26 @@ function Admin(props) {
       setLoading = _useState10[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    state.authenticated ? _utils_AuthService__WEBPACK_IMPORTED_MODULE_11__["default"].getUser().then(function (res) {
-      dispatch({
+    auth.state.authenticated ? _utils_AuthService__WEBPACK_IMPORTED_MODULE_8__["default"].getUser().then(function (res) {
+      return auth.dispatch({
         type: "login",
         payload: res.data
       });
     })["catch"](function () {
-      dispatch({
+      return auth.dispatch({
         type: "logout"
       });
     })["finally"](function () {
-      setLoading(false);
+      return setLoading(false);
     }) : setLoading(false);
     darkMode === 'light' ? document.body.classList.add("white-content") : document.body.classList.remove("white-content");
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    !loading && (!state.authenticated || state.user.name !== 'admin') && setRedirectBack(true);
+    !loading && (!auth.state.authenticated || auth.state.user.name !== 'admin') && setRedirectBack(true);
     var tables = document.querySelectorAll(".table-responsive");
 
     for (var i = 0; i < tables.length; i++) {
-      new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_10__["default"](tables[i]);
+      new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_7__["default"](tables[i]);
     }
   });
 
@@ -1739,9 +1734,9 @@ function Admin(props) {
   };
 
   var getBrandText = function getBrandText(path) {
-    for (var i = 0; i < _routes_admin_js__WEBPACK_IMPORTED_MODULE_7__["default"].length; i++) {
-      if (props.location.pathname.indexOf(_routes_admin_js__WEBPACK_IMPORTED_MODULE_7__["default"][i].layout + _routes_admin_js__WEBPACK_IMPORTED_MODULE_7__["default"][i].path) !== -1) {
-        return _routes_admin_js__WEBPACK_IMPORTED_MODULE_7__["default"][i].name;
+    for (var i = 0; i < _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"].length; i++) {
+      if (props.location.pathname.indexOf(_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].layout + _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].path) !== -1) {
+        return _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].name;
       }
     }
 
@@ -1751,7 +1746,7 @@ function Admin(props) {
   return redirectBack ? window.location = '/' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notify_toast__WEBPACK_IMPORTED_MODULE_2___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "wrapper black-dashboard"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_admin_Sidebar_Sidebar_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, props, {
-    routes: _routes_admin_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    routes: _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"],
     bgColor: backgroundColor,
     toggleSidebar: toggleSidebar
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1760,7 +1755,7 @@ function Admin(props) {
     brandText: getBrandText(props.location.pathname),
     toggleSidebar: toggleSidebar,
     sidebarOpened: sidebarOpened
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, getRoutes(_routes_admin_js__WEBPACK_IMPORTED_MODULE_7__["default"]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, getRoutes(_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     from: "/admin",
     to: "admin/dashboard"
   })), // we don't want the Footer to be rendered on map page
@@ -2633,15 +2628,7 @@ function (_React$Component) {
         chart: react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__["Line"],
         api: this.chartMultiple
       }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-        lg: "6"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_Chart__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        type: "bar",
-        chart: react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__["Bar"],
-        api: "orders/countries",
-        icon: "tim-icons icon-world text-warning",
-        color: "#ff8d72"
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
-        lg: "6"
+        lg: "12"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_Chart__WEBPACK_IMPORTED_MODULE_9__["default"], {
         type: "bar",
         chart: react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__["Bar"],
@@ -2998,55 +2985,65 @@ function Order(props) {
       order = _useState2[0],
       setOrder = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState4 = _slicedToArray(_useState3, 2),
-      products = _useState4[0],
-      setProducts = _useState4[1];
+      email = _useState4[0],
+      setEmail = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState6 = _slicedToArray(_useState5, 2),
-      productsList = _useState6[0],
-      setProductsList = _useState6[1];
+      name = _useState6[0],
+      setName = _useState6[1];
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState8 = _slicedToArray(_useState7, 2),
-      status = _useState8[0],
-      setStatus = _useState8[1];
+      address = _useState8[0],
+      setAddress = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState10 = _slicedToArray(_useState9, 2),
-      statuses = _useState10[0],
-      setStatuses = _useState10[1];
+      zipCode = _useState10[0],
+      setZipCode = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      redirect = _useState12[0],
-      setRedirect = _useState12[1];
+      products = _useState12[0],
+      setProducts = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState14 = _slicedToArray(_useState13, 2),
-      date = _useState14[0],
-      setDate = _useState14[1];
+      productsList = _useState14[0],
+      setProductsList = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState16 = _slicedToArray(_useState15, 2),
-      user = _useState16[0],
-      setUser = _useState16[1];
+      status = _useState16[0],
+      setStatus = _useState16[1];
 
   var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      users = _useState18[0],
-      setUsers = _useState18[1];
+      statuses = _useState18[0],
+      setStatuses = _useState18[1];
 
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState20 = _slicedToArray(_useState19, 2),
-      value = _useState20[0],
-      setValue = _useState20[1];
+      redirect = _useState20[0],
+      setRedirect = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState22 = _slicedToArray(_useState21, 2),
+      date = _useState22[0],
+      setDate = _useState22[1];
+
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState24 = _slicedToArray(_useState23, 2),
+      value = _useState24[0],
+      setValue = _useState24[1];
 
   var id = props.match.params.id;
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     (function _callee() {
-      var statuses, users, _order, _products;
+      var statuses, _order, _products;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
         while (1) {
@@ -3063,44 +3060,36 @@ function Order(props) {
                   value: status.id
                 }, status.name);
               }));
-              _context.next = 6;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(UserService.all());
-
-            case 6:
-              users = _context.sent;
-              setUsers(users.map(function (user) {
-                return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-                  key: user.id,
-                  value: user.id
-                }, user.email);
-              }));
 
               if (!(id !== 'new')) {
-                _context.next = 18;
+                _context.next = 17;
                 break;
               }
 
-              _context.next = 11;
+              _context.next = 7;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].get(id));
 
-            case 11:
+            case 7:
               _order = _context.sent;
+              setOrder(_order);
               setProducts(_order.products);
               setStatus(_order.status.id);
-              setUser(_order.user.id);
-              setOrder(_order);
-              _context.next = 22;
+              setEmail(_order.details.email);
+              setName(_order.details.name);
+              setAddress(_order.details.address);
+              setZipCode(_order.details.zip_code);
+              _context.next = 21;
               break;
 
-            case 18:
-              _context.next = 20;
+            case 17:
+              _context.next = 19;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(ProductService.all());
 
-            case 20:
+            case 19:
               _products = _context.sent;
               setProductsList(_products);
 
-            case 22:
+            case 21:
             case "end":
               return _context.stop();
           }
@@ -3111,7 +3100,7 @@ function Order(props) {
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     var value = 0;
     products.map(function (product) {
-      value += parseFloat(product.price);
+      value += parseFloat(product.price_final);
     });
     setValue(value.toFixed(2));
   }, [products]);
@@ -3122,7 +3111,10 @@ function Order(props) {
       id: order.id,
       status: status,
       products: products,
-      user: user,
+      email: email,
+      name: name,
+      address: address,
+      zip_code: zipCode,
       date: date
     };
     if (id !== 'new') _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
@@ -3177,17 +3169,47 @@ function Order(props) {
     disabled: true
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Customer"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    type: "select",
-    value: user,
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Customer email"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+    type: "text",
+    value: email,
     onChange: function onChange(e) {
-      return setUser(e.target.value);
+      return setEmail(e.target.value);
     },
     className: props.bgColor,
     required: true
-  }, users))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
     md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Data zakupu"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Customer name"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+    type: "text",
+    value: name,
+    onChange: function onChange(e) {
+      return setName(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+    md: "12"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Customer address"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+    type: "text",
+    value: address,
+    onChange: function onChange(e) {
+      return setAddress(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+    md: "12"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Customer zip code"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+    type: "text",
+    value: zipCode,
+    onChange: function onChange(e) {
+      return setZipCode(e.target.value);
+    },
+    className: props.bgColor,
+    required: true
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+    md: "12"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Date"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     value: id !== 'new' ? order.created_at : date,
     className: props.bgColor,
     onChange: function onChange(e) {
@@ -3213,7 +3235,7 @@ function Order(props) {
     required: true
   }, statuses)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     className: "btn-fill",
-    color: props.bgColor,
+    color: "success",
     type: "submit"
   }, "Save"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     className: "btn-fill",

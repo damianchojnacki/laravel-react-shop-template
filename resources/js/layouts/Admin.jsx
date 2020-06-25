@@ -25,19 +25,17 @@ import AdminNavbar from "../components/admin/Navbars/AdminNavbar.jsx";
 import Footer from "../components/admin/Footer/Footer.jsx";
 import Sidebar from "../components/admin/Sidebar/Sidebar.jsx";
 import FixedPlugin from "../components/admin/FixedPlugin/FixedPlugin.jsx";
-
+import PerfectScrollbar from "perfect-scrollbar";
+import AuthService from "../utils/AuthService";
+import { useAuth } from "../utils/AuthContext";
 import routes from "../routes/admin.js";
 
 import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";
 
-import PerfectScrollbar from "perfect-scrollbar";
-import AuthService from "../utils/AuthService";
-import {AuthContext} from "../utils/AuthContext";
-
 function Admin(props) {
 
-    const { state, dispatch } = React.useContext(AuthContext);
+    const auth = useAuth();
     const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem('background'));
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode'));
     const [sidebarOpened, setSidebarOpened] =  useState(document.documentElement.className.indexOf("nav-open") !== -1);
@@ -45,25 +43,19 @@ function Admin(props) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        state.authenticated ?
+        auth.state.authenticated ?
             AuthService.getUser()
-                .then(res => {
-                    dispatch({type: "login", payload: res.data});
-                })
-                .catch(() => {
-                    dispatch({type: "logout"});
-                })
-                .finally(() => {
-                    setLoading(false);
-                })
+                .then(res => auth.dispatch({type: "login", payload: res.data}))
+                .catch(() => auth.dispatch({type: "logout"}))
+                .finally(() => setLoading(false))
             :
-            setLoading(false);
+                setLoading(false);
 
         darkMode === 'light' ?  document.body.classList.add("white-content") : document.body.classList.remove("white-content");
     }, []);
 
     useEffect(() => {
-        (!loading && (!state.authenticated || state.user.name !== 'admin')) && setRedirectBack(true);
+        (!loading && (!auth.state.authenticated || auth.state.user.name !== 'admin')) && setRedirectBack(true);
 
         let tables = document.querySelectorAll(".table-responsive");
         for (let i = 0; i < tables.length; i++) new PerfectScrollbar(tables[i]);

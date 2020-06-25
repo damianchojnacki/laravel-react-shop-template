@@ -53,7 +53,7 @@ function Homepage(props){
             </Helmet>
 
             <main className="d-flex flex-column">
-                {result === "success" &&
+                {result === "register-success" &&
                     <Alert theme="success" className="m-2 mb-4">
                         <Translate id="welcome"/>
                     </Alert>

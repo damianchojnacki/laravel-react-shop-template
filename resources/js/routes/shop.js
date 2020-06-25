@@ -31,14 +31,14 @@ export default [
         layout: "/shop"
     },
     {
-        path: "/register/:result",
-        component: Homepage,
+        path: "/checkout",
+        component: Checkout,
         layout: "/shop",
         hidden: true
     },
     {
-        path: "/checkout",
-        component: Checkout,
+        path: "/:result?",
+        component: Homepage,
         layout: "/shop",
         hidden: true
     },

@@ -33229,7 +33229,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40077,6 +40077,7 @@ function () {
     key: "register",
     value: function register(credentials) {
       credentials.password_confirmation = credentials.passwordConfirmation;
+      credentials.passwordConfirmation = null;
       return window.axios.post('/api/register', credentials).then(function (res) {
         js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
           expires: 7

@@ -22,13 +22,13 @@ class OrderController extends Controller
     }
 
     public function index($page){
-        $orders = Order::with(['user.country', 'status'])->skip(($page - 1) * 10)->take(10)->get();
+        $orders = Order::skip(($page - 1) * 10)->take(10)->get();
 
         return response(OrderResource::collection($orders), 200);
     }
 
     public function recent(){
-        $orders = Order::with('user.country')->whereHas('status', function($status){
+        $orders = Order::whereHas('status', function($status){
             $status->where('name', 'preparing');
         })->orderBy('created_at', 'DESC')->take(10)->get();
 
@@ -43,7 +43,7 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = Order::with(['products.image', 'status', 'user.country'])->findOrFail($id);
+        $order = Order::with('products.image')->findOrFail($id);
 
         if(!Auth::user()->isAdmin() && Auth::user()->id != $order->user->id)
             return response("You are not authorized to see this order.", 401);
@@ -53,7 +53,7 @@ class OrderController extends Controller
 
     public function search($id)
     {
-        $order = Order::with(['status', 'user.country'])->where('id', 'like', "%$id%")->take(100)->get();
+        $order = Order::where('id', 'like', "%$id%")->take(100)->get();
 
         return response(OrderResource::collection($order), 200);
     }
@@ -70,26 +70,28 @@ class OrderController extends Controller
         $request->validate([
             'status' => 'required|min:1|max:4',
             'products' => 'required|array',
-            'user' => 'required|min:1',
+            'email' => 'required|email',
+            'name' => 'required|string|min:1',
+            'address' => 'required|string|min:6',
+            'zip_code' => 'required|min:5|max:6',
             'date' => 'date',
         ]);
 
         $order = new Order();
-        $request->exists('date') && $order->created_at = Carbon::createFromDate($request->input('date'));
-        $order->status()->associate(OrderStatus::findOrFail($request->input('status')));
-        $order->user()->associate(User::findOrFail($request->input('user')));
+        $request->exists('date') && $order->created_at = Carbon::createFromDate($request->date);
+        $order->status()->associate(OrderStatus::findOrFail($request->status));
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user)
+            $order->user()->associate($user);
+
+        $details = new OrderDetails($request->toArray());
+
         $order->save();
+        $order->details()->save($details);
 
-        foreach($request->input('products') as $product){
-            $existing = $order->products()->where('name', $product['name'])->first();
-
-            if($existing){
-                $existing->pivot->quantity++;
-                $existing->pivot->save();
-            }
-            else
-                $order->products()->attach(Product::find($product['id']), ['quantity' => 1]);
-        }
+        $order->productsSet($request->products);
 
         return response($order->id, 200);
     }
@@ -100,17 +102,22 @@ class OrderController extends Controller
             'id' => 'uuid',
             'status' => 'required|min:1|max:4',
             'products' => 'required|array',
-            'user' => 'required|min:1',
+            'email' => 'required|email',
+            'name' => 'required|string|min:1',
+            'address' => 'required|string|min:6',
+            'zip_code' => 'required|min:5|max:6',
         ]);
 
-        $order = Order::findOrFail($request->input('id'));
-        $order->status()->associate(OrderStatus::findOrFail($request->input('status')));
-        $order->user()->associate(User::findOrFail($request->input('user')));
+        $order = Order::findOrFail($request->id);
+        $order->status()->associate(OrderStatus::findOrFail($request->status));
+        $order->details()->update($request->only(['email', 'name', 'address', 'zip_code']));
 
-        $order->products()->detach();
+        $user = User::where('email', $request->email)->first();
 
-        foreach($request->input('products') as $product)
-            $order->products()->attach(Product::find($product['id']), ['quantity' => $product['pivot']['quantity']]);
+        if($user)
+            $order->user()->associate($user);
+
+        $order->productsSet($request->products);
 
         $order->save();
 
@@ -122,7 +129,7 @@ class OrderController extends Controller
         $request->validate([
             'email' => 'email',
             'name' => 'required|string|min:1',
-            'address' => 'required|string:min:6',
+            'address' => 'required|string|min:6',
             'zip_code' => 'required|min:5|max:6',
             'coupon' => 'max:12',
             'products' => 'required',

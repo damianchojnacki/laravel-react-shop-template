@@ -22,14 +22,16 @@ import ProductsList from "../../components/admin/ProductsList";
 
 function Order(props) {
     const [order, setOrder] = useState({});
+    const [email, setEmail] = useState();
+    const [name, setName] = useState();
+    const [address, setAddress] = useState();
+    const [zipCode, setZipCode] = useState();
     const [products, setProducts] = useState([]);
     const [productsList, setProductsList] = useState([]);
     const [status, setStatus] = useState();
     const [statuses, setStatuses] = useState([]);
     const [redirect, setRedirect] = useState();
     const [date, setDate] = useState('');
-    const [user, setUser] = useState('');
-    const [users, setUsers] = useState([]);
     const [value, setValue] = useState(0);
 
     const id = props.match.params.id;
@@ -42,19 +44,16 @@ function Order(props) {
                 return <option key={status.id} value={status.id}>{status.name}</option>
             }));
 
-            const users = await UserService.all();
-
-            setUsers(users.map((user) => {
-                return <option key={user.id} value={user.id}>{user.email}</option>
-            }));
-
             if(id !== 'new'){
                 const order = await OrderService.get(id);
 
+                setOrder(order);
                 setProducts(order.products);
                 setStatus(order.status.id);
-                setUser(order.user.id);
-                setOrder(order);
+                setEmail(order.details.email);
+                setName(order.details.name);
+                setAddress(order.details.address);
+                setZipCode(order.details.zip_code);
             }
             else{
                 const products = await ProductService.all();
@@ -68,7 +67,7 @@ function Order(props) {
         let value = 0;
 
         products.map(product => {
-            value += parseFloat(product.price);
+            value += parseFloat(product.price_final);
         });
 
         setValue(value.toFixed(2));
@@ -81,7 +80,10 @@ function Order(props) {
             id: order.id,
             status: status,
             products: products,
-            user: user,
+            email: email,
+            name: name,
+            address: address,
+            zip_code: zipCode,
             date: date,
         };
 
@@ -152,21 +154,55 @@ function Order(props) {
                                 }
                                 <Row>
                                     <Col md="12">
-                                        <label>Customer</label>
+                                        <label>Customer email</label>
                                         <Input
-                                            type="select"
-                                            value={user}
-                                            onChange={e => setUser(e.target.value)}
+                                            type="text"
+                                            value={email}
+                                            onChange={e => setEmail(e.target.value)}
                                             className={props.bgColor}
                                             required
-                                        >
-                                            {users}
-                                        </Input>
+                                        />
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col md="12">
-                                        <label>Data zakupu</label>
+                                        <label>Customer name</label>
+                                        <Input
+                                            type="text"
+                                            value={name}
+                                            onChange={e => setName(e.target.value)}
+                                            className={props.bgColor}
+                                            required
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md="12">
+                                        <label>Customer address</label>
+                                        <Input
+                                            type="text"
+                                            value={address}
+                                            onChange={e => setAddress(e.target.value)}
+                                            className={props.bgColor}
+                                            required
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md="12">
+                                        <label>Customer zip code</label>
+                                        <Input
+                                            type="text"
+                                            value={zipCode}
+                                            onChange={e => setZipCode(e.target.value)}
+                                            className={props.bgColor}
+                                            required
+                                    />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md="12">
+                                        <label>Date</label>
                                         <Input
                                             value={id !== 'new' ? order.created_at : date}
                                             className={props.bgColor}
@@ -202,7 +238,7 @@ function Order(props) {
                                 </Row>
                             </CardBody>
                             <CardFooter>
-                                <Button className="btn-fill" color={props.bgColor} type="submit">
+                                <Button className="btn-fill" color="success" type="submit">
                                     Save
                                 </Button>
                                 <Button className="btn-fill" color="danger" type="button" onClick={handleDelete}>

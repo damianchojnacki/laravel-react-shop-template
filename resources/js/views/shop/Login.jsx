@@ -35,7 +35,7 @@ export default function Login() {
                 .then(() => {
                     AuthService.getUser().then(res => {
                         setErrors({});
-                        dispatch({type: "login", payload: res.data});
+                        auth.dispatch({type: "login", payload: res.data});
                     });
                 })
                 .catch(error => {
@@ -57,7 +57,7 @@ export default function Login() {
                     AuthService.loginWithGoogle(user).then(() => {
                         AuthService.getUser().then(res => {
                             setErrors({});
-                            dispatch({type: "login", payload: res.data});
+                            auth.dispatch({type: "login", payload: res.data});
                             setTimeout(() => setLoading(false), 1000);
                         });
                     });

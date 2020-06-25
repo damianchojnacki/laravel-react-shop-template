@@ -36,11 +36,11 @@ import {
     Container,
     Modal
 } from "reactstrap";
-import {AuthContext} from "../../../utils/AuthContext";
+import {useAuth} from "../../../utils/AuthContext";
 import AuthService from "../../../utils/AuthService";
 
 function AdminNavbar(props) {
-    const { state, dispatch } = React.useContext(AuthContext);
+    const auth = useAuth();
     const [collapseOpen, setCollapseOpen] = useState(false);
     const [modalSearch, setModalSearch] = useState(false);
     const [color, setColor] = useState("navbar-transparent");
@@ -54,8 +54,7 @@ function AdminNavbar(props) {
     const handleLogout = (e) => {
         e.preventDefault();
 
-        AuthService.logout();
-        dispatch({ type: "logout" });
+        auth.dispatch({ type: "logout" });
     };
 
     // function that adds color white/transparent to the navbar on resize (this is for the collapse)
@@ -73,7 +72,6 @@ function AdminNavbar(props) {
     const toggleModalSearch = () => {
         setModalSearch(!modalSearch)
     };
-
 
     return (
         <>

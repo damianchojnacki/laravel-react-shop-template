@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -60,16 +59,16 @@ class AuthController extends Controller {
             return response([
                 'token' => $token,
             ]);
-        } else {
-            return response('Authentication failed.', 403);
         }
+            
+        return response('Authentication failed.', 403);
     }
 
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
             'email'    => 'required|string|email|max:255|unique:users',
+            'name'  => 'required|string|min:3|max:64',
             'password' => 'required|string|min:6|confirmed',
-            'country' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -80,21 +79,20 @@ class AuthController extends Controller {
         $user->email = $request['email'];
         $user->name = $request['name'];
         $user->password = Hash::make($request['password']);
-        $user->country()->associate(Country::find($request['country']));
         $user->saveOrFail();
 
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-        $response = ['token' => $token];
 
-        return response($response);
+        return response([
+            'token' => $token
+        ]);
     }
 
     public function logout (Request $request) {
         $token = $request->user()->token();
         $token->revoke();
 
-        $response = 'You have been succesfully logged out!';
-        return response($response);
+        return response('You have been succesfully logged out!');
     }
 
     public function getGoogleClientId() {

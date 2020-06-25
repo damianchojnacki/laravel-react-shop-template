@@ -10,6 +10,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {checkFullName, isEmail, equals} from "../../utils/helpers";
 import Translate from "../../components/Translate";
+import { useLanguage } from '../../utils/LanguageContext';
 
 export default function Register() {
 
@@ -52,7 +53,7 @@ export default function Register() {
             AuthService.register(credentials)
                 .then(() => {
                     AuthService.getUser().then(res => {
-                        dispatch({type: "login", payload: res.data});
+                        auth.dispatch({type: "login", payload: res.data});
                     });
                 })
                 .catch(error => {
@@ -118,9 +119,9 @@ export default function Register() {
                 <Translate id="register-welcome"/>
             </h1>
             {errors &&
-            errors.map((e, index) => <Alert theme="danger" key={index}>{e}</Alert>)
+                errors.map((e, index) => <Alert theme="danger" key={index}>{e}</Alert>)
             }
-            <Button block onClick={nextStep} size="lg">
+            <Button block size="lg" onClick={nextStep}>
                 <Translate id="register-start"/>
             </Button>
         </div>,
@@ -152,7 +153,7 @@ export default function Register() {
                 </InputGroupAddon>
                 <FormInput size="lg" invalid={!!name && !validateStep()} type="text" onChange={(e) => {setName(e.target.value)}} value={name} style={{paddingLeft: 50+"px"}} required autoFocus/>
             </InputGroup>
-            <Button size="lg" onClick={previousStep}>
+            <Button size="lg" onClick={previousStep} >
                 <Translate id="register-back"/>
             </Button>
             <Button size="lg" onClick={nextStep} className="float-right">
@@ -223,7 +224,7 @@ export default function Register() {
 
     return auth.state.authenticated && !loading
         ?
-        <Redirect to="/register/success"/>
+        <Redirect to="/register-success"/>
         :
         (
             <>

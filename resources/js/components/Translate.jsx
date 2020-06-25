@@ -9,7 +9,7 @@ function Translate({id}) {
 
     useEffect(() => {
         setTranslated(LanguageService.translate(id))
-    }, [language.state]);
+    }, [language.state, id]);
 
     return translated;
 }

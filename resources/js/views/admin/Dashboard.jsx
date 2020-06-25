@@ -95,16 +95,7 @@ class Dashboard extends React.Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg="6">
-                            <Chart
-                                type="bar"
-                                chart={Bar}
-                                api="orders/countries"
-                                icon="tim-icons icon-world text-warning"
-                                color="#ff8d72"
-                            />
-                        </Col>
-                        <Col lg="6">
+                        <Col lg="12">
                             <Chart
                                 type="bar"
                                 chart={Bar}

@@ -135,7 +135,13 @@ function Checkout() {
                 })
             },
             onApprove: (data, actions) => {
+                OrderService.clearCookie();
+                cart.dispatch({type: 'reset'});
+                
                 setPendingState(4);
+
+                setTimeout(() => setRedirect(true), 2000);
+
             },
             onCancel: () => {
                 setTimeout(() => setPendingState(-2), 1000);

@@ -28,6 +28,7 @@ class AuthService{
 
     static register(credentials) {
         credentials.password_confirmation = credentials.passwordConfirmation;
+        credentials.passwordConfirmation = null;
 
         return window.axios.post('/api/register', credentials)
             .then(res => {
