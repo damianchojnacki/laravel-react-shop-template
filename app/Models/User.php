@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -39,7 +38,7 @@ class User extends Authenticatable
     ];
 
     public function isAdmin(){
-        return $this->name == 'admin' && $this->is_admin == 1;
+        return $this->name == 'admin' && $this->is_admin == true;
     }
 
     public function orders(){

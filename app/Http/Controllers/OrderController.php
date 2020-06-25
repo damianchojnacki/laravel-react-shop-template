@@ -138,10 +138,11 @@ class OrderController extends Controller
         if(count($request->products) > 0){
             $request->email = Auth::user()->email ?? $request->email;
 
-            $order = Order::find(\Cookie::get('order_id'));
+            $previous = \Cookie::get('order');
 
-            if($order){
-                $order->details()->update($request->except('terms'));
+            if($previous){
+                $order = Order::find(json_decode($previous)->id);
+                $order->details()->update($request->except(['terms', 'coupon', 'products']));
             } else {
                 $order = new Order();
                 $details = new OrderDetails($request->toArray());
@@ -159,7 +160,7 @@ class OrderController extends Controller
             $order->save();
 
             return response([
-                'order' => $request->except(['terms', 'products', 'coupon']),
+                'order' => new OrderResource(Order::with('details')->find($order->id)),
                 'paypalClientId' => config('services.paypal.client_id')
             ]);
         } else

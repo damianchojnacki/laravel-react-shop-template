@@ -1933,10 +1933,10 @@ function Checkout() {
     var order = _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].fromCookie();
 
     if (order) {
-      setName(order.name);
-      setEmail(order.email);
-      setAddress(order.address);
-      setZipCode(order.zip_code);
+      setName(order.details.name);
+      setEmail(order.details.email);
+      setAddress(order.details.address);
+      setZipCode(order.details.zip_code);
       setTerms(true);
     }
   }, []);
@@ -2116,7 +2116,7 @@ function Checkout() {
       id: 'address'
     },
     loadOptions: searchForAddress,
-    defaultValue: {
+    value: {
       label: address,
       value: address
     },

@@ -50,10 +50,10 @@ function Checkout() {
         const order = OrderService.fromCookie();
 
         if(order){
-            setName(order.name);
-            setEmail(order.email);
-            setAddress(order.address);
-            setZipCode(order.zip_code);
+            setName(order.details.name);
+            setEmail(order.details.email);
+            setAddress(order.details.address);
+            setZipCode(order.details.zip_code);
             setTerms(true);
         }
     }, []);
@@ -216,7 +216,7 @@ function Checkout() {
                                     onChange={e => setAddress(e.value)}
                                     inputProps={{id: 'address'}}
                                     loadOptions={searchForAddress}
-                                    defaultValue={{ label: address, value: address }}
+                                    value={{ label: address, value: address }}
                                     disabled={pendingState > 0}
                                     styles={{
                                         menu: provided => ({
