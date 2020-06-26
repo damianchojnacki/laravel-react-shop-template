@@ -12,7 +12,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".cart {\n  position: fixed !important;\n  bottom: 2rem;\n  right: 2rem;\n  z-index: 2;\n}\n\n.cart__empty {\n  min-width: 280px;\n}\n\n.cart__empty .dropdown-item {\n  padding: 1rem 2rem;\n  font-size: 1rem !important;\n}\n\n.cart__button {\n  border-radius: 50%;\n  height: 60px;\n  width: 60px;\n  text-align: center;\n  padding: 0;\n}\n\n.cart__header {\n  padding: 1rem 0 0 2rem;\n}\n\n.cart__field {\n  padding: 0 .5rem;\n}\n\n.cart__field:nth-child(2) {\n  border-left: 1px solid silver;\n  border-right: 1px solid silver;\n}\n\n.cart__field:nth-child(3) {\n  border-right: 1px solid silver;\n}\n\n@media (max-width: 765px) {\n  .cart__field {\n    overflow: auto;\n    display: inline-block;\n    vertical-align: middle;\n  }\n  .cart__field:nth-child(1) {\n    width: 30%;\n  }\n  .cart__field:nth-child(2) {\n    width: 25%;\n    text-align: center;\n  }\n  .cart__field:nth-child(3) {\n    width: 10%;\n    border-right: 1px solid silver;\n    text-align: center;\n  }\n  .cart__field:nth-child(4) {\n    width: 30%;\n    overflow: visible;\n  }\n}\n\n@media (min-width: 1200px) {\n  .cart__field {\n    font-size: 1rem;\n    padding: 0 1rem;\n  }\n}\n\n.cart__sum {\n  border-top: 1px solid silver !important;\n  text-align: right;\n  padding: .5rem 2.25rem;\n  padding-right: .5rem;\n  margin-right: 1rem !important;\n}\n\n@media (min-width: 1200px) {\n  .cart__sum {\n    font-size: 1rem;\n  }\n}\n\n@media (max-width: 1200px) {\n  .cart__sum {\n    margin-right: .5rem !important;\n  }\n}\n\n.cart .list-group-item {\n  display: flex;\n  justify-content: flex-end;\n}\n\n@media (max-width: 765px) {\n  .cart .list-group-item {\n    max-width: 280px;\n    display: block;\n  }\n}\n\n@media (max-width: 1200px) {\n  .cart .list-group-item {\n    padding-left: .5rem;\n    padding-right: .5rem;\n  }\n}\n", ""]);
+exports.push([module.i, ".cart {\n  position: fixed !important;\n  bottom: 2rem;\n  right: 2rem;\n  z-index: 5;\n}\n\n.cart__empty {\n  min-width: 280px;\n}\n\n.cart__empty .dropdown-item {\n  padding: 1rem 2rem;\n  font-size: 1rem !important;\n}\n\n.cart__button {\n  border-radius: 50%;\n  height: 60px;\n  width: 60px;\n  text-align: center;\n  padding: 0;\n}\n\n.cart__header {\n  padding: 1rem 0 0 2rem;\n}\n\n.cart__field {\n  padding: 0 .5rem;\n}\n\n.cart__field:nth-child(2) {\n  border-left: 1px solid silver;\n  border-right: 1px solid silver;\n}\n\n.cart__field:nth-child(3) {\n  border-right: 1px solid silver;\n}\n\n@media (max-width: 765px) {\n  .cart__field {\n    overflow: auto;\n    display: inline-block;\n    vertical-align: middle;\n  }\n  .cart__field:nth-child(1) {\n    width: 30%;\n  }\n  .cart__field:nth-child(2) {\n    width: 25%;\n    text-align: center;\n  }\n  .cart__field:nth-child(3) {\n    width: 10%;\n    border-right: 1px solid silver;\n    text-align: center;\n  }\n  .cart__field:nth-child(4) {\n    width: 30%;\n    overflow: visible;\n  }\n}\n\n@media (min-width: 1200px) {\n  .cart__field {\n    font-size: 1rem;\n    padding: 0 1rem;\n  }\n}\n\n.cart__sum {\n  border-top: 1px solid silver !important;\n  text-align: right;\n  padding: .5rem 2.25rem;\n  padding-right: .5rem;\n  margin-right: 1rem !important;\n}\n\n@media (min-width: 1200px) {\n  .cart__sum {\n    font-size: 1rem;\n  }\n}\n\n@media (max-width: 1200px) {\n  .cart__sum {\n    margin-right: .5rem !important;\n  }\n}\n\n.cart .list-group-item {\n  display: flex;\n  justify-content: flex-end;\n}\n\n@media (max-width: 765px) {\n  .cart .list-group-item {\n    max-width: 280px;\n    display: block;\n  }\n}\n\n@media (max-width: 1200px) {\n  .cart .list-group-item {\n    padding-left: .5rem;\n    padding-right: .5rem;\n  }\n}\n", ""]);
 
 // exports
 
@@ -631,7 +631,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function Footer(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
-    className: "py-4 bg-secondary text-light"
+    className: "py-4 bg-secondary text-light",
+    style: {
+      zIndex: 4
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "text-center m-0"
   }, "\xA9 2020 Copyright ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Badge"], {
@@ -942,17 +945,17 @@ var PaymentProgress = react__WEBPACK_IMPORTED_MODULE_1___default.a.forwardRef(fu
 
   function getProgressText() {
     switch (pendingState) {
-      case 1:
+      case 3:
         return "Creating the order...";
 
-      case 2:
+      case 4:
         return "Loading the payment options...";
 
-      case 3:
+      case 5:
         return "Processing the payment...";
 
       default:
-        return "Finishing...";
+        return "Trasaction in process...";
     }
   }
 
@@ -1068,15 +1071,7 @@ function ProductsListComplex(props) {
       className: "mx-2"
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, product.price_final, " ", currency.state.symbol)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, product.price_origin, " ", currency.state.symbol)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["CardFooter"], {
       className: "d-flex flex-wrap justify-content-between"
-    }, product.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, cart.state.products.includes(product.id) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-      size: "sm",
-      className: "btn btn-danger my-1",
-      onClick: function onClick() {
-        return removeFromCart(product);
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      id: "cart-remove"
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    }, product.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       size: "sm",
       className: "btn btn-secondary my-1",
       onClick: function onClick() {
@@ -1084,6 +1079,14 @@ function ProductsListComplex(props) {
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_8__["default"], {
       id: "cart-add"
+    })), cart.state.products.includes(product.id) && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      size: "sm",
+      className: "btn btn-danger my-1",
+      onClick: function onClick() {
+        return removeFromCart(product);
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      id: "cart-remove"
     })))));
   });
 }
@@ -1873,6 +1876,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Checkout() {
+  var _ref;
+
   var cart = Object(_utils_CartContext__WEBPACK_IMPORTED_MODULE_3__["useCart"])();
   var auth = Object(_utils_AuthContext__WEBPACK_IMPORTED_MODULE_21__["useAuth"])();
   var currency = Object(_utils_CurrencyContext__WEBPACK_IMPORTED_MODULE_14__["useCurrency"])();
@@ -1922,7 +1927,28 @@ function Checkout() {
       _useState18 = _slicedToArray(_useState17, 2),
       pendingState = _useState18[0],
       setPendingState = _useState18[1];
+  /** pendingState meaning:
+   *  -2: canceled
+   *  -1: animation
+   *   0: address form
+   *   1: animation address form
+   *   2: animation shipping form
+   *   3: creating order
+   *   4: loading payment
+   *   5: processing payment
+   *   6: approved
+   */
 
+
+  var credentials = {
+    email: (_ref = auth.state.user && auth.state.user.email) !== null && _ref !== void 0 ? _ref : email,
+    name: name,
+    address: address,
+    zip_code: zipCode,
+    terms: terms,
+    products: products,
+    coupon: cart.state.coupon.code
+  };
   var paypalRef = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])();
 
   function searchForAddress(input, callback) {
@@ -1963,45 +1989,41 @@ function Checkout() {
     })();
   }, [cart.state, currency.state]);
 
-  var handleSubmit = function handleSubmit(e) {
-    var _ref;
-
-    e.preventDefault();
-    var credentials = {
-      email: (_ref = auth.state.user && auth.state.user.email) !== null && _ref !== void 0 ? _ref : email,
-      name: name,
-      address: address,
-      zip_code: zipCode,
-      terms: terms,
-      products: products,
-      coupon: cart.state.coupon.code
-    };
+  function validateData() {
     var validation = Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_13__["shippingDataValidate"])(credentials);
     setInvalids(validation.invalids);
 
     if (validation.passed && pendingState <= 0) {
-      setPendingState(-1);
+      setPendingState(1);
       setTimeout(function () {
-        setPendingState(1);
-        _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].make(credentials).then(function (response) {
-          _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].toCookie(response.data.order);
-          setPendingState(2);
-          var script = document.createElement("script");
-          script.src = "https://www.paypal.com/sdk/js?client-id=".concat(response.data.paypalClientId, "&currency=").concat(currency.state.iso);
-          script.addEventListener("load", function () {
-            return loadPaypal();
-          });
-          document.body.appendChild(script);
-        })["catch"](function (error) {
-          setPendingState(0);
-          react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(error.response.data);
-        });
+        return setPendingState(2);
       }, 1000);
     }
+  }
+
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    setPendingState(-1);
+    setTimeout(function () {
+      setPendingState(3);
+      _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].make(credentials).then(function (response) {
+        _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].toCookie(response.data.order);
+        setPendingState(4);
+        var script = document.createElement("script");
+        script.src = "https://www.paypal.com/sdk/js?client-id=".concat(response.data.paypalClientId, "&currency=").concat(currency.state.iso);
+        script.addEventListener("load", function () {
+          return loadPaypal();
+        });
+        document.body.appendChild(script);
+      })["catch"](function (error) {
+        setPendingState(0);
+        react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(error.response.data);
+      });
+    }, 1000);
   };
 
   function loadPaypal() {
-    setPendingState(3);
+    setPendingState(5);
     var sum = coupon.percent_off ? _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProductsWithDiscount(products, coupon) : _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProducts(products);
     window.paypal.Buttons({
       createOrder: function createOrder(data, actions) {
@@ -2030,7 +2052,7 @@ function Checkout() {
         cart.dispatch({
           type: 'reset'
         });
-        setPendingState(4);
+        setPendingState(6);
         setTimeout(function () {
           return setRedirect(true);
         }, 2000);
@@ -2051,7 +2073,7 @@ function Checkout() {
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, redirect && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["Redirect"], {
     to: "/"
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_6__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Checkout")), pendingState > -2 && pendingState < 1 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_6__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Checkout")), pendingState > -2 && pendingState <= 2 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row w-100 my-5 align-items-center justify-content-center ".concat(pendingState < 0 && "animated fadeOutDown fast"),
     style: {
       zIndex: 1
@@ -2070,6 +2092,8 @@ function Checkout() {
     className: "col-lg-6 col-12 text-center"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Form"], {
     onSubmit: handleSubmit
+  }, pendingState < 2 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "".concat(pendingState > 0 && "animated fadeOutDown fast")
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
     className: "my-4"
   }, "Please fill all the shipment data:"), !auth.user && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
@@ -2169,10 +2193,23 @@ function Checkout() {
     invalid: invalids.includes("terms")
   }, "I agree with the terms and conditions of usage The Shop."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     block: true,
+    type: "button",
+    size: "lg",
+    color: "success",
+    className: "mt-4",
+    onClick: function onClick() {
+      return validateData();
+    }
+  }, "Proceed to shipment")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "".concat(pendingState > 1 && "animated fadeInUp fast")
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
+    className: "my-4"
+  }, "Please select shipment:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+    block: true,
     size: "lg",
     color: "success",
     className: "mt-4"
-  }, "Proceed to payment")))) : pendingState > 0 && pendingState < 4 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_PaymentProgress__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }, "Proceed to payment"))))) : pendingState > 0 && pendingState < 6 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_PaymentProgress__WEBPACK_IMPORTED_MODULE_20__["default"], {
     pendingState: pendingState,
     ref: paypalRef
   }) : pendingState === -2 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {

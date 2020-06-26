@@ -39,6 +39,28 @@ function Checkout() {
     const [invalids, setInvalids] = useState([]);
     const [redirect, setRedirect] = useState(false);
     const [pendingState, setPendingState] = useState(0);
+    
+    /** pendingState meaning:
+     *  -2: canceled
+     *  -1: animation
+     *   0: address form
+     *   1: animation address form
+     *   2: animation shipping form
+     *   3: creating order
+     *   4: loading payment
+     *   5: processing payment
+     *   6: approved
+     */ 
+
+    const credentials = {
+        email: (auth.state.user && auth.state.user.email) ?? email,
+        name,
+        address,
+        zip_code: zipCode,
+        terms,
+        products,
+        coupon: cart.state.coupon.code
+    };
 
     const paypalRef = useRef();
 
@@ -66,48 +88,44 @@ function Checkout() {
         })();
     }, [cart.state, currency.state]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const credentials = {
-            email: (auth.state.user && auth.state.user.email) ?? email,
-            name,
-            address,
-            zip_code: zipCode,
-            terms,
-            products,
-            coupon: cart.state.coupon.code
-        };
-
+    function validateData(){
         const validation = shippingDataValidate(credentials);
 
         setInvalids(validation.invalids);
 
         if (validation.passed && pendingState <= 0) {
-            setPendingState(-1);
-            setTimeout(() => {
-                setPendingState(1);
-
-                OrderService.make(credentials)
-                    .then(response => {
-                        OrderService.toCookie(response.data.order);
-
-                        setPendingState(2);
-                        const script = document.createElement("script");
-                        script.src = `https://www.paypal.com/sdk/js?client-id=${response.data.paypalClientId}&currency=${currency.state.iso}`;
-                        script.addEventListener("load", () => loadPaypal());
-                        document.body.appendChild(script);
-                    })
-                    .catch(error => {
-                        setPendingState(0);
-                        notify.show(error.response.data);
-                    });
-            }, 1000);
+            setPendingState(1); 
+            setTimeout(() => setPendingState(2), 1000);
         }
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        setPendingState(-1);
+
+        setTimeout(() => {
+            setPendingState(3);
+
+            OrderService.make(credentials)
+                .then(response => {
+                    OrderService.toCookie(response.data.order);
+
+                    setPendingState(4);
+                    const script = document.createElement("script");
+                    script.src = `https://www.paypal.com/sdk/js?client-id=${response.data.paypalClientId}&currency=${currency.state.iso}`;
+                    script.addEventListener("load", () => loadPaypal());
+                    document.body.appendChild(script);
+                })
+                .catch(error => {
+                    setPendingState(0);
+                    notify.show(error.response.data);
+                });
+        }, 1000);
     };
 
     function loadPaypal() {
-        setPendingState(3);
+        setPendingState(5);
 
         const sum = coupon.percent_off ? OrderService.getSumOfProductsWithDiscount(products, coupon) : OrderService.getSumOfProducts(products);
 
@@ -138,7 +156,7 @@ function Checkout() {
                 OrderService.clearCookie();
                 cart.dispatch({type: 'reset'});
                 
-                setPendingState(4);
+                setPendingState(6);
 
                 setTimeout(() => setRedirect(true), 2000);
 
@@ -160,7 +178,7 @@ function Checkout() {
             <Helmet>
                 <title>Shop | Checkout</title>
             </Helmet>
-            {(pendingState > -2 && pendingState < 1) ?
+            {(pendingState > -2 && pendingState <= 2) ?
                 <div
                     className={`row w-100 my-5 align-items-center justify-content-center ${pendingState < 0 && "animated fadeOutDown fast"}`}
                     style={{zIndex: 1}}>
@@ -175,102 +193,112 @@ function Checkout() {
                     </div>
                     <div className="col-lg-6 col-12 text-center">
                         <Form onSubmit={handleSubmit}>
-                            <h4 className="my-4">Please fill all the shipment data:</h4>
-                            {!auth.user &&
-                            <FormGroup>
-                                <label htmlFor="email">Email</label>
-                                <InputGroup seamless>
-                                    <InputGroupAddon type="prepend">
-                                        <InputGroupText>
-                                            <FontAwesomeIcon icon={faEnvelope}/>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <FormInput invalid={invalids.includes("email")}
-                                               type="email"
-                                               id="email"
-                                               onChange={e => setEmail(e.target.value)}
-                                               defaultValue={email}
-                                               disabled={pendingState > 0}/>
-                                </InputGroup>
-                            </FormGroup>
+                            {pendingState < 2 ? 
+                                <div className={`${pendingState > 0 && "animated fadeOutDown fast"}`}>
+                                    <h4 className="my-4">Please fill all the shipment data:</h4>
+                                    {!auth.user &&
+                                        <FormGroup>
+                                            <label htmlFor="email">Email</label>
+                                            <InputGroup seamless>
+                                                <InputGroupAddon type="prepend">
+                                                    <InputGroupText>
+                                                        <FontAwesomeIcon icon={faEnvelope} />
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+                                                <FormInput invalid={invalids.includes("email")}
+                                                    type="email"
+                                                    id="email"
+                                                    onChange={e => setEmail(e.target.value)}
+                                                    defaultValue={email}
+                                                    disabled={pendingState > 0} />
+                                            </InputGroup>
+                                        </FormGroup>
+                                    }
+                                    <FormGroup>
+                                        <label htmlFor="name">Full name</label>
+                                        <InputGroup seamless>
+                                            <InputGroupAddon type="prepend">
+                                                <InputGroupText>
+                                                    <FontAwesomeIcon icon={faUser} />
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <FormInput invalid={invalids.includes("name")}
+                                                type="text"
+                                                id="name"
+                                                onChange={e => setName(e.target.value)}
+                                                defaultValue={name}
+                                                disabled={pendingState > 0} />
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <label htmlFor="address">Address</label>
+                                        <AsyncSelect
+                                            onChange={e => setAddress(e.value)}
+                                            inputProps={{ id: 'address' }}
+                                            loadOptions={searchForAddress}
+                                            value={{ label: address, value: address }}
+                                            disabled={pendingState > 0}
+                                            styles={{
+                                                menu: provided => ({
+                                                    ...provided,
+                                                    zIndex: 10,
+                                                    textAlign: "justify",
+                                                }),
+                                                container: provided => ({
+                                                    ...provided,
+                                                    border: invalids.includes("address") ? "1px solid red" : null,
+                                                    borderRadius: ".375rem",
+                                                }),
+                                                valueContainer: provided => ({
+                                                    ...provided,
+                                                    cursor: "text",
+                                                })
+                                            }}
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <label htmlFor="zipCode">ZIP Code</label>
+                                        <InputGroup seamless>
+                                            <InputGroupAddon type="prepend">
+                                                <InputGroupText>
+                                                    <FontAwesomeIcon icon={faMapMarkerAlt} style={{ zIndex: 1 }} />
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <FormInput invalid={invalids.includes("zipCode")}
+                                                type="text"
+                                                id="zipCode"
+                                                defaultValue={zipCode}
+                                                onChange={e => setZipCode(e.target.value)}
+                                                disabled={pendingState > 0} />
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <FormCheckbox
+                                        onChange={() => {
+                                            setTerms(!terms)
+                                        }}
+                                        checked={terms}
+                                        className="my-4"
+                                        invalid={invalids.includes("terms")}
+                                    >
+                                        I agree with the terms and conditions of usage The Shop.
+                                    </FormCheckbox>
+                                    <Button block type="button" size="lg" color="success" className="mt-4" onClick={() => validateData()}>Proceed to shipment</Button>
+                                </div>
+                            :
+                                <div className={`${pendingState > 1 && "animated fadeInUp fast"}`}>
+                                    <h4 className="my-4">Please select shipment:</h4>
+                                    <Button block size="lg" color="success" className="mt-4">Proceed to payment</Button>
+                                </div>
                             }
-                            <FormGroup>
-                                <label htmlFor="name">Full name</label>
-                                <InputGroup seamless>
-                                    <InputGroupAddon type="prepend">
-                                        <InputGroupText>
-                                            <FontAwesomeIcon icon={faUser}/>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <FormInput invalid={invalids.includes("name")}
-                                               type="text"
-                                               id="name"
-                                               onChange={e => setName(e.target.value)}
-                                               defaultValue={name}
-                                               disabled={pendingState > 0}/>
-                                </InputGroup>
-                            </FormGroup>
-                            <FormGroup>
-                                <label htmlFor="address">Address</label>
-                                <AsyncSelect
-                                    onChange={e => setAddress(e.value)}
-                                    inputProps={{id: 'address'}}
-                                    loadOptions={searchForAddress}
-                                    value={{ label: address, value: address }}
-                                    disabled={pendingState > 0}
-                                    styles={{
-                                        menu: provided => ({
-                                            ...provided,
-                                            zIndex: 10,
-                                            textAlign: "justify",
-                                        }),
-                                        container: provided => ({
-                                            ...provided,
-                                            border: invalids.includes("address") ? "1px solid red" : null,
-                                            borderRadius: ".375rem",
-                                        }),
-                                        valueContainer: provided => ({
-                                            ...provided,
-                                            cursor: "text",
-                                        })
-                                    }}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <label htmlFor="zipCode">ZIP Code</label>
-                                <InputGroup seamless>
-                                    <InputGroupAddon type="prepend">
-                                        <InputGroupText>
-                                            <FontAwesomeIcon icon={faMapMarkerAlt} style={{zIndex: 1}}/>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <FormInput invalid={invalids.includes("zipCode")}
-                                               type="text"
-                                               id="zipCode"
-                                               defaultValue={zipCode}
-                                               onChange={e => setZipCode(e.target.value)}
-                                               disabled={pendingState > 0}/>
-                                </InputGroup>
-                            </FormGroup>
-                            <FormCheckbox
-                                onChange={() => {
-                                    setTerms(!terms)
-                                }}
-                                checked={terms}
-                                className="my-4"
-                                invalid={invalids.includes("terms")}
-                            >
-                                I agree with the terms and conditions of usage The Shop.
-                            </FormCheckbox>
-                            <Button block size="lg" color="success" className="mt-4">Proceed to payment</Button>
+                            
                         </Form>
                     </div>
                 </div>
-                : (pendingState > 0 && pendingState < 4) ?
+                : (pendingState > 0 && pendingState < 6) ?
                     <PaymentProgress pendingState={pendingState} ref={paypalRef}/>
                     : pendingState === -2 ?
                         <FontAwesomeIcon size="6x" icon={faTimesCircle} className="animated bounceIn text-danger"/>
-                        :
+                    :
                         <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
             }
         </>

@@ -72,14 +72,15 @@ function ProductsListComplex(props){
                     <CardFooter className="d-flex flex-wrap justify-content-between">
                         {product.name &&
                             <>
+                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>
+                                    <Translate id="cart-add" />
+                                </Button>
+                                
                                 {cart.state.products.includes(product.id) &&
                                         <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>
                                             <Translate id="cart-remove"/>
                                         </Button>
                                 }
-                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>
-                                    <Translate id="cart-add"/>
-                                </Button>
                             </>
                         }
                     </CardFooter>

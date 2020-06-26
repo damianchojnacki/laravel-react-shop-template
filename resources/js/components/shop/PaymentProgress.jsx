@@ -4,14 +4,14 @@ import React from "react";
 const PaymentProgress = React.forwardRef(({pendingState}, ref) => {
     function getProgressText() {
         switch (pendingState) {
-            case 1:
-                return "Creating the order...";
-            case 2:
-                return "Loading the payment options...";
             case 3:
+                return "Creating the order...";
+            case 4:
+                return "Loading the payment options...";
+            case 5:
                 return "Processing the payment...";
             default:
-                return "Finishing...";
+                return "Trasaction in process...";
         }
     }
 
