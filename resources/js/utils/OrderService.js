@@ -43,6 +43,54 @@ export default class OrderService{
         return window.axios.post(`/api/order`, data);
     }
 
+    static createPaypalOrder(actions, sum, currency){
+        return actions.order.create({
+            intent: "CAPTURE",
+            application_context: {
+                user_action: "PAY_NOW"
+            },
+            purchase_units: [{
+                description: "Shop-template order",
+                amount: {
+                    currency_code: currency.state.iso,
+                    value: sum,
+                    breakdown: {
+                        item_total: {
+                            currency_code: currency.state.iso,
+                            value: sum,
+                        },
+                    }
+                },
+
+            }]
+        }) 
+    }
+
+    static loadGeowidget(language, callback){
+        const script = document.createElement("script");
+        script.src = "https://geowidget.easypack24.net/js/sdk-for-javascript.js";
+        document.body.appendChild(script);
+
+        const stylesheet = document.createElement("link");
+        stylesheet.rel = "stylesheet";
+        stylesheet.href = "https://geowidget.easypack24.net/css/easypack.css";
+        document.head.appendChild(stylesheet);
+
+        script.addEventListener("load", () => {
+            window.easyPackAsyncInit = function () {
+                easyPack.init({
+                    defaultLocale: language == "en" ? "uk" : "pl",
+                });
+
+                const map = easyPack.mapWidget('geowidget', function (point) {
+                    geowidget.style.display = "none";
+                    
+                    callback(point.address.line1 + ", " + point.address.line2);
+                });
+            };
+        });
+    }
+
     static appendCoupon(coupon){
         return window.axios.put(`api/coupon/${coupon}`);
     }

@@ -22,6 +22,7 @@ import Coupon from "../../components/shop/Coupon";
 import PaymentProgress from "../../components/shop/PaymentProgress";
 import {useAuth} from "../../utils/AuthContext";
 import OrderService from "../../utils/OrderService";
+import ShippingForm from "../../components/shop/ShippingForm";
 
 function Checkout() {
     const cart = useCart();
@@ -34,6 +35,7 @@ function Checkout() {
     const [name, setName] = useState();
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
+    const [shippingAddress, setShippingAddress] = useState();
     const [zipCode, setZipCode] = useState('');
     const [terms, setTerms] = useState(false);
     const [invalids, setInvalids] = useState([]);
@@ -130,28 +132,7 @@ function Checkout() {
         const sum = coupon.percent_off ? OrderService.getSumOfProductsWithDiscount(products, coupon) : OrderService.getSumOfProducts(products);
 
         window.paypal.Buttons({
-            createOrder: (data, actions) => {
-                return actions.order.create({
-                    intent: "CAPTURE",
-                    application_context: {
-                        user_action: "PAY_NOW"
-                    },
-                    purchase_units: [{
-                        description: "Shop-template order",
-                        amount: {
-                            currency_code: currency.state.iso,
-                            value: sum,
-                            breakdown: {
-                                item_total: {
-                                    currency_code: currency.state.iso,
-                                    value: sum,
-                                },
-                            }
-                        },
-
-                    }]
-                })
-            },
+            createOrder: (data, actions) => OrderService.createPaypalOrder(actions, sum, currency.state.iso),
             onApprove: (data, actions) => {
                 OrderService.clearCookie();
                 cart.dispatch({type: 'reset'});
@@ -168,8 +149,7 @@ function Checkout() {
             onError: err => {
                 console.error(err);
             }
-        })
-            .render(paypalRef.current);
+        }).render(paypalRef.current);
     }
 
     return (
@@ -286,8 +266,7 @@ function Checkout() {
                                 </div>
                             :
                                 <div className={`${pendingState > 1 && "animated fadeInUp fast"}`}>
-                                    <h4 className="my-4">Please select shipment:</h4>
-                                    <Button block size="lg" color="success" className="mt-4">Proceed to payment</Button>
+                                    <ShippingForm pendingState={pendingState} shippingAddress={shippingAddress} setShippingAddress={setShippingAddress}/>
                                 </div>
                             }
                             
@@ -296,7 +275,8 @@ function Checkout() {
                 </div>
                 : (pendingState > 0 && pendingState < 6) ?
                     <PaymentProgress pendingState={pendingState} ref={paypalRef}/>
-                    : pendingState === -2 ?
+                : 
+                    pendingState === -2 ?
                         <FontAwesomeIcon size="6x" icon={faTimesCircle} className="animated bounceIn text-danger"/>
                     :
                         <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>

@@ -620,12 +620,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
-/* harmony import */ var _utils_AuthService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/AuthService */ "./resources/js/utils/AuthService.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
-
-
-
 
 
 
@@ -1436,6 +1430,64 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/shop/ShippingForm.jsx":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/shop/ShippingForm.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
+/* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
+/* harmony import */ var _utils_LanguageContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/LanguageContext */ "./resources/js/utils/LanguageContext.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+function ShippingForm(_ref) {
+  var pendingState = _ref.pendingState,
+      shippingAddress = _ref.shippingAddress,
+      setShippingAddress = _ref.setShippingAddress;
+  var language = Object(_utils_LanguageContext__WEBPACK_IMPORTED_MODULE_3__["useLanguage"])();
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      forceOpen = _useState2[0],
+      setForceOpen = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    pendingState == 2 && _utils_OrderService__WEBPACK_IMPORTED_MODULE_2__["default"].loadGeowidget(language.state, setShippingAddress);
+  }, [pendingState]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "my-4"
+  }, "Please select shipment:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "geowidget"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, shippingAddress && "Your package will be delivered to " + shippingAddress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    block: true,
+    size: "lg",
+    color: "success",
+    className: "mt-4"
+  }, "Proceed to payment"));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (ShippingForm);
+
+/***/ }),
+
 /***/ "./resources/js/layouts/Shop.jsx":
 /*!***************************************!*\
   !*** ./resources/js/layouts/Shop.jsx ***!
@@ -1836,6 +1888,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_shop_PaymentProgress__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../components/shop/PaymentProgress */ "./resources/js/components/shop/PaymentProgress.jsx");
 /* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
 /* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
+/* harmony import */ var _components_shop_ShippingForm__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/shop/ShippingForm */ "./resources/js/components/shop/ShippingForm.jsx");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -1851,6 +1904,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -1903,30 +1957,35 @@ function Checkout() {
       address = _useState8[0],
       setAddress = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState10 = _slicedToArray(_useState9, 2),
-      zipCode = _useState10[0],
-      setZipCode = _useState10[1];
+      shippingAddress = _useState10[0],
+      setShippingAddress = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      terms = _useState12[0],
-      setTerms = _useState12[1];
+      zipCode = _useState12[0],
+      setZipCode = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState14 = _slicedToArray(_useState13, 2),
-      invalids = _useState14[0],
-      setInvalids = _useState14[1];
+      terms = _useState14[0],
+      setTerms = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      redirect = _useState16[0],
-      setRedirect = _useState16[1];
+      invalids = _useState16[0],
+      setInvalids = _useState16[1];
 
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState18 = _slicedToArray(_useState17, 2),
-      pendingState = _useState18[0],
-      setPendingState = _useState18[1];
+      redirect = _useState18[0],
+      setRedirect = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState20 = _slicedToArray(_useState19, 2),
+      pendingState = _useState20[0],
+      setPendingState = _useState20[1];
   /** pendingState meaning:
    *  -2: canceled
    *  -1: animation
@@ -2027,25 +2086,7 @@ function Checkout() {
     var sum = coupon.percent_off ? _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProductsWithDiscount(products, coupon) : _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProducts(products);
     window.paypal.Buttons({
       createOrder: function createOrder(data, actions) {
-        return actions.order.create({
-          intent: "CAPTURE",
-          application_context: {
-            user_action: "PAY_NOW"
-          },
-          purchase_units: [{
-            description: "Shop-template order",
-            amount: {
-              currency_code: currency.state.iso,
-              value: sum,
-              breakdown: {
-                item_total: {
-                  currency_code: currency.state.iso,
-                  value: sum
-                }
-              }
-            }
-          }]
-        });
+        return _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].createPaypalOrder(actions, sum, currency.state.iso);
       },
       onApprove: function onApprove(data, actions) {
         _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].clearCookie();
@@ -2202,14 +2243,11 @@ function Checkout() {
     }
   }, "Proceed to shipment")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "".concat(pendingState > 1 && "animated fadeInUp fast")
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
-    className: "my-4"
-  }, "Please select shipment:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-    block: true,
-    size: "lg",
-    color: "success",
-    className: "mt-4"
-  }, "Proceed to payment"))))) : pendingState > 0 && pendingState < 6 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_PaymentProgress__WEBPACK_IMPORTED_MODULE_20__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_ShippingForm__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    pendingState: pendingState,
+    shippingAddress: shippingAddress,
+    setShippingAddress: setShippingAddress
+  }))))) : pendingState > 0 && pendingState < 6 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_PaymentProgress__WEBPACK_IMPORTED_MODULE_20__["default"], {
     pendingState: pendingState,
     ref: paypalRef
   }) : pendingState === -2 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {

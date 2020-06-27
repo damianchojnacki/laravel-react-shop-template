@@ -1,8 +1,5 @@
-import React, {useState} from "react";
-import {Nav, NavItem, Navbar, NavbarToggler, NavbarBrand, Collapse, Badge} from "shards-react";
-import AuthService from "../../utils/AuthService";
-import {Link, NavLink} from 'react-router-dom';
-import {AuthContext} from "../../utils/AuthContext";
+import React from "react";
+import {Badge} from "shards-react";
 
 function Footer(props) {
     return (

@@ -363,6 +363,51 @@ function () {
       return window.axios.post("/api/order", data);
     }
   }, {
+    key: "createPaypalOrder",
+    value: function createPaypalOrder(actions, sum, currency) {
+      return actions.order.create({
+        intent: "CAPTURE",
+        application_context: {
+          user_action: "PAY_NOW"
+        },
+        purchase_units: [{
+          description: "Shop-template order",
+          amount: {
+            currency_code: currency.state.iso,
+            value: sum,
+            breakdown: {
+              item_total: {
+                currency_code: currency.state.iso,
+                value: sum
+              }
+            }
+          }
+        }]
+      });
+    }
+  }, {
+    key: "loadGeowidget",
+    value: function loadGeowidget(language, callback) {
+      var script = document.createElement("script");
+      script.src = "https://geowidget.easypack24.net/js/sdk-for-javascript.js";
+      document.body.appendChild(script);
+      var stylesheet = document.createElement("link");
+      stylesheet.rel = "stylesheet";
+      stylesheet.href = "https://geowidget.easypack24.net/css/easypack.css";
+      document.head.appendChild(stylesheet);
+      script.addEventListener("load", function () {
+        window.easyPackAsyncInit = function () {
+          easyPack.init({
+            defaultLocale: language == "en" ? "uk" : "pl"
+          });
+          var map = easyPack.mapWidget('geowidget', function (point) {
+            geowidget.style.display = "none";
+            callback(point.address.line1 + ", " + point.address.line2);
+          });
+        };
+      });
+    }
+  }, {
     key: "appendCoupon",
     value: function appendCoupon(coupon) {
       return window.axios.put("api/coupon/".concat(coupon));
