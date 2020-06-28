@@ -111,5 +111,23 @@
             "3": "wysłano",
             "4": "dostarczono"
         }
+    },
+    "checkout": {
+        "header": "Podsumowanie",
+        "details": {
+            "header": "Uzupełnij poniższe dane:",
+            "email": "Email",
+            "name": "Imię i nazwisko",
+            "address": "Adres",
+            "zipCode": "Kod pocztowy",
+            "terms": "Zapoznałem i zgadzam się z regulaminem The Shop",
+            "button": "Przejdź do wyboru dostawy"
+        },
+        "shipping": {
+            "header": "Wybierz paczkomat:",
+            "confirmation": "Przesyłka zostanie dostarczona do: ",
+            "change": "Zmień paczkomat",
+            "button": "Przejdź do płatnośći"
+        }
     }
 }

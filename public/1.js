@@ -387,7 +387,7 @@ function () {
     }
   }, {
     key: "loadGeowidget",
-    value: function loadGeowidget(language, callback) {
+    value: function loadGeowidget(language, callback, setDisplay) {
       var script = document.createElement("script");
       script.src = "https://geowidget.easypack24.net/js/sdk-for-javascript.js";
       document.body.appendChild(script);
@@ -401,7 +401,7 @@ function () {
             defaultLocale: language == "en" ? "uk" : "pl"
           });
           var map = easyPack.mapWidget('geowidget', function (point) {
-            geowidget.style.display = "none";
+            setDisplay("none");
             callback(point.address.line1 + ", " + point.address.line2);
           });
         };

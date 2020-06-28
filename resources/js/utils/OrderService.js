@@ -63,10 +63,10 @@ export default class OrderService{
                 },
 
             }]
-        }) 
+        })
     }
 
-    static loadGeowidget(language, callback){
+    static loadGeowidget(language, callback, setDisplay){
         const script = document.createElement("script");
         script.src = "https://geowidget.easypack24.net/js/sdk-for-javascript.js";
         document.body.appendChild(script);
@@ -83,8 +83,7 @@ export default class OrderService{
                 });
 
                 const map = easyPack.mapWidget('geowidget', function (point) {
-                    geowidget.style.display = "none";
-                    
+                    setDisplay("none");
                     callback(point.address.line1 + ", " + point.address.line2);
                 });
             };

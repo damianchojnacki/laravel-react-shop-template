@@ -111,5 +111,23 @@
             "3": "shipped",
             "4": "delivered"
         }
+    },
+    "checkout": {
+        "header": "Checkout",
+        "details": {
+            "header": "Please fill all the shipment data:",
+            "email": "Email",
+            "name": "Full name",
+            "address": "Address",
+            "zipCode": "ZIP code",
+            "terms": "I agree with the terms and conditions of usage The Shop.",
+            "button": "Proceed to shipment"
+        },
+        "shipping": {
+            "header": "Please select locker:",
+            "confirmation": "Your package will be delivered to: ",
+            "change": "Select different locker",
+            "button": "Proceed to payment"
+        }
     }
 }

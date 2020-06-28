@@ -1444,6 +1444,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
 /* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
 /* harmony import */ var _utils_LanguageContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/LanguageContext */ "./resources/js/utils/LanguageContext.js");
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Translate */ "./resources/js/components/Translate.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -1458,30 +1459,57 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function ShippingForm(_ref) {
   var pendingState = _ref.pendingState,
       shippingAddress = _ref.shippingAddress,
       setShippingAddress = _ref.setShippingAddress;
   var language = Object(_utils_LanguageContext__WEBPACK_IMPORTED_MODULE_3__["useLanguage"])();
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("block"),
       _useState2 = _slicedToArray(_useState, 2),
-      forceOpen = _useState2[0],
-      setForceOpen = _useState2[1];
+      display = _useState2[0],
+      setDisplay = _useState2[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    pendingState == 2 && _utils_OrderService__WEBPACK_IMPORTED_MODULE_2__["default"].loadGeowidget(language.state, setShippingAddress);
+    pendingState == 2 && _utils_OrderService__WEBPACK_IMPORTED_MODULE_2__["default"].loadGeowidget(language.state, setShippingAddress, setDisplay);
   }, [pendingState]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+
+  function show() {
+    setShippingAddress(null);
+    setDisplay("block");
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, shippingAddress ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "checkout-shipping-confirmation"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "h5 my-4"
+  }, shippingAddress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    block: true,
+    size: "sm",
+    theme: "secondary",
+    onClick: function onClick() {
+      return show();
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "checkout-shipping-change"
+  }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "my-4"
-  }, "Please select shipment:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "geowidget"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, shippingAddress && "Your package will be delivered to " + shippingAddress), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "checkout-shipping-header"
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "geowidget",
+    style: {
+      display: display,
+      paddingBottom: "2rem"
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     block: true,
     size: "lg",
-    color: "success",
     className: "mt-4"
-  }, "Proceed to payment"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "checkout-shipping-button"
+  })));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (ShippingForm);
@@ -1889,6 +1917,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
 /* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
 /* harmony import */ var _components_shop_ShippingForm__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../components/shop/ShippingForm */ "./resources/js/components/shop/ShippingForm.jsx");
+/* harmony import */ var _components_Translate__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../components/Translate */ "./resources/js/components/Translate.jsx");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -1904,6 +1933,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2121,7 +2151,9 @@ function Checkout() {
     }
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
     className: "col-12 text-center pb-5 mb-4"
-  }, "Checkout"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    id: "checkout-header"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-lg-9 col-12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_ProductsList__WEBPACK_IMPORTED_MODULE_7__["default"], {
     data: products,
@@ -2137,9 +2169,13 @@ function Checkout() {
     className: "".concat(pendingState > 0 && "animated fadeOutDown fast")
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
     className: "my-4"
-  }, "Please fill all the shipment data:"), !auth.user && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    id: "checkout-details-header"
+  })), !auth.user && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "email"
-  }, "Email"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    id: "checkout-details-email"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
     seamless: true
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupAddon"], {
     type: "prepend"
@@ -2156,7 +2192,9 @@ function Checkout() {
     disabled: pendingState > 0
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "name"
-  }, "Full name"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    id: "checkout-details-name"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
     seamless: true
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupAddon"], {
     type: "prepend"
@@ -2173,12 +2211,14 @@ function Checkout() {
     disabled: pendingState > 0
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "address"
-  }, "Address"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_select_async_dist_react_select_esm__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    id: "checkout-details-address"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_select_async_dist_react_select_esm__WEBPACK_IMPORTED_MODULE_16__["default"], {
     onChange: function onChange(e) {
       return setAddress(e.value);
     },
     inputProps: {
-      id: 'address'
+      name: 'address'
     },
     loadOptions: searchForAddress,
     value: {
@@ -2207,7 +2247,9 @@ function Checkout() {
     }
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
     htmlFor: "zipCode"
-  }, "ZIP Code"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    id: "checkout-details-zipCode"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroup"], {
     seamless: true
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["InputGroupAddon"], {
     type: "prepend"
@@ -2232,16 +2274,19 @@ function Checkout() {
     checked: terms,
     className: "my-4",
     invalid: invalids.includes("terms")
-  }, "I agree with the terms and conditions of usage The Shop."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    id: "checkout-details-terms"
+  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Button"], {
     block: true,
     type: "button",
     size: "lg",
-    color: "success",
     className: "mt-4",
     onClick: function onClick() {
       return validateData();
     }
-  }, "Proceed to shipment")) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    id: "checkout-details-button"
+  }))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "".concat(pendingState > 1 && "animated fadeInUp fast")
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_ShippingForm__WEBPACK_IMPORTED_MODULE_23__["default"], {
     pendingState: pendingState,

@@ -23,6 +23,7 @@ import PaymentProgress from "../../components/shop/PaymentProgress";
 import {useAuth} from "../../utils/AuthContext";
 import OrderService from "../../utils/OrderService";
 import ShippingForm from "../../components/shop/ShippingForm";
+import Translate from "../../components/Translate";
 
 function Checkout() {
     const cart = useCart();
@@ -41,7 +42,7 @@ function Checkout() {
     const [invalids, setInvalids] = useState([]);
     const [redirect, setRedirect] = useState(false);
     const [pendingState, setPendingState] = useState(0);
-    
+
     /** pendingState meaning:
      *  -2: canceled
      *  -1: animation
@@ -52,7 +53,7 @@ function Checkout() {
      *   4: loading payment
      *   5: processing payment
      *   6: approved
-     */ 
+     */
 
     const credentials = {
         email: (auth.state.user && auth.state.user.email) ?? email,
@@ -96,7 +97,7 @@ function Checkout() {
         setInvalids(validation.invalids);
 
         if (validation.passed && pendingState <= 0) {
-            setPendingState(1); 
+            setPendingState(1);
             setTimeout(() => setPendingState(2), 1000);
         }
     }
@@ -136,7 +137,7 @@ function Checkout() {
             onApprove: (data, actions) => {
                 OrderService.clearCookie();
                 cart.dispatch({type: 'reset'});
-                
+
                 setPendingState(6);
 
                 setTimeout(() => setRedirect(true), 2000);
@@ -162,7 +163,9 @@ function Checkout() {
                 <div
                     className={`row w-100 my-5 align-items-center justify-content-center ${pendingState < 0 && "animated fadeOutDown fast"}`}
                     style={{zIndex: 1}}>
-                    <h1 className="col-12 text-center pb-5 mb-4">Checkout</h1>
+                    <h1 className="col-12 text-center pb-5 mb-4">
+                        <Translate id="checkout-header"/>
+                    </h1>
                     <div className="col-lg-9 col-12">
                         <ProductsList
                             data={products}
@@ -173,12 +176,16 @@ function Checkout() {
                     </div>
                     <div className="col-lg-6 col-12 text-center">
                         <Form onSubmit={handleSubmit}>
-                            {pendingState < 2 ? 
+                            {pendingState < 2 ?
                                 <div className={`${pendingState > 0 && "animated fadeOutDown fast"}`}>
-                                    <h4 className="my-4">Please fill all the shipment data:</h4>
+                                    <h4 className="my-4">
+                                        <Translate id="checkout-details-header"/>
+                                    </h4>
                                     {!auth.user &&
                                         <FormGroup>
-                                            <label htmlFor="email">Email</label>
+                                            <label htmlFor="email">
+                                                <Translate id="checkout-details-email"/>
+                                            </label>
                                             <InputGroup seamless>
                                                 <InputGroupAddon type="prepend">
                                                     <InputGroupText>
@@ -195,7 +202,9 @@ function Checkout() {
                                         </FormGroup>
                                     }
                                     <FormGroup>
-                                        <label htmlFor="name">Full name</label>
+                                        <label htmlFor="name">
+                                            <Translate id="checkout-details-name"/>
+                                        </label>
                                         <InputGroup seamless>
                                             <InputGroupAddon type="prepend">
                                                 <InputGroupText>
@@ -211,10 +220,12 @@ function Checkout() {
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
-                                        <label htmlFor="address">Address</label>
+                                        <label htmlFor="address">
+                                            <Translate id="checkout-details-address"/>
+                                        </label>
                                         <AsyncSelect
                                             onChange={e => setAddress(e.value)}
-                                            inputProps={{ id: 'address' }}
+                                            inputProps={{ name: 'address' }}
                                             loadOptions={searchForAddress}
                                             value={{ label: address, value: address }}
                                             disabled={pendingState > 0}
@@ -237,7 +248,9 @@ function Checkout() {
                                         />
                                     </FormGroup>
                                     <FormGroup>
-                                        <label htmlFor="zipCode">ZIP Code</label>
+                                        <label htmlFor="zipCode">
+                                            <Translate id="checkout-details-zipCode"/>
+                                        </label>
                                         <InputGroup seamless>
                                             <InputGroupAddon type="prepend">
                                                 <InputGroupText>
@@ -260,22 +273,24 @@ function Checkout() {
                                         className="my-4"
                                         invalid={invalids.includes("terms")}
                                     >
-                                        I agree with the terms and conditions of usage The Shop.
+                                        <Translate id="checkout-details-terms"/>
                                     </FormCheckbox>
-                                    <Button block type="button" size="lg" color="success" className="mt-4" onClick={() => validateData()}>Proceed to shipment</Button>
+                                    <Button block type="button" size="lg" className="mt-4" onClick={() => validateData()}>
+                                        <Translate id="checkout-details-button"/>
+                                    </Button>
                                 </div>
                             :
                                 <div className={`${pendingState > 1 && "animated fadeInUp fast"}`}>
                                     <ShippingForm pendingState={pendingState} shippingAddress={shippingAddress} setShippingAddress={setShippingAddress}/>
                                 </div>
                             }
-                            
+
                         </Form>
                     </div>
                 </div>
                 : (pendingState > 0 && pendingState < 6) ?
                     <PaymentProgress pendingState={pendingState} ref={paypalRef}/>
-                : 
+                :
                     pendingState === -2 ?
                         <FontAwesomeIcon size="6x" icon={faTimesCircle} className="animated bounceIn text-danger"/>
                     :
