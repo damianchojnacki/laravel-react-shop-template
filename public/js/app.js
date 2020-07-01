@@ -39989,7 +39989,6 @@ function AuthContextProvider(props) {
   }, props.children);
 }
 
-var AuthContextConsumer = AuthContext.Consumer;
 
 
 /***/ }),
@@ -40165,7 +40164,6 @@ function LanguageContextProvider(props) {
   }, props.children);
 }
 
-var LanguageContextConsumer = LanguageContext.Consumer;
 
 
 /***/ }),
@@ -40260,7 +40258,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-react-shop-template\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Damian\Documents\webprojects\laravel-react-shop-template\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

@@ -591,9 +591,9 @@ function ChartMultiple(props) {
       setCurrent = _useState4[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    function gen() {
+    (function _callee() {
       var chart;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function gen$(_context) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
@@ -610,9 +610,7 @@ function ChartMultiple(props) {
           }
         }
       });
-    }
-
-    gen();
+    })();
   }, []);
 
   function changeData(url, color, index) {
@@ -1453,8 +1451,6 @@ function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "linkOnClick", function () {
       document.documentElement.classList.remove("nav-open");
     });
-
-    _this.activeRoute.bind(_assertThisInitialized(_this));
 
     return _this;
   } // verifies if routeName is the one active (in browser input)

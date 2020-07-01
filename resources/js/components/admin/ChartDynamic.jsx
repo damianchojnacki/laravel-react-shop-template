@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {Card, CardBody, CardHeader, CardTitle} from "reactstrap";
 import {separateHundreds} from "../../utils/helpers";
 import ChartService from "../../utils/ChartService";

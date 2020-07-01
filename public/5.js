@@ -372,9 +372,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function Coupon(_ref) {
-  var coupon = _ref.coupon;
-
+function Coupon() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
       _useState2 = _slicedToArray(_useState, 2),
       code = _useState2[0],
@@ -386,6 +384,7 @@ function Coupon(_ref) {
       setWrongCode = _useState4[1];
 
   var cart = Object(_utils_CartContext__WEBPACK_IMPORTED_MODULE_7__["useCart"])();
+  var coupon = cart.state.coupon;
 
   function append() {
     code && _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].appendCoupon(code).then(function (response) {
@@ -1705,6 +1704,116 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/utils/CartContext.js":
+/*!*******************************************!*\
+  !*** ./resources/js/utils/CartContext.js ***!
+  \*******************************************/
+/*! exports provided: CartContextProvider, useCart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartContextProvider", function() { return CartContextProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useCart", function() { return useCart; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var CartContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
+
+var useCart = function useCart() {
+  return react__WEBPACK_IMPORTED_MODULE_0__["useContext"](CartContext);
+};
+
+var initialState = {
+  products: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : [],
+  coupon: localStorage.getItem('coupon') ? JSON.parse(localStorage.getItem("coupon")) : {},
+  payment: false
+};
+
+var reducer = function reducer(state, action) {
+  var products = state.products;
+
+  switch (action.type) {
+    case "reset":
+      localStorage.removeItem('cart');
+      return _objectSpread({}, state, {
+        products: [],
+        coupon: {},
+        payment: false
+      });
+
+    case "add":
+      products.push(action.payload);
+      localStorage.setItem('cart', JSON.stringify(products));
+      return _objectSpread({}, state, {
+        products: products
+      });
+
+    case "remove":
+      var index = products.indexOf(action.payload);
+      products.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(products));
+      return _objectSpread({}, state, {
+        products: products
+      });
+
+    case "appendCoupon":
+      localStorage.setItem('coupon', JSON.stringify(action.payload));
+      return _objectSpread({}, state, {
+        coupon: action.payload
+      });
+
+    case "removeCoupon":
+      localStorage.removeItem('coupon');
+      return _objectSpread({}, state, {
+        coupon: {}
+      });
+
+    case "beginPayment":
+      return _objectSpread({}, state, {
+        payment: true
+      });
+
+    case "endPayment":
+      return _objectSpread({}, state, {
+        payment: false
+      });
+  }
+};
+
+function CartContextProvider(props) {
+  var _React$useReducer = react__WEBPACK_IMPORTED_MODULE_0__["useReducer"](reducer, initialState),
+      _React$useReducer2 = _slicedToArray(_React$useReducer, 2),
+      state = _React$useReducer2[0],
+      dispatch = _React$useReducer2[1];
+
+  var value = {
+    state: state,
+    dispatch: dispatch
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](CartContext.Provider, {
+    value: value
+  }, props.children);
+}
+
+
+
+/***/ }),
+
 /***/ "./resources/js/utils/CurrencyContext.js":
 /*!***********************************************!*\
   !*** ./resources/js/utils/CurrencyContext.js ***!
@@ -1764,7 +1873,6 @@ function CurrencyContextProvider(props) {
   }, props.children);
 }
 
-var CurrencyContextConsumer = CurrencyContext.Consumer;
 
 
 /***/ }),
@@ -2243,9 +2351,7 @@ function Checkout() {
     data: products,
     sum: _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProducts(products),
     sumWithDiscount: coupon.code && _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProductsWithDiscount(products, coupon)
-  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_Coupon__WEBPACK_IMPORTED_MODULE_19__["default"], {
-    coupon: coupon !== null && coupon !== void 0 ? coupon : {}
-  })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_Coupon__WEBPACK_IMPORTED_MODULE_19__["default"], null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-lg-6 col-12 text-center"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Form"], {
     onSubmit: handleSubmit

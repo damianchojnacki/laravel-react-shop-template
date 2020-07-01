@@ -55,6 +55,4 @@ function CartContextProvider(props) {
     );
 }
 
-const CartContextConsumer = CartContext.Consumer;
-
 export { CartContextProvider, useCart };

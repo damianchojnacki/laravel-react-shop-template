@@ -8,13 +8,11 @@ function ChartMultiple(props){
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {
-        async function gen(){
+        (async function(){
             const chart = await ChartService.get(props.api[0].url);
 
             setChart(ChartService.generate(chart, props.color, props.type));
-        }
-
-        gen();
+        })();
     }, []);
 
     async function changeData(url, color, index){
@@ -25,29 +23,31 @@ function ChartMultiple(props){
     }
 
     const buttons = props.api.map((button, index) => {
-        return <Button
-            key={index}
-            tag="label"
-            color="info"
-            id="0"
-            size="sm"
-            className="btn-simple"
-            onClick={() => changeData(button.url, button.color, index)}
-            active={current === index}
-        >
-            <input
-                defaultChecked
-                className="d-none"
-                name="options"
-                type="radio"
-            />
-            <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                {button.title}
-            </span>
-            <span className="d-block d-sm-none">
-                <i className={button.icon}/>
-            </span>
-        </Button>
+        return (
+            <Button
+                key={index}
+                tag="label"
+                color="info"
+                id="0"
+                size="sm"
+                className="btn-simple"
+                onClick={() => changeData(button.url, button.color, index)}
+                active={current === index}
+            >
+                <input
+                    defaultChecked
+                    className="d-none"
+                    name="options"
+                    type="radio"
+                />
+                <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                    {button.title}
+                </span>
+                <span className="d-block d-sm-none">
+                    <i className={button.icon}/>
+                </span>
+            </Button>
+        )
     });
 
     return (

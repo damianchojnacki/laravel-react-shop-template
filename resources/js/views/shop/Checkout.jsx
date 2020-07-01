@@ -194,7 +194,7 @@ function Checkout() {
                             sum={OrderService.getSumOfProducts(products)}
                             sumWithDiscount={coupon.code && OrderService.getSumOfProductsWithDiscount(products, coupon)}
                         />
-                        <Coupon coupon={coupon ?? {}}/>
+                        <Coupon/>
                     </div>
                     <div className="col-lg-6 col-12 text-center">
                         <Form onSubmit={handleSubmit}>

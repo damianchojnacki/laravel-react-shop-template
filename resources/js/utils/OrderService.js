@@ -1,5 +1,4 @@
 import React from 'react';
-import {CartContext} from "./CartContext";
 import Cookies from "js-cookie";
 
 export default class OrderService{

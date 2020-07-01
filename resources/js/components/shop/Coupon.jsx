@@ -9,11 +9,13 @@ import {useCart} from "../../utils/CartContext";
 import {notify} from "react-notify-toast";
 import Translate from "../Translate";
 
-function Coupon({coupon}) {
+function Coupon() {
     const [code, setCode] = useState();
     const [wrongCode, setWrongCode] = useState(false);
 
     const cart = useCart();
+
+    const coupon = cart.state.coupon;
 
     function append(){
         code && OrderService.appendCoupon(code)
