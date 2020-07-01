@@ -1,5 +1,6 @@
 # Shop template created with Laravel & React
 
+![Laravel](https://github.com/damianchojnacki/laravel-react-shop-template/workflows/Laravel/badge.svg)
 [![DeepScan grade](https://deepscan.io/api/teams/8354/projects/10504/branches/147113/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=8354&pid=10504&bid=147113)
 
 <p align="center">
