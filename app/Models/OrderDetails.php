@@ -10,6 +10,7 @@ class OrderDetails extends Model{
         'email',
         'name',
         'address',
+        'shipping_address',
         'zip_code',
     ];
 

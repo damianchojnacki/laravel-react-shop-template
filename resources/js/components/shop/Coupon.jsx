@@ -7,6 +7,7 @@ import OrderService from "../../utils/OrderService";
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 import {useCart} from "../../utils/CartContext";
 import {notify} from "react-notify-toast";
+import Translate from "../Translate";
 
 function Coupon({coupon}) {
     const [code, setCode] = useState();
@@ -29,7 +30,9 @@ function Coupon({coupon}) {
         <div className="float-right">
             {coupon.code ?
                 <FormGroup>
-                    <label htmlFor="coupon" className="d-block">Coupon:</label>
+                    <label htmlFor="coupon" className="d-block">
+                        <Translate id="coupon-applied"/>
+                    </label>
                     <InputGroup seamless className="w-auto d-inline-block">
                         <InputGroupAddon type="prepend">
                             <InputGroupText>
@@ -50,7 +53,9 @@ function Coupon({coupon}) {
                 </FormGroup>
             :
                 <FormGroup>
-                    <label htmlFor="coupon" className="d-block">Have a coupon code?</label>
+                    <label htmlFor="coupon" className="d-block">
+                        <Translate id="coupon-none"/>
+                    </label>
                     <InputGroup seamless className="w-auto d-inline-block">
                         <InputGroupAddon type="prepend">
                             <InputGroupText>

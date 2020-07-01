@@ -2,16 +2,14 @@ import React from "react";
 import { Button } from "shards-react";
 import { useEffect, useState } from "react";
 import OrderService from "../../utils/OrderService";
-import { useLanguage } from "../../utils/LanguageContext";
 import Translate from "../Translate";
+import {notify} from "react-notify-toast";
 
-function ShippingForm({ pendingState, shippingAddress, setShippingAddress}) {
-    const language = useLanguage();
-
+function ShippingForm({pendingState, shippingAddress, setShippingAddress, address}) {
     const [display, setDisplay] = useState("block");
 
     useEffect(() => {
-        pendingState == 2 && OrderService.loadGeowidget(language.state, setShippingAddress, setDisplay);
+        pendingState == 2 && OrderService.loadGeowidget(address, setShippingAddress, setDisplay);
     }, [pendingState]);
 
     function show() {
@@ -28,6 +26,9 @@ function ShippingForm({ pendingState, shippingAddress, setShippingAddress}) {
                     <Button block size="sm" theme="secondary" onClick={() => show()}>
                         <Translate id="checkout-shipping-change"/>
                     </Button>
+                    <Button block size="lg" className="mt-4">
+                        <Translate id="checkout-shipping-button"/>
+                    </Button>
                 </p>
             :
                 <>
@@ -36,10 +37,7 @@ function ShippingForm({ pendingState, shippingAddress, setShippingAddress}) {
                     </h4>
                 </>
             }
-            <div id="geowidget" style={{display: display, paddingBottom: "2rem"}}/>
-            <Button block size="lg" className="mt-4">
-                <Translate id="checkout-shipping-button"/>
-            </Button>
+            <div id="geowidget" style={{display: display, paddingBottom: "4rem"}}/>
         </>
     );
 }

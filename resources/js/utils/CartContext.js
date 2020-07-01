@@ -7,6 +7,7 @@ const useCart = () => React.useContext(CartContext);
 const initialState = {
     products: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : [],
     coupon: localStorage.getItem('coupon') ? JSON.parse(localStorage.getItem("coupon")) : {},
+    payment: false,
 };
 
 const reducer = (state, action) => {
@@ -16,7 +17,7 @@ const reducer = (state, action) => {
         case "reset":
             localStorage.removeItem('cart');
 
-            return {...state, products: [], coupon: {}};
+            return {...state, products: [], coupon: {}, payment: false};
         case "add":
             products.push(action.payload);
 
@@ -38,6 +39,10 @@ const reducer = (state, action) => {
             localStorage.removeItem('coupon');
 
             return {...state, coupon: {}};
+        case "beginPayment":
+            return {...state, payment: true};
+        case "endPayment":
+            return {...state, payment: false};
     }
 };
 

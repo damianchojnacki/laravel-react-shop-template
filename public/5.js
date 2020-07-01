@@ -352,6 +352,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_CartContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/CartContext */ "./resources/js/utils/CartContext.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Translate */ "./resources/js/components/Translate.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -359,6 +360,7 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -402,7 +404,9 @@ function Coupon(_ref) {
   }, coupon.code ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "coupon",
     className: "d-block"
-  }, "Coupon:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    id: "coupon-applied"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], {
     seamless: true,
     className: "w-auto d-inline-block"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["InputGroupAddon"], {
@@ -429,7 +433,9 @@ function Coupon(_ref) {
   }))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     htmlFor: "coupon",
     className: "d-block"
-  }, "Have a coupon code?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    id: "coupon-none"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], {
     seamless: true,
     className: "w-auto d-inline-block"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["InputGroupAddon"], {
@@ -479,6 +485,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-responsive */ "./node_modules/react-responsive/dist/react-responsive.js");
 /* harmony import */ var react_responsive__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_responsive__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_CurrencyContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/CurrencyContext */ "./resources/js/utils/CurrencyContext.js");
+/* harmony import */ var _utils_CartContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/CartContext */ "./resources/js/utils/CartContext.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -501,13 +508,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function CurrencySelect() {
+  var currency = Object(_utils_CurrencyContext__WEBPACK_IMPORTED_MODULE_5__["useCurrency"])();
+  var cart = Object(_utils_CartContext__WEBPACK_IMPORTED_MODULE_6__["useCart"])();
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       selectOptions = _useState2[0],
       setSelectOptions = _useState2[1];
 
-  var currency = Object(_utils_CurrencyContext__WEBPACK_IMPORTED_MODULE_5__["useCurrency"])();
   var isMobile = Object(react_responsive__WEBPACK_IMPORTED_MODULE_4__["useMediaQuery"])({
     query: '(max-width: 768px)'
   });
@@ -555,6 +565,7 @@ function CurrencySelect() {
       }
     },
     isSearchable: false,
+    isDisabled: cart.state.payment,
     styles: {
       container: function container(provided) {
         return _objectSpread({}, provided, {
@@ -932,10 +943,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_CurrencyContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/CurrencyContext */ "./resources/js/utils/CurrencyContext.js");
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Translate */ "./resources/js/components/Translate.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 var PaymentProgress = react__WEBPACK_IMPORTED_MODULE_1___default.a.forwardRef(function (_ref, ref) {
-  var pendingState = _ref.pendingState;
+  var pendingState = _ref.pendingState,
+      sum = _ref.sum,
+      shippingCost = _ref.shippingCost;
+  var currency = Object(_utils_CurrencyContext__WEBPACK_IMPORTED_MODULE_2__["useCurrency"])();
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      tooltipOpened = _useState2[0],
+      setTooltipOpened = _useState2[1];
 
   function getProgressText() {
     switch (pendingState) {
@@ -958,7 +989,25 @@ var PaymentProgress = react__WEBPACK_IMPORTED_MODULE_1___default.a.forwardRef(fu
     style: {
       zIndex: 1
     }
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_0__["Progress"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    id: "price",
+    className: "pt-4"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: "checkout-total"
+  }), " ", parseFloat(sum) + parseFloat(shippingCost), " ", currency.state.symbol), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_0__["Tooltip"], {
+    open: tooltipOpened,
+    target: "#price",
+    placement: "right",
+    toggle: function toggle() {
+      return setTooltipOpened(!tooltipOpened);
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "font-weight-light"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: "checkout-tooltip-order"
+  }), " ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("pre", null, sum, " ", currency.state.symbol)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: "checkout-tooltip-shipping"
+  }), " ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("pre", null, shippingCost, " ", currency.state.symbol)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_0__["Progress"], {
     value: pendingState,
     max: 4,
     className: "my-4"
@@ -1207,7 +1256,9 @@ function ProductsList(props) {
   }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
     colSpan: "5",
     className: "text-right"
-  }, props.sumWithDiscount ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Sum: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("del", {
+  }, props.sumWithDiscount ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    id: "products-list-sum"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("del", {
     className: "line-through text-danger"
   }, props.sum, " ", currency.state.symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons_faCaretRight__WEBPACK_IMPORTED_MODULE_5__["faCaretRight"],
@@ -1443,8 +1494,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
 /* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
-/* harmony import */ var _utils_LanguageContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/LanguageContext */ "./resources/js/utils/LanguageContext.js");
-/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Translate */ "./resources/js/components/Translate.jsx");
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Translate */ "./resources/js/components/Translate.jsx");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -1463,8 +1515,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function ShippingForm(_ref) {
   var pendingState = _ref.pendingState,
       shippingAddress = _ref.shippingAddress,
-      setShippingAddress = _ref.setShippingAddress;
-  var language = Object(_utils_LanguageContext__WEBPACK_IMPORTED_MODULE_3__["useLanguage"])();
+      setShippingAddress = _ref.setShippingAddress,
+      address = _ref.address;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("block"),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1472,7 +1524,7 @@ function ShippingForm(_ref) {
       setDisplay = _useState2[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    pendingState == 2 && _utils_OrderService__WEBPACK_IMPORTED_MODULE_2__["default"].loadGeowidget(language.state, setShippingAddress, setDisplay);
+    pendingState == 2 && _utils_OrderService__WEBPACK_IMPORTED_MODULE_2__["default"].loadGeowidget(address, setShippingAddress, setDisplay);
   }, [pendingState]);
 
   function show() {
@@ -1480,7 +1532,7 @@ function ShippingForm(_ref) {
     setDisplay("block");
   }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, shippingAddress ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, shippingAddress ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_3__["default"], {
     id: "checkout-shipping-confirmation"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "h5 my-4"
@@ -1491,25 +1543,25 @@ function ShippingForm(_ref) {
     onClick: function onClick() {
       return show();
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_3__["default"], {
     id: "checkout-shipping-change"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    block: true,
+    size: "lg",
+    className: "mt-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: "checkout-shipping-button"
   }))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "my-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_3__["default"], {
     id: "checkout-shipping-header"
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "geowidget",
     style: {
       display: display,
-      paddingBottom: "2rem"
+      paddingBottom: "4rem"
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-    block: true,
-    size: "lg",
-    className: "mt-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    id: "checkout-shipping-button"
-  })));
+  }));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (ShippingForm);
@@ -1843,7 +1895,7 @@ function () {
               window.axios.get("/api/google/places/".concat(input)).then(function (response) {
                 var list = response.data.map(function (address) {
                   return {
-                    id: address.id,
+                    id: address.place_id,
                     value: address.description,
                     label: address.description
                   };
@@ -1987,35 +2039,45 @@ function Checkout() {
       address = _useState8[0],
       setAddress = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      shippingAddress = _useState10[0],
-      setShippingAddress = _useState10[1];
+      placeId = _useState10[0],
+      setPlaceId = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState12 = _slicedToArray(_useState11, 2),
-      zipCode = _useState12[0],
-      setZipCode = _useState12[1];
+      shippingAddress = _useState12[0],
+      setShippingAddress = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      terms = _useState14[0],
-      setTerms = _useState14[1];
+      zipCode = _useState14[0],
+      setZipCode = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState16 = _slicedToArray(_useState15, 2),
-      invalids = _useState16[0],
-      setInvalids = _useState16[1];
+      terms = _useState16[0],
+      setTerms = _useState16[1];
 
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      redirect = _useState18[0],
-      setRedirect = _useState18[1];
+      invalids = _useState18[0],
+      setInvalids = _useState18[1];
 
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState20 = _slicedToArray(_useState19, 2),
-      pendingState = _useState20[0],
-      setPendingState = _useState20[1];
+      redirect = _useState20[0],
+      setRedirect = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState22 = _slicedToArray(_useState21, 2),
+      pendingState = _useState22[0],
+      setPendingState = _useState22[1];
+
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState24 = _slicedToArray(_useState23, 2),
+      shippingCost = _useState24[0],
+      setShippingCost = _useState24[1];
   /** pendingState meaning:
    *  -2: canceled
    *  -1: animation
@@ -2033,6 +2095,8 @@ function Checkout() {
     email: (_ref = auth.state.user && auth.state.user.email) !== null && _ref !== void 0 ? _ref : email,
     name: name,
     address: address,
+    place_id: placeId,
+    shipping_address: shippingAddress,
     zip_code: zipCode,
     terms: terms,
     products: products,
@@ -2051,6 +2115,7 @@ function Checkout() {
       setName(order.details.name);
       setEmail(order.details.email);
       setAddress(order.details.address);
+      setShippingAddress(order.shipping_address);
       setZipCode(order.details.zip_code);
       setTerms(true);
     }
@@ -2083,20 +2148,33 @@ function Checkout() {
     setInvalids(validation.invalids);
 
     if (validation.passed && pendingState <= 0) {
-      setPendingState(1);
-      setTimeout(function () {
-        return setPendingState(2);
-      }, 1000);
+      var country = _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getCountry(address);
+
+      if (country) {
+        setPendingState(1);
+        setTimeout(function () {
+          return setPendingState(2);
+        }, 1000);
+      } else react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show("Unfortunately, we are not delivering to your specified country.", 'error');
     }
   }
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
+
+    if (!credentials.shipping_address || credentials.shipping_address.length <= 0) {
+      return false;
+    }
+
     setPendingState(-1);
     setTimeout(function () {
       setPendingState(3);
       _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].make(credentials).then(function (response) {
+        cart.dispatch({
+          type: "beginPayment"
+        });
         _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].toCookie(response.data.order);
+        setShippingCost(response.data.shippingCost);
         setPendingState(4);
         var script = document.createElement("script");
         script.src = "https://www.paypal.com/sdk/js?client-id=".concat(response.data.paypalClientId, "&currency=").concat(currency.state.iso);
@@ -2106,14 +2184,14 @@ function Checkout() {
         document.body.appendChild(script);
       })["catch"](function (error) {
         setPendingState(0);
-        react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(error.response.data);
+        react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(error.response.data, 'error');
       });
     }, 1000);
   };
 
   function loadPaypal() {
     setPendingState(5);
-    var sum = coupon.percent_off ? _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProductsWithDiscount(products, coupon) : _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProducts(products);
+    var sum = parseFloat(coupon.percent_off ? _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProductsWithDiscount(products, coupon) + parseFloat(shippingCost) : _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProducts(products) + parseFloat(shippingCost)).toFixed(2);
     window.paypal.Buttons({
       createOrder: function createOrder(data, actions) {
         return _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].createPaypalOrder(actions, sum, currency.state.iso);
@@ -2127,6 +2205,9 @@ function Checkout() {
         setTimeout(function () {
           return setRedirect(true);
         }, 2000);
+        cart.dispatch({
+          type: "endPayment"
+        });
       },
       onCancel: function onCancel() {
         setTimeout(function () {
@@ -2135,6 +2216,9 @@ function Checkout() {
         setTimeout(function () {
           return setPendingState(0);
         }, 2500);
+        cart.dispatch({
+          type: "endPayment"
+        });
       },
       onError: function onError(err) {
         console.error(err);
@@ -2215,13 +2299,12 @@ function Checkout() {
     id: "checkout-details-address"
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_select_async_dist_react_select_esm__WEBPACK_IMPORTED_MODULE_16__["default"], {
     onChange: function onChange(e) {
-      return setAddress(e.value);
+      setAddress(e.value);
+      setPlaceId(e.id);
     },
-    inputProps: {
-      name: 'address'
-    },
+    "aria-label": "address",
     loadOptions: searchForAddress,
-    value: {
+    defaultValue: {
       label: address,
       value: address
     },
@@ -2291,10 +2374,13 @@ function Checkout() {
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_ShippingForm__WEBPACK_IMPORTED_MODULE_23__["default"], {
     pendingState: pendingState,
     shippingAddress: shippingAddress,
-    setShippingAddress: setShippingAddress
+    setShippingAddress: setShippingAddress,
+    address: address
   }))))) : pendingState > 0 && pendingState < 6 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_PaymentProgress__WEBPACK_IMPORTED_MODULE_20__["default"], {
     pendingState: pendingState,
-    ref: paypalRef
+    ref: paypalRef,
+    shippingCost: shippingCost,
+    sum: _utils_OrderService__WEBPACK_IMPORTED_MODULE_22__["default"].getSumOfProductsWithDiscount(products, coupon)
   }) : pendingState === -2 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {
     size: "6x",
     icon: _fortawesome_free_solid_svg_icons_faTimesCircle__WEBPACK_IMPORTED_MODULE_17__["faTimesCircle"],

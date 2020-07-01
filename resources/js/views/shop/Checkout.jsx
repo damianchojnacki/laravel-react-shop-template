@@ -36,12 +36,14 @@ function Checkout() {
     const [name, setName] = useState();
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
+    const [placeId, setPlaceId] = useState('');
     const [shippingAddress, setShippingAddress] = useState();
     const [zipCode, setZipCode] = useState('');
     const [terms, setTerms] = useState(false);
     const [invalids, setInvalids] = useState([]);
     const [redirect, setRedirect] = useState(false);
     const [pendingState, setPendingState] = useState(0);
+    const [shippingCost, setShippingCost] = useState(0);
 
     /** pendingState meaning:
      *  -2: canceled
@@ -59,6 +61,8 @@ function Checkout() {
         email: (auth.state.user && auth.state.user.email) ?? email,
         name,
         address,
+        place_id: placeId,
+        shipping_address: shippingAddress,
         zip_code: zipCode,
         terms,
         products,
@@ -78,6 +82,7 @@ function Checkout() {
             setName(order.details.name);
             setEmail(order.details.email);
             setAddress(order.details.address);
+            setShippingAddress(order.shipping_address);
             setZipCode(order.details.zip_code);
             setTerms(true);
         }
@@ -97,13 +102,23 @@ function Checkout() {
         setInvalids(validation.invalids);
 
         if (validation.passed && pendingState <= 0) {
-            setPendingState(1);
-            setTimeout(() => setPendingState(2), 1000);
+            const country = OrderService.getCountry(address);
+
+            if(country){
+                setPendingState(1);
+                setTimeout(() => setPendingState(2), 1000);
+            }
+            else
+                notify.show("Unfortunately, we are not delivering to your specified country.", 'error');
         }
     }
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        if(!credentials.shipping_address || credentials.shipping_address.length <= 0){
+            return false;
+        }
 
         setPendingState(-1);
 
@@ -112,7 +127,11 @@ function Checkout() {
 
             OrderService.make(credentials)
                 .then(response => {
+                    cart.dispatch({type: "beginPayment"});
+
                     OrderService.toCookie(response.data.order);
+
+                    setShippingCost(response.data.shippingCost);
 
                     setPendingState(4);
                     const script = document.createElement("script");
@@ -122,7 +141,7 @@ function Checkout() {
                 })
                 .catch(error => {
                     setPendingState(0);
-                    notify.show(error.response.data);
+                    notify.show(error.response.data, 'error');
                 });
         }, 1000);
     };
@@ -130,7 +149,7 @@ function Checkout() {
     function loadPaypal() {
         setPendingState(5);
 
-        const sum = coupon.percent_off ? OrderService.getSumOfProductsWithDiscount(products, coupon) : OrderService.getSumOfProducts(products);
+        const sum = parseFloat(coupon.percent_off ? OrderService.getSumOfProductsWithDiscount(products, coupon) + parseFloat(shippingCost) : OrderService.getSumOfProducts(products) + parseFloat(shippingCost)).toFixed(2);
 
         window.paypal.Buttons({
             createOrder: (data, actions) => OrderService.createPaypalOrder(actions, sum, currency.state.iso),
@@ -142,10 +161,13 @@ function Checkout() {
 
                 setTimeout(() => setRedirect(true), 2000);
 
+                cart.dispatch({type: "endPayment"});
             },
             onCancel: () => {
                 setTimeout(() => setPendingState(-2), 1000);
                 setTimeout(() => setPendingState(0), 2500);
+
+                cart.dispatch({type: "endPayment"});
             },
             onError: err => {
                 console.error(err);
@@ -224,10 +246,10 @@ function Checkout() {
                                             <Translate id="checkout-details-address"/>
                                         </label>
                                         <AsyncSelect
-                                            onChange={e => setAddress(e.value)}
-                                            inputProps={{ name: 'address' }}
+                                            onChange={e => {setAddress(e.value); setPlaceId(e.id)}}
+                                            aria-label="address"
                                             loadOptions={searchForAddress}
-                                            value={{ label: address, value: address }}
+                                            defaultValue={{ label: address, value: address }}
                                             disabled={pendingState > 0}
                                             styles={{
                                                 menu: provided => ({
@@ -281,7 +303,7 @@ function Checkout() {
                                 </div>
                             :
                                 <div className={`${pendingState > 1 && "animated fadeInUp fast"}`}>
-                                    <ShippingForm pendingState={pendingState} shippingAddress={shippingAddress} setShippingAddress={setShippingAddress}/>
+                                    <ShippingForm pendingState={pendingState} shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} address={address}/>
                                 </div>
                             }
 
@@ -289,7 +311,7 @@ function Checkout() {
                     </div>
                 </div>
                 : (pendingState > 0 && pendingState < 6) ?
-                    <PaymentProgress pendingState={pendingState} ref={paypalRef}/>
+                    <PaymentProgress pendingState={pendingState} ref={paypalRef} shippingCost={shippingCost} sum={OrderService.getSumOfProductsWithDiscount(products, coupon)}/>
                 :
                     pendingState === -2 ?
                         <FontAwesomeIcon size="6x" icon={faTimesCircle} className="animated bounceIn text-danger"/>

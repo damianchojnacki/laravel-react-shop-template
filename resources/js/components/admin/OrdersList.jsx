@@ -22,7 +22,7 @@ function OrdersList(props){
                         {props.fields.index && <td>{index + 1}</td>}
                         {props.fields.id && <td>{order.id}</td>}
                         {props.fields.date && <td>{order.created_at}</td>}
-                        {props.fields.email && <td>{order.user.email}</td>}
+                        {props.fields.email && <td>{order.details.email}</td>}
                         {props.fields.value && <td className="text-center">{order.value} USD</td>}
                         {props.fields.status && <td>{order.status.name}</td>}
                         <td className="text-right"><Link className={`btn btn-${props.bgColor}`} to={`/admin/orders/${order.id}`}>Details</Link>

@@ -6,7 +6,7 @@ export default class GoogleService {
             .then(response => {
                 const list = response.data.map((address) => {
                     return {
-                        id: address.id,
+                        id: address.place_id,
                         value: address.description,
                         label: address.description
                     }

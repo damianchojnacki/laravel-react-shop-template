@@ -52,11 +52,11 @@ export default class OrderService{
             purchase_units: [{
                 description: "Shop-template order",
                 amount: {
-                    currency_code: currency.state.iso,
+                    currency_code: currency,
                     value: sum,
                     breakdown: {
                         item_total: {
-                            currency_code: currency.state.iso,
+                            currency_code: currency,
                             value: sum,
                         },
                     }
@@ -66,7 +66,26 @@ export default class OrderService{
         })
     }
 
-    static loadGeowidget(language, callback, setDisplay){
+    static getCountry(address){
+        const country = address.substring(address.lastIndexOf(',') + 1).trim();
+
+        switch(country){
+            case "Poland":
+                return "pl";
+            case "Polska":
+                return "pl";
+
+            case "UK":
+                return "uk";
+            case "Wielka Brytania":
+                return "uk";
+
+            default:
+                return null;
+        }
+    }
+
+    static loadGeowidget(address, callback, setDisplay){
         const script = document.createElement("script");
         script.src = "https://geowidget.easypack24.net/js/sdk-for-javascript.js";
         document.body.appendChild(script);
@@ -76,15 +95,18 @@ export default class OrderService{
         stylesheet.href = "https://geowidget.easypack24.net/css/easypack.css";
         document.head.appendChild(stylesheet);
 
+        const country = this.getCountry(address);
+
         script.addEventListener("load", () => {
             window.easyPackAsyncInit = function () {
+
                 easyPack.init({
-                    defaultLocale: language == "en" ? "uk" : "pl",
+                    defaultLocale: country,
                 });
 
                 const map = easyPack.mapWidget('geowidget', function (point) {
                     setDisplay("none");
-                    callback(point.address.line1 + ", " + point.address.line2);
+                    callback(point.name + " " + point.address.line1 + ", " + point.address.line2);
                 });
             };
         });

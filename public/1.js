@@ -36,7 +36,8 @@ var useCart = function useCart() {
 
 var initialState = {
   products: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : [],
-  coupon: localStorage.getItem('coupon') ? JSON.parse(localStorage.getItem("coupon")) : {}
+  coupon: localStorage.getItem('coupon') ? JSON.parse(localStorage.getItem("coupon")) : {},
+  payment: false
 };
 
 var reducer = function reducer(state, action) {
@@ -47,7 +48,8 @@ var reducer = function reducer(state, action) {
       localStorage.removeItem('cart');
       return _objectSpread({}, state, {
         products: [],
-        coupon: {}
+        coupon: {},
+        payment: false
       });
 
     case "add":
@@ -75,6 +77,16 @@ var reducer = function reducer(state, action) {
       localStorage.removeItem('coupon');
       return _objectSpread({}, state, {
         coupon: {}
+      });
+
+    case "beginPayment":
+      return _objectSpread({}, state, {
+        payment: true
+      });
+
+    case "endPayment":
+      return _objectSpread({}, state, {
+        payment: false
       });
   }
 };
@@ -373,11 +385,11 @@ function () {
         purchase_units: [{
           description: "Shop-template order",
           amount: {
-            currency_code: currency.state.iso,
+            currency_code: currency,
             value: sum,
             breakdown: {
               item_total: {
-                currency_code: currency.state.iso,
+                currency_code: currency,
                 value: sum
               }
             }
@@ -386,8 +398,30 @@ function () {
       });
     }
   }, {
+    key: "getCountry",
+    value: function getCountry(address) {
+      var country = address.substring(address.lastIndexOf(',') + 1).trim();
+
+      switch (country) {
+        case "Poland":
+          return "pl";
+
+        case "Polska":
+          return "pl";
+
+        case "UK":
+          return "uk";
+
+        case "Wielka Brytania":
+          return "uk";
+
+        default:
+          return null;
+      }
+    }
+  }, {
     key: "loadGeowidget",
-    value: function loadGeowidget(language, callback, setDisplay) {
+    value: function loadGeowidget(address, callback, setDisplay) {
       var script = document.createElement("script");
       script.src = "https://geowidget.easypack24.net/js/sdk-for-javascript.js";
       document.body.appendChild(script);
@@ -395,14 +429,15 @@ function () {
       stylesheet.rel = "stylesheet";
       stylesheet.href = "https://geowidget.easypack24.net/css/easypack.css";
       document.head.appendChild(stylesheet);
+      var country = this.getCountry(address);
       script.addEventListener("load", function () {
         window.easyPackAsyncInit = function () {
           easyPack.init({
-            defaultLocale: language == "en" ? "uk" : "pl"
+            defaultLocale: country
           });
           var map = easyPack.mapWidget('geowidget', function (point) {
             setDisplay("none");
-            callback(point.address.line1 + ", " + point.address.line2);
+            callback(point.name + " " + point.address.line1 + ", " + point.address.line2);
           });
         };
       });
@@ -715,7 +750,7 @@ function newArray(arrayLength, parameters) {
     }, parameters);
   });
 }
-function shippingDataValidate(credentials) {
+function shippingDataValidate(credentials, countries) {
   var passed = true;
   var invalids = [];
 

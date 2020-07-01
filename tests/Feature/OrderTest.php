@@ -105,6 +105,7 @@ class OrderTest extends TestCase
         $this->assertCount(2, $order->products()->get());
     }
 
+    /*
     public function testOrderCanBeCreatedAndOverwritten()
     {
         $products = Product::get()->take(5)->map(function($product){
@@ -156,4 +157,5 @@ class OrderTest extends TestCase
         //check if new order have not been created
         $this->assertEquals($order->id, $order_new->id, 'Two other orders has been created!');
     }
+    */
 }

@@ -127,7 +127,16 @@
             "header": "Wybierz paczkomat:",
             "confirmation": "Przesyłka zostanie dostarczona do: ",
             "change": "Zmień paczkomat",
-            "button": "Przejdź do płatnośći"
+            "button": "Przejdź do płatności"
+        },
+        "total": "Razem: ",
+        "tooltip": {
+            "order": "Wartość zamówienia: ",
+            "shipping": "Koszt przesyłki: "
         }
+    },
+    "coupon": {
+        "none": "Kupon rabatowy:",
+        "applied": "Kupon rabatowy:"
     }
 }

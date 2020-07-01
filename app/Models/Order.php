@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\UsesCoupon;
 use App\Traits\UsesUuid;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -124,4 +125,8 @@ class Order extends Model{
         return $this->hasOne(OrderDetails::class);
     }
 
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('d.m.Y');
+    }
 }

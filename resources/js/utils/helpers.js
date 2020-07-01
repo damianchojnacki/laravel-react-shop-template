@@ -74,7 +74,7 @@ export function newArray(arrayLength, parameters){
     )
 }
 
-export function shippingDataValidate(credentials){
+export function shippingDataValidate(credentials, countries){
     let passed = true;
 
     const invalids = [];

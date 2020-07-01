@@ -10,6 +10,7 @@ $factory->define(OrderDetails::class, function (Faker $faker) {
         'email' => $faker->email,
         'name' => $faker->name,
         'address' => $faker->address,
+        'shipping_address' => $faker->secondaryAddress,
         'zip_code' => $faker->postcode
     ];
 });

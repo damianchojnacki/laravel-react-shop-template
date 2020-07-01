@@ -6,24 +6,29 @@ trait UsesCurrency
 {
     public $baseCurrency = 'USD';
 
-    public function getLatestRates(){
+    public function getLatestRates($base){
         $client = new \GuzzleHttp\Client();
 
-        $rates = \Cache::get('currency_rates');
+        $rates = \Cache::get("currency_rates_$base");
 
         if($rates)
             return $rates;
         else {
-            $request = $client->get("https://api.exchangeratesapi.io/latest?base=$this->baseCurrency");
+            $request = $client->get("https://api.exchangeratesapi.io/latest?base=$base");
             $rates = json_decode($request->getBody()->getContents())->rates;
 
-            \Cache::put('currency_rates', $rates, 3600);
+            \Cache::put("currency_rates_$base", $rates, 3600);
 
             return $rates;
         }
     }
 
-    public function convert($value, $target){
-        return round($value * $this->getLatestRates()->{$target}, 2);
+    public function convert($value, $target, $base = null){
+        if($base == null) $base = $this->baseCurrency;
+
+        if($target == $base)
+            return $value;
+
+        return round($value * $this->getLatestRates($base)->{$target}, 2);
     }
 }

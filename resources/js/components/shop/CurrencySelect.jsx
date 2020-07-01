@@ -3,11 +3,13 @@ import CurrencyService from "../../utils/CurrencyService";
 import Select from "react-select";
 import {useMediaQuery} from "react-responsive";
 import {useCurrency} from "../../utils/CurrencyContext";
+import {useCart} from "../../utils/CartContext";
 
 function CurrencySelect() {
-    const [selectOptions, setSelectOptions] = useState([]);
-
     const currency = useCurrency();
+    const cart = useCart();
+
+    const [selectOptions, setSelectOptions] = useState([]);
 
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
@@ -35,6 +37,7 @@ function CurrencySelect() {
             options={selectOptions}
             components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
             isSearchable={false}
+            isDisabled={cart.state.payment}
             styles={{
                 container: provided => ({
                     ...provided,

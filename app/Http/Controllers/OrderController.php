@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Coupon;
+use App\GooglePlacesAPI;
 use App\Http\Resources\CouponResource;
 use App\Http\Resources\OrderResource;
 use App\Order;
 use App\OrderDetails;
 use App\OrderStatus;
 use App\Product;
+use App\Shipment;
+use App\Traits\UsesCurrency;
 use App\User;
+use Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    use UsesCurrency;
+
     public function __construct()
     {
         Auth::shouldUse('api');
@@ -130,19 +136,27 @@ class OrderController extends Controller
             'email' => 'email',
             'name' => 'required|string|min:1',
             'address' => 'required|string|min:6',
+            'place_id' => 'required',
+            'shipping_address' => 'required|string|min:6',
             'zip_code' => 'required|min:5|max:6',
             'coupon' => 'max:12',
             'products' => 'required',
         ]);
+
+        $country = GooglePlacesAPI::getCountry($request->place_id);
+        $shipment = Shipment::where('country', $country)->first();
+
+        if(!$shipment)
+            return response('Unfortunately, we are not shipping to specified country.');
 
         if(count($request->products) > 0){
             $request->email = Auth::user()->email ?? $request->email;
 
             $previous = \Cookie::get('order');
 
-            if($previous){
+            if($previous && Order::find(json_decode($previous)->id)){
                 $order = Order::find(json_decode($previous)->id);
-                $order->details()->update($request->except(['terms', 'coupon', 'products']));
+                $order->details()->update($request->except(['terms', 'coupon', 'products', 'place_id']));
             } else {
                 $order = new Order();
                 $details = new OrderDetails($request->toArray());
@@ -159,9 +173,14 @@ class OrderController extends Controller
 
             $order->save();
 
+            if(\Cookie::get('currency')){
+                $currency = json_decode(\Cookie::get('currency'))->iso;
+            }
+
             return response([
                 'order' => new OrderResource(Order::with('details')->find($order->id)),
-                'paypalClientId' => config('services.paypal.client_id')
+                'paypalClientId' => config('services.paypal.client_id'),
+                'shippingCost' => $this->convert($shipment->cost, $currency ?? $this->baseCurrency, $shipment->currency->iso),
             ]);
         } else
             return response('Ordering failed', 400);

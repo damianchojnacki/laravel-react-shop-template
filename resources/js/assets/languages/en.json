@@ -124,10 +124,19 @@
             "button": "Proceed to shipment"
         },
         "shipping": {
-            "header": "Please select locker:",
+            "header": "Please select parcel locker:",
             "confirmation": "Your package will be delivered to: ",
-            "change": "Select different locker",
+            "change": "Select different parcel locker",
             "button": "Proceed to payment"
+        },
+        "total": "Total: ",
+        "tooltip": {
+            "order": "Order value: ",
+            "shipping": "Shipment cost: "
         }
+    },
+    "coupon": {
+        "none": "Have a coupon code?",
+        "applied": "Coupon:"
     }
 }

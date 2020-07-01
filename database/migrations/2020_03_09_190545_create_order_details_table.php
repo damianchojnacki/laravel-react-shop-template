@@ -20,6 +20,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('email');
             $table->string('name');
             $table->string('address');
+            $table->string('shipping_address');
             $table->string('zip_code');
             $table->timestamps();
         });

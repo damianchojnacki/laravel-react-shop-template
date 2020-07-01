@@ -22,6 +22,7 @@ class OrderDetailsResource extends JsonResource
                 'email' => $this->email,
                 'name' => $this->name,
                 'address' => $this->address,
+                'shipping_address' => $this->address,
                 'zip_code' => $this->zip_code,
             ];
     }

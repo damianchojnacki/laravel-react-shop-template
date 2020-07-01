@@ -52,7 +52,7 @@ function ProductsList(props){
                     {props.sumWithDiscount ?
                         <>
                                 <span>
-                                    <span>Sum: </span>
+                                    <Translate id="products-list-sum"/>
                                     <del className="line-through text-danger">{props.sum} {currency.state.symbol}</del>
                                 </span>
                             <FontAwesomeIcon icon={faCaretRight} className="mx-2"/>
