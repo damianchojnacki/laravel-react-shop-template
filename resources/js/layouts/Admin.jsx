@@ -119,7 +119,7 @@ function Admin(props) {
                     >
                         <AdminNavbar
                             {...props}
-                            brandText={getBrandText(props.location.pathname)}
+                            brandText={getBrandText()}
                             toggleSidebar={toggleSidebar}
                             sidebarOpened={sidebarOpened}
                         />

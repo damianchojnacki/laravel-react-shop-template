@@ -1742,7 +1742,7 @@ function Admin(props) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "main-panel ".concat(backgroundColor)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_admin_Navbars_AdminNavbar_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, props, {
-    brandText: getBrandText(props.location.pathname),
+    brandText: getBrandText(),
     toggleSidebar: toggleSidebar,
     sidebarOpened: sidebarOpened
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, getRoutes(_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
