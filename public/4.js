@@ -1723,7 +1723,7 @@ function Admin(props) {
     });
   };
 
-  var getBrandText = function getBrandText(path) {
+  var getBrandText = function getBrandText() {
     for (var i = 0; i < _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"].length; i++) {
       if (props.location.pathname.indexOf(_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].layout + _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].path) !== -1) {
         return _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].name;
@@ -3581,7 +3581,7 @@ function Resource(props) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            if (!(searchField && searchField !== "")) {
+            if (!searchField) {
               _context.next = 7;
               break;
             }

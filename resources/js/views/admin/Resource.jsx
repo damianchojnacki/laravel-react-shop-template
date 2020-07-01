@@ -27,7 +27,7 @@ function Resource(props){
     }, [page, searchField, service]);
 
     const getResource = async () => {
-        if(searchField && searchField !== ""){
+        if(searchField){
             const found = await window[service].search(searchField);
 
             setData(found);

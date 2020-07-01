@@ -90,7 +90,7 @@ function Admin(props) {
         });
     };
 
-    const getBrandText = path => {
+    const getBrandText = () => {
         for (let i = 0; i < routes.length; i++) {
             if (
                 props.location.pathname.indexOf(

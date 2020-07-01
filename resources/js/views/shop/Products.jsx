@@ -42,7 +42,7 @@ export default function Products(props){
             const newProducts = await ProductService.all(page, category);
 
             setProducts(newProducts);
-        } else if(searchField && searchField !== ""){
+        } else if(searchField){
             const found = await ProductService.search(searchField, category);
 
             setProducts(found);
@@ -58,7 +58,7 @@ export default function Products(props){
     };
 
     const showMoreOrReload = () => {
-        if(searchField && searchField !== ''){
+        if(searchField){
             setSearchField('');
             setProducts([]);
             setPage(1);

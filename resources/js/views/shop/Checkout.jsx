@@ -309,7 +309,7 @@ function Checkout() {
                                     </Button>
                                 </div>
                             :
-                                <div className={`${pendingState > 1 && "animated fadeInUp fast"}`}>
+                                <div className="animated fadeInUp fast">
                                     <ShippingForm pendingState={pendingState} shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} address={address}/>
                                 </div>
                             }

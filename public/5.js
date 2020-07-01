@@ -2468,7 +2468,7 @@ function Checkout() {
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_24__["default"], {
     id: "checkout-details-button"
   }))) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "".concat(pendingState > 1 && "animated fadeInUp fast")
+    className: "animated fadeInUp fast"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_ShippingForm__WEBPACK_IMPORTED_MODULE_23__["default"], {
     pendingState: pendingState,
     shippingAddress: shippingAddress,
@@ -3034,7 +3034,7 @@ function Products(props) {
             break;
 
           case 7:
-            if (!(searchField && searchField !== "")) {
+            if (!searchField) {
               _context.next = 14;
               break;
             }
@@ -3077,7 +3077,7 @@ function Products(props) {
   };
 
   var showMoreOrReload = function showMoreOrReload() {
-    if (searchField && searchField !== '') {
+    if (searchField) {
       setSearchField('');
       setProducts([]);
       setPage(1);

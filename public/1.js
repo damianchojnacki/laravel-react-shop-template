@@ -131,10 +131,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return OrderService; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
-/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -142,7 +140,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 
 
 
@@ -322,7 +319,7 @@ function () {
           easyPack.init({
             defaultLocale: country
           });
-          var map = easyPack.mapWidget('geowidget', function (point) {
+          easyPack.mapWidget('geowidget', function (point) {
             setDisplay("none");
             callback(point.name + " " + point.address.line1 + ", " + point.address.line2);
           });
@@ -354,19 +351,19 @@ function () {
   }, {
     key: "fromCookie",
     value: function fromCookie() {
-      return js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.get("order") ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.get("order")) : null;
+      return js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get("order") ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get("order")) : null;
     }
   }, {
     key: "toCookie",
     value: function toCookie(order) {
-      order && js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.set("order", JSON.stringify(order), {
+      order && js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set("order", JSON.stringify(order), {
         expires: 1
       });
     }
   }, {
     key: "clearCookie",
     value: function clearCookie() {
-      js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.remove("order");
+      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove("order");
     }
   }]);
 
