@@ -39761,19 +39761,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var ShopLayout = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(1), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./layouts/Shop */ "./resources/js/layouts/Shop.jsx"));
 });
 var AdminLayout = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./layouts/Admin */ "./resources/js/layouts/Admin.jsx"));
 });
-
 var hist = Object(history__WEBPACK_IMPORTED_MODULE_2__["createBrowserHistory"])();
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
-
-
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Router"], {
   history: hist

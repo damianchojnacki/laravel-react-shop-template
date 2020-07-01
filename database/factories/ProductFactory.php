@@ -4,8 +4,8 @@
 
 use App\Product;
 use App\ProductType;
-use Faker\Generator as Faker;
 use Bezhanov\Faker\Provider\Device;
+use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     $faker->addProvider(new Device($faker));

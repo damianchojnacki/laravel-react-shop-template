@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Exceptions\GooglePlacesException;
-use Cookie;
 
 class GooglePlacesAPI{
 

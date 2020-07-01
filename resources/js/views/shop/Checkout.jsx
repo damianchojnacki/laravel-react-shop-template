@@ -1,6 +1,13 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
-    Form, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox
+    Button,
+    Form,
+    FormCheckbox,
+    FormGroup,
+    FormInput,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText
 } from "shards-react";
 import {useCart} from "../../utils/CartContext";
 import ProductService from "../../utils/ProductService";
@@ -9,7 +16,7 @@ import {Helmet} from "react-helmet";
 import ProductsList from "../../components/shop/ProductsList";
 import {Redirect} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faLock} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
 import {shippingDataValidate} from "../../utils/helpers";

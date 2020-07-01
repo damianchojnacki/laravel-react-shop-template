@@ -1,23 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Redirect} from "react-router-dom";
-
 // reactstrap components
-import {
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Form,
-    Input,
-    Row,
-    Col
-} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row} from "reactstrap";
 import {notify} from 'react-notify-toast';
 import OrderService from "../../utils/OrderService";
 import ProductsListComplex from "../../components/admin/ProductsListComplex";
-import User from "./User";
-import Product from "./Product";
 import ProductsList from "../../components/admin/ProductsList";
 
 function Order(props) {

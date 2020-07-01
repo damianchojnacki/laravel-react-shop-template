@@ -17,9 +17,8 @@
 */
 /*eslint-disable*/
 import React from "react";
-
 // reactstrap components
-import { Container, Badge } from "reactstrap";
+import {Badge, Container} from "reactstrap";
 
 class Footer extends React.Component {
   render() {

@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useContext} from 'react';
-import { Helmet } from 'react-helmet';
+import React, {useEffect, useState} from 'react';
+import {Helmet} from 'react-helmet';
 import ProductsNav from '../../components/shop/ProductsNav';
 import {Button} from "shards-react";
 import ProductsListComplex from "../../components/shop/ProductListComplex";

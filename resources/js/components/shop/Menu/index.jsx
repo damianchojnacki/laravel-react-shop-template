@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Nav, NavItem, Navbar, NavbarToggler, NavbarBrand, Collapse } from "shards-react";
-import { Link, NavLink, matchPath } from 'react-router-dom';
-import { useAuth } from "../../../utils/AuthContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons/faUserCircle";
-import { useMediaQuery } from "react-responsive";
+import React, {useState} from "react";
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem} from "shards-react";
+import {Link, matchPath, NavLink} from 'react-router-dom';
+import {useAuth} from "../../../utils/AuthContext";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
+import {useMediaQuery} from "react-responsive";
 import CurrencySelect from "../CurrencySelect";
 import LanguageSelect from "../LanguageSelect";
 import Translate from "../../Translate";

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class ViewsTableSeeder extends Seeder

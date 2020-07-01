@@ -16,24 +16,11 @@
 
 */
 import React from "react";
-import {Link} from "react-router-dom";
-import {Line, Bar, Pie} from "react-chartjs-2";
-
+import {Bar, Line} from "react-chartjs-2";
 // reactstrap components
-import {
-    Button,
-    ButtonGroup,
-    Card,
-    CardHeader,
-    CardBody,
-    CardTitle,
-    Row,
-    Col,
-} from "reactstrap";
+import {Col, Row,} from "reactstrap";
 
 import {Helmet} from "react-helmet";
-import ChartService from "../../utils/ChartService";
-import {separateHundreds} from "../../utils/helpers";
 import OrderService from "../../utils/OrderService";
 import Chart from "../../components/admin/Chart";
 import ChartMultiple from "../../components/admin/ChartMultiple";

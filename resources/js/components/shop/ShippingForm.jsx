@@ -1,9 +1,7 @@
-import React from "react";
-import { Button } from "shards-react";
-import { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
+import {Button} from "shards-react";
 import OrderService from "../../utils/OrderService";
 import Translate from "../Translate";
-import {notify} from "react-notify-toast";
 
 function ShippingForm({pendingState, shippingAddress, setShippingAddress, address}) {
     const [display, setDisplay] = useState("block");

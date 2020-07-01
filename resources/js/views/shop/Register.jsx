@@ -1,16 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
-import {Form, FormInput, Button, Alert, InputGroupAddon, InputGroupText, InputGroup, Row, FormCheckbox} from "shards-react";
+import {
+    Alert,
+    Button,
+    Form,
+    FormCheckbox,
+    FormInput,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    Row
+} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import {useAuth} from "../../utils/AuthContext";
 import classNames from 'classnames';
 import 'animate.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
-import {checkFullName, isEmail, equals} from "../../utils/helpers";
+import {checkFullName, equals, isEmail} from "../../utils/helpers";
 import Translate from "../../components/Translate";
-import { useLanguage } from '../../utils/LanguageContext';
 
 export default function Register() {
 

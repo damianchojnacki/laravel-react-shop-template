@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Order;
 use App\Product;
-use App\Coupon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

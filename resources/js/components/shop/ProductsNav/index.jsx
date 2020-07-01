@@ -3,7 +3,7 @@ import {FormInput, InputGroup, InputGroupAddon, InputGroupText, Nav, NavItem, Na
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
-import {isMobile, newArray} from "../../../utils/helpers";
+import {newArray} from "../../../utils/helpers";
 import ProductService from "../../../utils/ProductService";
 import "./style.scss";
 import Select from "react-select";

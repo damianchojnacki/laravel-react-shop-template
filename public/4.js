@@ -521,9 +521,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/helpers */ "./resources/js/utils/helpers.js");
-/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
-/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
-
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
 
 
 
@@ -538,7 +536,7 @@ function ChartDynamic(props) {
     tag: "h2"
   }, props.data ? Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_2__["separateHundreds"])(props.data.total) + ' ' + props.data.sign : null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "chart-area"
-  }, props.data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__["Line"], {
+  }, props.data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__["Line"], {
     data: props.data.data,
     options: props.data.options
   }))));
@@ -706,9 +704,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap/es/Button */ "./node_modules/reactstrap/es/Button.js");
-
+/* harmony import */ var reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap/es/Button */ "./node_modules/reactstrap/es/Button.js");
 
 
 
@@ -723,7 +719,7 @@ function DiscountsList(props) {
       key: product.discount.id
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.percent_off, " %"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.price, " USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.final_price, " USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.ends), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-right"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
       className: "btn btn-danger",
       onClick: function onClick() {
         return props.deleteDiscount(product.discount);
@@ -985,7 +981,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
-/* harmony import */ var _utils_AuthService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../utils/AuthService */ "./resources/js/utils/AuthService.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -1014,7 +1009,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  // nodejs library that concatenates classes
 
  // reactstrap components
-
 
 
 
@@ -2278,15 +2272,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
-/* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
-/* harmony import */ var _components_admin_ProductsListComplex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/ProductsListComplex */ "./resources/js/components/admin/ProductsListComplex.jsx");
-/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
-/* harmony import */ var _components_admin_ChartDynamic__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/admin/ChartDynamic */ "./resources/js/components/admin/ChartDynamic.jsx");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
+/* harmony import */ var _components_admin_ChartDynamic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/admin/ChartDynamic */ "./resources/js/components/admin/ChartDynamic.jsx");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_5__);
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -2298,10 +2287,6 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
  // reactstrap components
-
-
-
-
 
 
 
@@ -2344,11 +2329,11 @@ function Analytics(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ChartService__WEBPACK_IMPORTED_MODULE_7__["default"].dynamic(resource, group, range));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ChartService__WEBPACK_IMPORTED_MODULE_3__["default"].dynamic(resource, group, range));
 
             case 2:
               chart = _context.sent;
-              setData(_utils_ChartService__WEBPACK_IMPORTED_MODULE_7__["default"].generate(chart, getThemeColor(props.bgColor), 'line'));
+              setData(_utils_ChartService__WEBPACK_IMPORTED_MODULE_3__["default"].generate(chart, getThemeColor(props.bgColor), 'line'));
 
             case 4:
             case "end":
@@ -2360,9 +2345,9 @@ function Analytics(props) {
 
     range && group && resource && gen();
   }, [range, group, resource]);
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_9__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Admin - Analytics")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_5__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Admin - Analytics")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "content"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], null, data && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ChartDynamic__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], null, data && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ChartDynamic__WEBPACK_IMPORTED_MODULE_4__["default"], {
     data: data
   }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Col"], {
     md: "4"
@@ -2492,17 +2477,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
-/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/helpers */ "./resources/js/utils/helpers.js");
-/* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
-/* harmony import */ var _components_admin_Chart__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/admin/Chart */ "./resources/js/components/admin/Chart.jsx");
-/* harmony import */ var _components_admin_ChartMultiple__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/admin/ChartMultiple */ "./resources/js/components/admin/ChartMultiple.jsx");
-/* harmony import */ var _components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/admin/OrdersList */ "./resources/js/components/admin/OrdersList.jsx");
+/* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
+/* harmony import */ var _components_admin_Chart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/Chart */ "./resources/js/components/admin/Chart.jsx");
+/* harmony import */ var _components_admin_ChartMultiple__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/ChartMultiple */ "./resources/js/components/admin/ChartMultiple.jsx");
+/* harmony import */ var _components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/admin/OrdersList */ "./resources/js/components/admin/OrdersList.jsx");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -2541,10 +2523,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 */
 
-
  // reactstrap components
-
-
 
 
 
@@ -2596,7 +2575,7 @@ function (_React$Component) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_OrderService__WEBPACK_IMPORTED_MODULE_8__["default"].recent());
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].recent());
 
             case 2:
               orders = _context.sent;
@@ -2615,23 +2594,23 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_5__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Admin - Dashboard")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_4__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Admin - Dashboard")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "content"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         xs: "12"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ChartMultiple__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ChartMultiple__WEBPACK_IMPORTED_MODULE_7__["default"], {
         type: "line",
-        chart: react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__["Line"],
+        chart: react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__["Line"],
         api: this.chartMultiple
-      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
         lg: "12"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_Chart__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_Chart__WEBPACK_IMPORTED_MODULE_6__["default"], {
         type: "bar",
-        chart: react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__["Bar"],
+        chart: react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__["Bar"],
         api: "orders/values",
         icon: "tim-icons icon-money-coins text-danger",
         color: "#fd5d93"
-      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "card-plain card"
@@ -2645,7 +2624,7 @@ function (_React$Component) {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "table-responsive ps"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_8__["default"], {
         data: this.state.orders,
         bgColor: this.props.bgColor,
         fields: {
@@ -2941,9 +2920,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
 /* harmony import */ var _components_admin_ProductsListComplex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/ProductsListComplex */ "./resources/js/components/admin/ProductsListComplex.jsx");
-/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./User */ "./resources/js/views/admin/User.jsx");
-/* harmony import */ var _Product__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Product */ "./resources/js/views/admin/Product.jsx");
-/* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
+/* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
 
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -2966,8 +2943,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
  // reactstrap components
-
-
 
 
 
@@ -3244,7 +3219,7 @@ function Order(props) {
     data: products,
     bgColor: props.bgColor,
     remove: removeProduct
-  })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+  })) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, props, {
     data: productsList,
     bgColor: props.bgColor,
     fields: {

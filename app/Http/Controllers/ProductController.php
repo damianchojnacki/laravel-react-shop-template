@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Discount;
 use App\Http\Resources\ProductResource;
 use App\Image;
 use App\Product;

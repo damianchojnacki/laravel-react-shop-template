@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
 import {Button, FormGroup, FormInput, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPercentage} from "@fortawesome/free-solid-svg-icons/faPercentage";

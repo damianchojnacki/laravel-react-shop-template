@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Country;
 use App\Http\Resources\UserResource;
-use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
