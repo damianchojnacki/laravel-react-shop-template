@@ -17,11 +17,19 @@ Master branch is working application ready for deployment on:
 
 ### 
 
-Laravel-react-shop-template require a **Heroku Dyno** and extension **Heroku Postgres**.
+Requirements:
+- Google Places API (Address autocomplete),
+- Cloudinary (Images storage)
+- PayPal REST API (Payment service)
 
 1. Deploy an app from github repo.
 2. Generate APP_KEY:
 
+```bash
+php artisan key:generate 
+```
+
+For deploy to heroku you can use --show option to copy and paste key:
 ```bash
 php artisan key:generate --show
 ```
@@ -30,8 +38,15 @@ php artisan key:generate --show
 
 | KEY | VALUE |
 | ------ | ------ |
-| APP_KEY | ^^ generated above ^^ |
-
+| APP_KEY |
+| GOOGLE_CLIENT_ID |
+| GOOGLE_SECRET_KEY | 
+| GOOGLE_PLACES_API_KEY |
+| CLOUDINARY_API_KEY | 
+| CLOUDINARY_API_SECRET |
+| CLOUDINARY_CLOUD_NAME |
+| PAYPAL_CLIENT_ID |
+    
 4. Create required databases and seed:
 
 ```bash
