@@ -40,7 +40,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:64',
             'price' => 'required|numeric|min:1',
-            'img' => 'required|string',
+            'img' => 'required|image',
             'type' => 'required|numeric|min:1',
         ]);
 
@@ -87,6 +87,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:64',
             'price' => 'required|numeric|min:1',
             'type' => 'required|numeric|min:1',
+            'img' => 'image',
         ]);
 
         $product = Product::findOrFail($request->input('id'));
@@ -97,6 +98,12 @@ class ProductController extends Controller
         $product->type()->associate($type);
 
         $product->save();
+
+        if($request->img){
+            $image = new Image();
+            $image->url= $request->input('img');
+            $product->image()->save($image);
+        }
 
         return response('Product has been updated', 200);
     }
