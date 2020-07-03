@@ -20,7 +20,8 @@
         "laravel/telescope": "^3.5",
         "laravel/tinker": "^2.0",
         "mbezhanov/faker-provider-collection": "^1.2",
-        "phpseclib/bcmath_compat": "1.0.4"
+        "phpseclib/bcmath_compat": "1.0.4",
+        "sentry/sentry-laravel": "1.8.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",
