@@ -717,7 +717,7 @@ function DiscountsList(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "#"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Product"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Percent off"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Product price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Final price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ends"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Added at"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.data && props.data.length > 0 ? props.data.map(function (product, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: product.discount.id
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.percent_off, " %"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.price, " USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.final_price, " USD"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.ends), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.percent_off, " %"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.price_origin, " $"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.price_final, " $"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.ends), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.discount.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-right"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
       className: "btn btn-danger",
@@ -1281,12 +1281,14 @@ function ProductsList(props) {
   }, "Final price"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Added at"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, props.data && props.data.length > 0 ? props.data.map(function (product, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
       key: product.id,
-      className: props.product && (props.product === product.id || props.products.includes(product)) ? "table-warning" : null
-    }, props.fields.index && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), props.fields.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.id), props.fields.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), props.fields.type && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.type["long"]), props.fields.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+      style: {
+        backgroundColor: props.remove && props.products.includes(product) && "#00000055"
+      }
+    }, props.fields.index && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, index + 1), props.fields.id && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.id), props.fields.name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), props.fields.type && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.type.name), props.fields.price && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
     }, product.price, " USD"), props.fields.price_final && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-center"
-    }, product.price_final, " USD"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.created_at), props.add ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+    }, product.price_final, " $"), props.fields.date && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.created_at), props.add ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
       className: "text-right"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       color: "success",
@@ -1303,7 +1305,7 @@ function ProductsList(props) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_es_Button__WEBPACK_IMPORTED_MODULE_3__["default"], {
       color: "danger",
       onClick: function onClick() {
-        return props.remove(product.id);
+        return props.remove(product);
       }
     }, "Remove")));
   }) : null));
@@ -2122,7 +2124,12 @@ function () {
     key: "upload",
     value: function upload(data) {
       var formData = new FormData();
-      formData.append('img', data);
+      formData.append('img', data.img);
+
+      if (data.product_id) {
+        formData.append('product_id', data.product_id);
+      }
+
       return window.axios.post("/api/images", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -2764,14 +2771,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
-/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
 
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -2788,16 +2804,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function DiscountsNew(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       products = _useState2[0],
       setProducts = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      id = _useState4[0],
-      setId = _useState4[1];
+      discounted = _useState4[0],
+      setDiscounted = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -2808,6 +2825,11 @@ function DiscountsNew(props) {
       _useState8 = _slicedToArray(_useState7, 2),
       ends = _useState8[0],
       setEnds = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      redirect = _useState10[0],
+      setRedirect = _useState10[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     getProducts();
@@ -2820,7 +2842,7 @@ function DiscountsNew(props) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].discounts.without());
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.without());
 
           case 2:
             products = _context.sent;
@@ -2834,48 +2856,61 @@ function DiscountsNew(props) {
     });
   };
 
+  var removeProduct = function removeProduct(product) {
+    var id = product.id;
+    var newProducts = discounted.filter(function (product) {
+      return product.id !== id;
+    });
+    setDiscounted(newProducts);
+  };
+
+  var addProduct = function addProduct(product) {
+    setDiscounted([].concat(_toConsumableArray(discounted), [product]));
+  };
+
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var data = {
-      product_id: id,
+      products: discounted,
       percent_off: percentOff,
       ends: ends
     };
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__["default"].discounts.create(data).then(function (res) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(res.data, 'success');
-      getProducts();
+    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.create(data).then(function (res) {
+      setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+        to: "/admin/discounts"
+      }));
     })["catch"](function (error) {
-      react_notify_toast__WEBPACK_IMPORTED_MODULE_5__["notify"].show(error.response.data.message, 'error');
+      react_notify_toast__WEBPACK_IMPORTED_MODULE_6__["notify"].show(error.response.data.message, 'error');
     });
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Admin - New Discount")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, redirect, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_3__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("title", null, "Shop | Admin - New Discount")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", {
     className: "content"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-lg-6 col-12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Form"], {
     onSubmit: handleSubmit
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Card"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CardHeader"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: "card-title"
-  }, "New discount")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+  }, "New discount")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CardBody"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
     md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Percent off"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Percent off"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], {
     type: "number",
     onChange: function onChange(e) {
       return setPercentOff(e.target.value);
     },
     className: props.bgColor,
     required: true
-  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Col"], {
     md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Ends at"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Ends at"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], {
     type: "datetime-local",
     onChange: function onChange(e) {
       return setEnds(e.target.value);
     },
     className: props.bgColor,
     required: true
-  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["CardFooter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], {
     className: "btn-fill",
     color: "success",
     type: "submit"
@@ -2883,17 +2918,16 @@ function DiscountsNew(props) {
     className: "col-lg-6 col-12"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
     className: ""
-  }, "Products:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, "Products:"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_7__["default"], {
     data: products,
     bgColor: props.bgColor,
     fields: {
       name: true,
       price: true
     },
-    add: function add(product) {
-      return setId(product.id);
-    },
-    product: id
+    products: discounted,
+    add: addProduct,
+    remove: removeProduct
   })))));
 }
 
@@ -3113,7 +3147,8 @@ function Order(props) {
     });
   };
 
-  var removeProduct = function removeProduct(id) {
+  var removeProduct = function removeProduct(product) {
+    var id = product.id;
     var newProducts = products.filter(function (product) {
       return product.id !== id;
     });
@@ -3372,7 +3407,7 @@ function Product(props) {
       name: name,
       price: price,
       type: type,
-      img: image.id
+      img: image.publicId
     };
     if (id !== 'new') _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
@@ -3389,7 +3424,11 @@ function Product(props) {
   };
 
   var uploadImage = function uploadImage(image) {
-    _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__["default"].upload(image).then(function (res) {
+    var data = {
+      img: image,
+      product_id: product.id
+    };
+    _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__["default"].upload(data).then(function (res) {
       setImage(res.data);
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("Image has been uploaded.", 'success');
     })["catch"](function (error) {
@@ -3471,10 +3510,15 @@ function Product(props) {
     style: {
       display: "flex"
     }
-  }, image.src ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+  }, image.src && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
     src: image.src,
     alt: name
-  }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    style: image.src && {
+      position: 'absolute',
+      opacity: '.8'
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_8__["default"], {
     "for": "exampleCustomFileBrowser",
     className: "text-center"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"], {
@@ -3482,7 +3526,7 @@ function Product(props) {
     icon: _fortawesome_free_solid_svg_icons_faCloudUploadAlt__WEBPACK_IMPORTED_MODULE_10__["faCloudUploadAlt"]
   }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
     className: "mt-2"
-  }, "Upload product image")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
+  }, image.src ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, "Change product image") : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, "Upload product image"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
     type: "file",
     style: {
       opacity: 0
@@ -3776,61 +3820,35 @@ function User(props) {
       password = _useState8[0],
       setPassword = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])('1'),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState10 = _slicedToArray(_useState9, 2),
-      country = _useState10[0],
-      setCountry = _useState10[1];
-
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState12 = _slicedToArray(_useState11, 2),
-      countries = _useState12[0],
-      setCountries = _useState12[1];
-
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
-      _useState14 = _slicedToArray(_useState13, 2),
-      redirect = _useState14[0],
-      setRedirect = _useState14[1];
+      redirect = _useState10[0],
+      setRedirect = _useState10[1];
 
   var id = props.match.params.id;
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     (function _callee() {
-      var countriesData, options, _user;
+      var _user;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/countries'));
-
-            case 2:
-              countriesData = _context.sent;
-              options = countriesData.data.map(function (country) {
-                return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-                  key: country.id,
-                  value: country.id
-                }, country.name);
-              });
-
               if (!(id !== 'new')) {
-                _context.next = 12;
+                _context.next = 7;
                 break;
               }
 
-              _context.next = 7;
+              _context.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].get(id));
 
-            case 7:
+            case 3:
               _user = _context.sent;
               setUser(_user);
               setName(_user.name);
               setEmail(_user.email);
-              setCountry(_user.country.id);
 
-            case 12:
-              setCountries(options);
-
-            case 13:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -3845,7 +3863,6 @@ function User(props) {
       id: id,
       name: name,
       email: email,
-      country: country,
       password: password
     };
     if (id !== 'new') _utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
@@ -3916,17 +3933,7 @@ function User(props) {
     },
     className: props.bgColor,
     required: true
-  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-    md: "12"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Country"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Input"], {
-    type: "select",
-    value: country,
-    onChange: function onChange(e) {
-      return setCountry(e.target.value);
-    },
-    className: props.bgColor,
-    required: true
-  }, countries)))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, id !== 'new' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+  })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["CardFooter"], null, id !== 'new' ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
     className: "btn-fill",
     color: props.bgColor,
     type: "submit"

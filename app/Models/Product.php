@@ -29,6 +29,13 @@ class Product extends Model{
         return $id;
     }
 
+    public function saveImage($public_id){
+        if($this->image)
+            $this->image()->update(['public_id' => $public_id]);
+        else
+            $this->image()->create(['public_id' => $public_id]);
+    }
+
     public function getPriceFinalAttribute(){
         if($this->discount)
             $price_final = $this->price - $this->price * ($this->discount->percent_off / 100);

@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\FormatedModel;
 
-class Discount extends Model{
+class Discount extends FormatedModel{
 
     public function product(){
         return $this->belongsTo(Product::class);

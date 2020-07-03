@@ -23,8 +23,8 @@ function DiscountsList(props){
                         <td>{index + 1}</td>
                         <td>{product.name}</td>
                         <td>{product.discount.percent_off} %</td>
-                        <td>{product.price} USD</td>
-                        <td>{product.final_price} USD</td>
+                        <td>{product.price_origin} $</td>
+                        <td>{product.price_final} $</td>
                         <td>{product.discount.ends}</td>
                         <td>{product.discount.created_at}</td>
                         <td className="text-right">

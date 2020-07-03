@@ -49,7 +49,7 @@ function Product(props) {
             name: name,
             price: price,
             type: type,
-            img: image.id,
+            img: image.publicId,
         };
 
         if(id !== 'new')
@@ -72,7 +72,12 @@ function Product(props) {
     };
 
     const uploadImage = image => {
-        ImageService.upload(image)
+        const data = {
+          img: image,
+          product_id: product.id
+        };
+
+        ImageService.upload(data)
             .then(res => {
                 setImage(res.data);
                 notify.show(`Image has been uploaded.`, 'success');
@@ -176,17 +181,21 @@ function Product(props) {
                     </Form>
                 </Col>
                 <Col md="4" className="justify-content-center align-items-center" style={{display: "flex"}}>
-                    {image.src ?
-                        <img src={image.src} alt={name}/>
-                        :
-                        <FormGroup>
-                            <Label for="exampleCustomFileBrowser" className="text-center">
-                                <FontAwesomeIcon size="6x" icon={faCloudUploadAlt}/>
-                                <p className="mt-2">Upload product image</p>
-                            </Label>
-                            <Input type="file" style={{opacity: 0}} onChange={e => uploadImage(e.target.files[0])}/>
-                        </FormGroup>
-                    }
+                    {image.src && <img src={image.src} alt={name}/> }
+
+                    <FormGroup style={image.src && {position: 'absolute', opacity: '.8'}}>
+                        <Label for="exampleCustomFileBrowser" className="text-center">
+                            <FontAwesomeIcon size="6x" icon={faCloudUploadAlt}/>
+                            <p className="mt-2">
+                                {image.src ?
+                                    <>Change product image</>
+                                :
+                                    <>Upload product image</>
+                                }
+                            </p>
+                        </Label>
+                        <Input type="file" style={{opacity: 0}} onChange={e => uploadImage(e.target.files[0])}/>
+                    </FormGroup>
                 </Col>
             </Row>
         </div>

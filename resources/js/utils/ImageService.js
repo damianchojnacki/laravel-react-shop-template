@@ -3,8 +3,15 @@ export default class ImageService{
         const formData = new FormData();
         formData.append(
             'img',
-            data,
+            data.img,
         );
+
+        if(data.product_id){
+            formData.append(
+                'product_id',
+                data.product_id,
+            );
+        }
 
         return window.axios.post(`/api/images`, formData, {
             headers: {

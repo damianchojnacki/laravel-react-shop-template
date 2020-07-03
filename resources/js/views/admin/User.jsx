@@ -11,28 +11,17 @@ function User(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [country, setCountry] = useState('1');
-    const [countries, setCountries] = useState([]);
     const [redirect, setRedirect] = useState();
     const id = props.match.params.id;
 
     useEffect(() => {
         (async function() {
-            const countriesData = await window.axios.get('/api/countries');
-
-            const options =  countriesData.data.map((country) => {
-                return <option key={country.id} value={country.id}>{country.name}</option>
-            });
-
             if(id !== 'new'){
                 const user = await UserService.get(id);
                 setUser(user);
                 setName(user.name);
                 setEmail(user.email);
-                setCountry(user.country.id);
             }
-
-            setCountries(options);
         })();
     }, []);
 
@@ -43,7 +32,6 @@ function User(props) {
             id: id,
             name: name,
             email: email,
-            country: country,
             password: password,
         };
 
@@ -138,20 +126,6 @@ function User(props) {
                                     </Col>
                                 </Row>
                                 }
-                                <Row>
-                                    <Col md="12">
-                                        <label>Country</label>
-                                        <Input
-                                            type="select"
-                                            value={country}
-                                            onChange={e => setCountry(e.target.value)}
-                                            className={props.bgColor}
-                                            required
-                                        >
-                                            {countries}
-                                        </Input>
-                                    </Col>
-                                </Row>
                             </CardBody>
                             <CardFooter>
                                 {id !== 'new' ?

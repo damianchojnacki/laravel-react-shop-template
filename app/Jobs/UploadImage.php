@@ -34,7 +34,7 @@ class UploadImage implements ShouldQueue
     public function handle()
     {
         $image = new Image();
-        $image->url = Product::imageUpload('./public/images/products/' . $this->product->id . '.png');
+        $image->public_id = Product::imageUpload('./public/images/products/' . $this->product->id . '.png');
         $this->product->image()->save($image);
     }
 }

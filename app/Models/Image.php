@@ -14,7 +14,14 @@ class Image extends Model{
         'created_at',
         'updated_at',
     ];
-    protected $appends = ['src'];
+
+    protected $fillable = [
+        'public_id'
+    ];
+
+    protected $appends = [
+        'src'
+    ];
 
     public static function imageUpload($image, $prefix = null){
         $id = Cloudder::upload($image, null, [
@@ -32,15 +39,15 @@ class Image extends Model{
     }
 
     public function getSrcAttribute(){
-        return self::getImageSrc($this->url);
+        return self::getImageSrc($this->public_id);
     }
 
-    public static function getImageSrc($publicId){
-        return Cloudder::show($publicId);
+    public static function getImageSrc($public_id){
+        return Cloudder::show($public_id);
     }
 
     public function imageDelete(){
-        return config('app.env') !== 'testing' ? Cloudder::delete($this->url) : null;
+        Cloudder::delete($this->public_id);
     }
 
 }

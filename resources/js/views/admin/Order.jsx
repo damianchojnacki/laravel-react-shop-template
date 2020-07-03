@@ -104,7 +104,9 @@ function Order(props) {
             });
     };
 
-    const removeProduct = id => {
+    const removeProduct = product => {
+        const id = product.id;
+
         const newProducts = products.filter(product => {
             return product.id !== id;
         });

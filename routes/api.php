@@ -74,7 +74,7 @@ Route::group([
     Route::post('discounts', 'DiscountController@create');
 
     Route::middleware('auth:api')->group(function () {
-        Route::delete('discounts/{id}', 'DiscountController@discountDelete');
+        Route::delete('discounts/{id}', 'DiscountController@delete');
     });
 });
 

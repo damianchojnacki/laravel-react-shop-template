@@ -20,13 +20,13 @@ function ProductsList(props){
             </thead>
             <tbody>
                 {(props.data && props.data.length > 0) ? props.data.map((product, index) =>
-                    <tr key={product.id} className={props.product && (props.product === product.id || props.products.includes(product)) ? "table-warning" : null}>
+                    <tr key={product.id} style={{backgroundColor: props.remove && props.products.includes(product) && "#00000055"}}>
                         {props.fields.index && <td>{index + 1}</td>}
                         {props.fields.id && <td>{product.id}</td>}
                         {props.fields.name && <td>{product.name}</td>}
-                        {props.fields.type && <td>{product.type.long}</td>}
+                        {props.fields.type && <td>{product.type.name}</td>}
                         {props.fields.price && <td className="text-center">{product.price} USD</td>}
-                        {props.fields.price_final && <td className="text-center">{product.price_final} USD</td>}
+                        {props.fields.price_final && <td className="text-center">{product.price_final} $</td>}
                         {props.fields.date && <td>{product.created_at}</td>}
                         {props.add ?
                             <td className="text-right">
@@ -38,7 +38,7 @@ function ProductsList(props){
                         }
                         {props.remove && props.products.includes(product) &&
                             <td className="text-right">
-                                <Button color="danger" onClick={() => props.remove(product.id)}>Remove</Button>
+                                <Button color="danger" onClick={() => props.remove(product)}>Remove</Button>
                             </td>
                         }
                     </tr>

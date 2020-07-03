@@ -44,7 +44,7 @@ function () {
             case 2:
               products = _context.sent;
               return _context.abrupt("return", products.filter(function (product) {
-                return product.discount;
+                return product.price_origin != product.price_final;
               }));
 
             case 4:
@@ -68,7 +68,7 @@ function () {
             case 2:
               products = _context2.sent;
               return _context2.abrupt("return", products.filter(function (product) {
-                return !product.discount;
+                return product.price_origin == product.price_final;
               }));
 
             case 4:

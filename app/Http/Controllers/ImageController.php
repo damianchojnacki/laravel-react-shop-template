@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Image;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -12,12 +13,15 @@ class ImageController extends Controller
             'img' => 'required|max:3070',
         ]);
 
-        $publicId = Image::imageUpload($request->file('img'), 'products');
-        $url = Image::getImageSrc($publicId);
+        $public_id = Product::imageUpload($request->file('img'));
+        $url = Image::getImageSrc($public_id);
+
+        if($request->product_id)
+            Product::findOrFail($request->product_id)->saveImage($public_id);
 
         return response([
             'src' => $url,
-            'id' => $publicId,
+            'publicId' => $public_id,
         ], 200);
     }
 }

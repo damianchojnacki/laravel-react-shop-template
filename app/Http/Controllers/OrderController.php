@@ -109,7 +109,7 @@ class OrderController extends Controller
             'email' => 'required|email',
             'name' => 'required|string|min:1',
             'address' => 'required|string|min:6',
-            'zip_code' => 'required|min:5|max:6',
+            'zip_code' => 'required|min:5|max:12',
         ]);
 
         $order = Order::findOrFail($request->id);
@@ -136,7 +136,7 @@ class OrderController extends Controller
             'address' => 'required|string|min:6',
             'place_id' => 'required',
             'shipping_address' => 'required|string|min:6',
-            'zip_code' => 'required|min:5|max:6',
+            'zip_code' => 'required|min:5|max:12',
             'coupon' => 'max:12',
             'products' => 'required',
         ]);

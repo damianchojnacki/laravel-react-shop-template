@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row,} from 'reactstrap';
 
@@ -8,13 +9,13 @@ import ProductsList from "../../components/admin/ProductsList";
 
 function DiscountsNew(props){
     const [products, setProducts] = useState([]);
-    const [id, setId] = useState('');
+    const [discounted, setDiscounted] = useState([]);
     const [percentOff, setPercentOff] = useState('');
     const [ends, setEnds] = useState('');
+    const [redirect, setRedirect] = useState(null);
 
     useEffect(() => {
         getProducts();
-
     }, []);
 
     const getProducts = async () => {
@@ -23,20 +24,32 @@ function DiscountsNew(props){
         setProducts(products);
     };
 
+    const removeProduct = product => {
+        const id = product.id;
+
+        const newProducts = discounted.filter(product => {
+            return product.id !== id;
+        });
+
+        setDiscounted(newProducts);
+    };
+
+    const addProduct = product => {
+        setDiscounted([...discounted, product]);
+    };
+
     const handleSubmit = e => {
         e.preventDefault();
 
         const data = {
-            product_id: id,
+            products: discounted,
             percent_off: percentOff,
             ends: ends,
         };
 
         ProductService.discounts.create(data)
             .then(res => {
-                notify.show(res.data, 'success');
-
-                getProducts();
+                setRedirect(<Redirect to="/admin/discounts"/>);
             })
             .catch(error => {
                 notify.show(error.response.data.message, 'error');
@@ -45,6 +58,7 @@ function DiscountsNew(props){
 
     return (
         <>
+            {redirect}
             <Helmet>
                 <title>Shop | Admin - New Discount</title>
             </Helmet>
@@ -97,8 +111,9 @@ function DiscountsNew(props){
                             name: true,
                             price: true,
                         }}
-                        add={product => setId(product.id)}
-                        product={id}
+                        products={discounted}
+                        add={addProduct}
+                        remove={removeProduct}
                     />
                 </div>
                 </Row>

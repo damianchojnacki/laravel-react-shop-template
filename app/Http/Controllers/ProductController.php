@@ -52,9 +52,7 @@ class ProductController extends Controller
         $product->type()->associate($type);
         $product->save();
 
-        $image = new Image();
-        $image->url= $request->input('img');
-        $product->image()->save($image);
+        $product->saveImage($request->img);
 
         return response($product->id, 200);
     }

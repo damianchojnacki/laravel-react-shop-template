@@ -5,7 +5,7 @@ export default class DiscountService {
         const products = await ProductService.all();
 
         return products.filter(product => {
-            return product.discount;
+            return product.price_origin != product.price_final;
         });
     };
 
@@ -13,7 +13,7 @@ export default class DiscountService {
         const products = await ProductService.all();
 
         return products.filter(product => {
-            return !product.discount;
+            return product.price_origin == product.price_final;
         });
     };
 
