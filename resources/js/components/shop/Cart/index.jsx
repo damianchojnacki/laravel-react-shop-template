@@ -1,16 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-} from "shards-react";
+import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, ListGroup, ListGroupItem,} from "shards-react";
 import {useCart} from "../../../utils/CartContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import ProductService from "../../../utils/ProductService";
-import {ListGroup, ListGroupItem, Button} from "shards-react";
 import OrderService from "../../../utils/OrderService";
 import "./style.scss";
 import {useCurrency} from "../../../utils/CurrencyContext";

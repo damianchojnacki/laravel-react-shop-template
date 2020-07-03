@@ -1,19 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Redirect} from "react-router-dom";
-
 // reactstrap components
-import {
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Form,
-    Input,
-    Row,
-    Col
-} from "reactstrap";
-import Notifications, {notify} from 'react-notify-toast';
+import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row} from "reactstrap";
+import {notify} from 'react-notify-toast';
 import ProductService from "../../utils/ProductService";
 import ImageService from "../../utils/ImageService";
 import FormGroup from "reactstrap/es/FormGroup";

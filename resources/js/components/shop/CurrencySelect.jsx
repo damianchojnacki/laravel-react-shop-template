@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useEffect, useState} from "react";
 import CurrencyService from "../../utils/CurrencyService";
 import Select from "react-select";
 import {useMediaQuery} from "react-responsive";

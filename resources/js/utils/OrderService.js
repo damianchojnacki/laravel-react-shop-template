@@ -1,5 +1,3 @@
-import React from 'react';
-import {CartContext} from "./CartContext";
 import Cookies from "js-cookie";
 
 export default class OrderService{
@@ -104,7 +102,7 @@ export default class OrderService{
                     defaultLocale: country,
                 });
 
-                const map = easyPack.mapWidget('geowidget', function (point) {
+                easyPack.mapWidget('geowidget', function (point) {
                     setDisplay("none");
                     callback(point.name + " " + point.address.line1 + ", " + point.address.line2);
                 });

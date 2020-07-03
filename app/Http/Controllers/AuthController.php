@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -60,7 +60,7 @@ class AuthController extends Controller {
                 'token' => $token,
             ]);
         }
-            
+
         return response('Authentication failed.', 403);
     }
 

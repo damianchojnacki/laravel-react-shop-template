@@ -17,22 +17,19 @@
 */
 /*eslint-disable*/
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 // nodejs library to set properties for components
-import { PropTypes } from "prop-types";
-
+import {PropTypes} from "prop-types";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-
 // reactstrap components
-import { Nav } from "reactstrap";
+import {Nav} from "reactstrap";
 
 var ps;
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.activeRoute.bind(this);
   }
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {

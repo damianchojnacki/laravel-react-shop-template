@@ -14,3 +14,4 @@ yarn-error.log
 /public/phpliteadmin.php
 _ide_helper.php
 .phpstorm.meta.php
+.rnd

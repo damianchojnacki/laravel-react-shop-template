@@ -29,6 +29,4 @@ function LanguageContextProvider(props) {
     );
 }
 
-const LanguageContextConsumer = LanguageContext.Consumer;
-
 export { LanguageContextProvider, useLanguage };

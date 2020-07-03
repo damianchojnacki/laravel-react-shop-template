@@ -1,13 +1,11 @@
 <?php
 
-use App\Discount;
-use App\Image;
 use App\Jobs\UploadImage;
 use App\Product;
 use App\ProductType;
+use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Generator as Faker;
 
 class ProductsTableSeeder extends Seeder
 {

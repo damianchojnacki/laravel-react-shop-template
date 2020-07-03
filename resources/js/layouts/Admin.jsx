@@ -15,11 +15,10 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useState, useEffect} from "react";
-import {Route, Switch, Redirect} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Redirect, Route, Switch} from "react-router-dom";
 
 import Notifications from 'react-notify-toast';
-
 // core components
 import AdminNavbar from "../components/admin/Navbars/AdminNavbar.jsx";
 import Footer from "../components/admin/Footer/Footer.jsx";
@@ -27,7 +26,7 @@ import Sidebar from "../components/admin/Sidebar/Sidebar.jsx";
 import FixedPlugin from "../components/admin/FixedPlugin/FixedPlugin.jsx";
 import PerfectScrollbar from "perfect-scrollbar";
 import AuthService from "../utils/AuthService";
-import { useAuth } from "../utils/AuthContext";
+import {useAuth} from "../utils/AuthContext";
 import routes from "../routes/admin.js";
 
 import "../assets/scss/black-dashboard-react.scss";
@@ -91,7 +90,7 @@ function Admin(props) {
         });
     };
 
-    const getBrandText = path => {
+    const getBrandText = () => {
         for (let i = 0; i < routes.length; i++) {
             if (
                 props.location.pathname.indexOf(
@@ -120,7 +119,7 @@ function Admin(props) {
                     >
                         <AdminNavbar
                             {...props}
-                            brandText={getBrandText(props.location.pathname)}
+                            brandText={getBrandText()}
                             toggleSidebar={toggleSidebar}
                             sidebarOpened={sidebarOpened}
                         />

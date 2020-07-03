@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {Redirect, Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
-import {Form, FormInput, FormGroup, Button, Alert, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
+import {Alert, Button, Form, FormGroup, FormInput, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
 import AuthService from '../../utils/AuthService';
 import {useAuth} from "../../utils/AuthContext";
 import {isEmail} from '../../utils/helpers';
 import GoogleButton from 'react-google-button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import 'animate.css/animate.css';
 import Translate from "../../components/Translate";

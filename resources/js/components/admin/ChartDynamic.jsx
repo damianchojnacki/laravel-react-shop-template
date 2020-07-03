@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {Card, CardBody, CardHeader, CardTitle} from "reactstrap";
 import {separateHundreds} from "../../utils/helpers";
-import ChartService from "../../utils/ChartService";
 import {Line} from "react-chartjs-2";
 
 function ChartDynamic(props){

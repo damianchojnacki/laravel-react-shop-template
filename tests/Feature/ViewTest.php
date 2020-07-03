@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ViewTest extends TestCase
@@ -44,7 +42,7 @@ class ViewTest extends TestCase
 
         $response->assertStatus(403);
     }
-    
+
 
     public function testAdminCanViewTelescope()
     {

@@ -15,29 +15,27 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-
 // reactstrap components
 import {
     Button,
     Collapse,
-    DropdownToggle,
-    DropdownMenu,
+    Container,
     DropdownItem,
-    UncontrolledDropdown,
+    DropdownMenu,
+    DropdownToggle,
     Input,
     InputGroup,
-    NavbarBrand,
-    Navbar,
-    NavLink,
+    Modal,
     Nav,
-    Container,
-    Modal
+    Navbar,
+    NavbarBrand,
+    NavLink,
+    UncontrolledDropdown
 } from "reactstrap";
 import {useAuth} from "../../../utils/AuthContext";
-import AuthService from "../../../utils/AuthService";
 
 function AdminNavbar(props) {
     const auth = useAuth();

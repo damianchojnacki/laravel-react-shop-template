@@ -1,6 +1,13 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
-    Form, FormGroup, InputGroup, InputGroupAddon, FormInput, Button, InputGroupText, FormCheckbox
+    Button,
+    Form,
+    FormCheckbox,
+    FormGroup,
+    FormInput,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText
 } from "shards-react";
 import {useCart} from "../../utils/CartContext";
 import ProductService from "../../utils/ProductService";
@@ -9,7 +16,7 @@ import {Helmet} from "react-helmet";
 import ProductsList from "../../components/shop/ProductsList";
 import {Redirect} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faLock} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
 import {shippingDataValidate} from "../../utils/helpers";
@@ -194,7 +201,7 @@ function Checkout() {
                             sum={OrderService.getSumOfProducts(products)}
                             sumWithDiscount={coupon.code && OrderService.getSumOfProductsWithDiscount(products, coupon)}
                         />
-                        <Coupon coupon={coupon ?? {}}/>
+                        <Coupon/>
                     </div>
                     <div className="col-lg-6 col-12 text-center">
                         <Form onSubmit={handleSubmit}>
@@ -302,7 +309,7 @@ function Checkout() {
                                     </Button>
                                 </div>
                             :
-                                <div className={`${pendingState > 1 && "animated fadeInUp fast"}`}>
+                                <div className="animated fadeInUp fast">
                                     <ShippingForm pendingState={pendingState} shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} address={address}/>
                                 </div>
                             }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Discount;
-use App\Http\Resources\ProductResource;
 use App\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

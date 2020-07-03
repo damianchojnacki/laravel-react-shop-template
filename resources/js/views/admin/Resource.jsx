@@ -1,13 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { Helmet } from 'react-helmet';
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Button,
-    Input,
-} from 'reactstrap';
+import {Helmet} from 'react-helmet';
+import {Button, Card, CardBody, CardFooter, CardHeader, Input,} from 'reactstrap';
 
 import OrdersList from "../../components/admin/OrdersList";
 import OrderService from "../../utils/OrderService";
@@ -34,7 +27,7 @@ function Resource(props){
     }, [page, searchField, service]);
 
     const getResource = async () => {
-        if(searchField && searchField !== ""){
+        if(searchField){
             const found = await window[service].search(searchField);
 
             setData(found);

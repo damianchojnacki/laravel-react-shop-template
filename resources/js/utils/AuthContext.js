@@ -41,6 +41,4 @@ function AuthContextProvider(props) {
     );
 }
 
-const AuthContextConsumer = AuthContext.Consumer;
-
 export { AuthContextProvider, useAuth };

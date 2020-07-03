@@ -29,6 +29,4 @@ function CurrencyContextProvider(props) {
     );
 }
 
-const CurrencyContextConsumer = CurrencyContext.Consumer;
-
 export { CurrencyContextProvider, useCurrency };

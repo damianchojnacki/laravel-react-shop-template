@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Helmet } from 'react-helmet';
+import {Helmet} from 'react-helmet';
 import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
 import ProductService from "../../utils/ProductService";
 import ProductsListComplex from "../../components/shop/ProductListComplex";

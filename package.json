@@ -41,7 +41,7 @@
         "chart.js": "^2.7.2",
         "classnames": "^2.2.6",
         "history": "^4.10.1",
-        "jquery": ">=3.4.0",
+        "jquery": "^3.5.0",
         "js-cookie": "^2.2.1",
         "perfect-scrollbar": "^1.4.0",
         "popper.js": "1.14.7",
@@ -58,7 +58,11 @@
         "react-select": "^3.0.8",
         "reactstrap": "^8.1.1",
         "serialize-javascript": "^2.1.1",
-        "shards-react": "^1.0.3"
+        "shards-react": "^1.0.3",
+        "websocket-extensions": "^0.1.4",
+        "minimist": "^1.2.3",
+        "acorn": "^6.4.1",
+        "kind-of": "^6.0.3"
     },
     "babel": {
         "presets": [

@@ -15,23 +15,21 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {Suspense, lazy} from "react";
+import React, {lazy, Suspense} from "react";
 import ReactDOM from "react-dom";
 import {createBrowserHistory} from "history";
-import {Router, Route, Switch} from "react-router-dom";
+import {Route, Router, Switch} from "react-router-dom";
+import {AuthContextProvider} from './utils/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Loading from "./components/Loading";
+import {LanguageContextProvider} from "./utils/LanguageContext";
 
 const ShopLayout = lazy(() => import('./layouts/Shop'));
 const AdminLayout = lazy(() => import("./layouts/Admin"));
 
-import {AuthContextProvider} from './utils/AuthContext';
-
 const hist = createBrowserHistory();
 
 require('./bootstrap');
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Loading from "./components/Loading";
-import {LanguageContextProvider} from "./utils/LanguageContext";
 
 ReactDOM.render(
     <Router history={hist}>

@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useContext} from 'react';
-import { Helmet } from 'react-helmet';
+import React, {useEffect, useState} from 'react';
+import {Helmet} from 'react-helmet';
 import ProductsNav from '../../components/shop/ProductsNav';
 import {Button} from "shards-react";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
@@ -42,7 +42,7 @@ export default function Products(props){
             const newProducts = await ProductService.all(page, category);
 
             setProducts(newProducts);
-        } else if(searchField && searchField !== ""){
+        } else if(searchField){
             const found = await ProductService.search(searchField, category);
 
             setProducts(found);
@@ -58,7 +58,7 @@ export default function Products(props){
     };
 
     const showMoreOrReload = () => {
-        if(searchField && searchField !== ''){
+        if(searchField){
             setSearchField('');
             setProducts([]);
             setPage(1);

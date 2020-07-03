@@ -1,6 +1,5 @@
 import React from "react";
-import {Card, CardBody, CardHeader, CardTitle, CardFooter, Button} from "shards-react";
-import {notify} from "react-notify-toast";
+import {Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from "shards-react";
 import {useCart} from "../../../utils/CartContext";
 import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -75,7 +74,7 @@ function ProductsListComplex(props){
                                 <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>
                                     <Translate id="cart-add" />
                                 </Button>
-                                
+
                                 {cart.state.products.includes(product.id) &&
                                         <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>
                                             <Translate id="cart-remove"/>
