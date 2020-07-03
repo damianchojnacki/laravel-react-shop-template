@@ -25,7 +25,7 @@ function Product(props) {
             const types = await ProductService.types();
 
             const options =  types.map((type) => {
-                return <option key={type.id} value={type.id}>{type.long}</option>
+                return <option key={type.id} value={type.id}>{type.name}</option>
             });
 
             setProductsTypes(options);

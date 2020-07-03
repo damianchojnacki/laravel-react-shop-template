@@ -3336,7 +3336,7 @@ function Product(props) {
                 return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
                   key: type.id,
                   value: type.id
-                }, type["long"]);
+                }, type.name);
               });
               setProductsTypes(options);
 
