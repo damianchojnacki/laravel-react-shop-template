@@ -93,7 +93,7 @@ Route::group([
 
     Route::post('order', 'OrderController@make');
     Route::get('orders/{id}', 'OrderController@show');
-    Route::put("coupon/{code}", 'OrderController@couponCheck')->middleware('throttle:10,1');
+    Route::put("coupon/{code}", 'OrderController@couponCheck')->middleware('throttle:100,1');
 });
 
 Route::group([
@@ -128,3 +128,5 @@ Route::group([
 });
 
 Route::get('/google/places/{input}', 'GooglePlacesController')->middleware('throttle:200,1');
+Route::get('/logrocket', 'LogController@logRocket');
+Route::get('/sentry', 'LogController@sentry');

@@ -16,6 +16,8 @@ const reducer = (state, action) => {
         case "reset":
             return initialState;
         case "login":
+            AuthService.logRocketIdentify(action.payload);
+
             return {
                 ...state,
                 authenticated: true,

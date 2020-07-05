@@ -23,6 +23,9 @@ import {AuthContextProvider} from './utils/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loading from "./components/Loading";
 import {LanguageContextProvider} from "./utils/LanguageContext";
+import LogService from "./utils/LogService";
+
+LogService.init();
 
 const ShopLayout = lazy(() => import('./layouts/Shop'));
 const AdminLayout = lazy(() => import("./layouts/Admin"));
@@ -46,5 +49,3 @@ ReactDOM.render(
     </Router>,
     document.getElementById("root")
 );
-
-//TODO render only one main view

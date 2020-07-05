@@ -1,4 +1,5 @@
-import {notify} from "react-notify-toast/bin/notify";
+import {notify} from "react-notify-toast";
+import LogRocket from 'logrocket';
 
 export default class GoogleService {
     static async addressSearch(input, callback) {
@@ -15,7 +16,7 @@ export default class GoogleService {
                 callback(list);
             })
             .catch(error => {
-                console.error(error.response.data);
+                LogRocket.captureException(error);
 
                 notify.show('Oops, problem with Dynamic Address Search, please enter your address manually.', 'error');
 

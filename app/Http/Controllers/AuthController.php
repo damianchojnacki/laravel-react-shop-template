@@ -28,7 +28,7 @@ class AuthController extends Controller {
             ]);
         }
 
-        return response('Incorrect email or password!', 422);
+        return response('alert-login-badCredentials', 422);
     }
 
     public function loginWithGoogle(Request $request){

@@ -504,6 +504,7 @@ function Chart(props) {
   }))));
 }
 
+Chart.displayName = "Chart";
 /* harmony default export */ __webpack_exports__["default"] = (Chart);
 
 /***/ }),
@@ -542,6 +543,7 @@ function ChartDynamic(props) {
   }))));
 }
 
+ChartDynamic.displayName = "ChartDynamic";
 /* harmony default export */ __webpack_exports__["default"] = (ChartDynamic);
 
 /***/ }),
@@ -688,6 +690,7 @@ function ChartMultiple(props) {
   }))));
 }
 
+ChartMultiple.displayName = "ChartMultiple";
 /* harmony default export */ __webpack_exports__["default"] = (ChartMultiple);
 
 /***/ }),
@@ -728,6 +731,7 @@ function DiscountsList(props) {
   }) : null));
 }
 
+DiscountsList.displayName = "DiscountsList";
 /* harmony default export */ __webpack_exports__["default"] = (DiscountsList);
 
 /***/ }),
@@ -874,6 +878,7 @@ function (_Component) {
   return FixedPlugin;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+FixedPlugin.displayName = "FixedPlugin";
 /* harmony default export */ __webpack_exports__["default"] = (FixedPlugin);
 
 /***/ }),
@@ -962,6 +967,7 @@ function (_React$Component) {
   return Footer;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
+Footer.displayName = "Footer";
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
 
 /***/ }),
@@ -1246,6 +1252,7 @@ function OrdersList(props) {
   }) : null));
 }
 
+OrdersList.displayName = "OrdersList";
 /* harmony default export */ __webpack_exports__["default"] = (OrdersList);
 
 /***/ }),
@@ -1311,6 +1318,7 @@ function ProductsList(props) {
   }) : null));
 }
 
+ProductsList.displayName = "ProductsList";
 /* harmony default export */ __webpack_exports__["default"] = (ProductsList);
 
 /***/ }),
@@ -1507,6 +1515,7 @@ function (_React$Component) {
   return Sidebar;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
+Sidebar.displayName = "Sidebar";
 Sidebar.defaultProps = {
   bgColor: "primary",
   routes: [{}]
@@ -1569,6 +1578,7 @@ function UsersList(props) {
   }) : null));
 }
 
+UsersList.displayName = "UsersList";
 /* harmony default export */ __webpack_exports__["default"] = (UsersList);
 
 /***/ }),
@@ -2281,8 +2291,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
 /* harmony import */ var _components_admin_ChartDynamic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/admin/ChartDynamic */ "./resources/js/components/admin/ChartDynamic.jsx");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -2486,8 +2495,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
 /* harmony import */ var _components_admin_Chart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/Chart */ "./resources/js/components/admin/Chart.jsx");
 /* harmony import */ var _components_admin_ChartMultiple__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/ChartMultiple */ "./resources/js/components/admin/ChartMultiple.jsx");
@@ -2647,6 +2655,7 @@ function (_React$Component) {
   return Dashboard;
 }(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
 
+Dashboard.displayName = "Dashboard";
 /* harmony default export */ __webpack_exports__["default"] = (Dashboard);
 
 /***/ }),
@@ -2664,8 +2673,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
@@ -2772,8 +2780,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
@@ -3267,6 +3274,7 @@ function Order(props) {
   })))));
 }
 
+Order.displayName = "Order";
 /* harmony default export */ __webpack_exports__["default"] = (Order);
 
 /***/ }),
@@ -3537,6 +3545,7 @@ function Product(props) {
   })))));
 }
 
+Product.displayName = "Product";
 /* harmony default export */ __webpack_exports__["default"] = (Product);
 
 /***/ }),
@@ -3554,8 +3563,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/admin/OrdersList */ "./resources/js/components/admin/OrdersList.jsx");
 /* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
@@ -3961,6 +3969,7 @@ function User(props) {
   }))))));
 }
 
+User.displayName = "User";
 /* harmony default export */ __webpack_exports__["default"] = (User);
 
 /***/ })

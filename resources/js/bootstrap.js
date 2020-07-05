@@ -16,7 +16,12 @@ window.axios.interceptors.response.use(
     response => response,
     (error) => {
         if (error.response.status === 401) Cookies.remove('access_token');
-        console.warn("Error - " + error.response.data.message);
+
+        if(error.response.data.message)
+            console.warn(error.response.data.message);
+        else
+            error.response.data && console.warn(error.response.data);
+
         return Promise.reject(error);
     },
 );

@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import LogRocket from 'logrocket';
 
 class AuthService{
     static login(credentials) {
@@ -47,6 +48,13 @@ class AuthService{
         Cookies.remove('access_token');
 
         return response;
+    }
+
+    static logRocketIdentify(user){
+        LogRocket.identify(user.id, {
+            name: user.name,
+            email: user.email,
+        });
     }
 }
 

@@ -294,6 +294,7 @@ function Cart() {
   }))));
 }
 
+Cart.displayName = "Cart";
 /* harmony default export */ __webpack_exports__["default"] = (Cart);
 
 /***/ }),
@@ -461,6 +462,7 @@ function Coupon() {
   }))))));
 }
 
+Coupon.displayName = "Coupon";
 /* harmony default export */ __webpack_exports__["default"] = (Coupon);
 
 /***/ }),
@@ -613,6 +615,7 @@ function CurrencySelect() {
   });
 }
 
+CurrencySelect.displayName = "CurrencySelect";
 /* harmony default export */ __webpack_exports__["default"] = (CurrencySelect);
 
 /***/ }),
@@ -646,6 +649,7 @@ function Footer(props) {
   }, "Damian Chojnacki")));
 }
 
+Footer.displayName = "Footer";
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
 
 /***/ }),
@@ -771,6 +775,7 @@ function LanguageSelect() {
   });
 }
 
+LanguageSelect.displayName = "LanguageSelect";
 /* harmony default export */ __webpack_exports__["default"] = (LanguageSelect);
 
 /***/ }),
@@ -895,6 +900,7 @@ function Menu(props) {
   })))))));
 }
 
+Menu.displayName = "Menu";
 /* harmony default export */ __webpack_exports__["default"] = (Menu);
 
 /***/ }),
@@ -1263,6 +1269,7 @@ function ProductsList(props) {
   }), " ", props.sum, " ", currency.state.symbol)))));
 }
 
+ProductsList.displayName = "ProductsList";
 /* harmony default export */ __webpack_exports__["default"] = (ProductsList);
 
 /***/ }),
@@ -1638,6 +1645,7 @@ function Shop(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, getRoutes(_routes_shop_js__WEBPACK_IMPORTED_MODULE_2__["default"]))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shop_Footer__WEBPACK_IMPORTED_MODULE_8__["default"], null))));
 }
 
+Shop.displayName = "Shop";
 /* harmony default export */ __webpack_exports__["default"] = (Shop);
 
 /***/ }),
@@ -1802,6 +1810,7 @@ function CartContextProvider(props) {
   }, props.children);
 }
 
+CartContextProvider.displayName = "CartContextProvider";
 
 
 /***/ }),
@@ -1865,6 +1874,7 @@ function CurrencyContextProvider(props) {
   }, props.children);
 }
 
+CurrencyContextProvider.displayName = "CurrencyContextProvider";
 
 
 /***/ }),
@@ -1966,8 +1976,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GoogleService; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_notify_toast_bin_notify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-notify-toast/bin/notify */ "./node_modules/react-notify-toast/bin/notify.js");
-/* harmony import */ var react_notify_toast_bin_notify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast_bin_notify__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
+/* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var logrocket__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! logrocket */ "./node_modules/logrocket/dist/build.umd.js");
+/* harmony import */ var logrocket__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(logrocket__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1975,6 +1987,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -2002,8 +2015,8 @@ function () {
                 });
                 callback(list);
               })["catch"](function (error) {
-                console.error(error.response.data);
-                react_notify_toast_bin_notify__WEBPACK_IMPORTED_MODULE_1__["notify"].show('Oops, problem with Dynamic Address Search, please enter your address manually.', 'error');
+                logrocket__WEBPACK_IMPORTED_MODULE_2___default.a.captureException(error);
+                react_notify_toast__WEBPACK_IMPORTED_MODULE_1__["notify"].show('Oops, problem with Dynamic Address Search, please enter your address manually.', 'error');
                 var list = [{
                   id: 1,
                   value: input,
@@ -2046,8 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var _components_shop_ProductsList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/shop/ProductsList */ "./resources/js/components/shop/ProductsList.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
@@ -2507,8 +2519,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
 /* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
 /* harmony import */ var _components_shop_ProductListComplex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/shop/ProductListComplex */ "./resources/js/components/shop/ProductListComplex/index.jsx");
@@ -2701,8 +2712,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
 /* harmony import */ var _utils_AuthService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/AuthService */ "./resources/js/utils/AuthService.js");
 /* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
@@ -2933,8 +2943,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var _components_shop_ProductsNav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/shop/ProductsNav */ "./resources/js/components/shop/ProductsNav/index.jsx");
 /* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
 /* harmony import */ var _components_shop_ProductListComplex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/shop/ProductListComplex */ "./resources/js/components/shop/ProductListComplex/index.jsx");
@@ -3139,8 +3148,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/lib/Helmet.js");
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_helmet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
 /* harmony import */ var _utils_AuthService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/AuthService */ "./resources/js/utils/AuthService.js");
 /* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/AuthContext */ "./resources/js/utils/AuthContext.js");

@@ -41,5 +41,16 @@ return [
         'client_id' => env('PAYPAL_CLIENT_ID'),
     ],
 
+    'logrocket' => [
+        'app_id' => env('LOGROCKET_APP_ID', ''),
+    ],
+
+
+    'sentry' => [
+        'react' => [
+            'dsn' => env('SENTRY_REACT_DSN', ''),
+        ],
+    ],
+
     'github' => env('GITHUB', false)
 ];
