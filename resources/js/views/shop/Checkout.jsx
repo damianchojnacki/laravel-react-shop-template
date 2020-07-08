@@ -39,6 +39,8 @@ function Checkout() {
 
     const coupon = cart.state.coupon;
 
+    const paypalRef = useRef();
+
     const [products, setProducts] = useState([]);
     const [name, setName] = useState();
     const [email, setEmail] = useState('');
@@ -51,6 +53,7 @@ function Checkout() {
     const [redirect, setRedirect] = useState(false);
     const [pendingState, setPendingState] = useState(0);
     const [shippingCost, setShippingCost] = useState(0);
+    const [cancelToken, setCancelToken] = useState();
 
     /** pendingState meaning:
      *  -2: canceled
@@ -65,7 +68,7 @@ function Checkout() {
      */
 
     const credentials = {
-        email: (auth.state.user && auth.state.user.email) ?? email,
+        email: (auth.state.authenticated) ? auth.state.user.email : email,
         name,
         address,
         place_id: placeId,
@@ -76,10 +79,14 @@ function Checkout() {
         coupon: cart.state.coupon.code
     };
 
-    const paypalRef = useRef();
-
     function searchForAddress(input, callback) {
-        GoogleService.addressSearch(input, callback);
+        cancelToken && cancelToken.cancel();
+
+        const CancelToken = window.axios.CancelToken.source();
+
+        GoogleService.addressSearch(input, callback, CancelToken);
+
+        setCancelToken(CancelToken);
     }
 
     useEffect(() => {
@@ -210,7 +217,7 @@ function Checkout() {
                                     <h4 className="my-4">
                                         <Translate id="checkout-details-header"/>
                                     </h4>
-                                    {!auth.user &&
+                                    {!auth.state.authenticated &&
                                         <FormGroup>
                                             <label htmlFor="email">
                                                 <Translate id="checkout-details-email"/>

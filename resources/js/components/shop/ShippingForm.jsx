@@ -35,7 +35,7 @@ function ShippingForm({pendingState, shippingAddress, setShippingAddress, addres
                     </h4>
                 </>
             }
-            <div id="geowidget" style={{display: display, paddingBottom: "4rem"}}/>
+            <div id="geowidget" style={{display: shippingAddress ? "none" : display, paddingBottom: "4rem"}}/>
         </>
     );
 }

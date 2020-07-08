@@ -11,19 +11,19 @@ const PaymentProgress = React.forwardRef(({pendingState, sum, shippingCost}, ref
     function getProgressText() {
         switch (pendingState) {
             case 3:
-                return "Creating the order...";
+                return <Translate id="checkout-progress-3"/>;
             case 4:
-                return "Loading the payment options...";
+                return <Translate id="checkout-progress-4"/>;
             case 5:
-                return "Processing the payment...";
+                return <Translate id="checkout-progress-5"/>;
             default:
-                return "Trasaction in process...";
+                return <Translate id="checkout-progress-default"/>;
         }
     }
 
     return (
         <div className="animated fadeInDown fast col-9 col-md-6 text-center" style={{zIndex: 1}}>
-            <h3 id="price" className="pt-4"><Translate id="checkout-total"/> {parseFloat(sum) + parseFloat(shippingCost)} {currency.state.symbol}</h3>
+            <h3 id="price" className="pt-4"><Translate id="checkout-total"/> {(parseFloat(sum) + parseFloat(shippingCost)).toFixed(2)} {currency.state.symbol}</h3>
             <Tooltip
                 open={tooltipOpened}
                 target="#price"

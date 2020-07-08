@@ -39,7 +39,7 @@ export default function Login() {
                     });
                 })
                 .catch(error => {
-                    setTimeout(() => setErrors(error.response), 1000);
+                    setTimeout(() => setErrors(error), 1000);
                 })
                 .finally(() => {
                     setTimeout(() => setLoading(false), 1000);

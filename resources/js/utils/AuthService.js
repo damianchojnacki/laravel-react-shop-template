@@ -5,6 +5,7 @@ class AuthService{
     static login(credentials) {
         return window.axios.post('/api/login', credentials)
             .then(res => {
+                Cookies.set('googlePlacesSessionId', res.data.googlePlacesSessionId);
                 Cookies.set('access_token', res.data.token, {expires: 7});
                 window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
             });

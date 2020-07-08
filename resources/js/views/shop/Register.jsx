@@ -233,7 +233,7 @@ export default function Register() {
 
     return auth.state.authenticated && !loading
         ?
-        <Redirect to="/register-success"/>
+        <Redirect to="/homepage/registration-successful"/>
         :
         (
             <>

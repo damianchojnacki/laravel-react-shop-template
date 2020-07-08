@@ -1,0 +1,30 @@
+.user{
+  &__card{
+    transition: .3s;
+    width: calc(50% - 2rem);
+    color: inherit;
+    margin: 1rem 1rem;
+
+    @media (max-width: 765px) {
+      width: 100%;
+    }
+
+    &:hover{
+      transform:scale(1.02);
+      color: inherit;
+      text-decoration: none !important;
+    }
+
+    *{
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    &:nth-child(2){
+      width: 100%;
+    }
+  }
+}
+

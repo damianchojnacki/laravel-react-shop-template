@@ -133,6 +133,12 @@
         "tooltip": {
             "order": "Wartość zamówienia: ",
             "shipping": "Koszt przesyłki: "
+        },
+        "progress": {
+            "3": "Tworzenie zamówienia...",
+            "4": "Ładowanie...",
+            "5": "Realizacja płatności...",
+            "default": "Transkacja jest przetwarzana..."
         }
     },
     "coupon": {

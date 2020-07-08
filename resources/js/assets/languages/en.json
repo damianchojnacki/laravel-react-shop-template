@@ -133,6 +133,12 @@
         "tooltip": {
             "order": "Order value: ",
             "shipping": "Shipment cost: "
+        },
+        "progress": {
+            "3": "Creating the order...",
+            "4": "Loading the payment options...",
+            "5": "Processing the payment...",
+            "default": "Transaction in process..."
         }
     },
     "coupon": {

@@ -2,8 +2,10 @@ import {notify} from "react-notify-toast";
 import LogRocket from 'logrocket';
 
 export default class GoogleService {
-    static async addressSearch(input, callback) {
-        window.axios.get(`/api/google/places/${input}`)
+    static async addressSearch(input, callback, cancelToken) {
+        window.axios.get(`/api/google/places/${input}`, {
+            cancelToken: cancelToken.token
+        })
             .then(response => {
                 const list = response.data.map((address) => {
                     return {
@@ -16,19 +18,21 @@ export default class GoogleService {
                 callback(list);
             })
             .catch(error => {
-                LogRocket.captureException(error);
+                if (!window.axios.isCancel(error)) {
+                    LogRocket.captureException(error);
 
-                notify.show('Oops, problem with Dynamic Address Search, please enter your address manually.', 'error');
+                    notify.show('Oops, problem with Dynamic Address Search, please enter your address manually.', 'error');
 
-                const list = [
-                    {
-                        id: 1,
-                        value: input,
-                        label: input
-                    }
-                ];
+                    const list = [
+                        {
+                            id: 1,
+                            value: input,
+                            label: input
+                        }
+                    ];
 
-                callback(list);
+                    callback(list);
+                }
             });
     };
 }

@@ -3,6 +3,9 @@ import Login from "../views/shop/Login";
 import Products from "../views/shop/Products";
 import Register from "../views/shop/Register";
 import Checkout from "../views/shop/Checkout";
+import User from "../views/shop/User";
+import NotFound from "../views/shop/404";
+import Orders from "../views/shop/User/Orders";
 
 export default [
     {
@@ -10,6 +13,12 @@ export default [
         name: "menu-homepage",
         component: Homepage,
         layout: "/shop"
+    },
+    {
+        path: "/homepage/:status",
+        component: Homepage,
+        layout: "/shop",
+        hidden: true
     },
     {
         path: "/products/:category?",
@@ -37,8 +46,20 @@ export default [
         hidden: true
     },
     {
-        path: "/:result?",
-        component: Homepage,
+        path: "/user",
+        component: User,
+        layout: "/shop",
+        hidden: true
+    },
+    {
+        path: "/user/orders",
+        component: Orders,
+        layout: "/shop",
+        hidden: true
+    },
+    {
+        path: "/:404",
+        component: NotFound,
         layout: "/shop",
         hidden: true
     },

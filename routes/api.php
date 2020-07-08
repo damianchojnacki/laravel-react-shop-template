@@ -83,7 +83,6 @@ Route::group([
 ], function () {
     Route::middleware('auth:api')->group(function () {
         Route::get('orders/all/{page}', 'OrderController@index');
-        Route::get('orders/recent', 'OrderController@recent');
         Route::get('orders/statuses', 'OrderController@statuses');
         Route::get('orders/search/{id}', 'OrderController@search');
         Route::post('orders', 'OrderController@create');
@@ -92,6 +91,7 @@ Route::group([
     });
 
     Route::post('order', 'OrderController@make');
+    Route::get('orders/recent', 'OrderController@recent');
     Route::get('orders/{id}', 'OrderController@show');
     Route::put("coupon/{code}", 'OrderController@couponCheck')->middleware('throttle:100,1');
 });

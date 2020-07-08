@@ -37,4 +37,11 @@ class UploadImage implements ShouldQueue
         $image->public_id = Product::imageUpload('./public/images/products/' . $this->product->id . '.png');
         $this->product->image()->save($image);
     }
+
+    public function failed(\Throwable $exception)
+    {
+        if (app()->bound('sentry')) {
+            app('sentry')->captureException($exception);
+        }
+    }
 }

@@ -2,40 +2,55 @@
 
 namespace App;
 
+use App;
 use App\Exceptions\GooglePlacesException;
+use Cookie;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class GooglePlacesAPI{
+
+    private static $acceptedStatuses = [
+        "OK",
+        "ZERO_RESULTS"
+    ];
+
+    private static function passed($content){
+        return in_array($content->status, self::$acceptedStatuses);
+    }
 
     public static function autocomplete($input, $language = "en"){
         $apiKey = config('services.google.places_key');
 
-        $client = new \GuzzleHttp\Client();
+        $sessionId = Cookie::get('googlePlacesSessionId') ?? null;
 
-        $request = $client->get("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$apiKey&types=address&language=$language");
+        $url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&key=$apiKey&types=address&language=$language&sessiontoken=$sessionId";
 
-        $content = json_decode($request->getBody()->getContents());
+        $response = Http::get($url)->object();
 
-        if($content->status == "OK" || $content->status == "ZERO_RESULTS")
-            return $content->predictions;
-        else{
-            throw new GooglePlacesException($content->error_message);
+        if(App::environment() != "local" && config('app.debug'))
+            self::log($url, $response);
+
+        if(self::passed($response)){
+            return $response->predictions;
         }
+        else
+            throw new GooglePlacesException($response->error_message);
     }
 
     public static function searchById($id, $language = "en"){
         $apiKey = config('services.google.places_key');
 
-        $client = new \GuzzleHttp\Client();
+        $sessionId = Cookie::get('googlePlacesSessionId') ?? null;
 
-        $request = $client->get("https://maps.googleapis.com/maps/api/place/details/json?placeid=$id&key=$apiKey&types=address&language=$language");
+        $url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=$id&key=$apiKey&types=address&language=$language&sessiontoken=$sessionId";
 
-        $content = json_decode($request->getBody()->getContents());
+        $response = Http::get($url)->object();
 
-        if($content->status == "OK" || $content->status == "ZERO_RESULTS")
-            return $content->result;
-        else{
-            throw new GooglePlacesException($content->error_message);
-        }
+        if(self::passed($response))
+            return $response->result;
+        else
+            throw new GooglePlacesException($response->error_message);
     }
 
     public static function getCountry($id){
@@ -48,5 +63,17 @@ class GooglePlacesAPI{
         return null;
     }
 
+    private static function log($url, $response){
+        $info = [
+            'info' => 'Request to Google Places API',
+            'url' => $url,
+            'returned records' => self::passed($response) ? count($response->predictions) : null,
+            'exception' => !self::passed($response) ? $response->error_message : null,
+        ];
 
+        if(self::passed($response))
+            Log::info('Google Places API Request Successful', $info);
+        else
+            Log::error('Google Places API Request Failed', $info);
+    }
 }

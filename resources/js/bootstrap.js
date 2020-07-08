@@ -14,14 +14,17 @@ window.axios.defaults.headers.common.Authorization = token ? `Bearer ${token}` :
 
 window.axios.interceptors.response.use(
     response => response,
-    (error) => {
-        if (error.response.status === 401) Cookies.remove('access_token');
+    error => {
+        if(error.response) {
+            if (error.response.status === 401) Cookies.remove('access_token');
 
-        if(error.response.data.message)
-            console.warn(error.response.data.message);
-        else
-            error.response.data && console.warn(error.response.data);
-
-        return Promise.reject(error);
+            if (error.response.data) {
+                if(error.response.data.message)
+                    console.warn(error.response.data.message);
+                else
+                    console.warn(error.response.data);
+            }
+        }
+            return Promise.reject(error);
     },
 );

@@ -51062,10 +51062,10 @@ __webpack_require__.r(__webpack_exports__);
 
 _utils_LogService__WEBPACK_IMPORTED_MODULE_8__["default"].init();
 var ShopLayout = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(1), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./layouts/Shop */ "./resources/js/layouts/Shop.jsx"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./layouts/Shop */ "./resources/js/layouts/Shop.jsx"));
 });
 var AdminLayout = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./layouts/Admin */ "./resources/js/layouts/Admin.jsx"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./layouts/Admin */ "./resources/js/layouts/Admin.jsx"));
 });
 var hist = Object(history__WEBPACK_IMPORTED_MODULE_2__["createBrowserHistory"])();
 
@@ -51096,7 +51096,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 /*! exports provided: welcome, menu, products, cart, login, register, alert, orders, order, checkout, coupon, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"welcome\":\"You've successfully registered and logged in. You can start shopping right now!\",\"menu\":{\"homepage\":\"Homepage\",\"products\":\"Products\",\"login\":\"Login\",\"register\":\"Register\",\"logout\":\"Logout\"},\"products\":{\"special\":{\"header\":\"Offer of the day\"},\"block\":{\"price\":\"Price: \"},\"list\":{\"name\":\"Name\",\"price\":\"Price\",\"quantity\":\"Quantity\",\"sum\":\"Sum: \"},\"reload\":\"Reload\",\"showMore\":\"Show more\",\"category\":{\"all\":\"All\",\"cpu\":{\"long\":\"Processors\",\"short\":\"CPUs\"},\"gpu\":{\"long\":\"Graphics cards\",\"short\":\"GPUs\"},\"hdd\":{\"long\":\"Hard disks\",\"short\":\"HDDs\"},\"ssd\":{\"long\":\"SSDs\",\"short\":\"SSDs\"}},\"sort\":{\"label\":\"Sorting\",\"name\":{\"asc\":\"Sort by name (asc)\",\"desc\":\"Sort by name (desc)\"},\"price\":{\"asc\":\"Sort by price (asc)\",\"desc\":\"Sort by price (desc)\"}},\"search\":\"Search product\"},\"cart\":{\"header\":\"Shopping cart\",\"clear\":\"Clear\",\"add\":\"Add to cart\",\"remove\":\"Remove\",\"checkout\":\"Checkout\",\"empty\":\"Your shopping cart is empty.\",\"sum\":\"Sum:\",\"alert\":{\"add\":\" has been added to cart.\",\"remove\":\" has been remove from cart.\"}},\"login\":{\"google\":\"Sign in with Google\",\"email\":\"Email\",\"password\":\"Password\",\"submit\":\"Sign in\",\"register\":\"Don't have an account? You can create one there.\",\"loading\":\"Loading...\"},\"register\":{\"welcome\":\"Sign up\",\"done\":\"Done\",\"back\":\"Go back\",\"next\":\"Continue\",\"start\":\"Let's start!\",\"email\":\"Please enter your e-mail below:\",\"name\":\"What's your full name?\",\"password\":\"Select safe password and retype:\",\"terms\":{\"title\":\"We are almost done!\",\"subtitle\":\"Please read and accept the terms and conditions:\",\"label\":\"I agree with the terms and conditions of usage.\"},\"submit\":\"Sign in!\",\"loading\":\"Loading...\"},\"alert\":{\"login\":{\"badCredentials\":\"Incorrect email or password.\"}},\"orders\":{\"header\":\"Your last orders\",\"date\":\"Purchase date\",\"value\":\"Value\",\"status\":\"Delivery status\",\"details\":\"Details\"},\"order\":{\"status\":{\"1\":\"unpaid\",\"2\":\"preparing\",\"3\":\"shipped\",\"4\":\"delivered\"}},\"checkout\":{\"header\":\"Checkout\",\"details\":{\"header\":\"Please fill all the shipment data:\",\"email\":\"Email\",\"name\":\"Full name\",\"address\":\"Address\",\"zipCode\":\"ZIP code\",\"terms\":\"I agree with the terms and conditions of usage The Shop.\",\"button\":\"Proceed to shipment\"},\"shipping\":{\"header\":\"Please select parcel locker:\",\"confirmation\":\"Your package will be delivered to: \",\"change\":\"Select different parcel locker\",\"button\":\"Proceed to payment\"},\"total\":\"Total: \",\"tooltip\":{\"order\":\"Order value: \",\"shipping\":\"Shipment cost: \"}},\"coupon\":{\"none\":\"Have a coupon code?\",\"applied\":\"Coupon:\"}}");
+module.exports = JSON.parse("{\"welcome\":\"You've successfully registered and logged in. You can start shopping right now!\",\"menu\":{\"homepage\":\"Homepage\",\"products\":\"Products\",\"login\":\"Login\",\"register\":\"Register\",\"logout\":\"Logout\"},\"products\":{\"special\":{\"header\":\"Offer of the day\"},\"block\":{\"price\":\"Price: \"},\"list\":{\"name\":\"Name\",\"price\":\"Price\",\"quantity\":\"Quantity\",\"sum\":\"Sum: \"},\"reload\":\"Reload\",\"showMore\":\"Show more\",\"category\":{\"all\":\"All\",\"cpu\":{\"long\":\"Processors\",\"short\":\"CPUs\"},\"gpu\":{\"long\":\"Graphics cards\",\"short\":\"GPUs\"},\"hdd\":{\"long\":\"Hard disks\",\"short\":\"HDDs\"},\"ssd\":{\"long\":\"SSDs\",\"short\":\"SSDs\"}},\"sort\":{\"label\":\"Sorting\",\"name\":{\"asc\":\"Sort by name (asc)\",\"desc\":\"Sort by name (desc)\"},\"price\":{\"asc\":\"Sort by price (asc)\",\"desc\":\"Sort by price (desc)\"}},\"search\":\"Search product\"},\"cart\":{\"header\":\"Shopping cart\",\"clear\":\"Clear\",\"add\":\"Add to cart\",\"remove\":\"Remove\",\"checkout\":\"Checkout\",\"empty\":\"Your shopping cart is empty.\",\"sum\":\"Sum:\",\"alert\":{\"add\":\" has been added to cart.\",\"remove\":\" has been remove from cart.\"}},\"login\":{\"google\":\"Sign in with Google\",\"email\":\"Email\",\"password\":\"Password\",\"submit\":\"Sign in\",\"register\":\"Don't have an account? You can create one there.\",\"loading\":\"Loading...\"},\"register\":{\"welcome\":\"Sign up\",\"done\":\"Done\",\"back\":\"Go back\",\"next\":\"Continue\",\"start\":\"Let's start!\",\"email\":\"Please enter your e-mail below:\",\"name\":\"What's your full name?\",\"password\":\"Select safe password and retype:\",\"terms\":{\"title\":\"We are almost done!\",\"subtitle\":\"Please read and accept the terms and conditions:\",\"label\":\"I agree with the terms and conditions of usage.\"},\"submit\":\"Sign in!\",\"loading\":\"Loading...\"},\"alert\":{\"login\":{\"badCredentials\":\"Incorrect email or password.\"}},\"orders\":{\"header\":\"Your last orders\",\"date\":\"Purchase date\",\"value\":\"Value\",\"status\":\"Delivery status\",\"details\":\"Details\"},\"order\":{\"status\":{\"1\":\"unpaid\",\"2\":\"preparing\",\"3\":\"shipped\",\"4\":\"delivered\"}},\"checkout\":{\"header\":\"Checkout\",\"details\":{\"header\":\"Please fill all the shipment data:\",\"email\":\"Email\",\"name\":\"Full name\",\"address\":\"Address\",\"zipCode\":\"ZIP code\",\"terms\":\"I agree with the terms and conditions of usage The Shop.\",\"button\":\"Proceed to shipment\"},\"shipping\":{\"header\":\"Please select parcel locker:\",\"confirmation\":\"Your package will be delivered to: \",\"change\":\"Select different parcel locker\",\"button\":\"Proceed to payment\"},\"total\":\"Total: \",\"tooltip\":{\"order\":\"Order value: \",\"shipping\":\"Shipment cost: \"},\"progress\":{\"3\":\"Creating the order...\",\"4\":\"Loading the payment options...\",\"5\":\"Processing the payment...\",\"default\":\"Transaction in process...\"}},\"coupon\":{\"none\":\"Have a coupon code?\",\"applied\":\"Coupon:\"}}");
 
 /***/ }),
 
@@ -51138,7 +51138,7 @@ var dictionary = {
 /*! exports provided: welcome, menu, products, cart, login, register, alert, orders, order, checkout, coupon, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"welcome\":\"Zostałeś pomyślnie zarejestrowany. Miłych zakupów!\",\"menu\":{\"homepage\":\"Strona główna\",\"products\":\"Produkty\",\"login\":\"Logowanie\",\"register\":\"Rejestracja\",\"logout\":\"Wyloguj się\"},\"products\":{\"special\":{\"header\":\"Okazja dnia\"},\"block\":{\"price\":\"Cena: \"},\"list\":{\"name\":\"Nazwa\",\"price\":\"Cena\",\"quantity\":\"Ilość\",\"sum\":\"Razem: \"},\"reload\":\"Odśwież\",\"showMore\":\"Pokaż więcej\",\"category\":{\"all\":\"Wszystko\",\"cpu\":{\"long\":\"Procesory\",\"short\":\"CPU\"},\"gpu\":{\"long\":\"Karty graficzne\",\"short\":\"GPU\"},\"hdd\":{\"long\":\"Dyski twarde\",\"short\":\"HDD\"},\"ssd\":{\"long\":\"SSDs\",\"short\":\"SSD\"}},\"sort\":{\"label\":\"Sortowanie\",\"name\":{\"asc\":\"Sortuj po nazwie (rosnąco)\",\"desc\":\"Sortuj po nazwie (malejąco)\"},\"price\":{\"asc\":\"Sortuj po cenie (rosnąco)\",\"desc\":\"Sortuj po cenie (malejąco)\"}},\"search\":\"Wyszukaj po nazwie\"},\"cart\":{\"header\":\"Koszyk\",\"clear\":\"Wyczyść\",\"add\":\"Dodaj do koszyka\",\"remove\":\"Usuń\",\"checkout\":\"Podsumowanie\",\"empty\":\"Koszyk jest pusty.\",\"sum\":\"Razem: \",\"alert\":{\"add\":\" został dodany do koszyka.\",\"remove\":\" został usunięty z koszyka.\"}},\"login\":{\"google\":\"Kontynuuj z Google\",\"email\":\"Email\",\"password\":\"Hasło\",\"submit\":\"Zaloguj się\",\"register\":\"Nie masz jeszcze konta? Możesz je założyć tutaj.\",\"loading\":\"Ładowanie...\"},\"register\":{\"welcome\":\"Rejestracja\",\"done\":\"Gotowe\",\"back\":\"Wróć\",\"next\":\"Dalej\",\"start\":\"Zaczynamy!\",\"email\":\"Wpisz swój email poniżej:\",\"name\":\"Jak się nazywasz?\",\"password\":\"Wybierz bezpieczne hasło i powtórz:\",\"terms\":{\"title\":\"Został już ostatni krok.\",\"subtitle\":\"Przeczytaj i zaakceptuj regulamin i warunki użytkowania:\",\"label\":\"Zgadzam się i akceptuję.\"},\"submit\":\"Zarejestruj się!\",\"loading\":\"Ładowanie...\"},\"alert\":{\"login\":{\"badCredentials\":\"Niepoprawny email lub hasło.\"}},\"orders\":{\"header\":\"Twoje zamówienia\",\"date\":\"Data zakupu\",\"value\":\"Cena\",\"status\":\"Status przesyłki\",\"details\":\"Szczegóły\"},\"order\":{\"status\":{\"1\":\"płatność\",\"2\":\"przygotowywanie\",\"3\":\"wysłano\",\"4\":\"dostarczono\"}},\"checkout\":{\"header\":\"Podsumowanie\",\"details\":{\"header\":\"Uzupełnij poniższe dane:\",\"email\":\"Email\",\"name\":\"Imię i nazwisko\",\"address\":\"Adres\",\"zipCode\":\"Kod pocztowy\",\"terms\":\"Zapoznałem i zgadzam się z regulaminem The Shop\",\"button\":\"Przejdź do wyboru dostawy\"},\"shipping\":{\"header\":\"Wybierz paczkomat:\",\"confirmation\":\"Przesyłka zostanie dostarczona do: \",\"change\":\"Zmień paczkomat\",\"button\":\"Przejdź do płatności\"},\"total\":\"Razem: \",\"tooltip\":{\"order\":\"Wartość zamówienia: \",\"shipping\":\"Koszt przesyłki: \"}},\"coupon\":{\"none\":\"Kupon rabatowy:\",\"applied\":\"Kupon rabatowy:\"}}");
+module.exports = JSON.parse("{\"welcome\":\"Zostałeś pomyślnie zarejestrowany. Miłych zakupów!\",\"menu\":{\"homepage\":\"Strona główna\",\"products\":\"Produkty\",\"login\":\"Logowanie\",\"register\":\"Rejestracja\",\"logout\":\"Wyloguj się\"},\"products\":{\"special\":{\"header\":\"Okazja dnia\"},\"block\":{\"price\":\"Cena: \"},\"list\":{\"name\":\"Nazwa\",\"price\":\"Cena\",\"quantity\":\"Ilość\",\"sum\":\"Razem: \"},\"reload\":\"Odśwież\",\"showMore\":\"Pokaż więcej\",\"category\":{\"all\":\"Wszystko\",\"cpu\":{\"long\":\"Procesory\",\"short\":\"CPU\"},\"gpu\":{\"long\":\"Karty graficzne\",\"short\":\"GPU\"},\"hdd\":{\"long\":\"Dyski twarde\",\"short\":\"HDD\"},\"ssd\":{\"long\":\"SSDs\",\"short\":\"SSD\"}},\"sort\":{\"label\":\"Sortowanie\",\"name\":{\"asc\":\"Sortuj po nazwie (rosnąco)\",\"desc\":\"Sortuj po nazwie (malejąco)\"},\"price\":{\"asc\":\"Sortuj po cenie (rosnąco)\",\"desc\":\"Sortuj po cenie (malejąco)\"}},\"search\":\"Wyszukaj po nazwie\"},\"cart\":{\"header\":\"Koszyk\",\"clear\":\"Wyczyść\",\"add\":\"Dodaj do koszyka\",\"remove\":\"Usuń\",\"checkout\":\"Podsumowanie\",\"empty\":\"Koszyk jest pusty.\",\"sum\":\"Razem: \",\"alert\":{\"add\":\" został dodany do koszyka.\",\"remove\":\" został usunięty z koszyka.\"}},\"login\":{\"google\":\"Kontynuuj z Google\",\"email\":\"Email\",\"password\":\"Hasło\",\"submit\":\"Zaloguj się\",\"register\":\"Nie masz jeszcze konta? Możesz je założyć tutaj.\",\"loading\":\"Ładowanie...\"},\"register\":{\"welcome\":\"Rejestracja\",\"done\":\"Gotowe\",\"back\":\"Wróć\",\"next\":\"Dalej\",\"start\":\"Zaczynamy!\",\"email\":\"Wpisz swój email poniżej:\",\"name\":\"Jak się nazywasz?\",\"password\":\"Wybierz bezpieczne hasło i powtórz:\",\"terms\":{\"title\":\"Został już ostatni krok.\",\"subtitle\":\"Przeczytaj i zaakceptuj regulamin i warunki użytkowania:\",\"label\":\"Zgadzam się i akceptuję.\"},\"submit\":\"Zarejestruj się!\",\"loading\":\"Ładowanie...\"},\"alert\":{\"login\":{\"badCredentials\":\"Niepoprawny email lub hasło.\"}},\"orders\":{\"header\":\"Twoje zamówienia\",\"date\":\"Data zakupu\",\"value\":\"Cena\",\"status\":\"Status przesyłki\",\"details\":\"Szczegóły\"},\"order\":{\"status\":{\"1\":\"płatność\",\"2\":\"przygotowywanie\",\"3\":\"wysłano\",\"4\":\"dostarczono\"}},\"checkout\":{\"header\":\"Podsumowanie\",\"details\":{\"header\":\"Uzupełnij poniższe dane:\",\"email\":\"Email\",\"name\":\"Imię i nazwisko\",\"address\":\"Adres\",\"zipCode\":\"Kod pocztowy\",\"terms\":\"Zapoznałem i zgadzam się z regulaminem The Shop\",\"button\":\"Przejdź do wyboru dostawy\"},\"shipping\":{\"header\":\"Wybierz paczkomat:\",\"confirmation\":\"Przesyłka zostanie dostarczona do: \",\"change\":\"Zmień paczkomat\",\"button\":\"Przejdź do płatności\"},\"total\":\"Razem: \",\"tooltip\":{\"order\":\"Wartość zamówienia: \",\"shipping\":\"Koszt przesyłki: \"},\"progress\":{\"3\":\"Tworzenie zamówienia...\",\"4\":\"Ładowanie...\",\"5\":\"Realizacja płatności...\",\"default\":\"Transkacja jest przetwarzana...\"}},\"coupon\":{\"none\":\"Kupon rabatowy:\",\"applied\":\"Kupon rabatowy:\"}}");
 
 /***/ }),
 
@@ -51166,8 +51166,14 @@ window.axios.defaults.headers.common.Authorization = token ? "Bearer ".concat(to
 window.axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
-  if (error.response.status === 401) js_cookie__WEBPACK_IMPORTED_MODULE_0___default.a.remove('access_token');
-  if (error.response.data.message) console.warn(error.response.data.message);else error.response.data && console.warn(error.response.data);
+  if (error.response) {
+    if (error.response.status === 401) js_cookie__WEBPACK_IMPORTED_MODULE_0___default.a.remove('access_token');
+
+    if (error.response.data) {
+      if (error.response.data.message) console.warn(error.response.data.message);else console.warn(error.response.data);
+    }
+  }
+
   return Promise.reject(error);
 });
 
@@ -51329,6 +51335,7 @@ function () {
     key: "login",
     value: function login(credentials) {
       return window.axios.post('/api/login', credentials).then(function (res) {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('googlePlacesSessionId', res.data.googlePlacesSessionId);
         js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
           expires: 7
         });
@@ -51621,7 +51628,7 @@ function () {
             case 4:
               logRocketAppId = _context.sent;
 
-              if (logRocket) {
+              if (logRocket && logRocketAppId.status == 200) {
                 logrocket__WEBPACK_IMPORTED_MODULE_2___default.a.init(logRocketAppId.data, {
                   release: "alpha",
                   console: {
@@ -51641,29 +51648,26 @@ function () {
                 });
               }
 
-              if (!sentry) {
-                _context.next = 11;
-                break;
-              }
-
-              _context.next = 9;
+              _context.next = 8;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("/api/sentry"));
 
-            case 9:
+            case 8:
               sentryDsn = _context.sent;
-              _sentry_react__WEBPACK_IMPORTED_MODULE_1__["init"]({
-                dsn: sentryDsn.data
-              });
 
-            case 11:
-              logRocket && sentry && logrocket__WEBPACK_IMPORTED_MODULE_2___default.a.getSessionURL(function (sessionURL) {
+              if (sentry && sentryDsn.status == 200) {
+                _sentry_react__WEBPACK_IMPORTED_MODULE_1__["init"]({
+                  dsn: sentryDsn.data
+                });
+              }
+
+              logRocket && sentry && logRocketAppId.status == 200 && sentryDsn.status == 200 && logrocket__WEBPACK_IMPORTED_MODULE_2___default.a.getSessionURL(function (sessionURL) {
                 _sentry_react__WEBPACK_IMPORTED_MODULE_1__["configureScope"](function (scope) {
                   scope.setExtra("sessionURL", sessionURL);
                 });
               });
               logrocket_react__WEBPACK_IMPORTED_MODULE_3___default()(logrocket__WEBPACK_IMPORTED_MODULE_2___default.a);
 
-            case 13:
+            case 12:
             case "end":
               return _context.stop();
           }

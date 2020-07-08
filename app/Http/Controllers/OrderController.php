@@ -32,9 +32,14 @@ class OrderController extends Controller
     }
 
     public function recent(){
-        $orders = Order::whereHas('status', function($status){
-            $status->where('name', 'preparing');
-        })->orderBy('created_at', 'DESC')->take(10)->get();
+        if(Auth::user()->isAdmin())
+            $orders = Order::whereHas('status', function($status){
+                $status->where('name', 'preparing');
+            })->orderBy('created_at', 'DESC')->take(10)->get();
+        else
+            $orders = Order::whereHas('details', function($status){
+                $status->where('email', Auth::user()->email);
+            })->orderBy('created_at', 'DESC')->get();
 
         return response(OrderResource::collection($orders), 200);
     }

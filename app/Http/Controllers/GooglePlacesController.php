@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\GooglePlacesException;
 use App\GooglePlacesAPI;
 use Cookie;
 
 class GooglePlacesController extends Controller
 {
-    public function __invoke($input)
+    public function __invoke($input, $sessionId = null)
     {
-        try{
-            $addresses = GooglePlacesAPI::autocomplete($input, Cookie::get('lang'));
+        $addresses = GooglePlacesAPI::autocomplete($input, Cookie::get('lang'));
 
-            return response($addresses, 200);
-        } catch (\Exception $e){
-            $response = config('app.debug') ? $e->getMessage() : "Google Places API Error";
-            return response($response, 500);
-        }
+        return response($addresses, 200);
     }
 }

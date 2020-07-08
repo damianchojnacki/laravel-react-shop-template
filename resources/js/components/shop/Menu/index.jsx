@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem} from "shards-react";
-import {Link, matchPath, NavLink} from 'react-router-dom';
+import {Link, matchPath, NavLink, useLocation} from 'react-router-dom';
 import {useAuth} from "../../../utils/AuthContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
@@ -12,6 +12,8 @@ import Translate from "../../Translate";
 import './style.scss';
 
 function Menu(props) {
+    const location = useLocation();
+
     const auth = useAuth();
     const [navbarOpened, setNavbarOpened] = useState(false);
 
@@ -38,7 +40,7 @@ function Menu(props) {
                         if (prop.hidden) return null;
                         return (
                             <NavItem key={key}>
-                                <NavLink className={`nav-link ${!!matchPath(props.location.pathname, { path: prop.path, exact: true }) ? "active" : "inactive"}`} to={prop.link ?? prop.path}>
+                                <NavLink className={`nav-link ${!!matchPath(location.pathname, { path: prop.path, exact: true }) ? "active" : "inactive"}`} to={prop.link ?? prop.path}>
                                     <Translate id={prop.name} />
                                 </NavLink>
                             </NavItem>

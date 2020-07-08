@@ -7,7 +7,7 @@ export default class LogService{
     static async init(sentry = true, logRocket = true){
         const logRocketAppId = await axios.get("/api/logrocket");
 
-        if(logRocket){
+        if(logRocket && logRocketAppId.status == 200){
             LogRocket.init(logRocketAppId.data, {
                 release: "alpha",
                 console: {
@@ -30,13 +30,14 @@ export default class LogService{
             });
         }
 
-        if(sentry) {
-            const sentryDsn = await axios.get("/api/sentry");
+        const sentryDsn = await axios.get("/api/sentry");
+
+        if(sentry && sentryDsn.status == 200) {
 
             Sentry.init({dsn: sentryDsn.data});
         }
 
-        (logRocket && sentry) && LogRocket.getSessionURL(sessionURL => {
+        (logRocket && sentry && logRocketAppId.status == 200 && sentryDsn.status == 200) && LogRocket.getSessionURL(sessionURL => {
             Sentry.configureScope(scope => {
                 scope.setExtra("sessionURL", sessionURL);
             });

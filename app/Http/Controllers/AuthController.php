@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class AuthController extends Controller {
 
@@ -25,6 +26,7 @@ class AuthController extends Controller {
 
             return response([
                 'token' => $token,
+                'googlePlacesSessionId' => Str::uuid(),
             ]);
         }
 

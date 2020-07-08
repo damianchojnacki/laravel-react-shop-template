@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Helmet} from 'react-helmet';
+import {useParams} from 'react-router-dom';
 import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
 import ProductService from "../../utils/ProductService";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
@@ -11,8 +12,7 @@ import {useCurrency} from "../../utils/CurrencyContext";
 import Translate from "../../components/Translate";
 
 function Homepage(props){
-    const result = props.match.params.result;
-
+    const params = useParams();
     const cart = useCart();
     const currency = useCurrency();
 
@@ -53,7 +53,7 @@ function Homepage(props){
             </Helmet>
 
             <main className="d-flex flex-column">
-                {result === "register-success" &&
+                {params.status === "registration-successful" &&
                     <Alert theme="success" className="m-2 mb-4">
                         <Translate id="welcome"/>
                     </Alert>
