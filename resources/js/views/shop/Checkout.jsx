@@ -325,7 +325,7 @@ function Checkout() {
                     </div>
                 </div>
                 : (pendingState > 0 && pendingState < 6) ?
-                    <PaymentProgress pendingState={pendingState} ref={paypalRef} shippingCost={shippingCost} sum={OrderService.getSumOfProductsWithDiscount(products, coupon)}/>
+                    <PaymentProgress pendingState={pendingState} ref={paypalRef} shippingCost={shippingCost} sum={coupon.code ? OrderService.getSumOfProductsWithDiscount(products, coupon) : OrderService.getSumOfProducts(products)}/>
                 :
                     pendingState === -2 ?
                         <FontAwesomeIcon size="6x" icon={faTimesCircle} className="animated bounceIn text-danger"/>
