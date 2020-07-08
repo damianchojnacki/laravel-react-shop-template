@@ -3752,7 +3752,9 @@ function Orders() {
       });
     })();
   }, []);
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("main", {
+    className: "container"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
     className: "text-left w-100 mx-3 mt-5 mb-4"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
     id: "orders-header"
@@ -3760,9 +3762,7 @@ function Orders() {
     className: "table"
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", {
     className: "text-primary"
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "#"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
-    className: "hidden--mobile"
-  }, "ID"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "#"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
     id: "orders-date"
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
     className: "text-center"
@@ -3773,9 +3773,7 @@ function Orders() {
   })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, orders.length > 0 && orders.map(function (order, index) {
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
       key: order.id
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, index + 1), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
-      className: "hidden--mobile"
-    }, order.id), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, order.created_at), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, index + 1), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, order.created_at), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
       className: "text-center"
     }, order.value, " ", currency.state.symbol), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_shop_OrderStatus__WEBPACK_IMPORTED_MODULE_3__["default"], {
       status: order.status
@@ -3790,6 +3788,7 @@ function Orders() {
   }))));
 }
 
+Orders.displayName = "Orders";
 /* harmony default export */ __webpack_exports__["default"] = (Orders);
 
 /***/ }),

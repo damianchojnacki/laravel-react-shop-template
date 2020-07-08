@@ -19,7 +19,7 @@ function Orders(){
     }, []);
 
     return (
-        <>
+        <main className="container">
             <h3 className="text-left w-100 mx-3 mt-5 mb-4">
                 <Translate id="orders-header"/>
             </h3>
@@ -28,7 +28,6 @@ function Orders(){
                 <thead className="text-primary">
                 <tr>
                     <th>#</th>
-                    <th className="hidden--mobile">ID</th>
                     <th><Translate id="orders-date"/></th>
                     <th className="text-center"><Translate id="orders-value"/></th>
                     <th><Translate id="orders-status"/></th>
@@ -39,7 +38,6 @@ function Orders(){
                 {orders.length > 0 && orders.map((order, index) =>
                     <tr key={order.id}>
                         <td>{index + 1}</td>
-                        <td className="hidden--mobile">{order.id}</td>
                         <td>{order.created_at}</td>
                         <td className="text-center">{order.value} {currency.state.symbol}</td>
                         <td><OrderStatus status={order.status}/></td>
@@ -52,7 +50,7 @@ function Orders(){
                 )}
                 </tbody>
             </table>
-        </>
+        </main>
     )
 }
 
