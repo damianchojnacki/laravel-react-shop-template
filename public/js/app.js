@@ -833,7 +833,7 @@ function wrap(fn, options, before) {
 /*!***************************************************!*\
   !*** ./node_modules/@sentry/browser/esm/index.js ***!
   \***************************************************/
-/*! exports provided: Severity, Status, addGlobalEventProcessor, addBreadcrumb, captureException, captureEvent, captureMessage, configureScope, getHubFromCarrier, getCurrentHub, Hub, makeMain, Scope, startTransaction, setContext, setExtra, setExtras, setTag, setTags, setUser, withScope, BrowserClient, defaultIntegrations, forceLoad, init, lastEventId, onLoad, showReportDialog, flush, close, wrap, SDK_NAME, SDK_VERSION, Integrations, Transports */
+/*! exports provided: Integrations, Transports, Severity, Status, addGlobalEventProcessor, addBreadcrumb, captureException, captureEvent, captureMessage, configureScope, getHubFromCarrier, getCurrentHub, Hub, makeMain, Scope, startTransaction, setContext, setExtra, setExtras, setTag, setTags, setUser, withScope, BrowserClient, defaultIntegrations, forceLoad, init, lastEventId, onLoad, showReportDialog, flush, close, wrap, SDK_NAME, SDK_VERSION */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4928,13 +4928,17 @@ function withErrorBoundary(WrappedComponent, errorBoundaryOptions) {
 /*!*************************************************!*\
   !*** ./node_modules/@sentry/react/esm/index.js ***!
   \*************************************************/
-/*! exports provided: Profiler, withProfiler, useProfiler, ErrorBoundary, withErrorBoundary, Severity, Status, addGlobalEventProcessor, addBreadcrumb, captureException, captureEvent, captureMessage, configureScope, getHubFromCarrier, getCurrentHub, Hub, makeMain, Scope, startTransaction, setContext, setExtra, setExtras, setTag, setTags, setUser, withScope, BrowserClient, defaultIntegrations, forceLoad, init, lastEventId, onLoad, showReportDialog, flush, close, wrap, SDK_NAME, SDK_VERSION, Integrations, Transports */
+/*! exports provided: Profiler, withProfiler, useProfiler, ErrorBoundary, withErrorBoundary, Integrations, Transports, Severity, Status, addGlobalEventProcessor, addBreadcrumb, captureException, captureEvent, captureMessage, configureScope, getHubFromCarrier, getCurrentHub, Hub, makeMain, Scope, startTransaction, setContext, setExtra, setExtras, setTag, setTags, setUser, withScope, BrowserClient, defaultIntegrations, forceLoad, init, lastEventId, onLoad, showReportDialog, flush, close, wrap, SDK_NAME, SDK_VERSION */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _sentry_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @sentry/browser */ "./node_modules/@sentry/browser/esm/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Integrations", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Integrations"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transports", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Transports"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Severity", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Severity"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Status", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Status"]; });
@@ -5000,10 +5004,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SDK_NAME", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["SDK_NAME"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SDK_VERSION", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["SDK_VERSION"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Integrations", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Integrations"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transports", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Transports"]; });
 
 /* harmony import */ var _profiler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profiler */ "./node_modules/@sentry/react/esm/profiler.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Profiler", function() { return _profiler__WEBPACK_IMPORTED_MODULE_2__["Profiler"]; });
@@ -44118,7 +44118,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51690,7 +51690,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel-react-shop-template\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Damian\Documents\webprojects\laravel-react-shop-template\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })
