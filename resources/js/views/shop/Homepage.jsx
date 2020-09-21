@@ -2,13 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {Helmet} from 'react-helmet';
 import {useParams} from 'react-router-dom';
 import {Alert, Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from 'shards-react';
-import ProductService from "../../utils/ProductService";
+import ProductService from "../../utils/services/ProductService";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
-import {useCart} from "../../utils/CartContext";
+import {useCart} from "../../utils/stores/CartContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import {newArray} from "../../utils/helpers";
-import {useCurrency} from "../../utils/CurrencyContext";
+import {useCurrency} from "../../utils/stores/CurrencyContext";
 import Translate from "../../components/Translate";
 
 function Homepage(props){

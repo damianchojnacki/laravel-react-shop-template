@@ -9,8 +9,8 @@ import {
     InputGroupAddon,
     InputGroupText
 } from "shards-react";
-import {useCart} from "../../utils/CartContext";
-import ProductService from "../../utils/ProductService";
+import {useCart} from "../../utils/stores/CartContext";
+import ProductService from "../../utils/services/ProductService";
 import {notify} from "react-notify-toast";
 import {Helmet} from "react-helmet";
 import ProductsList from "../../components/shop/ProductsList";
@@ -20,15 +20,15 @@ import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
 import {shippingDataValidate} from "../../utils/helpers";
-import {useCurrency} from "../../utils/CurrencyContext";
-import GoogleService from "../../utils/GoogleService";
+import {useCurrency} from "../../utils/stores/CurrencyContext";
+import GoogleService from "../../utils/services/GoogleService";
 import AsyncSelect from "react-select/async/dist/react-select.esm";
 import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import Coupon from "../../components/shop/Coupon";
 import PaymentProgress from "../../components/shop/PaymentProgress";
-import {useAuth} from "../../utils/AuthContext";
-import OrderService from "../../utils/OrderService";
+import {useAuth} from "../../utils/stores/AuthContext";
+import OrderService from "../../utils/services/OrderService";
 import ShippingForm from "../../components/shop/ShippingForm";
 import Translate from "../../components/Translate";
 

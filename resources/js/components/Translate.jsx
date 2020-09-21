@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import LanguageService from '../utils/LanguageService';
-import {useLanguage} from "../utils/LanguageContext";
+import LanguageService from '../utils/services/LanguageService';
+import {useLanguage} from "../utils/stores/LanguageContext";
 
 function Translate({id}) {
     const language = useLanguage();

@@ -25,9 +25,9 @@ import Footer from "../components/admin/Footer/Footer.jsx";
 import Sidebar from "../components/admin/Sidebar/Sidebar.jsx";
 import FixedPlugin from "../components/admin/FixedPlugin/FixedPlugin.jsx";
 import PerfectScrollbar from "perfect-scrollbar";
-import AuthService from "../utils/AuthService";
-import {useAuth} from "../utils/AuthContext";
-import routes from "../routes/admin.js";
+import AuthService from "../utils/services/AuthService";
+import {useAuth} from "../utils/stores/AuthContext";
+import routes from "../utils/routes/admin.js";
 
 import "../assets/scss/black-dashboard-react.scss";
 import "../assets/css/nucleo-icons.css";

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button} from "shards-react";
-import OrderService from "../../utils/OrderService";
+import OrderService from "../../utils/services/OrderService";
 import Translate from "../Translate";
 
 function ShippingForm({pendingState, shippingAddress, setShippingAddress, address}) {

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Button, ButtonGroup, Card, CardBody, CardHeader, CardTitle, Col, Row} from "reactstrap";
 import {separateHundreds} from "../../utils/helpers";
-import ChartService from "../../utils/ChartService";
+import ChartService from "../../utils/services/ChartService";
 
 function ChartMultiple(props){
     const [chart, setChart] = useState(null);

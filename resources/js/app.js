@@ -19,11 +19,11 @@ import React, {lazy, Suspense} from "react";
 import ReactDOM from "react-dom";
 import {createBrowserHistory} from "history";
 import {Route, Router, Switch} from "react-router-dom";
-import {AuthContextProvider} from './utils/AuthContext';
+import {AuthContextProvider} from './utils/stores/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loading from "./components/Loading";
-import {LanguageContextProvider} from "./utils/LanguageContext";
-import LogService from "./utils/LogService";
+import {LanguageContextProvider} from "./utils/stores/LanguageContext";
+import LogService from "./utils/services/LogService";
 
 LogService.init();
 

@@ -444,7 +444,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/helpers */ "./resources/js/utils/helpers.js");
-/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
+/* harmony import */ var _utils_services_ChartService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/services/ChartService */ "./resources/js/utils/services/ChartService.js");
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -474,11 +474,11 @@ function Chart(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].get(props.api));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].get(props.api));
 
             case 2:
               chart = _context.sent;
-              setChart(_utils_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].generate(chart, props.color, props.type));
+              setChart(_utils_services_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].generate(chart, props.color, props.type));
 
             case 4:
             case "end":
@@ -563,7 +563,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/helpers */ "./resources/js/utils/helpers.js");
-/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
+/* harmony import */ var _utils_services_ChartService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/services/ChartService */ "./resources/js/utils/services/ChartService.js");
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -598,11 +598,11 @@ function ChartMultiple(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].get(props.api[0].url));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].get(props.api[0].url));
 
             case 2:
               chart = _context.sent;
-              setChart(_utils_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].generate(chart, props.color, props.type));
+              setChart(_utils_services_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].generate(chart, props.color, props.type));
 
             case 4:
             case "end":
@@ -620,11 +620,11 @@ function ChartMultiple(props) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].get(url));
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].get(url));
 
           case 2:
             chart = _context2.sent;
-            setChart(_utils_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].generate(chart, color, props.type));
+            setChart(_utils_services_ChartService__WEBPACK_IMPORTED_MODULE_4__["default"].generate(chart, color, props.type));
             setCurrent(index);
 
           case 5:
@@ -986,7 +986,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
+/* harmony import */ var _utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/stores/AuthContext */ "./resources/js/utils/stores/AuthContext.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -1020,7 +1020,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function AdminNavbar(props) {
-  var auth = Object(_utils_AuthContext__WEBPACK_IMPORTED_MODULE_3__["useAuth"])();
+  var auth = Object(_utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_3__["useAuth"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1602,9 +1602,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_Sidebar_Sidebar_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/admin/Sidebar/Sidebar.jsx */ "./resources/js/components/admin/Sidebar/Sidebar.jsx");
 /* harmony import */ var _components_admin_FixedPlugin_FixedPlugin_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/admin/FixedPlugin/FixedPlugin.jsx */ "./resources/js/components/admin/FixedPlugin/FixedPlugin.jsx");
 /* harmony import */ var perfect_scrollbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js");
-/* harmony import */ var _utils_AuthService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/AuthService */ "./resources/js/utils/AuthService.js");
-/* harmony import */ var _utils_AuthContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/AuthContext */ "./resources/js/utils/AuthContext.js");
-/* harmony import */ var _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../routes/admin.js */ "./resources/js/routes/admin.js");
+/* harmony import */ var _utils_services_AuthService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/services/AuthService */ "./resources/js/utils/services/AuthService.js");
+/* harmony import */ var _utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/stores/AuthContext */ "./resources/js/utils/stores/AuthContext.js");
+/* harmony import */ var _utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/routes/admin.js */ "./resources/js/utils/routes/admin.js");
 /* harmony import */ var _assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../assets/scss/black-dashboard-react.scss */ "./resources/js/assets/scss/black-dashboard-react.scss");
 /* harmony import */ var _assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _assets_css_nucleo_icons_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../assets/css/nucleo-icons.css */ "./resources/js/assets/css/nucleo-icons.css");
@@ -1652,7 +1652,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Admin(props) {
-  var auth = Object(_utils_AuthContext__WEBPACK_IMPORTED_MODULE_9__["useAuth"])();
+  var auth = Object(_utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_9__["useAuth"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(localStorage.getItem('background')),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1680,7 +1680,7 @@ function Admin(props) {
       setLoading = _useState10[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    auth.state.authenticated ? _utils_AuthService__WEBPACK_IMPORTED_MODULE_8__["default"].getUser().then(function (res) {
+    auth.state.authenticated ? _utils_services_AuthService__WEBPACK_IMPORTED_MODULE_8__["default"].getUser().then(function (res) {
       return auth.dispatch({
         type: "login",
         payload: res.data
@@ -1736,9 +1736,9 @@ function Admin(props) {
   };
 
   var getBrandText = function getBrandText() {
-    for (var i = 0; i < _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"].length; i++) {
-      if (props.location.pathname.indexOf(_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].layout + _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].path) !== -1) {
-        return _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].name;
+    for (var i = 0; i < _utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"].length; i++) {
+      if (props.location.pathname.indexOf(_utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].layout + _utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].path) !== -1) {
+        return _utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"][i].name;
       }
     }
 
@@ -1748,7 +1748,7 @@ function Admin(props) {
   return redirectBack ? window.location = '/' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notify_toast__WEBPACK_IMPORTED_MODULE_2___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "wrapper black-dashboard"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_admin_Sidebar_Sidebar_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, props, {
-    routes: _routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"],
+    routes: _utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"],
     bgColor: backgroundColor,
     toggleSidebar: toggleSidebar
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1757,7 +1757,7 @@ function Admin(props) {
     brandText: getBrandText(),
     toggleSidebar: toggleSidebar,
     sidebarOpened: sidebarOpened
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, getRoutes(_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, getRoutes(_utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"]), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     from: "/admin",
     to: "admin/dashboard"
   })), // we don't want the Footer to be rendered on map page
@@ -1774,23 +1774,23 @@ function Admin(props) {
 
 /***/ }),
 
-/***/ "./resources/js/routes/admin.js":
-/*!**************************************!*\
-  !*** ./resources/js/routes/admin.js ***!
-  \**************************************/
+/***/ "./resources/js/utils/routes/admin.js":
+/*!********************************************!*\
+  !*** ./resources/js/utils/routes/admin.js ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _views_admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../views/admin/Dashboard */ "./resources/js/views/admin/Dashboard.jsx");
-/* harmony import */ var _views_admin_Product__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/admin/Product */ "./resources/js/views/admin/Product.jsx");
-/* harmony import */ var _views_admin_Order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/admin/Order */ "./resources/js/views/admin/Order.jsx");
-/* harmony import */ var _views_admin_Resource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/admin/Resource */ "./resources/js/views/admin/Resource.jsx");
-/* harmony import */ var _views_admin_User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../views/admin/User */ "./resources/js/views/admin/User.jsx");
-/* harmony import */ var _views_admin_Analytics__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../views/admin/Analytics */ "./resources/js/views/admin/Analytics.jsx");
-/* harmony import */ var _views_admin_Discounts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../views/admin/Discounts */ "./resources/js/views/admin/Discounts.jsx");
-/* harmony import */ var _views_admin_DiscountsNew__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../views/admin/DiscountsNew */ "./resources/js/views/admin/DiscountsNew.jsx");
+/* harmony import */ var _views_admin_Dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../views/admin/Dashboard */ "./resources/js/views/admin/Dashboard.jsx");
+/* harmony import */ var _views_admin_Product__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../views/admin/Product */ "./resources/js/views/admin/Product.jsx");
+/* harmony import */ var _views_admin_Order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../views/admin/Order */ "./resources/js/views/admin/Order.jsx");
+/* harmony import */ var _views_admin_Resource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../views/admin/Resource */ "./resources/js/views/admin/Resource.jsx");
+/* harmony import */ var _views_admin_User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../views/admin/User */ "./resources/js/views/admin/User.jsx");
+/* harmony import */ var _views_admin_Analytics__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../views/admin/Analytics */ "./resources/js/views/admin/Analytics.jsx");
+/* harmony import */ var _views_admin_Discounts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../views/admin/Discounts */ "./resources/js/views/admin/Discounts.jsx");
+/* harmony import */ var _views_admin_DiscountsNew__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../views/admin/DiscountsNew */ "./resources/js/views/admin/DiscountsNew.jsx");
 /*!
 
 =========================================================
@@ -1876,10 +1876,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/utils/ChartService.js":
-/*!********************************************!*\
-  !*** ./resources/js/utils/ChartService.js ***!
-  \********************************************/
+/***/ "./resources/js/utils/services/ChartService.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/utils/services/ChartService.js ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1888,7 +1888,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ChartService; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./resources/js/utils/helpers.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers */ "./resources/js/utils/helpers.js");
 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2107,10 +2107,10 @@ function () {
 
 /***/ }),
 
-/***/ "./resources/js/utils/ImageService.js":
-/*!********************************************!*\
-  !*** ./resources/js/utils/ImageService.js ***!
-  \********************************************/
+/***/ "./resources/js/utils/services/ImageService.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/utils/services/ImageService.js ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2155,10 +2155,10 @@ function () {
 
 /***/ }),
 
-/***/ "./resources/js/utils/UserService.js":
-/*!*******************************************!*\
-  !*** ./resources/js/utils/UserService.js ***!
-  \*******************************************/
+/***/ "./resources/js/utils/services/UserService.js":
+/*!****************************************************!*\
+  !*** ./resources/js/utils/services/UserService.js ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2289,7 +2289,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _utils_ChartService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/ChartService */ "./resources/js/utils/ChartService.js");
+/* harmony import */ var _utils_services_ChartService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/services/ChartService */ "./resources/js/utils/services/ChartService.js");
 /* harmony import */ var _components_admin_ChartDynamic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/admin/ChartDynamic */ "./resources/js/components/admin/ChartDynamic.jsx");
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 
@@ -2345,11 +2345,11 @@ function Analytics(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ChartService__WEBPACK_IMPORTED_MODULE_3__["default"].dynamic(resource, group, range));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_ChartService__WEBPACK_IMPORTED_MODULE_3__["default"].dynamic(resource, group, range));
 
             case 2:
               chart = _context.sent;
-              setData(_utils_ChartService__WEBPACK_IMPORTED_MODULE_3__["default"].generate(chart, getThemeColor(props.bgColor), 'line'));
+              setData(_utils_services_ChartService__WEBPACK_IMPORTED_MODULE_3__["default"].generate(chart, getThemeColor(props.bgColor), 'line'));
 
             case 4:
             case "end":
@@ -2496,7 +2496,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_chartjs_2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-chartjs-2 */ "./node_modules/react-chartjs-2/es/index.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
-/* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
+/* harmony import */ var _utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/services/OrderService */ "./resources/js/utils/services/OrderService.js");
 /* harmony import */ var _components_admin_Chart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/Chart */ "./resources/js/components/admin/Chart.jsx");
 /* harmony import */ var _components_admin_ChartMultiple__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/ChartMultiple */ "./resources/js/components/admin/ChartMultiple.jsx");
 /* harmony import */ var _components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/admin/OrdersList */ "./resources/js/components/admin/OrdersList.jsx");
@@ -2590,7 +2590,7 @@ function (_React$Component) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].recent());
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].recent());
 
             case 2:
               orders = _context.sent;
@@ -2676,7 +2676,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
+/* harmony import */ var _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/services/ProductService */ "./resources/js/utils/services/ProductService.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_admin_DiscountsList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/DiscountsList */ "./resources/js/components/admin/DiscountsList.jsx");
@@ -2715,7 +2715,7 @@ function Discounts(props) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.all());
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.all());
 
           case 2:
             discounts = _context.sent;
@@ -2730,7 +2730,7 @@ function Discounts(props) {
   };
 
   var handleDelete = function handleDelete(discount) {
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts["delete"](discount.id).then(function (res) {
+    _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts["delete"](discount.id).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_6__["notify"].show(res.data, 'success');
       getDiscounts();
     })["catch"](function (error) {
@@ -2782,7 +2782,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
+/* harmony import */ var _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/services/ProductService */ "./resources/js/utils/services/ProductService.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
@@ -2849,7 +2849,7 @@ function DiscountsNew(props) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.without());
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.without());
 
           case 2:
             products = _context.sent;
@@ -2882,7 +2882,7 @@ function DiscountsNew(props) {
       percent_off: percentOff,
       ends: ends
     };
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.create(data).then(function (res) {
+    _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].discounts.create(data).then(function (res) {
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/discounts"
       }));
@@ -2959,7 +2959,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
+/* harmony import */ var _utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/services/OrderService */ "./resources/js/utils/services/OrderService.js");
 /* harmony import */ var _components_admin_ProductsListComplex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/ProductsListComplex */ "./resources/js/components/admin/ProductsListComplex.jsx");
 /* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
 
@@ -3079,7 +3079,7 @@ function Order(props) {
               }
 
               _context.next = 7;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].get(id));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].get(id));
 
             case 7:
               _order = _context.sent;
@@ -3129,11 +3129,11 @@ function Order(props) {
       zip_code: zipCode,
       date: date
     };
-    if (id !== 'new') _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
+    if (id !== 'new') _utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
-    });else _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
+    });else _utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("Order ".concat(id, " has been added."), 'success', 2000);
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/orders"
@@ -3144,7 +3144,7 @@ function Order(props) {
   };
 
   var handleDelete = function handleDelete() {
-    _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"](order.id).then(function (res) {
+    _utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"](order.id).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/orders"
@@ -3296,8 +3296,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
-/* harmony import */ var _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/ImageService */ "./resources/js/utils/ImageService.js");
+/* harmony import */ var _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/services/ProductService */ "./resources/js/utils/services/ProductService.js");
+/* harmony import */ var _utils_services_ImageService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/services/ImageService */ "./resources/js/utils/services/ImageService.js");
 /* harmony import */ var reactstrap_es_FormGroup__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reactstrap/es/FormGroup */ "./node_modules/reactstrap/es/FormGroup.js");
 /* harmony import */ var reactstrap_es_Label__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reactstrap/es/Label */ "./node_modules/reactstrap/es/Label.js");
 /* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
@@ -3371,7 +3371,7 @@ function Product(props) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].types());
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].types());
 
             case 2:
               types = _context.sent;
@@ -3389,7 +3389,7 @@ function Product(props) {
               }
 
               _context.next = 8;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].get(props.match.params.id));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].get(props.match.params.id));
 
             case 8:
               _product = _context.sent;
@@ -3417,11 +3417,11 @@ function Product(props) {
       type: type,
       img: image.publicId
     };
-    if (id !== 'new') _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
+    if (id !== 'new') _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
-    });else _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
+    });else _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("".concat(name, " has been added."), 'success');
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/products/".concat(res.data)
@@ -3436,7 +3436,7 @@ function Product(props) {
       img: image,
       product_id: product.id
     };
-    _utils_ImageService__WEBPACK_IMPORTED_MODULE_6__["default"].upload(data).then(function (res) {
+    _utils_services_ImageService__WEBPACK_IMPORTED_MODULE_6__["default"].upload(data).then(function (res) {
       setImage(res.data);
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("Image has been uploaded.", 'success');
     })["catch"](function (error) {
@@ -3445,7 +3445,7 @@ function Product(props) {
   };
 
   var handleDelete = function handleDelete() {
-    _utils_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"](id).then(function (res) {
+    _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"](id).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/products"
@@ -3566,9 +3566,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-helmet */ "./node_modules/react-helmet/es/Helmet.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/admin/OrdersList */ "./resources/js/components/admin/OrdersList.jsx");
-/* harmony import */ var _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/OrderService */ "./resources/js/utils/OrderService.js");
-/* harmony import */ var _utils_UserService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/UserService */ "./resources/js/utils/UserService.js");
-/* harmony import */ var _utils_ProductService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/ProductService */ "./resources/js/utils/ProductService.js");
+/* harmony import */ var _utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/services/OrderService */ "./resources/js/utils/services/OrderService.js");
+/* harmony import */ var _utils_services_UserService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/services/UserService */ "./resources/js/utils/services/UserService.js");
+/* harmony import */ var _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/services/ProductService */ "./resources/js/utils/services/ProductService.js");
 /* harmony import */ var _components_admin_UsersList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/admin/UsersList */ "./resources/js/components/admin/UsersList.jsx");
 /* harmony import */ var _components_admin_ProductsList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/admin/ProductsList */ "./resources/js/components/admin/ProductsList.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
@@ -3592,9 +3592,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-window['OrderService'] = _utils_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"];
-window['UserService'] = _utils_UserService__WEBPACK_IMPORTED_MODULE_6__["default"];
-window['ProductService'] = _utils_ProductService__WEBPACK_IMPORTED_MODULE_7__["default"];
+window['OrderService'] = _utils_services_OrderService__WEBPACK_IMPORTED_MODULE_5__["default"];
+window['UserService'] = _utils_services_UserService__WEBPACK_IMPORTED_MODULE_6__["default"];
+window['ProductService'] = _utils_services_ProductService__WEBPACK_IMPORTED_MODULE_7__["default"];
 
 function Resource(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
@@ -3787,7 +3787,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-notify-toast */ "./node_modules/react-notify-toast/bin/notify.js");
 /* harmony import */ var react_notify_toast__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_notify_toast__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_UserService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/UserService */ "./resources/js/utils/UserService.js");
+/* harmony import */ var _utils_services_UserService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/services/UserService */ "./resources/js/utils/services/UserService.js");
 /* harmony import */ var _components_admin_OrdersList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/admin/OrdersList */ "./resources/js/components/admin/OrdersList.jsx");
 
 
@@ -3848,7 +3848,7 @@ function User(props) {
               }
 
               _context.next = 3;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].get(id));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(_utils_services_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].get(id));
 
             case 3:
               _user = _context.sent;
@@ -3873,11 +3873,11 @@ function User(props) {
       email: email,
       password: password
     };
-    if (id !== 'new') _utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
+    if (id !== 'new') _utils_services_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].edit(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
     })["catch"](function (error) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(error.response.data.message, 'error');
-    });else _utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
+    });else _utils_services_UserService__WEBPACK_IMPORTED_MODULE_5__["default"].create(data).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show("".concat(name, " has been added."), 'success');
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/users/".concat(res.data)
@@ -3888,7 +3888,7 @@ function User(props) {
   };
 
   var handleDelete = function handleDelete() {
-    _utils_UserService__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"](user.id).then(function (res) {
+    _utils_services_UserService__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"](user.id).then(function (res) {
       react_notify_toast__WEBPACK_IMPORTED_MODULE_4__["notify"].show(res.data, 'success');
       setRedirect(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: "/admin/users"

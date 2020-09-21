@@ -3,8 +3,8 @@ import {Redirect} from "react-router-dom";
 // reactstrap components
 import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row} from "reactstrap";
 import {notify} from 'react-notify-toast';
-import ProductService from "../../utils/ProductService";
-import ImageService from "../../utils/ImageService";
+import ProductService from "../../utils/services/ProductService";
+import ImageService from "../../utils/services/ImageService";
 import FormGroup from "reactstrap/es/FormGroup";
 import Label from "reactstrap/es/Label";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

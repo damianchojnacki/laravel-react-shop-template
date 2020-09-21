@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import {Alert, Button, Form, FormGroup, FormInput, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
-import AuthService from '../../utils/AuthService';
-import {useAuth} from "../../utils/AuthContext";
+import AuthService from '../../utils/services/AuthService';
+import {useAuth} from "../../utils/stores/AuthContext";
 import {isEmail} from '../../utils/helpers';
 import GoogleButton from 'react-google-button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckCircle, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 import 'animate.css/animate.css';
 import Translate from "../../components/Translate";
-import LanguageService from "../../utils/LanguageService";
+import LanguageService from "../../utils/services/LanguageService";
 
 export default function Login() {
     const auth = useAuth();

@@ -35,7 +35,7 @@ import {
     NavLink,
     UncontrolledDropdown
 } from "reactstrap";
-import {useAuth} from "../../../utils/AuthContext";
+import {useAuth} from "../../../utils/stores/AuthContext";
 
 function AdminNavbar(props) {
     const auth = useAuth();

@@ -3,9 +3,9 @@ import {Button, FormGroup, FormInput, InputGroup, InputGroupAddon, InputGroupTex
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPercentage} from "@fortawesome/free-solid-svg-icons/faPercentage";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import OrderService from "../../utils/OrderService";
+import OrderService from "../../utils/services/OrderService";
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
-import {useCart} from "../../utils/CartContext";
+import {useCart} from "../../utils/stores/CartContext";
 import {notify} from "react-notify-toast";
 import Translate from "../Translate";
 

@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 // reactstrap components
 import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row} from "reactstrap";
 import {notify} from 'react-notify-toast';
-import OrderService from "../../utils/OrderService";
+import OrderService from "../../utils/services/OrderService";
 import ProductsListComplex from "../../components/admin/ProductsListComplex";
 import ProductsList from "../../components/admin/ProductsList";
 

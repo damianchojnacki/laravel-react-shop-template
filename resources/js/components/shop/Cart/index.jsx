@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, ListGroup, ListGroupItem,} from "shards-react";
-import {useCart} from "../../../utils/CartContext";
+import {useCart} from "../../../utils/stores/CartContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
-import ProductService from "../../../utils/ProductService";
-import OrderService from "../../../utils/OrderService";
+import ProductService from "../../../utils/services/ProductService";
+import OrderService from "../../../utils/services/OrderService";
 import "./style.scss";
-import {useCurrency} from "../../../utils/CurrencyContext";
+import {useCurrency} from "../../../utils/stores/CurrencyContext";
 import Translate from "../../Translate";
 
 function Cart() {

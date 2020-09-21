@@ -5,7 +5,7 @@ import {faShoppingCart} from "@fortawesome/free-solid-svg-icons/faShoppingCart";
 import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";
 import {faPercentage} from "@fortawesome/free-solid-svg-icons/faPercentage";
 import {Link, Redirect} from "react-router-dom";
-import {useAuth} from "../../../utils/AuthContext";
+import {useAuth} from "../../../utils/stores/AuthContext";
 
 import './index.scss';
 

@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 // reactstrap components
 import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row} from "reactstrap";
 import {notify} from 'react-notify-toast';
-import UserService from "../../utils/UserService";
+import UserService from "../../utils/services/UserService";
 import OrdersList from "../../components/admin/OrdersList";
 
 function User(props) {

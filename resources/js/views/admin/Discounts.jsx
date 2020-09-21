@@ -3,7 +3,7 @@ import {Helmet} from 'react-helmet';
 import {Link} from 'react-router-dom';
 import {Button, Card, CardBody, CardHeader,} from 'reactstrap';
 
-import ProductService from "../../utils/ProductService";
+import ProductService from "../../utils/services/ProductService";
 import {notify} from "react-notify-toast";
 import DiscountsList from "../../components/admin/DiscountsList";
 

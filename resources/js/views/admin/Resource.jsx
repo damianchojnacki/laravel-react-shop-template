@@ -3,9 +3,9 @@ import {Helmet} from 'react-helmet';
 import {Button, Card, CardBody, CardFooter, CardHeader, Input,} from 'reactstrap';
 
 import OrdersList from "../../components/admin/OrdersList";
-import OrderService from "../../utils/OrderService";
-import UserService from "../../utils/UserService";
-import ProductService from "../../utils/ProductService";
+import OrderService from "../../utils/services/OrderService";
+import UserService from "../../utils/services/UserService";
+import ProductService from "../../utils/services/ProductService";
 import UsersList from "../../components/admin/UsersList";
 import ProductsList from "../../components/admin/ProductsList";
 import {Link} from "react-router-dom";

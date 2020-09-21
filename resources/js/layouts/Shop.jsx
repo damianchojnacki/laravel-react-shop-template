@@ -1,19 +1,19 @@
 import React, {useEffect} from "react";
 import {Route, Switch} from "react-router-dom";
 
-import routes from "../routes/shop.js";
+import routes from "../utils/routes/shop.js";
 
-import AuthService from "../utils/AuthService";
-import {useAuth} from "../utils/AuthContext";
+import AuthService from "../utils/services/AuthService";
+import {useAuth} from "../utils/stores/AuthContext";
 
 import Notifications from 'react-notify-toast';
 
 import "shards-ui/dist/css/shards.min.css";
 import Menu from "../components/shop/Menu/index";
 import Footer from "../components/shop/Footer";
-import {CartContextProvider} from "../utils/CartContext";
+import {CartContextProvider} from "../utils/stores/CartContext";
 import Cart from "../components/shop/Cart";
-import {CurrencyContextProvider} from "../utils/CurrencyContext";
+import {CurrencyContextProvider} from "../utils/stores/CurrencyContext";
 
 function Shop(props) {
     const auth = useAuth();

@@ -1,10 +1,10 @@
 import React from "react";
 import {Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from "shards-react";
-import {useCart} from "../../../utils/CartContext";
+import {useCart} from "../../../utils/stores/CartContext";
 import './style.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import {useCurrency} from "../../../utils/CurrencyContext";
+import {useCurrency} from "../../../utils/stores/CurrencyContext";
 import Translate from "../../Translate";
 
 function ProductsListComplex(props){

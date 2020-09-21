@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import {Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Input, Row,} from 'reactstrap';
 
-import ProductService from "../../utils/ProductService";
+import ProductService from "../../utils/services/ProductService";
 import {notify} from "react-notify-toast";
 import ProductsList from "../../components/admin/ProductsList";
 

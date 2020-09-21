@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import CurrencyService from "../../utils/CurrencyService";
+import CurrencyService from "../../utils/services/CurrencyService";
 import Select from "react-select";
 import {useMediaQuery} from "react-responsive";
-import {useCurrency} from "../../utils/CurrencyContext";
-import {useCart} from "../../utils/CartContext";
+import {useCurrency} from "../../utils/stores/CurrencyContext";
+import {useCart} from "../../utils/stores/CartContext";
 
 function CurrencySelect() {
     const currency = useCurrency();

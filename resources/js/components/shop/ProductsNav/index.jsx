@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {newArray} from "../../../utils/helpers";
-import ProductService from "../../../utils/ProductService";
+import ProductService from "../../../utils/services/ProductService";
 import "./style.scss";
 import Select from "react-select";
-import LanguageService from "../../../utils/LanguageService";
-import {useLanguage} from "../../../utils/LanguageContext";
+import LanguageService from "../../../utils/services/LanguageService";
+import {useLanguage} from "../../../utils/stores/LanguageContext";
 import Translate from "../../Translate";
 
 export default function ProductsNav(props){

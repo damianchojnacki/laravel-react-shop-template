@@ -21,7 +21,7 @@ import {Bar, Line} from "react-chartjs-2";
 import {Col, Row,} from "reactstrap";
 
 import {Helmet} from "react-helmet";
-import OrderService from "../../utils/OrderService";
+import OrderService from "../../utils/services/OrderService";
 import Chart from "../../components/admin/Chart";
 import ChartMultiple from "../../components/admin/ChartMultiple";
 import OrdersList from "../../components/admin/OrdersList";

@@ -5,8 +5,8 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 import {faMinus} from "@fortawesome/free-solid-svg-icons/faMinus";
 import {faCaretRight} from "@fortawesome/free-solid-svg-icons/faCaretRight";
 import Translate from "../Translate";
-import {useCurrency} from "../../utils/CurrencyContext";
-import {useCart} from "../../utils/CartContext";
+import {useCurrency} from "../../utils/stores/CurrencyContext";
+import {useCart} from "../../utils/stores/CartContext";
 
 function ProductsList(props){
     const currency = useCurrency();

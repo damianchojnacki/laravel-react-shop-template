@@ -1,6 +1,6 @@
 import {Progress, Tooltip} from "shards-react";
 import React, {useState} from "react";
-import {useCurrency} from "../../utils/CurrencyContext";
+import {useCurrency} from "../../utils/stores/CurrencyContext";
 import Translate from "../Translate";
 
 const PaymentProgress = React.forwardRef(({pendingState, sum, shippingCost}, ref) => {

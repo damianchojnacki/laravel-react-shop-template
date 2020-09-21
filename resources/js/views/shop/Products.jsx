@@ -4,9 +4,9 @@ import ProductsNav from '../../components/shop/ProductsNav';
 import {Button} from "shards-react";
 import ProductsListComplex from "../../components/shop/ProductListComplex";
 import classnames from 'classnames';
-import ProductService from "../../utils/ProductService";
+import ProductService from "../../utils/services/ProductService";
 import {newArray} from "../../utils/helpers";
-import {useCurrency} from "../../utils/CurrencyContext";
+import {useCurrency} from "../../utils/stores/CurrencyContext";
 import Translate from "../../components/Translate";
 
 export default function Products(props){

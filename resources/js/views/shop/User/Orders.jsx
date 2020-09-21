@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import OrderStatus from "../../../components/shop/OrderStatus";
 import Translate from "../../../components/Translate";
-import {useCurrency} from "../../../utils/CurrencyContext";
-import OrderService from "../../../utils/OrderService";
+import {useCurrency} from "../../../utils/stores/CurrencyContext";
+import OrderService from "../../../utils/services/OrderService";
 
 function Orders(){
     const currency = useCurrency();

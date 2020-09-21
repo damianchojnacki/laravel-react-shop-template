@@ -12,8 +12,8 @@ import {
     InputGroupText,
     Row
 } from "shards-react";
-import AuthService from '../../utils/AuthService';
-import {useAuth} from "../../utils/AuthContext";
+import AuthService from '../../utils/services/AuthService';
+import {useAuth} from "../../utils/stores/AuthContext";
 import classNames from 'classnames';
 import 'animate.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

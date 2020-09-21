@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Card, CardBody, CardHeader, CardTitle} from "reactstrap";
 import {separateHundreds} from "../../utils/helpers";
-import ChartService from "../../utils/ChartService";
+import ChartService from "../../utils/services/ChartService";
 
 function Chart(props){
     const [chart, setChart] = useState(null);

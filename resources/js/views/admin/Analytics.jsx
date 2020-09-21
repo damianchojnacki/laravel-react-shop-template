@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 // reactstrap components
 import {Button, Card, CardBody, CardHeader, Col, Row} from "reactstrap";
-import ChartService from "../../utils/ChartService";
+import ChartService from "../../utils/services/ChartService";
 import ChartDynamic from "../../components/admin/ChartDynamic";
 import {Helmet} from "react-helmet";
 

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem} from "shards-react";
 import {Link, matchPath, NavLink, useLocation} from 'react-router-dom';
-import {useAuth} from "../../../utils/AuthContext";
+import {useAuth} from "../../../utils/stores/AuthContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUserCircle} from "@fortawesome/free-solid-svg-icons/faUserCircle";
 import {useMediaQuery} from "react-responsive";
