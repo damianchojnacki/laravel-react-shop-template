@@ -1,92 +1,139 @@
 import React from "react";
-import {Button, Card, CardBody, CardFooter, CardHeader, CardTitle} from "shards-react";
-import {useCart} from "../../../utils/stores/CartContext";
-import './style.scss';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import {useCurrency} from "../../../utils/stores/CurrencyContext";
+import {
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "shards-react";
+import { useCart } from "../../../utils/stores/store";
+import "./style.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
+import { useCurrency } from "../../../utils/stores/store";
 import Translate from "../../Translate";
 
-function ProductsListComplex(props){
+function ProductsListComplex(props) {
     const cart = useCart();
     const currency = useCurrency();
 
-    const addToCart = product => {
-        cart.dispatch({type: "add", payload: product.id});
+    const addToCart = (product) => {
+        cart.dispatch({ type: "add", payload: product.id });
 
         //notify.show(`${product.name} has been added to cart.`, 'success', 1500);
     };
 
-    const removeFromCart = product => {
-        cart.dispatch({type: "remove", payload: product.id});
+    const removeFromCart = (product) => {
+        cart.dispatch({ type: "remove", payload: product.id });
 
         //notify.show(`${product.name} has been removed to cart.`, 'success', 1500);
     };
 
-    const sortProducts = products => {
+    const sortProducts = (products) => {
         return products.sort((previous, next) => {
-            if(props.sort.type === "desc"){
+            if (props.sort.type === "desc") {
                 const pre = previous;
 
                 previous = next;
                 next = pre;
             }
 
-            if(props.sort.sort === "id") return previous.id - next.id;
-            if(props.sort.sort === "name") return previous.name.localeCompare(next.name);
-            if(props.sort.sort === "price") return previous.price_final - next.price_final;
+            if (props.sort.sort === "id") return previous.id - next.id;
+            if (props.sort.sort === "name")
+                return previous.name.localeCompare(next.name);
+            if (props.sort.sort === "price")
+                return previous.price_final - next.price_final;
         });
     };
 
-    const data = (props.data && props.data.length && props.data[0].name) && props.sort ? sortProducts(props.data) : props.data;
+    const data =
+        props.data && props.data.length && props.data[0].name && props.sort
+            ? sortProducts(props.data)
+            : props.data;
 
     return (
-        (data && data.length) && data.map(product => {
+        data &&
+        data.length &&
+        data.map((product) => {
             return (
                 <Card key={product.id} className="product m-2">
                     <CardHeader className="h-75 product__header">
                         <CardTitle tag="h5">{product.name}</CardTitle>
-                        {product.image && <img className="rounded mx-auto mw-100 d-block" style={{maxHeight: '200px'}} src={product.image.src} alt={product.name}/>}
+                        {product.image && (
+                            <img
+                                className="rounded mx-auto mw-100 d-block"
+                                style={{ maxHeight: "200px" }}
+                                src={product.image.src}
+                                alt={product.name}
+                            />
+                        )}
                     </CardHeader>
                     <CardBody>
                         <p>
-                            {product.price_origin &&
+                            {product.price_origin && (
                                 <>
                                     <span className="font-weight-bold">
-                                        <Translate id="products-block-price"/>
+                                        <Translate id="products-block-price" />
                                     </span>
-                                    {product.discount ?
+                                    {product.discount ? (
                                         <>
-                                            <span className="text-danger" style={{textDecoration: "line-through" }}>{product.price_origin} {currency.state.symbol}</span>
-                                            <FontAwesomeIcon icon={faArrowRight} className="mx-2"/>
-                                            <span>{product.price_final} {currency.state.symbol}</span>
+                                            <span
+                                                className="text-danger"
+                                                style={{
+                                                    textDecoration:
+                                                        "line-through",
+                                                }}
+                                            >
+                                                {product.price_origin}{" "}
+                                                {currency.state.symbol}
+                                            </span>
+                                            <FontAwesomeIcon
+                                                icon={faArrowRight}
+                                                className="mx-2"
+                                            />
+                                            <span>
+                                                {product.price_final}{" "}
+                                                {currency.state.symbol}
+                                            </span>
                                         </>
-                                        :
-                                        <span>{product.price_origin} {currency.state.symbol}</span>
-                                    }
+                                    ) : (
+                                        <span>
+                                            {product.price_origin}{" "}
+                                            {currency.state.symbol}
+                                        </span>
+                                    )}
                                 </>
-                            }
+                            )}
                         </p>
                     </CardBody>
                     <CardFooter className="d-flex flex-wrap justify-content-between">
-                        {product.name &&
+                        {product.name && (
                             <>
-                                <Button size="sm" className="btn btn-secondary my-1" onClick={() => addToCart(product)}>
+                                <Button
+                                    size="sm"
+                                    className="btn btn-secondary my-1"
+                                    onClick={() => addToCart(product)}
+                                >
                                     <Translate id="cart-add" />
                                 </Button>
 
-                                {cart.state.products.includes(product.id) &&
-                                        <Button size="sm" className="btn btn-danger my-1" onClick={() => removeFromCart(product)}>
-                                            <Translate id="cart-remove"/>
-                                        </Button>
-                                }
+                                {cart.state.products.includes(product.id) && (
+                                    <Button
+                                        size="sm"
+                                        className="btn btn-danger my-1"
+                                        onClick={() => removeFromCart(product)}
+                                    >
+                                        <Translate id="cart-remove" />
+                                    </Button>
+                                )}
                             </>
-                        }
+                        )}
                     </CardFooter>
                 </Card>
             );
         })
-    )
+    );
 }
 
 export default ProductsListComplex;

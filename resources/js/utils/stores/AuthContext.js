@@ -1,13 +1,13 @@
 import * as React from "react";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import AuthService from "../services/AuthService";
 
 const AuthContext = React.createContext();
 
-const useAuth = () => React.useContext(AuthContext);
+const auth = () => React.useContext(AuthContext);
 
 const initialState = {
-    authenticated: !!Cookies.get('access_token'),
+    authenticated: !!Cookies.get("access_token"),
     user: {},
 };
 
@@ -21,7 +21,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 authenticated: true,
-                user: action.payload
+                user: action.payload,
             };
         case "logout":
             AuthService.logout();
@@ -29,7 +29,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 authenticated: false,
-                user: null
+                user: null,
             };
     }
 };
@@ -39,8 +39,10 @@ function AuthContextProvider(props) {
     const value = { state, dispatch };
 
     return (
-        <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
+        <AuthContext.Provider value={value}>
+            {props.children}
+        </AuthContext.Provider>
     );
 }
 
-export { AuthContextProvider, useAuth };
+export { AuthContextProvider, auth };

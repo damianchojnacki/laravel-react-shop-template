@@ -15,36 +15,39 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {lazy, Suspense} from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
-import {createBrowserHistory} from "history";
-import {Route, Router, Switch} from "react-router-dom";
-import {AuthContextProvider} from './utils/stores/AuthContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { createBrowserHistory } from "history";
+import { Route, Router, Switch } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading";
-import {LanguageContextProvider} from "./utils/stores/LanguageContext";
 import LogService from "./utils/services/LogService";
+import { StoreContextProvider } from "./utils/stores/store";
 
 LogService.init();
 
-const ShopLayout = lazy(() => import('./layouts/Shop'));
+const ShopLayout = lazy(() => import("./layouts/Shop"));
 const AdminLayout = lazy(() => import("./layouts/Admin"));
 
 const hist = createBrowserHistory();
 
-require('./bootstrap');
+require("./bootstrap");
 
 ReactDOM.render(
     <Router history={hist}>
-        <Suspense fallback={<Loading/>}>
-            <AuthContextProvider>
-                <LanguageContextProvider>
-                    <Switch>
-                        <Route path="/admin" render={props => <AdminLayout {...props} />}/>
-                        <Route path="/" render={(props) => <ShopLayout {...props} />}/>
-                    </Switch>
-                </LanguageContextProvider>
-            </AuthContextProvider>
+        <Suspense fallback={<Loading />}>
+            <StoreContextProvider>
+                <Switch>
+                    <Route
+                        path="/admin"
+                        render={(props) => <AdminLayout {...props} />}
+                    />
+                    <Route
+                        path="/"
+                        render={(props) => <ShopLayout {...props} />}
+                    />
+                </Switch>
+            </StoreContextProvider>
         </Suspense>
     </Router>,
     document.getElementById("root")

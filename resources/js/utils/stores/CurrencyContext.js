@@ -3,7 +3,7 @@ import CurrencyService from "../services/CurrencyService";
 
 const CurrencyContext = React.createContext();
 
-const useCurrency = () => React.useContext(CurrencyContext);
+const currency = () => React.useContext(CurrencyContext);
 
 const initialState = CurrencyService.get();
 
@@ -25,8 +25,10 @@ function CurrencyContextProvider(props) {
     const value = { state, dispatch };
 
     return (
-        <CurrencyContext.Provider value={value}>{props.children}</CurrencyContext.Provider>
+        <CurrencyContext.Provider value={value}>
+            {props.children}
+        </CurrencyContext.Provider>
     );
 }
 
-export { CurrencyContextProvider, useCurrency };
+export { CurrencyContextProvider, currency };

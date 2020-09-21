@@ -3,7 +3,7 @@ import LanguageService from "../services/LanguageService";
 
 const LanguageContext = React.createContext();
 
-const useLanguage = () => React.useContext(LanguageContext);
+const language = () => React.useContext(LanguageContext);
 
 const initialState = LanguageService.current();
 
@@ -25,8 +25,10 @@ function LanguageContextProvider(props) {
     const value = { state, dispatch };
 
     return (
-        <LanguageContext.Provider value={value}>{props.children}</LanguageContext.Provider>
+        <LanguageContext.Provider value={value}>
+            {props.children}
+        </LanguageContext.Provider>
     );
 }
 
-export { LanguageContextProvider, useLanguage };
+export { LanguageContextProvider, language };

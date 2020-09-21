@@ -833,7 +833,7 @@ function wrap(fn, options, before) {
 /*!***************************************************!*\
   !*** ./node_modules/@sentry/browser/esm/index.js ***!
   \***************************************************/
-/*! exports provided: Integrations, Transports, Severity, Status, addGlobalEventProcessor, addBreadcrumb, captureException, captureEvent, captureMessage, configureScope, getHubFromCarrier, getCurrentHub, Hub, makeMain, Scope, startTransaction, setContext, setExtra, setExtras, setTag, setTags, setUser, withScope, BrowserClient, defaultIntegrations, forceLoad, init, lastEventId, onLoad, showReportDialog, flush, close, wrap, SDK_NAME, SDK_VERSION */
+/*! exports provided: Severity, Status, addGlobalEventProcessor, addBreadcrumb, captureException, captureEvent, captureMessage, configureScope, getHubFromCarrier, getCurrentHub, Hub, makeMain, Scope, startTransaction, setContext, setExtra, setExtras, setTag, setTags, setUser, withScope, BrowserClient, defaultIntegrations, forceLoad, init, lastEventId, onLoad, showReportDialog, flush, close, wrap, SDK_NAME, SDK_VERSION, Integrations, Transports */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4928,17 +4928,13 @@ function withErrorBoundary(WrappedComponent, errorBoundaryOptions) {
 /*!*************************************************!*\
   !*** ./node_modules/@sentry/react/esm/index.js ***!
   \*************************************************/
-/*! exports provided: Profiler, withProfiler, useProfiler, ErrorBoundary, withErrorBoundary, Integrations, Transports, Severity, Status, addGlobalEventProcessor, addBreadcrumb, captureException, captureEvent, captureMessage, configureScope, getHubFromCarrier, getCurrentHub, Hub, makeMain, Scope, startTransaction, setContext, setExtra, setExtras, setTag, setTags, setUser, withScope, BrowserClient, defaultIntegrations, forceLoad, init, lastEventId, onLoad, showReportDialog, flush, close, wrap, SDK_NAME, SDK_VERSION */
+/*! exports provided: Profiler, withProfiler, useProfiler, ErrorBoundary, withErrorBoundary, Severity, Status, addGlobalEventProcessor, addBreadcrumb, captureException, captureEvent, captureMessage, configureScope, getHubFromCarrier, getCurrentHub, Hub, makeMain, Scope, startTransaction, setContext, setExtra, setExtras, setTag, setTags, setUser, withScope, BrowserClient, defaultIntegrations, forceLoad, init, lastEventId, onLoad, showReportDialog, flush, close, wrap, SDK_NAME, SDK_VERSION, Integrations, Transports */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _sentry_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @sentry/browser */ "./node_modules/@sentry/browser/esm/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Integrations", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Integrations"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transports", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Transports"]; });
-
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Severity", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Severity"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Status", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Status"]; });
@@ -5004,6 +5000,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SDK_NAME", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["SDK_NAME"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SDK_VERSION", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["SDK_VERSION"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Integrations", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Integrations"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transports", function() { return _sentry_browser__WEBPACK_IMPORTED_MODULE_1__["Transports"]; });
 
 /* harmony import */ var _profiler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profiler */ "./node_modules/@sentry/react/esm/profiler.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Profiler", function() { return _profiler__WEBPACK_IMPORTED_MODULE_2__["Profiler"]; });
@@ -51028,12 +51028,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var history__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! history */ "./node_modules/history/esm/history.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/stores/AuthContext */ "./resources/js/utils/stores/AuthContext.js");
-/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
-/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Loading */ "./resources/js/components/Loading.jsx");
-/* harmony import */ var _utils_stores_LanguageContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/stores/LanguageContext */ "./resources/js/utils/stores/LanguageContext.js");
-/* harmony import */ var _utils_services_LogService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils/services/LogService */ "./resources/js/utils/services/LogService.js");
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Loading */ "./resources/js/components/Loading.jsx");
+/* harmony import */ var _utils_services_LogService__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/services/LogService */ "./resources/js/utils/services/LogService.js");
+/* harmony import */ var _utils_stores_store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/stores/store */ "./resources/js/utils/stores/store.js");
 /*!
 
 =========================================================
@@ -51059,8 +51058,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-_utils_services_LogService__WEBPACK_IMPORTED_MODULE_8__["default"].init();
+_utils_services_LogService__WEBPACK_IMPORTED_MODULE_6__["default"].init();
 var ShopLayout = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3), __webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./layouts/Shop */ "./resources/js/layouts/Shop.jsx"));
 });
@@ -51074,8 +51072,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Router"], {
   history: hist
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
-  fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null)
-}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_4__["AuthContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_stores_LanguageContext__WEBPACK_IMPORTED_MODULE_7__["LanguageContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+  fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], null)
+}, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_stores_store__WEBPACK_IMPORTED_MODULE_7__["StoreContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
   path: "/admin",
   render: function render(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AdminLayout, props);
@@ -51085,7 +51083,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
   render: function render(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ShopLayout, props);
   }
-})))))), document.getElementById("root"));
+}))))), document.getElementById("root"));
 
 /***/ }),
 
@@ -51337,6 +51335,91 @@ function () {
 
 /***/ }),
 
+/***/ "./resources/js/utils/services/CurrencyService.js":
+/*!********************************************************!*\
+  !*** ./resources/js/utils/services/CurrencyService.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CurrencyService; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var CurrencyService =
+/*#__PURE__*/
+function () {
+  function CurrencyService() {
+    _classCallCheck(this, CurrencyService);
+  }
+
+  _createClass(CurrencyService, null, [{
+    key: "all",
+    value: function all() {
+      var currencies;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function all$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/currencies"));
+
+            case 2:
+              currencies = _context.sent;
+              return _context.abrupt("return", currencies.data);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "change",
+    value: function change(value) {
+      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('currency', JSON.stringify(value));
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('currency');
+    }
+  }, {
+    key: "get",
+    value: function get() {
+      return js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('currency') ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('currency')) : this["default"]();
+    }
+  }, {
+    key: "default",
+    value: function _default() {
+      return {
+        iso: "USD",
+        symbol: "$"
+      };
+    }
+  }]);
+
+  return CurrencyService;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/js/utils/services/LanguageService.js":
 /*!********************************************************!*\
   !*** ./resources/js/utils/services/LanguageService.js ***!
@@ -51538,13 +51621,13 @@ function () {
 /*!**************************************************!*\
   !*** ./resources/js/utils/stores/AuthContext.js ***!
   \**************************************************/
-/*! exports provided: AuthContextProvider, useAuth */
+/*! exports provided: AuthContextProvider, auth */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthContextProvider", function() { return AuthContextProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useAuth", function() { return useAuth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return auth; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
@@ -51569,12 +51652,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var AuthContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
 
-var useAuth = function useAuth() {
+var auth = function auth() {
   return react__WEBPACK_IMPORTED_MODULE_0__["useContext"](AuthContext);
 };
 
 var initialState = {
-  authenticated: !!js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('access_token'),
+  authenticated: !!js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get("access_token"),
   user: {}
 };
 
@@ -51619,17 +51702,192 @@ AuthContextProvider.displayName = "AuthContextProvider";
 
 /***/ }),
 
+/***/ "./resources/js/utils/stores/CartContext.js":
+/*!**************************************************!*\
+  !*** ./resources/js/utils/stores/CartContext.js ***!
+  \**************************************************/
+/*! exports provided: CartContextProvider, cart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartContextProvider", function() { return CartContextProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cart", function() { return cart; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var CartContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
+
+var cart = function cart() {
+  return react__WEBPACK_IMPORTED_MODULE_0__["useContext"](CartContext);
+};
+
+var initialState = {
+  products: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
+  coupon: localStorage.getItem("coupon") ? JSON.parse(localStorage.getItem("coupon")) : {},
+  payment: false
+};
+
+var reducer = function reducer(state, action) {
+  var products = state.products;
+
+  switch (action.type) {
+    case "reset":
+      localStorage.removeItem("cart");
+      return _objectSpread({}, state, {
+        products: [],
+        coupon: {},
+        payment: false
+      });
+
+    case "add":
+      products.push(action.payload);
+      localStorage.setItem("cart", JSON.stringify(products));
+      return _objectSpread({}, state, {
+        products: products
+      });
+
+    case "remove":
+      var index = products.indexOf(action.payload);
+      products.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(products));
+      return _objectSpread({}, state, {
+        products: products
+      });
+
+    case "appendCoupon":
+      localStorage.setItem("coupon", JSON.stringify(action.payload));
+      return _objectSpread({}, state, {
+        coupon: action.payload
+      });
+
+    case "removeCoupon":
+      localStorage.removeItem("coupon");
+      return _objectSpread({}, state, {
+        coupon: {}
+      });
+
+    case "beginPayment":
+      return _objectSpread({}, state, {
+        payment: true
+      });
+
+    case "endPayment":
+      return _objectSpread({}, state, {
+        payment: false
+      });
+  }
+};
+
+function CartContextProvider(props) {
+  var _React$useReducer = react__WEBPACK_IMPORTED_MODULE_0__["useReducer"](reducer, initialState),
+      _React$useReducer2 = _slicedToArray(_React$useReducer, 2),
+      state = _React$useReducer2[0],
+      dispatch = _React$useReducer2[1];
+
+  var value = {
+    state: state,
+    dispatch: dispatch
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](CartContext.Provider, {
+    value: value
+  }, props.children);
+}
+
+CartContextProvider.displayName = "CartContextProvider";
+
+
+/***/ }),
+
+/***/ "./resources/js/utils/stores/CurrencyContext.js":
+/*!******************************************************!*\
+  !*** ./resources/js/utils/stores/CurrencyContext.js ***!
+  \******************************************************/
+/*! exports provided: CurrencyContextProvider, currency */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CurrencyContextProvider", function() { return CurrencyContextProvider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "currency", function() { return currency; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_CurrencyService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/CurrencyService */ "./resources/js/utils/services/CurrencyService.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var CurrencyContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
+
+var currency = function currency() {
+  return react__WEBPACK_IMPORTED_MODULE_0__["useContext"](CurrencyContext);
+};
+
+var initialState = _services_CurrencyService__WEBPACK_IMPORTED_MODULE_1__["default"].get();
+
+var reducer = function reducer(state, action) {
+  switch (action.type) {
+    case "reset":
+      _services_CurrencyService__WEBPACK_IMPORTED_MODULE_1__["default"].reset();
+      return initialState;
+
+    case "change":
+      _services_CurrencyService__WEBPACK_IMPORTED_MODULE_1__["default"].change(action.payload);
+      return action.payload;
+  }
+};
+
+function CurrencyContextProvider(props) {
+  var _React$useReducer = react__WEBPACK_IMPORTED_MODULE_0__["useReducer"](reducer, initialState),
+      _React$useReducer2 = _slicedToArray(_React$useReducer, 2),
+      state = _React$useReducer2[0],
+      dispatch = _React$useReducer2[1];
+
+  var value = {
+    state: state,
+    dispatch: dispatch
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](CurrencyContext.Provider, {
+    value: value
+  }, props.children);
+}
+
+CurrencyContextProvider.displayName = "CurrencyContextProvider";
+
+
+/***/ }),
+
 /***/ "./resources/js/utils/stores/LanguageContext.js":
 /*!******************************************************!*\
   !*** ./resources/js/utils/stores/LanguageContext.js ***!
   \******************************************************/
-/*! exports provided: LanguageContextProvider, useLanguage */
+/*! exports provided: LanguageContextProvider, language */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LanguageContextProvider", function() { return LanguageContextProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useLanguage", function() { return useLanguage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "language", function() { return language; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _services_LanguageService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/LanguageService */ "./resources/js/utils/services/LanguageService.js");
@@ -51645,7 +51903,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LanguageContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
 
-var useLanguage = function useLanguage() {
+var language = function language() {
   return react__WEBPACK_IMPORTED_MODULE_0__["useContext"](LanguageContext);
 };
 
@@ -51679,6 +51937,44 @@ function LanguageContextProvider(props) {
 }
 
 LanguageContextProvider.displayName = "LanguageContextProvider";
+
+
+/***/ }),
+
+/***/ "./resources/js/utils/stores/store.js":
+/*!********************************************!*\
+  !*** ./resources/js/utils/stores/store.js ***!
+  \********************************************/
+/*! exports provided: StoreContextProvider, useAuth, useLanguage, useCurrency, useCart */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StoreContextProvider", function() { return StoreContextProvider; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _AuthContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AuthContext */ "./resources/js/utils/stores/AuthContext.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useAuth", function() { return _AuthContext__WEBPACK_IMPORTED_MODULE_1__["auth"]; });
+
+/* harmony import */ var _LanguageContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LanguageContext */ "./resources/js/utils/stores/LanguageContext.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useLanguage", function() { return _LanguageContext__WEBPACK_IMPORTED_MODULE_2__["language"]; });
+
+/* harmony import */ var _CurrencyContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CurrencyContext */ "./resources/js/utils/stores/CurrencyContext.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useCurrency", function() { return _CurrencyContext__WEBPACK_IMPORTED_MODULE_3__["currency"]; });
+
+/* harmony import */ var _CartContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CartContext */ "./resources/js/utils/stores/CartContext.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useCart", function() { return _CartContext__WEBPACK_IMPORTED_MODULE_4__["cart"]; });
+
+
+
+
+
+
+function StoreContextProvider(_ref) {
+  var children = _ref.children;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AuthContext__WEBPACK_IMPORTED_MODULE_1__["AuthContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LanguageContext__WEBPACK_IMPORTED_MODULE_2__["LanguageContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CurrencyContext__WEBPACK_IMPORTED_MODULE_3__["CurrencyContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CartContext__WEBPACK_IMPORTED_MODULE_4__["CartContextProvider"], null, children))));
+}
+StoreContextProvider.displayName = "StoreContextProvider";
 
 
 /***/ }),

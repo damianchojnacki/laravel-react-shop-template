@@ -986,7 +986,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/stores/AuthContext */ "./resources/js/utils/stores/AuthContext.js");
+/* harmony import */ var _utils_stores_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/stores/store */ "./resources/js/utils/stores/store.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -1020,7 +1020,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function AdminNavbar(props) {
-  var auth = Object(_utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_3__["useAuth"])();
+  var auth = Object(_utils_stores_store__WEBPACK_IMPORTED_MODULE_3__["useAuth"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1603,7 +1603,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_FixedPlugin_FixedPlugin_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/admin/FixedPlugin/FixedPlugin.jsx */ "./resources/js/components/admin/FixedPlugin/FixedPlugin.jsx");
 /* harmony import */ var perfect_scrollbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js");
 /* harmony import */ var _utils_services_AuthService__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/services/AuthService */ "./resources/js/utils/services/AuthService.js");
-/* harmony import */ var _utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/stores/AuthContext */ "./resources/js/utils/stores/AuthContext.js");
+/* harmony import */ var _utils_stores_store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/stores/store */ "./resources/js/utils/stores/store.js");
 /* harmony import */ var _utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/routes/admin.js */ "./resources/js/utils/routes/admin.js");
 /* harmony import */ var _assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../assets/scss/black-dashboard-react.scss */ "./resources/js/assets/scss/black-dashboard-react.scss");
 /* harmony import */ var _assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_assets_scss_black_dashboard_react_scss__WEBPACK_IMPORTED_MODULE_11__);
@@ -1652,14 +1652,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Admin(props) {
-  var auth = Object(_utils_stores_AuthContext__WEBPACK_IMPORTED_MODULE_9__["useAuth"])();
+  var auth = Object(_utils_stores_store__WEBPACK_IMPORTED_MODULE_9__["useAuth"])();
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(localStorage.getItem('background')),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(localStorage.getItem("background")),
       _useState2 = _slicedToArray(_useState, 2),
       backgroundColor = _useState2[0],
       setBackgroundColor = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(localStorage.getItem('darkMode')),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(localStorage.getItem("darkMode")),
       _useState4 = _slicedToArray(_useState3, 2),
       darkMode = _useState4[0],
       setDarkMode = _useState4[1];
@@ -1692,10 +1692,10 @@ function Admin(props) {
     })["finally"](function () {
       return setLoading(false);
     }) : setLoading(false);
-    darkMode === 'light' ? document.body.classList.add("white-content") : document.body.classList.remove("white-content");
+    darkMode === "light" ? document.body.classList.add("white-content") : document.body.classList.remove("white-content");
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    !loading && (!auth.state.authenticated || auth.state.user.name !== 'admin') && setRedirectBack(true);
+    !loading && (!auth.state.authenticated || auth.state.user.name !== "admin") && setRedirectBack(true);
     var tables = document.querySelectorAll(".table-responsive");
 
     for (var i = 0; i < tables.length; i++) {
@@ -1709,14 +1709,14 @@ function Admin(props) {
   };
 
   var handleBgClick = function handleBgClick(color) {
-    localStorage.setItem('background', color);
+    localStorage.setItem("background", color);
     setBackgroundColor(color);
   };
 
   var handleDarkModeClick = function handleDarkModeClick(color) {
-    localStorage.setItem('darkMode', color);
+    localStorage.setItem("darkMode", color);
     setDarkMode(color);
-    color === 'light' ? document.body.classList.add("white-content") : document.body.classList.remove("white-content");
+    color === "light" ? document.body.classList.add("white-content") : document.body.classList.remove("white-content");
   };
 
   var getRoutes = function getRoutes(routes) {
@@ -1745,7 +1745,7 @@ function Admin(props) {
     return "Brand";
   };
 
-  return redirectBack ? window.location = '/' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notify_toast__WEBPACK_IMPORTED_MODULE_2___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return redirectBack ? window.location = "/" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_notify_toast__WEBPACK_IMPORTED_MODULE_2___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "wrapper black-dashboard"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_admin_Sidebar_Sidebar_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({}, props, {
     routes: _utils_routes_admin_js__WEBPACK_IMPORTED_MODULE_10__["default"],

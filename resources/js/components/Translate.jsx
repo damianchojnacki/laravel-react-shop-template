@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import LanguageService from '../utils/services/LanguageService';
-import {useLanguage} from "../utils/stores/LanguageContext";
+import React, { useEffect, useState } from "react";
+import LanguageService from "../utils/services/LanguageService";
+import { useLanguage } from "../utils/stores/store";
 
-function Translate({id}) {
+function Translate({ id }) {
     const language = useLanguage();
 
     const [translated, setTranslated] = useState("");
 
     useEffect(() => {
-        setTranslated(LanguageService.translate(id))
+        setTranslated(LanguageService.translate(id));
     }, [language.state, id]);
 
     return translated;

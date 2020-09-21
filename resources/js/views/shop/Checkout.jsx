@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Button,
     Form,
@@ -7,27 +7,27 @@ import {
     FormInput,
     InputGroup,
     InputGroupAddon,
-    InputGroupText
+    InputGroupText,
 } from "shards-react";
-import {useCart} from "../../utils/stores/CartContext";
+import { useCart } from "../../utils/stores/store";
 import ProductService from "../../utils/services/ProductService";
-import {notify} from "react-notify-toast";
-import {Helmet} from "react-helmet";
+import { notify } from "react-notify-toast";
+import { Helmet } from "react-helmet";
 import ProductsList from "../../components/shop/ProductsList";
-import {Redirect} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
-import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
-import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
-import {shippingDataValidate} from "../../utils/helpers";
-import {useCurrency} from "../../utils/stores/CurrencyContext";
+import { Redirect } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt";
+import { shippingDataValidate } from "../../utils/helpers";
+import { useCurrency } from "../../utils/stores/store";
 import GoogleService from "../../utils/services/GoogleService";
 import AsyncSelect from "react-select/async/dist/react-select.esm";
-import {faTimesCircle} from "@fortawesome/free-solid-svg-icons/faTimesCircle";
-import {faCheckCircle} from "@fortawesome/free-solid-svg-icons/faCheckCircle";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons/faTimesCircle";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons/faCheckCircle";
 import Coupon from "../../components/shop/Coupon";
 import PaymentProgress from "../../components/shop/PaymentProgress";
-import {useAuth} from "../../utils/stores/AuthContext";
+import { useAuth } from "../../utils/stores/store";
 import OrderService from "../../utils/services/OrderService";
 import ShippingForm from "../../components/shop/ShippingForm";
 import Translate from "../../components/Translate";
@@ -43,11 +43,11 @@ function Checkout() {
 
     const [products, setProducts] = useState([]);
     const [name, setName] = useState();
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
-    const [placeId, setPlaceId] = useState('');
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [placeId, setPlaceId] = useState("");
     const [shippingAddress, setShippingAddress] = useState();
-    const [zipCode, setZipCode] = useState('');
+    const [zipCode, setZipCode] = useState("");
     const [terms, setTerms] = useState(false);
     const [invalids, setInvalids] = useState([]);
     const [redirect, setRedirect] = useState(false);
@@ -68,7 +68,7 @@ function Checkout() {
      */
 
     const credentials = {
-        email: (auth.state.authenticated) ? auth.state.user.email : email,
+        email: auth.state.authenticated ? auth.state.user.email : email,
         name,
         address,
         place_id: placeId,
@@ -76,7 +76,7 @@ function Checkout() {
         zip_code: zipCode,
         terms,
         products,
-        coupon: cart.state.coupon.code
+        coupon: cart.state.coupon.code,
     };
 
     function searchForAddress(input, callback) {
@@ -92,7 +92,7 @@ function Checkout() {
     useEffect(() => {
         const order = OrderService.fromCookie();
 
-        if(order){
+        if (order) {
             setName(order.details.name);
             setEmail(order.details.email);
             setAddress(order.details.address);
@@ -110,7 +110,7 @@ function Checkout() {
         })();
     }, [cart.state, currency.state]);
 
-    function validateData(){
+    function validateData() {
         const validation = shippingDataValidate(credentials);
 
         setInvalids(validation.invalids);
@@ -118,19 +118,24 @@ function Checkout() {
         if (validation.passed && pendingState <= 0) {
             const country = OrderService.getCountry(address);
 
-            if(country){
+            if (country) {
                 setPendingState(1);
                 setTimeout(() => setPendingState(2), 1000);
-            }
-            else
-                notify.show("Unfortunately, we are not delivering to your specified country.", 'error');
+            } else
+                notify.show(
+                    "Unfortunately, we are not delivering to your specified country.",
+                    "error"
+                );
         }
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(!credentials.shipping_address || credentials.shipping_address.length <= 0){
+        if (
+            !credentials.shipping_address ||
+            credentials.shipping_address.length <= 0
+        ) {
             return false;
         }
 
@@ -140,8 +145,8 @@ function Checkout() {
             setPendingState(3);
 
             OrderService.make(credentials)
-                .then(response => {
-                    cart.dispatch({type: "beginPayment"});
+                .then((response) => {
+                    cart.dispatch({ type: "beginPayment" });
 
                     OrderService.toCookie(response.data.order);
 
@@ -153,9 +158,9 @@ function Checkout() {
                     script.addEventListener("load", () => loadPaypal());
                     document.body.appendChild(script);
                 })
-                .catch(error => {
+                .catch((error) => {
                     setPendingState(0);
-                    notify.show(error.response.data, 'error');
+                    notify.show(error.response.data, "error");
                 });
         }, 1000);
     };
@@ -163,175 +168,263 @@ function Checkout() {
     function loadPaypal() {
         setPendingState(5);
 
-        const sum = parseFloat(coupon.percent_off ? OrderService.getSumOfProductsWithDiscount(products, coupon) + parseFloat(shippingCost) : OrderService.getSumOfProducts(products) + parseFloat(shippingCost)).toFixed(2);
+        const sum = parseFloat(
+            coupon.percent_off
+                ? OrderService.getSumOfProductsWithDiscount(products, coupon) +
+                      parseFloat(shippingCost)
+                : OrderService.getSumOfProducts(products) +
+                      parseFloat(shippingCost)
+        ).toFixed(2);
 
-        window.paypal.Buttons({
-            createOrder: (data, actions) => OrderService.createPaypalOrder(actions, sum, currency.state.iso),
-            onApprove: (data, actions) => {
-                OrderService.clearCookie();
-                cart.dispatch({type: 'reset'});
+        window.paypal
+            .Buttons({
+                createOrder: (data, actions) =>
+                    OrderService.createPaypalOrder(
+                        actions,
+                        sum,
+                        currency.state.iso
+                    ),
+                onApprove: (data, actions) => {
+                    OrderService.clearCookie();
+                    cart.dispatch({ type: "reset" });
 
-                setPendingState(6);
+                    setPendingState(6);
 
-                setTimeout(() => setRedirect(true), 2000);
+                    setTimeout(() => setRedirect(true), 2000);
 
-                cart.dispatch({type: "endPayment"});
-            },
-            onCancel: () => {
-                setTimeout(() => setPendingState(-2), 1000);
-                setTimeout(() => setPendingState(0), 2500);
+                    cart.dispatch({ type: "endPayment" });
+                },
+                onCancel: () => {
+                    setTimeout(() => setPendingState(-2), 1000);
+                    setTimeout(() => setPendingState(0), 2500);
 
-                cart.dispatch({type: "endPayment"});
-            },
-            onError: err => {
-                console.error(err);
-            }
-        }).render(paypalRef.current);
+                    cart.dispatch({ type: "endPayment" });
+                },
+                onError: (err) => {
+                    console.error(err);
+                },
+            })
+            .render(paypalRef.current);
     }
 
     return (
         <>
-            {redirect && <Redirect to="/"/>}
+            {redirect && <Redirect to="/" />}
             <Helmet>
                 <title>Shop | Checkout</title>
             </Helmet>
-            {(pendingState > -2 && pendingState <= 2) ?
+            {pendingState > -2 && pendingState <= 2 ? (
                 <div
-                    className={`row w-100 my-5 align-items-center justify-content-center ${pendingState < 0 && "animated fadeOutDown fast"}`}
-                    style={{zIndex: 1}}>
+                    className={`row w-100 my-5 align-items-center justify-content-center ${pendingState <
+                        0 && "animated fadeOutDown fast"}`}
+                    style={{ zIndex: 1 }}
+                >
                     <h1 className="col-12 text-center pb-5 mb-4">
-                        <Translate id="checkout-header"/>
+                        <Translate id="checkout-header" />
                     </h1>
                     <div className="col-lg-9 col-12">
                         <ProductsList
                             data={products}
                             sum={OrderService.getSumOfProducts(products)}
-                            sumWithDiscount={coupon.code && OrderService.getSumOfProductsWithDiscount(products, coupon)}
+                            sumWithDiscount={
+                                coupon.code &&
+                                OrderService.getSumOfProductsWithDiscount(
+                                    products,
+                                    coupon
+                                )
+                            }
                         />
-                        <Coupon/>
+                        <Coupon />
                     </div>
                     <div className="col-lg-6 col-12 text-center">
                         <Form onSubmit={handleSubmit}>
-                            {pendingState < 2 ?
-                                <div className={`${pendingState > 0 && "animated fadeOutDown fast"}`}>
+                            {pendingState < 2 ? (
+                                <div
+                                    className={`${pendingState > 0 &&
+                                        "animated fadeOutDown fast"}`}
+                                >
                                     <h4 className="my-4">
-                                        <Translate id="checkout-details-header"/>
+                                        <Translate id="checkout-details-header" />
                                     </h4>
-                                    {!auth.state.authenticated &&
+                                    {!auth.state.authenticated && (
                                         <FormGroup>
                                             <label htmlFor="email">
-                                                <Translate id="checkout-details-email"/>
+                                                <Translate id="checkout-details-email" />
                                             </label>
                                             <InputGroup seamless>
                                                 <InputGroupAddon type="prepend">
                                                     <InputGroupText>
-                                                        <FontAwesomeIcon icon={faEnvelope} />
+                                                        <FontAwesomeIcon
+                                                            icon={faEnvelope}
+                                                        />
                                                     </InputGroupText>
                                                 </InputGroupAddon>
-                                                <FormInput invalid={invalids.includes("email")}
+                                                <FormInput
+                                                    invalid={invalids.includes(
+                                                        "email"
+                                                    )}
                                                     type="email"
                                                     id="email"
-                                                    onChange={e => setEmail(e.target.value)}
+                                                    onChange={(e) =>
+                                                        setEmail(e.target.value)
+                                                    }
                                                     defaultValue={email}
-                                                    disabled={pendingState > 0} />
+                                                    disabled={pendingState > 0}
+                                                />
                                             </InputGroup>
                                         </FormGroup>
-                                    }
+                                    )}
                                     <FormGroup>
                                         <label htmlFor="name">
-                                            <Translate id="checkout-details-name"/>
+                                            <Translate id="checkout-details-name" />
                                         </label>
                                         <InputGroup seamless>
                                             <InputGroupAddon type="prepend">
                                                 <InputGroupText>
-                                                    <FontAwesomeIcon icon={faUser} />
+                                                    <FontAwesomeIcon
+                                                        icon={faUser}
+                                                    />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <FormInput invalid={invalids.includes("name")}
+                                            <FormInput
+                                                invalid={invalids.includes(
+                                                    "name"
+                                                )}
                                                 type="text"
                                                 id="name"
-                                                onChange={e => setName(e.target.value)}
+                                                onChange={(e) =>
+                                                    setName(e.target.value)
+                                                }
                                                 defaultValue={name}
-                                                disabled={pendingState > 0} />
+                                                disabled={pendingState > 0}
+                                            />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
                                         <label htmlFor="address">
-                                            <Translate id="checkout-details-address"/>
+                                            <Translate id="checkout-details-address" />
                                         </label>
                                         <AsyncSelect
-                                            onChange={e => {setAddress(e.value); setPlaceId(e.id)}}
+                                            onChange={(e) => {
+                                                setAddress(e.value);
+                                                setPlaceId(e.id);
+                                            }}
                                             aria-label="address"
                                             loadOptions={searchForAddress}
-                                            defaultValue={{ label: address, value: address }}
+                                            defaultValue={{
+                                                label: address,
+                                                value: address,
+                                            }}
                                             disabled={pendingState > 0}
                                             styles={{
-                                                menu: provided => ({
+                                                menu: (provided) => ({
                                                     ...provided,
                                                     zIndex: 10,
                                                     textAlign: "justify",
                                                 }),
-                                                container: provided => ({
+                                                container: (provided) => ({
                                                     ...provided,
-                                                    border: invalids.includes("address") ? "1px solid red" : null,
+                                                    border: invalids.includes(
+                                                        "address"
+                                                    )
+                                                        ? "1px solid red"
+                                                        : null,
                                                     borderRadius: ".375rem",
                                                 }),
-                                                valueContainer: provided => ({
+                                                valueContainer: (provided) => ({
                                                     ...provided,
                                                     cursor: "text",
-                                                })
+                                                }),
                                             }}
                                         />
                                     </FormGroup>
                                     <FormGroup>
                                         <label htmlFor="zipCode">
-                                            <Translate id="checkout-details-zipCode"/>
+                                            <Translate id="checkout-details-zipCode" />
                                         </label>
                                         <InputGroup seamless>
                                             <InputGroupAddon type="prepend">
                                                 <InputGroupText>
-                                                    <FontAwesomeIcon icon={faMapMarkerAlt} style={{ zIndex: 1 }} />
+                                                    <FontAwesomeIcon
+                                                        icon={faMapMarkerAlt}
+                                                        style={{ zIndex: 1 }}
+                                                    />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <FormInput invalid={invalids.includes("zipCode")}
+                                            <FormInput
+                                                invalid={invalids.includes(
+                                                    "zipCode"
+                                                )}
                                                 type="text"
                                                 id="zipCode"
                                                 defaultValue={zipCode}
-                                                onChange={e => setZipCode(e.target.value)}
-                                                disabled={pendingState > 0} />
+                                                onChange={(e) =>
+                                                    setZipCode(e.target.value)
+                                                }
+                                                disabled={pendingState > 0}
+                                            />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormCheckbox
                                         onChange={() => {
-                                            setTerms(!terms)
+                                            setTerms(!terms);
                                         }}
                                         checked={terms}
                                         className="my-4"
                                         invalid={invalids.includes("terms")}
                                     >
-                                        <Translate id="checkout-details-terms"/>
+                                        <Translate id="checkout-details-terms" />
                                     </FormCheckbox>
-                                    <Button block type="button" size="lg" className="mt-4" onClick={() => validateData()}>
-                                        <Translate id="checkout-details-button"/>
+                                    <Button
+                                        block
+                                        type="button"
+                                        size="lg"
+                                        className="mt-4"
+                                        onClick={() => validateData()}
+                                    >
+                                        <Translate id="checkout-details-button" />
                                     </Button>
                                 </div>
-                            :
+                            ) : (
                                 <div className="animated fadeInUp fast">
-                                    <ShippingForm pendingState={pendingState} shippingAddress={shippingAddress} setShippingAddress={setShippingAddress} address={address}/>
+                                    <ShippingForm
+                                        pendingState={pendingState}
+                                        shippingAddress={shippingAddress}
+                                        setShippingAddress={setShippingAddress}
+                                        address={address}
+                                    />
                                 </div>
-                            }
-
+                            )}
                         </Form>
                     </div>
                 </div>
-                : (pendingState > 0 && pendingState < 6) ?
-                    <PaymentProgress pendingState={pendingState} ref={paypalRef} shippingCost={shippingCost} sum={coupon.code ? OrderService.getSumOfProductsWithDiscount(products, coupon) : OrderService.getSumOfProducts(products)}/>
-                :
-                    pendingState === -2 ?
-                        <FontAwesomeIcon size="6x" icon={faTimesCircle} className="animated bounceIn text-danger"/>
-                    :
-                        <FontAwesomeIcon size="6x" icon={faCheckCircle} className="animated bounceIn text-success"/>
-            }
+            ) : pendingState > 0 && pendingState < 6 ? (
+                <PaymentProgress
+                    pendingState={pendingState}
+                    ref={paypalRef}
+                    shippingCost={shippingCost}
+                    sum={
+                        coupon.code
+                            ? OrderService.getSumOfProductsWithDiscount(
+                                  products,
+                                  coupon
+                              )
+                            : OrderService.getSumOfProducts(products)
+                    }
+                />
+            ) : pendingState === -2 ? (
+                <FontAwesomeIcon
+                    size="6x"
+                    icon={faTimesCircle}
+                    className="animated bounceIn text-danger"
+                />
+            ) : (
+                <FontAwesomeIcon
+                    size="6x"
+                    icon={faCheckCircle}
+                    className="animated bounceIn text-success"
+                />
+            )}
         </>
     );
 }

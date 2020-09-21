@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // reactstrap components
@@ -33,9 +33,9 @@ import {
     Navbar,
     NavbarBrand,
     NavLink,
-    UncontrolledDropdown
+    UncontrolledDropdown,
 } from "reactstrap";
-import {useAuth} from "../../../utils/stores/AuthContext";
+import { useAuth } from "../../../utils/stores/store";
 
 function AdminNavbar(props) {
     const auth = useAuth();
@@ -57,7 +57,9 @@ function AdminNavbar(props) {
 
     // function that adds color white/transparent to the navbar on resize (this is for the collapse)
     const updateColor = () => {
-        (window.innerWidth < 993 && collapseOpen) ? setColor("bg-white") : setColor("navbar-transparent");
+        window.innerWidth < 993 && collapseOpen
+            ? setColor("bg-white")
+            : setColor("navbar-transparent");
     };
 
     // this function opens and closes the collapse on small devices
@@ -68,7 +70,7 @@ function AdminNavbar(props) {
     };
 
     const toggleModalSearch = () => {
-        setModalSearch(!modalSearch)
+        setModalSearch(!modalSearch);
     };
 
     return (
@@ -81,7 +83,7 @@ function AdminNavbar(props) {
                     <div className="navbar-wrapper">
                         <div
                             className={classNames("navbar-toggle d-inline", {
-                                toggled: props.sidebarOpened
+                                toggled: props.sidebarOpened,
                             })}
                         >
                             <button
@@ -89,12 +91,15 @@ function AdminNavbar(props) {
                                 type="button"
                                 onClick={props.toggleSidebar}
                             >
-                                <span className="navbar-toggler-bar bar1"/>
-                                <span className="navbar-toggler-bar bar2"/>
-                                <span className="navbar-toggler-bar bar3"/>
+                                <span className="navbar-toggler-bar bar1" />
+                                <span className="navbar-toggler-bar bar2" />
+                                <span className="navbar-toggler-bar bar3" />
                             </button>
                         </div>
-                        <NavbarBrand href="#" onClick={e => e.preventDefault()}>
+                        <NavbarBrand
+                            href="#"
+                            onClick={(e) => e.preventDefault()}
+                        >
                             {props.brandText}
                         </NavbarBrand>
                     </div>
@@ -108,9 +113,9 @@ function AdminNavbar(props) {
                         type="button"
                         onClick={toggleCollapse}
                     >
-                        <span className="navbar-toggler-bar navbar-kebab"/>
-                        <span className="navbar-toggler-bar navbar-kebab"/>
-                        <span className="navbar-toggler-bar navbar-kebab"/>
+                        <span className="navbar-toggler-bar navbar-kebab" />
+                        <span className="navbar-toggler-bar navbar-kebab" />
+                        <span className="navbar-toggler-bar navbar-kebab" />
                     </button>
                     <Collapse navbar isOpen={collapseOpen}>
                         <Nav className="ml-auto" navbar>
@@ -122,8 +127,10 @@ function AdminNavbar(props) {
                                     id="search-button"
                                     onClick={toggleModalSearch}
                                 >
-                                    <i className="tim-icons icon-zoom-split"/>
-                                    <span className="d-lg-none d-md-block">Search</span>
+                                    <i className="tim-icons icon-zoom-split" />
+                                    <span className="d-lg-none d-md-block">
+                                        Search
+                                    </span>
                                 </Button>
                             </InputGroup>
                             <UncontrolledDropdown nav>
@@ -133,11 +140,15 @@ function AdminNavbar(props) {
                                     data-toggle="dropdown"
                                     nav
                                 >
-                                    <div className="notification d-none d-lg-block d-xl-block"/>
-                                    <i className="tim-icons icon-sound-wave"/>
+                                    <div className="notification d-none d-lg-block d-xl-block" />
+                                    <i className="tim-icons icon-sound-wave" />
                                     <p className="d-lg-none">Notifications</p>
                                 </DropdownToggle>
-                                <DropdownMenu className="dropdown-navbar" right tag="ul">
+                                <DropdownMenu
+                                    className="dropdown-navbar"
+                                    right
+                                    tag="ul"
+                                >
                                     <NavLink tag="li">
                                         <DropdownItem className="nav-item">
                                             Mike John responded to your email
@@ -171,20 +182,29 @@ function AdminNavbar(props) {
                                     color="default"
                                     data-toggle="dropdown"
                                     nav
-                                    onClick={e => e.preventDefault()}
+                                    onClick={(e) => e.preventDefault()}
                                 >
                                     <div className="photo">
                                         <i className="tim-icons icon-single-02"></i>
                                     </div>
                                     <p className="d-lg-none">Log out</p>
                                 </DropdownToggle>
-                                <DropdownMenu className="dropdown-navbar" right tag="ul">
+                                <DropdownMenu
+                                    className="dropdown-navbar"
+                                    right
+                                    tag="ul"
+                                >
                                     <NavLink tag="li">
-                                        <DropdownItem className="nav-item" onClick={handleLogout}>Log out</DropdownItem>
+                                        <DropdownItem
+                                            className="nav-item"
+                                            onClick={handleLogout}
+                                        >
+                                            Log out
+                                        </DropdownItem>
                                     </NavLink>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
-                            <li className="separator d-lg-none"/>
+                            <li className="separator d-lg-none" />
                         </Nav>
                     </Collapse>
                 </Container>
@@ -195,7 +215,11 @@ function AdminNavbar(props) {
                 toggle={toggleModalSearch}
             >
                 <div className="modal-header">
-                    <Input id="inlineFormInputGroup" placeholder="SEARCH" type="text"/>
+                    <Input
+                        id="inlineFormInputGroup"
+                        placeholder="SEARCH"
+                        type="text"
+                    />
                     <button
                         aria-label="Close"
                         className="close"
@@ -203,7 +227,7 @@ function AdminNavbar(props) {
                         type="button"
                         onClick={toggleModalSearch}
                     >
-                        <i className="tim-icons icon-simple-remove"/>
+                        <i className="tim-icons icon-simple-remove" />
                     </button>
                 </div>
             </Modal>
