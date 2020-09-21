@@ -1,13 +1,22 @@
 import React from "react";
 
-function Cart() {
+export default function Loading({ fullscreen }) {
     return (
-        <div style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>
+        <div
+            style={
+                fullscreen && {
+                    position: "fixed",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100vw",
+                    height: "100vh",
+                }
+            }
+        >
             <div className="spinner-border" role="status">
                 <span className="sr-only">Loading...</span>
             </div>
         </div>
     );
 }
-
-export default Cart;

@@ -57,6 +57,25 @@ exports.push([module.i, ".products-nav__dynamic::before {\n  display: block;\n  
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./resources/js/components/shop/Tooltip/style.scss":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--6-2!./node_modules/sass-loader/lib/loader.js??ref--6-3!./resources/js/components/shop/Tooltip/style.scss ***!
+  \**********************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".tooltip {\n  transition: 0.3s;\n  opacity: 0;\n  visibility: hidden;\n}\n\n*:hover > .tooltip {\n  opacity: 1;\n  visibility: visible;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./resources/js/views/shop/User/index.scss":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/postcss-loader/src??ref--6-2!./node_modules/sass-loader/lib/loader.js??ref--6-3!./resources/js/views/shop/User/index.scss ***!
@@ -1536,6 +1555,442 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/shop/Register/Email.jsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/shop/Register/Email.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Email; });
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Translate */ "./resources/js/components/Translate.jsx");
+/* harmony import */ var _RippledButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../RippledButton */ "./resources/js/components/shop/RippledButton.jsx");
+/* harmony import */ var _Step__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Step */ "./resources/js/components/shop/Register/Step.jsx");
+
+
+
+
+
+
+
+function Email(_ref) {
+  var handleKeyDown = _ref.handleKeyDown,
+      nextStep = _ref.nextStep,
+      previousStep = _ref.previousStep,
+      validateStep = _ref.validateStep,
+      email = _ref.email,
+      setEmail = _ref.setEmail;
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Step__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    handleKeyDown: handleKeyDown
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", {
+    className: "h1"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-email"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
+    seamless: true,
+    className: "my-4"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupAddon"], {
+    type: "prepend"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faEnvelope"],
+    size: "lg"
+  }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormInput"], {
+    size: "lg",
+    invalid: !!email && !validateStep(),
+    type: "email",
+    onChange: function onChange(e) {
+      setEmail(e.target.value);
+    },
+    value: email,
+    style: {
+      paddingLeft: 50 + "px"
+    },
+    required: true,
+    autoFocus: true,
+    autoComplete: "false"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    size: "lg",
+    onClick: previousStep
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-back"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    size: "lg",
+    onClick: nextStep,
+    className: "float-right"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-next"
+  })));
+}
+Email.displayName = "Email";
+
+/***/ }),
+
+/***/ "./resources/js/components/shop/Register/Name.jsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/shop/Register/Name.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Name; });
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Translate */ "./resources/js/components/Translate.jsx");
+/* harmony import */ var _RippledButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../RippledButton */ "./resources/js/components/shop/RippledButton.jsx");
+/* harmony import */ var _Step__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Step */ "./resources/js/components/shop/Register/Step.jsx");
+
+
+
+
+
+
+
+function Name(_ref) {
+  var handleKeyDown = _ref.handleKeyDown,
+      nextStep = _ref.nextStep,
+      previousStep = _ref.previousStep,
+      validateStep = _ref.validateStep,
+      name = _ref.name,
+      setName = _ref.setName;
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Step__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    handleKeyDown: handleKeyDown
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", {
+    className: "h1"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-name"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
+    seamless: true,
+    className: "my-4"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupAddon"], {
+    type: "prepend"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faUser"],
+    size: "lg"
+  }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormInput"], {
+    size: "lg",
+    invalid: !!name && !validateStep(),
+    type: "text",
+    onChange: function onChange(e) {
+      setName(e.target.value);
+    },
+    value: name,
+    style: {
+      paddingLeft: 50 + "px"
+    },
+    required: true,
+    autoFocus: true
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    size: "lg",
+    onClick: previousStep
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-back"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    size: "lg",
+    onClick: nextStep,
+    className: "float-right"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-next"
+  })));
+}
+Name.displayName = "Name";
+
+/***/ }),
+
+/***/ "./resources/js/components/shop/Register/Password.jsx":
+/*!************************************************************!*\
+  !*** ./resources/js/components/shop/Register/Password.jsx ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Password; });
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Translate */ "./resources/js/components/Translate.jsx");
+/* harmony import */ var _RippledButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../RippledButton */ "./resources/js/components/shop/RippledButton.jsx");
+/* harmony import */ var _Step__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Step */ "./resources/js/components/shop/Register/Step.jsx");
+/* harmony import */ var _Tooltip_index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Tooltip/index */ "./resources/js/components/shop/Tooltip/index.jsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+function Password(_ref) {
+  var handleKeyDown = _ref.handleKeyDown,
+      nextStep = _ref.nextStep,
+      previousStep = _ref.previousStep,
+      validateStep = _ref.validateStep,
+      password = _ref.password,
+      setPassword = _ref.setPassword,
+      passwordConfirmation = _ref.passwordConfirmation,
+      setPasswordConfirmation = _ref.setPasswordConfirmation;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      visible = _useState2[0],
+      setVisible = _useState2[1];
+
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Step__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    handleKeyDown: handleKeyDown
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", {
+    className: "h2"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-password"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+    className: "my-4"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "col-lg-6 col-12 my-2"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
+    seamless: true
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupAddon"], {
+    type: "prepend"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faLock"],
+    size: "lg"
+  }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormInput"], {
+    id: "password",
+    size: "lg",
+    invalid: !!password && !validateStep(),
+    type: "password",
+    onChange: function onChange(e) {
+      setPassword(e.target.value);
+    },
+    value: password,
+    style: {
+      paddingLeft: 50 + "px"
+    },
+    required: true,
+    autoFocus: true
+  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Tooltip_index__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Password must have at least 8 characters."))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "col-lg-6 col-12 my-2"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
+    seamless: true
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupAddon"], {
+    type: "prepend"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_1__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_0__["faLock"],
+    size: "lg"
+  }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormInput"], {
+    size: "lg",
+    invalid: !!passwordConfirmation && !validateStep(),
+    type: "password",
+    onChange: function onChange(e) {
+      setPasswordConfirmation(e.target.value);
+    },
+    value: passwordConfirmation,
+    style: {
+      paddingLeft: 50 + "px"
+    },
+    required: true
+  })))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    size: "lg",
+    onClick: previousStep
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-back"
+  })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    size: "lg",
+    onClick: nextStep,
+    className: "float-right"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: "register-next"
+  })));
+}
+Password.displayName = "Password";
+
+/***/ }),
+
+/***/ "./resources/js/components/shop/Register/Step.jsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/shop/Register/Step.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Step; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function Step(_ref) {
+  var handleKeyDown = _ref.handleKeyDown,
+      children = _ref.children;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onKeyDown: handleKeyDown
+  }, children);
+}
+Step.displayName = "Step";
+
+/***/ }),
+
+/***/ "./resources/js/components/shop/Register/Terms.jsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/shop/Register/Terms.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Terms; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Translate */ "./resources/js/components/Translate.jsx");
+/* harmony import */ var _RippledButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../RippledButton */ "./resources/js/components/shop/RippledButton.jsx");
+/* harmony import */ var _Step__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Step */ "./resources/js/components/shop/Register/Step.jsx");
+
+
+
+
+
+function Terms(_ref) {
+  var handleKeyDown = _ref.handleKeyDown,
+      previousStep = _ref.previousStep,
+      handleSubmit = _ref.handleSubmit,
+      terms = _ref.terms,
+      setTerms = _ref.setTerms;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Step__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    handleKeyDown: handleKeyDown
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "h1"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "register-terms-title"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "register-terms-subtitle"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FormCheckbox, {
+    onChange: function onChange() {
+      setTerms(!terms);
+    },
+    checked: terms,
+    className: "my-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "register-terms-label"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    size: "lg",
+    onClick: previousStep
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "register-back"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    size: "lg",
+    onClick: handleSubmit,
+    className: "float-right"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "register-submit"
+  })));
+}
+Terms.displayName = "Terms";
+
+/***/ }),
+
+/***/ "./resources/js/components/shop/Register/Welcome.jsx":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/shop/Register/Welcome.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Welcome; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
+/* harmony import */ var _Translate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Translate */ "./resources/js/components/Translate.jsx");
+/* harmony import */ var _Step__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Step */ "./resources/js/components/shop/Register/Step.jsx");
+/* harmony import */ var _RippledButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../RippledButton */ "./resources/js/components/shop/RippledButton.jsx");
+
+
+
+
+
+function Welcome(_ref) {
+  var handleKeyDown = _ref.handleKeyDown,
+      errors = _ref.errors,
+      nextStep = _ref.nextStep;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Step__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    handleKeyDown: handleKeyDown
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "mb-4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "register-welcome"
+  })), errors && errors.map(function (e, index) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_1__["Alert"], {
+      theme: "danger",
+      key: index
+    }, e);
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RippledButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    block: true,
+    size: "lg",
+    onClick: nextStep
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Translate__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "register-start"
+  })));
+}
+Welcome.displayName = "Welcome";
+
+/***/ }),
+
+/***/ "./resources/js/components/shop/RippledButton.jsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/shop/RippledButton.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RippledButton; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_ripples__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-ripples */ "./node_modules/react-ripples/esm/index.js");
+/* harmony import */ var shards_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! shards-react */ "./node_modules/shards-react/dist/shards-react.es.js");
+
+
+
+function RippledButton(props) {
+  var _props$during;
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_ripples__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "".concat(props.className, " ").concat(props.block && "w-100"),
+    during: (_props$during = props.during) !== null && _props$during !== void 0 ? _props$during : props.block ? 2000 : 1000,
+    color: props.color,
+    style: props.style
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_2__["Button"], props, props.children));
+}
+RippledButton.displayName = "RippledButton";
+
+/***/ }),
+
 /***/ "./resources/js/components/shop/ShippingForm.jsx":
 /*!*******************************************************!*\
   !*** ./resources/js/components/shop/ShippingForm.jsx ***!
@@ -1616,6 +2071,63 @@ function ShippingForm(_ref) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (ShippingForm);
+
+/***/ }),
+
+/***/ "./resources/js/components/shop/Tooltip/index.jsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/shop/Tooltip/index.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Tooltip; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./resources/js/components/shop/Tooltip/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_1__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+function Tooltip(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+    className: "tooltip ".concat(props.className)
+  }, props), props.children);
+}
+Tooltip.displayName = "Tooltip";
+
+/***/ }),
+
+/***/ "./resources/js/components/shop/Tooltip/style.scss":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/shop/Tooltip/style.scss ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/sass-loader/lib/loader.js??ref--6-3!./style.scss */ "./node_modules/css-loader/index.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./resources/js/components/shop/Tooltip/style.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -3011,6 +3523,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/helpers */ "./resources/js/utils/helpers.js");
 /* harmony import */ var _components_Translate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/Translate */ "./resources/js/components/Translate.jsx");
+/* harmony import */ var _components_shop_Register_Welcome__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/shop/Register/Welcome */ "./resources/js/components/shop/Register/Welcome.jsx");
+/* harmony import */ var _components_shop_Register_Email__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/shop/Register/Email */ "./resources/js/components/shop/Register/Email.jsx");
+/* harmony import */ var _components_shop_Register_Name__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/shop/Register/Name */ "./resources/js/components/shop/Register/Name.jsx");
+/* harmony import */ var _components_shop_Register_Password__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../components/shop/Register/Password */ "./resources/js/components/shop/Register/Password.jsx");
+/* harmony import */ var _components_shop_Register_Terms__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../components/shop/Register/Terms */ "./resources/js/components/shop/Register/Terms.jsx");
+/* harmony import */ var _components_Loading__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../components/Loading */ "./resources/js/components/Loading.jsx");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -3018,6 +3538,12 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
 
 
 
@@ -3079,27 +3605,27 @@ function Register() {
       loading = _useState18[0],
       setLoading = _useState18[1];
 
-  var validate = function validate(credentials) {
+  var validate = function validate() {
     var check = true;
-    if (!Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_10__["checkFullName"])(credentials.name)) check = false;
-    if (!Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_10__["isEmail"])(credentials.email)) check = false;
-    if (!Object(_utils_helpers__WEBPACK_IMPORTED_MODULE_10__["equals"])(credentials.password, credentials.passwordConfirmation)) check = false;
-    if (!terms) check = false;
+
+    for (var i = 1; i <= steps.length; i++) {
+      if (validateStep(i) === false) check = false;
+    }
+
     return check;
   };
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    var credentials = {
-      email: email,
-      name: name,
-      password: password,
-      passwordConfirmation: passwordConfirmation
-    };
 
-    if (validate(credentials)) {
+    if (validate()) {
       setLoading(true);
-      _utils_services_AuthService__WEBPACK_IMPORTED_MODULE_4__["default"].register(credentials).then(function () {
+      _utils_services_AuthService__WEBPACK_IMPORTED_MODULE_4__["default"].register({
+        email: email,
+        name: name,
+        password: password,
+        passwordConfirmation: passwordConfirmation
+      }).then(function () {
         _utils_services_AuthService__WEBPACK_IMPORTED_MODULE_4__["default"].getUser().then(function (res) {
           auth.dispatch({
             type: "login",
@@ -3118,7 +3644,9 @@ function Register() {
   };
 
   var validateStep = function validateStep() {
-    switch (step) {
+    var i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : step;
+
+    switch (i) {
       case 1:
         return true;
 
@@ -3137,7 +3665,7 @@ function Register() {
   };
 
   var nextStep = function nextStep() {
-    if (validateStep()) {
+    if (validateStep(step)) {
       setHide(true);
       setTimeout(function () {
         setHide(false);
@@ -3164,185 +3692,32 @@ function Register() {
     }
   };
 
-  var steps = [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onKeyDown: handleKeyDown
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "mb-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-welcome"
-  })), errors && errors.map(function (e, index) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Alert"], {
-      theme: "danger",
-      key: index
-    }, e);
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    block: true,
-    size: "lg",
-    onClick: nextStep
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-start"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onKeyDown: handleKeyDown
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "h1"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-email"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
-    seamless: true,
-    className: "my-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupAddon"], {
-    type: "prepend"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
-    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faEnvelope"],
-    size: "lg"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormInput"], {
-    size: "lg",
-    invalid: !!email && !validateStep(),
-    type: "email",
-    onChange: function onChange(e) {
-      setEmail(e.target.value);
-    },
-    value: email,
-    style: {
-      paddingLeft: 50 + "px"
-    },
-    required: true,
-    autoFocus: true
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    block: true,
-    size: "lg",
-    onClick: nextStep
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-done"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onKeyDown: handleKeyDown
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "h1"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-name"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
-    seamless: true,
-    className: "my-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupAddon"], {
-    type: "prepend"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
-    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faUser"],
-    size: "lg"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormInput"], {
-    size: "lg",
-    invalid: !!name && !validateStep(),
-    type: "text",
-    onChange: function onChange(e) {
-      setName(e.target.value);
-    },
-    value: name,
-    style: {
-      paddingLeft: 50 + "px"
-    },
-    required: true,
-    autoFocus: true
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    size: "lg",
-    onClick: previousStep
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-back"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    size: "lg",
-    onClick: nextStep,
-    className: "float-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-next"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onKeyDown: handleKeyDown
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "h2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-password"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-    className: "my-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-6 col-12 my-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
-    seamless: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupAddon"], {
-    type: "prepend"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
-    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faLock"],
-    size: "lg"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormInput"], {
-    size: "lg",
-    invalid: !!password && !validateStep(),
-    type: "password",
-    onChange: function onChange(e) {
-      setPassword(e.target.value);
-    },
-    value: password,
-    style: {
-      paddingLeft: 50 + "px"
-    },
-    required: true,
-    autoFocus: true
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-6 col-12 my-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], {
-    seamless: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupAddon"], {
-    type: "prepend"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["InputGroupText"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
-    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faLock"],
-    size: "lg"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormInput"], {
-    size: "lg",
-    invalid: !!passwordConfirmation && !validateStep(),
-    type: "password",
-    onChange: function onChange(e) {
-      setPasswordConfirmation(e.target.value);
-    },
-    value: passwordConfirmation,
-    style: {
-      paddingLeft: 50 + "px"
-    },
-    required: true
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    size: "lg",
-    onClick: previousStep
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-back"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    size: "lg",
-    onClick: nextStep,
-    className: "float-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-next"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onKeyDown: handleKeyDown
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "h1"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-terms-title"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-terms-subtitle"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["FormCheckbox"], {
-    onChange: function onChange() {
-      setTerms(!terms);
-    },
-    checked: terms,
-    className: "my-4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-terms-label"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    size: "lg",
-    onClick: previousStep
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-back"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-    size: "lg",
-    onClick: handleSubmit,
-    className: "float-right"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Translate__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    id: "register-submit"
-  })))];
+  var actions = {
+    handleKeyDown: handleKeyDown,
+    nextStep: nextStep,
+    previousStep: previousStep,
+    validateStep: validateStep,
+    handleSubmit: handleSubmit
+  };
+  var steps = [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shop_Register_Welcome__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, actions, {
+    errors: errors
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shop_Register_Email__WEBPACK_IMPORTED_MODULE_13__["default"], _extends({}, actions, {
+    email: email,
+    setEmail: setEmail
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shop_Register_Name__WEBPACK_IMPORTED_MODULE_14__["default"], _extends({}, actions, {
+    name: name,
+    setName: setName
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shop_Register_Password__WEBPACK_IMPORTED_MODULE_15__["default"], _extends({}, actions, {
+    password: password,
+    setPassword: setPassword,
+    passwordConfirmation: passwordConfirmation,
+    setPasswordConfirmation: setPasswordConfirmation
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_shop_Register_Terms__WEBPACK_IMPORTED_MODULE_16__["default"], _extends({}, actions, {
+    terms: terms,
+    setTerms: setTerms
+  }))];
   var formClasses = classnames__WEBPACK_IMPORTED_MODULE_6___default()({
+    "w-100": true,
     animated: true,
     fadeOut: hide,
     fadeIn: !hide
@@ -3350,21 +3725,12 @@ function Register() {
   return auth.state.authenticated && !loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
     to: "/homepage/registration-successful"
   }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_helmet__WEBPACK_IMPORTED_MODULE_2__["Helmet"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "Shop | Register")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container col-lg-9 col-12"
-  }, loading ? auth.state.authenticated ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
+    className: "container col-lg-9 col-12 d-flex justify-content-center"
+  }, loading ? auth.state.authenticated ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
     size: "6x",
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faCheckCircle"],
     className: "animated bounceIn text-success"
-  })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "spinner-grow",
-    role: "status"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "sr-only"
-  }, "Loading..."))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Form"], {
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_17__["default"], null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(shards_react__WEBPACK_IMPORTED_MODULE_3__["Form"], {
     onSubmit: handleSubmit,
     className: formClasses
   }, displayStep())));

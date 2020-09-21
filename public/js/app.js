@@ -51072,7 +51072,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Router"], {
   history: hist
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
-  fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], null)
+  fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    fullscreen: true
+  })
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_stores_store__WEBPACK_IMPORTED_MODULE_7__["StoreContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
   path: "/admin",
   render: function render(props) {
@@ -51186,17 +51188,20 @@ window.axios.interceptors.response.use(function (response) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Loading; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-
-function Cart() {
+function Loading(_ref) {
+  var fullscreen = _ref.fullscreen;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)"
+    style: fullscreen && {
+      position: "fixed",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100vw",
+      height: "100vh"
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "spinner-border",
@@ -51205,9 +51210,7 @@ function Cart() {
     className: "sr-only"
   }, "Loading...")));
 }
-
-Cart.displayName = "Cart";
-/* harmony default export */ __webpack_exports__["default"] = (Cart);
+Loading.displayName = "Loading";
 
 /***/ }),
 
@@ -51247,12 +51250,12 @@ function () {
   _createClass(AuthService, null, [{
     key: "login",
     value: function login(credentials) {
-      return window.axios.post('/api/login', credentials).then(function (res) {
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('googlePlacesSessionId', res.data.googlePlacesSessionId);
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+      return window.axios.post("/api/login", credentials).then(function (res) {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set("googlePlacesSessionId", res.data.googlePlacesSessionId);
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set("access_token", res.data.token, {
           expires: 7
         });
-        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+        setToken(res.data.token);
       });
     }
   }, {
@@ -51264,7 +51267,7 @@ function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get('/api/google-client-id'));
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(window.axios.get("/api/google-client-id"));
 
             case 2:
               googleClientId = _context.sent;
@@ -51285,13 +51288,13 @@ function () {
   }, {
     key: "loginWithGoogle",
     value: function loginWithGoogle(user) {
-      return window.axios.post('/api/login/google', {
+      return window.axios.post("/api/login/google", {
         user_id: user.getAuthResponse().id_token
       }).then(function (res) {
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set("access_token", res.data.token, {
           expires: 7
         });
-        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+        setToken(res.data.token);
       });
     }
   }, {
@@ -51299,23 +51302,23 @@ function () {
     value: function register(credentials) {
       credentials.password_confirmation = credentials.passwordConfirmation;
       credentials.passwordConfirmation = null;
-      return window.axios.post('/api/register', credentials).then(function (res) {
-        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set('access_token', res.data.token, {
+      return window.axios.post("/api/register", credentials).then(function (res) {
+        js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.set("access_token", res.data.token, {
           expires: 7
         });
-        window.axios.defaults.headers.common.Authorization = "Bearer ".concat(res.data.token);
+        setToken(res.data.token);
       });
     }
   }, {
     key: "getUser",
     value: function getUser() {
-      return window.axios.get('/api/user');
+      return window.axios.get("/api/user");
     }
   }, {
     key: "logout",
     value: function logout() {
-      var response = window.axios.post('/api/logout');
-      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove('access_token');
+      var response = window.axios.post("/api/logout");
+      js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.remove("access_token");
       return response;
     }
   }, {
@@ -51325,6 +51328,11 @@ function () {
         name: user.name,
         email: user.email
       });
+    }
+  }, {
+    key: "setHeader",
+    value: function setHeader(token) {
+      window.axios.defaults.headers.common.Authorization = "Bearer ".concat(token);
     }
   }]);
 
@@ -51575,7 +51583,7 @@ function () {
                   network: {
                     requestSanitizer: function requestSanitizer(request) {
                       if (request.headers.Authorization) request.headers.Authorization = "****";
-                      request.headers['X-XSRF-TOKEN'] = "****";
+                      request.headers["X-XSRF-TOKEN"] = "****";
                       return request;
                     }
                   }

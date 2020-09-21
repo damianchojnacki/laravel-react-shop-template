@@ -25,6 +25,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { checkFullName, equals, isEmail } from "../../utils/helpers";
 import Translate from "../../components/Translate";
+import Welcome from "../../components/shop/Register/Welcome";
+import Email from "../../components/shop/Register/Email";
+import Name from "../../components/shop/Register/Name";
+import Password from "../../components/shop/Register/Password";
+import Terms from "../../components/shop/Register/Terms";
+import Loading from "../../components/Loading";
 
 export default function Register() {
     const auth = useAuth();
@@ -39,14 +45,12 @@ export default function Register() {
     const [terms, setTerms] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const validate = (credentials) => {
+    const validate = () => {
         let check = true;
 
-        if (!checkFullName(credentials.name)) check = false;
-        if (!isEmail(credentials.email)) check = false;
-        if (!equals(credentials.password, credentials.passwordConfirmation))
-            check = false;
-        if (!terms) check = false;
+        for (let i = 1; i <= steps.length; i++) {
+            if (validateStep(i) === false) check = false;
+        }
 
         return check;
     };
@@ -54,17 +58,15 @@ export default function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const credentials = {
-            email,
-            name,
-            password,
-            passwordConfirmation,
-        };
-
-        if (validate(credentials)) {
+        if (validate()) {
             setLoading(true);
 
-            AuthService.register(credentials)
+            AuthService.register({
+                email,
+                name,
+                password,
+                passwordConfirmation,
+            })
                 .then(() => {
                     AuthService.getUser().then((res) => {
                         auth.dispatch({ type: "login", payload: res.data });
@@ -80,8 +82,8 @@ export default function Register() {
         } else nextStep();
     };
 
-    const validateStep = () => {
-        switch (step) {
+    const validateStep = (i = step) => {
+        switch (i) {
             case 1:
                 return true;
             case 2:
@@ -99,7 +101,7 @@ export default function Register() {
     };
 
     const nextStep = () => {
-        if (validateStep()) {
+        if (validateStep(step)) {
             setHide(true);
 
             setTimeout(() => {
@@ -130,158 +132,30 @@ export default function Register() {
         }
     };
 
+    const actions = {
+        handleKeyDown,
+        nextStep,
+        previousStep,
+        validateStep,
+        handleSubmit,
+    };
+
     const steps = [
-        <div onKeyDown={handleKeyDown}>
-            <h1 className="mb-4">
-                <Translate id="register-welcome" />
-            </h1>
-            {errors &&
-                errors.map((e, index) => (
-                    <Alert theme="danger" key={index}>
-                        {e}
-                    </Alert>
-                ))}
-            <Button block size="lg" onClick={nextStep}>
-                <Translate id="register-start" />
-            </Button>
-        </div>,
-        <div onKeyDown={handleKeyDown}>
-            <h2 className="h1">
-                <Translate id="register-email" />
-            </h2>
-            <InputGroup seamless className="my-4">
-                <InputGroupAddon type="prepend">
-                    <InputGroupText>
-                        <FontAwesomeIcon icon={faEnvelope} size="lg" />
-                    </InputGroupText>
-                </InputGroupAddon>
-                <FormInput
-                    size="lg"
-                    invalid={!!email && !validateStep()}
-                    type="email"
-                    onChange={(e) => {
-                        setEmail(e.target.value);
-                    }}
-                    value={email}
-                    style={{ paddingLeft: 50 + "px" }}
-                    required
-                    autoFocus
-                />
-            </InputGroup>
-            <Button block size="lg" onClick={nextStep}>
-                <Translate id="register-done" />
-            </Button>
-        </div>,
-        <div onKeyDown={handleKeyDown}>
-            <h2 className="h1">
-                <Translate id="register-name" />
-            </h2>
-            <InputGroup seamless className="my-4">
-                <InputGroupAddon type="prepend">
-                    <InputGroupText>
-                        <FontAwesomeIcon icon={faUser} size="lg" />
-                    </InputGroupText>
-                </InputGroupAddon>
-                <FormInput
-                    size="lg"
-                    invalid={!!name && !validateStep()}
-                    type="text"
-                    onChange={(e) => {
-                        setName(e.target.value);
-                    }}
-                    value={name}
-                    style={{ paddingLeft: 50 + "px" }}
-                    required
-                    autoFocus
-                />
-            </InputGroup>
-            <Button size="lg" onClick={previousStep}>
-                <Translate id="register-back" />
-            </Button>
-            <Button size="lg" onClick={nextStep} className="float-right">
-                <Translate id="register-next" />
-            </Button>
-        </div>,
-        <div onKeyDown={handleKeyDown}>
-            <h2 className="h2">
-                <Translate id="register-password" />
-            </h2>
-            <Row className="my-4">
-                <div className="col-lg-6 col-12 my-2">
-                    <InputGroup seamless>
-                        <InputGroupAddon type="prepend">
-                            <InputGroupText>
-                                <FontAwesomeIcon icon={faLock} size="lg" />
-                            </InputGroupText>
-                        </InputGroupAddon>
-                        <FormInput
-                            size="lg"
-                            invalid={!!password && !validateStep()}
-                            type="password"
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                            }}
-                            value={password}
-                            style={{ paddingLeft: 50 + "px" }}
-                            required
-                            autoFocus
-                        />
-                    </InputGroup>
-                </div>
-                <div className="col-lg-6 col-12 my-2">
-                    <InputGroup seamless>
-                        <InputGroupAddon type="prepend">
-                            <InputGroupText>
-                                <FontAwesomeIcon icon={faLock} size="lg" />
-                            </InputGroupText>
-                        </InputGroupAddon>
-                        <FormInput
-                            size="lg"
-                            invalid={!!passwordConfirmation && !validateStep()}
-                            type="password"
-                            onChange={(e) => {
-                                setPasswordConfirmation(e.target.value);
-                            }}
-                            value={passwordConfirmation}
-                            style={{ paddingLeft: 50 + "px" }}
-                            required
-                        />
-                    </InputGroup>
-                </div>
-            </Row>
-            <Button size="lg" onClick={previousStep}>
-                <Translate id="register-back" />
-            </Button>
-            <Button size="lg" onClick={nextStep} className="float-right">
-                <Translate id="register-next" />
-            </Button>
-        </div>,
-        <div onKeyDown={handleKeyDown}>
-            <h2 className="h1">
-                <Translate id="register-terms-title" />
-            </h2>
-            <p>
-                <Translate id="register-terms-subtitle" />
-            </p>
-            <FormCheckbox
-                onChange={() => {
-                    setTerms(!terms);
-                }}
-                checked={terms}
-                className="my-4"
-            >
-                <Translate id="register-terms-label" />
-            </FormCheckbox>
-            <Button size="lg" onClick={previousStep}>
-                <Translate id="register-back" />
-            </Button>
-            <Button size="lg" onClick={handleSubmit} className="float-right">
-                <Translate id="register-submit" />
-            </Button>
-        </div>,
+        <Welcome {...actions} errors={errors} />,
+        <Email {...actions} email={email} setEmail={setEmail} />,
+        <Name {...actions} name={name} setName={setName} />,
+        <Password
+            {...actions}
+            password={password}
+            setPassword={setPassword}
+            passwordConfirmation={passwordConfirmation}
+            setPasswordConfirmation={setPasswordConfirmation}
+        />,
+        <Terms {...actions} terms={terms} setTerms={setTerms} />,
     ];
 
     const formClasses = classNames({
+        "w-100": true,
         animated: true,
         fadeOut: hide,
         fadeIn: !hide,
@@ -294,22 +168,16 @@ export default function Register() {
             <Helmet>
                 <title>Shop | Register</title>
             </Helmet>
-            <div className="container col-lg-9 col-12">
+            <div className="container col-lg-9 col-12 d-flex justify-content-center">
                 {loading ? (
                     auth.state.authenticated ? (
-                        <div className="d-flex justify-content-center">
-                            <FontAwesomeIcon
-                                size="6x"
-                                icon={faCheckCircle}
-                                className="animated bounceIn text-success"
-                            />
-                        </div>
+                        <FontAwesomeIcon
+                            size="6x"
+                            icon={faCheckCircle}
+                            className="animated bounceIn text-success"
+                        />
                     ) : (
-                        <div className="d-flex justify-content-center">
-                            <div className="spinner-grow" role="status">
-                                <span className="sr-only">Loading...</span>
-                            </div>
-                        </div>
+                        <Loading />
                     )
                 ) : (
                     <Form onSubmit={handleSubmit} className={formClasses}>

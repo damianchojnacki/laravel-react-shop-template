@@ -1,18 +1,20 @@
-import Cookies from 'js-cookie';
-import LogRocket from 'logrocket';
+import Cookies from "js-cookie";
+import LogRocket from "logrocket";
 
-class AuthService{
+class AuthService {
     static login(credentials) {
-        return window.axios.post('/api/login', credentials)
-            .then(res => {
-                Cookies.set('googlePlacesSessionId', res.data.googlePlacesSessionId);
-                Cookies.set('access_token', res.data.token, {expires: 7});
-                window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-            });
+        return window.axios.post("/api/login", credentials).then((res) => {
+            Cookies.set(
+                "googlePlacesSessionId",
+                res.data.googlePlacesSessionId
+            );
+            Cookies.set("access_token", res.data.token, { expires: 7 });
+            setToken(res.data.token);
+        });
     }
 
-    static async googleInit(callback){
-        const googleClientId = await window.axios.get('/api/google-client-id');
+    static async googleInit(callback) {
+        const googleClientId = await window.axios.get("/api/google-client-id");
 
         const script = document.createElement("script");
         script.src = `https://apis.google.com/js/platform.js?onload=init`;
@@ -21,10 +23,13 @@ class AuthService{
     }
 
     static loginWithGoogle(user) {
-        return window.axios.post('/api/login/google', {user_id: user.getAuthResponse().id_token})
-            .then(res => {
-                Cookies.set('access_token', res.data.token, {expires: 7});
-                window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
+        return window.axios
+            .post("/api/login/google", {
+                user_id: user.getAuthResponse().id_token,
+            })
+            .then((res) => {
+                Cookies.set("access_token", res.data.token, { expires: 7 });
+                setToken(res.data.token);
             });
     }
 
@@ -32,32 +37,34 @@ class AuthService{
         credentials.password_confirmation = credentials.passwordConfirmation;
         credentials.passwordConfirmation = null;
 
-        return window.axios.post('/api/register', credentials)
-            .then(res => {
-                Cookies.set('access_token', res.data.token, {expires: 7});
-                window.axios.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
-            });
+        return window.axios.post("/api/register", credentials).then((res) => {
+            Cookies.set("access_token", res.data.token, { expires: 7 });
+            setToken(res.data.token);
+        });
     }
 
     static getUser() {
-        return window.axios.get('/api/user');
+        return window.axios.get("/api/user");
     }
 
     static logout() {
-        const response = window.axios.post('/api/logout');
+        const response = window.axios.post("/api/logout");
 
-        Cookies.remove('access_token');
+        Cookies.remove("access_token");
 
         return response;
     }
 
-    static logRocketIdentify(user){
+    static logRocketIdentify(user) {
         LogRocket.identify(user.id, {
             name: user.name,
             email: user.email,
         });
     }
+
+    static setHeader(token) {
+        window.axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    }
 }
 
 export default AuthService;
-

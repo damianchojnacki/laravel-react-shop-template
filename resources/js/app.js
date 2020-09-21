@@ -35,7 +35,7 @@ require("./bootstrap");
 
 ReactDOM.render(
     <Router history={hist}>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Loading fullscreen />}>
             <StoreContextProvider>
                 <Switch>
                     <Route

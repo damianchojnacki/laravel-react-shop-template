@@ -27199,6 +27199,182 @@ object-assign
 
 /***/ }),
 
+/***/ "./node_modules/react-ripples/esm/createRipples.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/react-ripples/esm/createRipples.js ***!
+  \*********************************************************/
+/*! exports provided: createRipples */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRipples", function() { return createRipples; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (undefined && undefined.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+
+
+var boxStyle = {
+    position: 'relative',
+    display: 'inline-flex',
+    overflow: 'hidden',
+};
+var createRipples = function (defaultProps) {
+    if (defaultProps === void 0) { defaultProps = {}; }
+    var _a;
+    return _a = (function (_super) {
+            __extends(class_1, _super);
+            function class_1(props) {
+                var _this = _super.call(this, props) || this;
+                _this.timer = 0;
+                _this.onClick = function (ev) {
+                    var _a = _this.props, during = _a.during, onClick = _a.onClick, color = _a.color;
+                    ev.stopPropagation();
+                    var pageX = ev.pageX, pageY = ev.pageY, currentTarget = ev.currentTarget;
+                    var rect = currentTarget.getBoundingClientRect();
+                    var left = pageX - (rect.left + window.scrollX);
+                    var top = pageY - (rect.top + window.scrollY);
+                    var size = Math.max(rect.width, rect.height);
+                    _this.setState(function (state) {
+                        return {
+                            rippleStyle: __assign({}, state.rippleStyle, { left: left,
+                                top: top, opacity: 1, transform: 'translate(-50%, -50%)', transition: 'initial', backgroundColor: color }),
+                        };
+                    }, function () {
+                        _this.timer = setTimeout(function () {
+                            _this.setState(function (state) { return ({
+                                rippleStyle: __assign({}, state.rippleStyle, { opacity: 0, transform: "scale(" + size / 9 + ")", transition: "all " + during + "ms" }),
+                            }); });
+                        }, 50);
+                    });
+                    if (onClick)
+                        onClick(ev);
+                };
+                _this.state = {
+                    rippleStyle: {
+                        position: 'absolute',
+                        borderRadius: '50%',
+                        opacity: 0,
+                        width: 35,
+                        height: 35,
+                        transform: 'translate(-50%, -50%)',
+                        pointerEvents: 'none',
+                    },
+                };
+                return _this;
+            }
+            class_1.prototype.componentWillUnmount = function () {
+                clearTimeout(this.timer);
+            };
+            class_1.prototype.render = function () {
+                var _a = this.props, children = _a.children, during = _a.during, color = _a.color, onClick = _a.onClick, className = _a.className, props = __rest(_a, ["children", "during", "color", "onClick", "className"]);
+                var rippleStyle = this.state.rippleStyle;
+                return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", __assign({}, props, { className: ("react-ripples " + className).trim(), style: boxStyle, onClick: this.onClick }),
+                    children,
+                    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("s", { style: rippleStyle })));
+            };
+            return class_1;
+        }(react__WEBPACK_IMPORTED_MODULE_0___default.a.PureComponent)),
+        _a.displayName = 'Ripples',
+        _a.propTypes = {
+            during: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+            color: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+            onClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+            className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+        },
+        _a.defaultProps = __assign({ during: 600, color: 'rgba(0, 0, 0, .3)', className: '', onClick: function () { } }, defaultProps),
+        _a;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/react-ripples/esm/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/react-ripples/esm/index.js ***!
+  \*************************************************/
+/*! exports provided: default, createRipples */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _createRipples__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createRipples */ "./node_modules/react-ripples/esm/createRipples.js");
+/* harmony import */ var _withAttrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./withAttrs */ "./node_modules/react-ripples/esm/withAttrs.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createRipples", function() { return _createRipples__WEBPACK_IMPORTED_MODULE_0__["createRipples"]; });
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_withAttrs__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(_createRipples__WEBPACK_IMPORTED_MODULE_0__["createRipples"])()));
+
+
+
+/***/ }),
+
+/***/ "./node_modules/react-ripples/esm/withAttrs.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/react-ripples/esm/withAttrs.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+var withAttrs = function (Component) { return function (props) { return (react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, __assign({}, props))); }; };
+/* harmony default export */ __webpack_exports__["default"] = (withAttrs);
+
+
+/***/ }),
+
 /***/ "./node_modules/react-select/async/dist/react-select.browser.esm.js":
 /*!**************************************************************************!*\
   !*** ./node_modules/react-select/async/dist/react-select.browser.esm.js ***!

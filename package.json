@@ -9,7 +9,7 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "server": "php artisan serve --port=80",
-        "start": "concurrently --kill-others \"yarn run server\" \"yarn run watch\"",
+        "start": "concurrently --kill-others \"yarn run server\" \"yarn run hot\"",
         "analyze": "source-map-explorer public/js/*"
     },
     "devDependencies": {
@@ -21,6 +21,8 @@
         "@babel/preset-env": "^7.7.1",
         "@babel/preset-react": "^7.0.0",
         "babel-loader": "^8.0.6",
+        "browser-sync": "^2.26.12",
+        "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^5.1",
         "laravel-mix": "^4.0.7",
         "node-sass": "^4.13.0",
@@ -62,6 +64,7 @@
         "react-notification-alert": "^0.0.12",
         "react-notify-toast": "^0.5.1",
         "react-responsive": "^8.1.0",
+        "react-ripples": "^2.2.1",
         "react-router-dom": "^5.1.2",
         "react-select": "^3.0.8",
         "reactstrap": "^8.1.1",
