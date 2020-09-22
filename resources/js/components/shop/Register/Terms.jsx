@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "shards-react";
+import { Button, FormCheckbox } from "shards-react";
 import Translate from "../../Translate";
 import RippledButton from "../RippledButton";
 import Step from "./Step";

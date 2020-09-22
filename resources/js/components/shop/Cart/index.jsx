@@ -11,7 +11,7 @@ import {
 } from "shards-react";
 import { useCart } from "../../../utils/stores/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ProductService from "../../../utils/services/ProductService";
 import OrderService from "../../../utils/services/OrderService";
 import "./style.scss";
@@ -24,16 +24,25 @@ function Cart() {
 
     const [opened, setOpened] = useState(false);
     const [products, setProducts] = useState([]);
+    const [animate, setAnimate] = useState(false);
 
     useEffect(() => {
         (async function() {
-            const products = await ProductService.cart(cart.state.products);
+            const newProducts = await ProductService.cart(cart.state.products);
 
-            setProducts(products);
+            setProducts(newProducts);
 
-            //products.length <= 0 && OrderService.clearCookie();
+            //products.length == 0 && OrderService.clearCookie();
+
+            products && products.length > 0 && startAnimation();
         })();
     }, [cart.state, currency.state]);
+
+    const startAnimation = () => {
+        setAnimate(true);
+
+        setTimeout(() => setAnimate(false), 500);
+    };
 
     const removeFromCart = (product) => {
         cart.dispatch({ type: "remove", payload: product.id });
@@ -46,7 +55,8 @@ function Cart() {
     return (
         <Dropdown dropup open={opened} className="cart" toggle={() => false}>
             <DropdownToggle
-                className="cart__button"
+                className={`cart__button ${animate &&
+                    "animated rubberBand fast"}`}
                 onClick={() => setOpened(!opened)}
             >
                 <FontAwesomeIcon size="lg" icon={faShoppingCart} />
@@ -95,7 +105,9 @@ function Cart() {
                                                     removeFromCart(product)
                                                 }
                                             >
-                                                <Translate id="cart-remove" />
+                                                <FontAwesomeIcon
+                                                    icon={faTrash}
+                                                />
                                             </Button>
                                         </span>
                                     </ListGroupItem>

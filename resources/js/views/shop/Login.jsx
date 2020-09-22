@@ -31,7 +31,7 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -51,8 +51,8 @@ export default function Login() {
                         auth.dispatch({ type: "login", payload: res.data });
                     });
                 })
-                .catch((error) => {
-                    setTimeout(() => setErrors(error.response), 1000);
+                .catch((err) => {
+                    setTimeout(() => setErrors(err), 1000);
                 })
                 .finally(() => {
                     setTimeout(() => setLoading(false), 1000);
@@ -104,9 +104,9 @@ export default function Login() {
                     </a>
                 </div>
                 <Form method="POST" onSubmit={handleSubmit}>
-                    {errors.data && (
+                    {errors && (
                         <Alert theme="danger">
-                            <Translate id={errors.data} />
+                            <Translate id={errors} />
                         </Alert>
                     )}
                     <FormGroup>
@@ -120,7 +120,7 @@ export default function Login() {
                                 </InputGroupText>
                             </InputGroupAddon>
                             <FormInput
-                                invalid={!!errors.data}
+                                invalid={!!errors}
                                 type="email"
                                 id="#email"
                                 name="email"
@@ -141,7 +141,7 @@ export default function Login() {
                                 </InputGroupText>
                             </InputGroupAddon>
                             <FormInput
-                                invalid={!!errors.data}
+                                invalid={!!errors}
                                 type="password"
                                 id="#password"
                                 name="password"

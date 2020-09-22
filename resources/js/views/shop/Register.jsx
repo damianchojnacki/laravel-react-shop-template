@@ -24,7 +24,6 @@ import {
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { checkFullName, equals, isEmail } from "../../utils/helpers";
-import Translate from "../../components/Translate";
 import Welcome from "../../components/shop/Register/Welcome";
 import Email from "../../components/shop/Register/Email";
 import Name from "../../components/shop/Register/Name";
@@ -72,8 +71,8 @@ export default function Register() {
                         auth.dispatch({ type: "login", payload: res.data });
                     });
                 })
-                .catch((error) => {
-                    setErrors(error.response.data.errors);
+                .catch((err) => {
+                    setErrors(err);
                     setStep(1);
                 })
                 .finally(() => {

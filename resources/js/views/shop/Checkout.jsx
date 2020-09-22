@@ -158,9 +158,9 @@ function Checkout() {
                     script.addEventListener("load", () => loadPaypal());
                     document.body.appendChild(script);
                 })
-                .catch((error) => {
+                .catch((err) => {
                     setPendingState(0);
-                    notify.show(error.response.data, "error");
+                    notify.show(err, "error");
                 });
         }, 1000);
     };

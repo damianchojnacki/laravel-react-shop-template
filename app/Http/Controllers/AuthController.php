@@ -74,7 +74,7 @@ class AuthController extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
+            return response($validator->errors()->all(), 422);
         }
 
         $user = new User();

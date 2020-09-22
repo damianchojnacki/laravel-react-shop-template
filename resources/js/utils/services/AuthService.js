@@ -9,7 +9,7 @@ class AuthService {
                 res.data.googlePlacesSessionId
             );
             Cookies.set("access_token", res.data.token, { expires: 7 });
-            setToken(res.data.token);
+            AuthService.setToken(res.data.token);
         });
     }
 
@@ -29,7 +29,7 @@ class AuthService {
             })
             .then((res) => {
                 Cookies.set("access_token", res.data.token, { expires: 7 });
-                setToken(res.data.token);
+                AuthService.setToken(res.data.token);
             });
     }
 
@@ -37,9 +37,16 @@ class AuthService {
         credentials.password_confirmation = credentials.passwordConfirmation;
         credentials.passwordConfirmation = null;
 
-        return window.axios.post("/api/register", credentials).then((res) => {
-            Cookies.set("access_token", res.data.token, { expires: 7 });
-            setToken(res.data.token);
+        return new Promise((resolve, reject) => {
+            window.axios
+                .post("/api/register", credentials)
+                .then((res) => {
+                    Cookies.set("access_token", res.data.token, { expires: 7 });
+                    AuthService.setToken(res.data.token);
+
+                    resolve(res);
+                })
+                .catch((err) => reject(err));
         });
     }
 
@@ -62,7 +69,7 @@ class AuthService {
         });
     }
 
-    static setHeader(token) {
+    static setToken(token) {
         window.axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     }
 }
