@@ -40,9 +40,7 @@ function LanguageSelect() {
             value={selectOptions.find((option) => {
                 return language.state === option.value;
             })}
-            onChange={(e) =>
-                language.dispatch({ type: "change", payload: e.value })
-            }
+            onChange={(e) => language.change(e.value)}
             styles={{
                 container: (provided) => ({
                     ...provided,

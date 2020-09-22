@@ -1,31 +1,23 @@
-import * as React from "react";
+import React, { createContext, useContext, useState } from "react";
 import LanguageService from "../services/LanguageService";
 
-const LanguageContext = React.createContext();
+const LanguageContext = createContext();
 
-const language = () => React.useContext(LanguageContext);
+const language = () => useContext(LanguageContext);
 
 const initialState = LanguageService.current();
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case "reset":
-            LanguageService.reset();
-
-            return initialState;
-        case "change":
-            LanguageService.set(action.payload);
-
-            return action.payload;
-    }
-};
-
 function LanguageContextProvider(props) {
-    const [state, dispatch] = React.useReducer(reducer, initialState);
-    const value = { state, dispatch };
+    const [state, setState] = useState(initialState);
+
+    const change = (name) => {
+        LanguageService.set(name);
+
+        setState(name);
+    };
 
     return (
-        <LanguageContext.Provider value={value}>
+        <LanguageContext.Provider value={{ state, change }}>
             {props.children}
         </LanguageContext.Provider>
     );

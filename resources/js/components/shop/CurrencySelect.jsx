@@ -78,10 +78,7 @@ function CurrencySelect() {
                 return currency.state.iso === option.value;
             })}
             onChange={(e) =>
-                currency.dispatch({
-                    type: "change",
-                    payload: { iso: e.value, symbol: e.symbol },
-                })
+                currency.change({ iso: e.value, symbol: e.symbol })
             }
         />
     );
