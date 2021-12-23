@@ -11,9 +11,10 @@
     "require": {
         "php": "^7.4.3",
         "ext-json": "*",
+        "damianchojnacki/access-token": "^1.0",
         "fideloper/proxy": "^4.0",
         "google/apiclient": "^2.4",
-        "jrm2k6/cloudder": "^0.6.0",
+        "jrm2k6/cloudder": "^0.7.0",
         "laravel/framework": "^7.0",
         "laravel/passport": "^8.0",
         "laravel/socialite": "^4.3",
