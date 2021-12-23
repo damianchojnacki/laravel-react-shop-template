@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Discount;
-use App\Product;
+use App\Models\Discount;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

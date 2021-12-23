@@ -1,7 +1,7 @@
 <?php
 
-use App\Currency;
-use App\Shipment;
+use App\Models\Currency;
+use App\Models\Shipment;
 use Illuminate\Database\Seeder;
 
 class ShipmentsTableSeeder extends Seeder

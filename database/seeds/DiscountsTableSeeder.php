@@ -1,7 +1,7 @@
 <?php
 
-use App\Discount;
-use App\Product;
+use App\Models\Discount;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DiscountsTableSeeder extends Seeder

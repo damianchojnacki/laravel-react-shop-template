@@ -2,26 +2,11 @@
 
 namespace App\Traits;
 
+use App\CurrencyAPI;
+
 trait UsesCurrency
 {
     public $baseCurrency = 'USD';
-
-    public function getLatestRates($base){
-        $client = new \GuzzleHttp\Client();
-
-        $rates = \Cache::get("currency_rates_$base");
-
-        if($rates)
-            return $rates;
-        else {
-            $request = $client->get("https://api.exchangeratesapi.io/latest?base=$base");
-            $rates = json_decode($request->getBody()->getContents())->rates;
-
-            \Cache::put("currency_rates_$base", $rates, 3600);
-
-            return $rates;
-        }
-    }
 
     public function convert($value, $target, $base = null){
         if($base == null) $base = $this->baseCurrency;
@@ -29,6 +14,14 @@ trait UsesCurrency
         if($target == $base)
             return $value;
 
-        return round($value * $this->getLatestRates($base)->{$target}, 2);
+        $rates = (new CurrencyAPI)->getCurrentRates();
+
+        $value *= $rates->where('code', 'USD')->first()["mid"];
+
+        if($target == "PLN"){
+            return $value;
+        }
+
+        return round($value / $rates->where('code', $target)->first()["mid"], 2);
     }
 }

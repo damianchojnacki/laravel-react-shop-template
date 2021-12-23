@@ -14,7 +14,7 @@ class CreateCurrenciesTable extends Migration
     public function up()
     {
         Schema::create('currencies', function (Blueprint $table) {
-            $table->smallIncrements('id');
+            $table->bigIncrements('id');
             $table->string('iso', 3);
             $table->string('symbol', 3);
         });

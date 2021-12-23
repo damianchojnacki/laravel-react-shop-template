@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Order;
-use App\OrderStatus;
-use App\User;
+use App\Models\Order;
+use App\Models\OrderStatus;
+use App\Models\User;
 use Faker\Generator as Faker;
 
 $factory->define(Order::class, function (Faker $faker) {

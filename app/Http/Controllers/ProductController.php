@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductResource;
-use App\Image;
-use App\Product;
-use App\ProductType;
+use App\Models\Image;
+use App\Models\Product;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

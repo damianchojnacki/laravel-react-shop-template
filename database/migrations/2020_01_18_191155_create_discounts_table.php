@@ -15,11 +15,12 @@ class CreateDiscountsTable extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_id')->unique();
+            $table->unsignedBigInteger('product_id')->unique();
             $table->tinyInteger('percent_off');
             $table->dateTime('ends')->nullable()->default(null);
-            //$table->foreign('product_id')->references('id')->on('products')->onDelete('CASCADE');
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('CASCADE');
         });
     }
 

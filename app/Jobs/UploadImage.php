@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Image;
-use App\Product;
+use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

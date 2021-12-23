@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Coupon;
+use App\Models\Coupon;
 use App\GooglePlacesAPI;
 use App\Http\Resources\CouponResource;
 use App\Http\Resources\OrderResource;
-use App\Order;
-use App\OrderDetails;
-use App\OrderStatus;
-use App\Shipment;
+use App\Models\Order;
+use App\Models\OrderDetails;
+use App\Models\OrderStatus;
+use App\Models\Shipment;
 use App\Traits\UsesCurrency;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;

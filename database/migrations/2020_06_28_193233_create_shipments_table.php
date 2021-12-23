@@ -14,9 +14,9 @@ class CreateShipmentsTable extends Migration
     public function up()
     {
         Schema::create('shipments', function (Blueprint $table) {
-            $table->smallIncrements('id');
+            $table->bigIncrements('id');
             $table->decimal('cost', 6, 2);
-            $table->smallInteger('currency_id');
+            $table->unsignedBigInteger('currency_id');
             $table->string('country', 3);
         });
     }

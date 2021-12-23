@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Coupon;
+use App\Models\Coupon;
 
 trait UsesCoupon
 {

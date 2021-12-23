@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Product;
-use App\ProductType;
+use App\Models\Product;
+use App\Models\ProductType;
 use Bezhanov\Faker\Provider\Device;
 use Faker\Generator as Faker;
 
