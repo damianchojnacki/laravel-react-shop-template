@@ -13,7 +13,7 @@
         "analyze": "source-map-explorer public/js/*"
     },
     "devDependencies": {
-        "@babel/core": "7.0.0",
+        "@babel/core": "7.20.12",
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
