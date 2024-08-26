@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\GooglePlacesException;
 use App\GooglePlacesAPI;
 use Cookie;
 

@@ -1,11 +1,14 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Jobs\UploadImage;
 use App\Models\Product;
 use App\Models\ProductType;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -115,7 +118,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         if(config('app.env') != 'testing'){
-            Cloudder::deleteResourcesByPrefix('products');
+            Storage::deleteDirectory('uploads/products');
 
             Product::all()->each(function($product) use($faker) {
                 UploadImage::dispatch($product);

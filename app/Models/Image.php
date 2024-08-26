@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-
-use Cloudder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\File\File;
 
 class Image extends Model{
 
@@ -17,20 +18,12 @@ class Image extends Model{
     ];
 
     protected $fillable = [
-        'public_id'
+        'path'
     ];
 
     protected $appends = [
         'src'
     ];
-
-    public static function imageUpload($image, $prefix = null){
-        $id = Cloudder::upload($image, null, [
-            'folder' => $prefix,
-        ])->getPublicId();
-
-        return $id;
-    }
 
     /**
      * Get the owning imageable model.
@@ -39,16 +32,22 @@ class Image extends Model{
         return $this->morphTo();
     }
 
-    public function getSrcAttribute(){
-        return self::getImageSrc($this->public_id);
+    public function getSrcAttribute(): string
+    {
+        return Storage::url($this->path);
     }
 
-    public static function getImageSrc($public_id){
-        return Cloudder::show($public_id);
+    public static function imageUpload(File $image, $prefix = null): string
+    {
+        $path = 'images/' . ($prefix ? "$prefix/" : '') . Str::uuid() . '.' . $image->getExtension();
+
+        Storage::put($path, $image->getContent());
+
+        return $path;
     }
 
-    public function imageDelete(){
-        Cloudder::delete($this->public_id);
+    public function imageDelete(): bool
+    {
+        return $this->path && Storage::delete($this->path);
     }
-
 }

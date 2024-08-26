@@ -49,7 +49,7 @@ function Product(props) {
             name: name,
             price: price,
             type: type,
-            img: image.publicId,
+            img: image.path,
         };
 
         if(id !== 'new')

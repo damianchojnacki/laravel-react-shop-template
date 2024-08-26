@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Currency;
 use App\Models\Shipment;
 use Illuminate\Database\Seeder;

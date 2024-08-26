@@ -38,7 +38,7 @@ class ChartController extends Controller
         $chart = new LaravelChart([
             'title' => 'Orders (one year)',
             'report_type' => 'group_by_date',
-            'model' => 'App\Order',
+            'model' => 'App\Models\Order',
             'group_by_field' => 'created_at',
             'group_by_period' => 'month',
             'filter_field' => 'created_at',
@@ -53,7 +53,7 @@ class ChartController extends Controller
         $chart = new LaravelChart([
             'title' => 'Total orders by country',
             'report_type' => 'group_by_relation',
-            'model' => 'App\Order',
+            'model' => 'App\Models\Order',
             'group_by_field' => 'user',
             'relation_field' => 'country',
             'relation_field2' => 'name',
@@ -67,7 +67,7 @@ class ChartController extends Controller
         $chart = new LaravelChart([
             'title' => 'Total value of orders (one year)',
             'report_type' => 'group_by_date',
-            'model' => 'App\Order',
+            'model' => 'App\Models\Order',
             'group_by_field' => 'created_at',
             'group_by_period' => 'month',
             'filter_days' => 365,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -13,15 +14,15 @@ class ImageController extends Controller
             'img' => 'required|max:3070',
         ]);
 
-        $public_id = Product::imageUpload($request->file('img'));
-        $url = Image::getImageSrc($public_id);
+        $path = Product::imageUpload($request->file('img'));
+        $url = Storage::url($path);
 
         if($request->product_id)
-            Product::findOrFail($request->product_id)->saveImage($public_id);
+            Product::findOrFail($request->product_id)->saveImage($path);
 
         return response([
             'src' => $url,
-            'publicId' => $public_id,
+            'path' => $path,
         ], 200);
     }
 }

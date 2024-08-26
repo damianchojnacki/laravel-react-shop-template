@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Symfony\Component\HttpFoundation\File\File;
 
 class UploadImage implements ShouldQueue
 {
@@ -34,7 +35,8 @@ class UploadImage implements ShouldQueue
     public function handle()
     {
         $image = new Image();
-        $image->public_id = Product::imageUpload('./public/images/products/' . $this->product->id . '.png');
+        $file = new File(public_path('/images/products/' . $this->product->id . '.png'));
+        $image->path = Product::imageUpload($file);
         $this->product->image()->save($image);
     }
 

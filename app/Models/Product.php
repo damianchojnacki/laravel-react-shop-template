@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Traits\UsesCurrency;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @method static find($id)
@@ -24,17 +25,12 @@ class Product extends Model{
         'discount',
     ];
 
-    public static function imageUpload($image){
-        $id = Image::imageUpload($image, 'products');
-
-        return $id;
+    public static function imageUpload(File $image){
+        return Image::imageUpload($image, 'products');
     }
 
-    public function saveImage($public_id){
-        if($this->image)
-            $this->image()->update(['public_id' => $public_id]);
-        else
-            $this->image()->create(['public_id' => $public_id]);
+    public function saveImage($path){
+        $this->image()->createOrUpdate(['path' => $path]);
     }
 
     public function getPriceFinalAttribute(){

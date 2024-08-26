@@ -23,7 +23,7 @@ export default class LanguageService{
     }
 
     static translate(id){
-        id = this.transformId(id);
+        id = this.transformId(String(id));
 
         if(!Array.isArray(id)) id = [id];
 

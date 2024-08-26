@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
@@ -14,7 +16,7 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        $products = $products = Product::all();
+        $products = Product::all();
 
         factory(Order::class, 100)->create()->each(function ($order) use($products) {
             $order->details()->save(factory(OrderDetails::class)->make());

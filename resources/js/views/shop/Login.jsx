@@ -47,7 +47,7 @@ export default function Login() {
             AuthService.login(credentials)
                 .then(() => {
                     AuthService.getUser().then((res) => {
-                        setErrors({});
+                        setErrors(null);
                         auth.dispatch({ type: "login", payload: res.data });
                     });
                 })

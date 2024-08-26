@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
