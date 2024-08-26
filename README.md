@@ -1,25 +1,16 @@
 # Shop template created with Laravel & React
 
-![Laravel](https://github.com/damianchojnacki/laravel-react-shop-template/workflows/Laravel/badge.svg)
-[![DeepScan grade](https://deepscan.io/api/teams/8354/projects/10504/branches/147113/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=8354&pid=10504&bid=147113)
+![Laravel]([https://github.com/damianchojnacki/laravel-react-shop-template/workflows/Laravel/badge.svg](https://github.com/damianchojnacki/laravel-react-shop-template/actions/workflows/laravel.yml/badge.svg))
 
 <p align="center">
-    <img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" height="200">
-    <img src="https://cdn.worldvectorlogo.com/logos/react.svg" height="200"> 
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1024px-Laravel.svg.png" height="200">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/React_Logo_SVG.svg/1280px-React_Logo_SVG.svg.png" height="200"> 
 </p>
-
----
-Master branch is working application ready for deployment on:
-<p align="center">
-    <img src="https://cdn-images-1.medium.com/max/1600/1*fIjRtO5P8zc3pjs0E5hYkw.png" height="200">
-</p>
----
 
 ### 
 
 Requirements:
 - Google Places API (Address autocomplete),
-- Cloudinary (Images storage)
 - PayPal REST API (Payment service)
 
 1. Deploy an app from github repo.
@@ -42,9 +33,6 @@ php artisan key:generate --show
 | GOOGLE_CLIENT_ID |
 | GOOGLE_SECRET_KEY | 
 | GOOGLE_PLACES_API_KEY |
-| CLOUDINARY_API_KEY | 
-| CLOUDINARY_API_SECRET |
-| CLOUDINARY_CLOUD_NAME |
 | PAYPAL_CLIENT_ID |
     
 4. Create required databases and seed:
