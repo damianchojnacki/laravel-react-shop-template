@@ -1,6 +1,6 @@
 # Shop template created with Laravel & React
 
-![Laravel]([https://github.com/damianchojnacki/laravel-react-shop-template/workflows/Laravel/badge.svg](https://github.com/damianchojnacki/laravel-react-shop-template/actions/workflows/laravel.yml/badge.svg))
+![Laravel](https://github.com/damianchojnacki/laravel-react-shop-template/actions/workflows/laravel.yml/badge.svg)
 
 <p align="center">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1024px-Laravel.svg.png" height="200">
