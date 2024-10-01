@@ -1,2 +1,2 @@
 [phases.build]
-cmds = ["composer install --no-interaction"]
+  cmds = ["composer install --no-interaction"]
