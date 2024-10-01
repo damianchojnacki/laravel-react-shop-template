@@ -1,2 +1,4 @@
 [phases.install]
   cmds = ["mkdir -p /var/log/nginx && mkdir -p /var/cache/nginx", "composer install --no-interaction"]
+[phases.build]
+  cmds = []
