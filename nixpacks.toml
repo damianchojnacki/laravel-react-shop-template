@@ -1,1 +1,2 @@
-providers = ["php"]
+[phases.build]
+cmds = ["composer install --no-interaction"]
